@@ -115,6 +115,10 @@ class TestRig:
         return self.arduino.digitalRead(pin.number)
     raise Exception("Pin" + pinName + "not found!")
 
+  def setProgrammerSpeed(self, speed):
+    """ Set the speed of the programmer"""
+    return self.arduino.setProgrammerSpeed(speed)
+    
   def measure(self, measurementName):
     """ Read a measurement pin """
     for pin in self.measurementPins:
@@ -122,7 +126,6 @@ class TestRig:
         return pin.M*(self.arduino.analogRead(pin.number) + pin.B)
 
     raise Exception("Measurement pin " + measurementName + "not found!")
-    
 
   def shortTest(self, pinName):
     """ Perform a short test between the given pin and all other pins by pulling the given pin low,

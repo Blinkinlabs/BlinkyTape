@@ -52,7 +52,7 @@ class UserInterface():
       print ""
       print "**********************************************************************"
 
-  def DisplayPass(self, message = 'PASS', timeout=.5):
+  def DisplayPass(self, message = 'PASS', timeout=0):
     """
     Display a pass message to the user, for a given amout of time.
     @param timeout Time to display the message, in seconds
@@ -60,14 +60,14 @@ class UserInterface():
     self.DisplayMessage(message, color=(0,0,0), bgcolor=(0,255,0), boxed=True)
     time.sleep(timeout)
 
-  def DisplayError(self, message = 'ERROR', timeout=.5):
+  def DisplayError(self, message = 'ERROR', timeout=1):
     """
     Display a failure message to the user, for a given amout of time.
     @param timeout Time to display the message, in seconds
     """
     self.DisplayMessage(message, color=(0,0,0), bgcolor=(255,0,0), boxed=True)
     
-  def DisplayFail(self, message = 'FAIL', timeout=.5):
+  def DisplayFail(self, message = 'FAIL', timeout=1):
     """
     Display a failure message to the user, for a given amout of time.
     @param timeout Time to display the message, in seconds

@@ -17,11 +17,6 @@ class TestProgramBootloader(BlinkyTapeUnitTest.BlinkyTapeTestCase):
   def setUp(self):
     self.stopMe = True
 
-    self.testRig.resetState()
-    self.testRig.enableRelay('EN_USB_VCC')
-    self.testRig.enableRelay('EN_USB_GND')
-    self.testRig.disconnect()
-
   def tearDown(self):
     self.testRig.connect(self.port)
     self.testRig.resetState()
@@ -30,10 +25,19 @@ class TestProgramBootloader(BlinkyTapeUnitTest.BlinkyTapeTestCase):
       self.Stop()
 
   def test_010_program_fuses(self):
+    self.i.DisplayMessage("Programming fuses...")
+
+    self.testRig.resetState()
+    self.testRig.enableRelay('EN_USB_VCC')
+    self.testRig.enableRelay('EN_USB_GND')
+    self.testRig.setProgrammerSpeed(0)
+    self.testRig.disconnect()
+
     lockFuses = 0x2F
     eFuses    = 0xCB
     hFuses    = 0xD8
     lFuses    = 0xFF
+#    lFuses    = 0x5E #default
     
     returnCode = IcspUtils.writeFuses(self.port, lockFuses, eFuses, hFuses, lFuses)
     
@@ -41,6 +45,15 @@ class TestProgramBootloader(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     self.stopMe = False
 
   def test_020_program_production(self):
+    self.i.DisplayMessage("Programming firmware...")
+
+    self.testRig.connect(self.port)
+    self.testRig.resetState()
+    self.testRig.enableRelay('EN_USB_VCC')
+    self.testRig.enableRelay('EN_USB_GND')
+    self.testRig.setProgrammerSpeed(1)
+    self.testRig.disconnect()
+
     productionFile = "firmware/BlinkyTape-Production.hex"
 
     returnCode = IcspUtils.loadFlash(self.port, productionFile)

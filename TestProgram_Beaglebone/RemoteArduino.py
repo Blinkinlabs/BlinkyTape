@@ -45,6 +45,9 @@ class RemoteArduino:
   def getRemoteVersion(self):
     return self.sendCommand('v', 1, 1)
 
+  def setProgrammerSpeed(self, speed):
+    return self.sendCommand('s', speed, 0)
+
   def analogRead(self, pin):
     """Read the value of an analog pin"""
     # TODO: How to send float cleanly?
