@@ -29,7 +29,7 @@ int k = 0;
 void loop()
 {
   for(uint8_t i = 0; i < 10; i++) {
-    send_pixel(0,0,0);
+//    send_pixel(0,0,0);
   }
   
   float brightness = random(100,100)/100.0;
@@ -50,5 +50,6 @@ void loop()
   f = f + random(1,2);
   k = k + random(1,2);
 }
+
 
 
