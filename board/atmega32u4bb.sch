@@ -4496,20 +4496,6 @@ type 0309, grid 2.5 mm</description>
 </library>
 <library name="glowboard">
 <packages>
-<package name="PAD_CONNECTION">
-<description>SMT pads for interfacing with a strip of individually controllable RGB LEDs</description>
-<smd name="1" x="0" y="4.6" dx="3.4" dy="2.4" layer="1"/>
-<smd name="2" x="0" y="1.6" dx="3.4" dy="2.4" layer="1"/>
-<smd name="3" x="0" y="-1.4" dx="3.4" dy="2.4" layer="1"/>
-<smd name="4" x="0" y="-4.4" dx="3.4" dy="2.4" layer="1"/>
-</package>
-<package name="KMR211G_SWITCH">
-<description>KMR211G momentary surface mount switch</description>
-<smd name="P$1" x="-2" y="0.8" dx="0.9" dy="1" layer="1" rot="R180"/>
-<smd name="P$3" x="-2" y="-0.8" dx="0.9" dy="1" layer="1"/>
-<smd name="P$4" x="2.1" y="-0.8" dx="0.9" dy="1" layer="1"/>
-<smd name="P$2" x="2.1" y="0.8" dx="0.9" dy="1" layer="1"/>
-</package>
 <package name="ABMM2_CRYSTAL">
 <smd name="P$4" x="-2.1" y="1.2" dx="1.8" dy="1.4" layer="1"/>
 <smd name="P$3" x="2.3" y="1.2" dx="1.8" dy="1.4" layer="1"/>
@@ -4523,48 +4509,8 @@ type 0309, grid 2.5 mm</description>
 <text x="-3.1" y="2.2" size="1.27" layer="25">&gt;NAME</text>
 <text x="-3.1" y="-3.5" size="1.27" layer="27">&gt;VALUE</text>
 </package>
-<package name="ICSP_PADS">
-<smd name="RST" x="-1.6" y="4" dx="2" dy="2" layer="16"/>
-<smd name="VCC" x="2" y="4" dx="3.3" dy="2" layer="16"/>
-<smd name="SCK`" x="-1.6" y="0" dx="2" dy="2" layer="16"/>
-<smd name="MOSI" x="2" y="0" dx="3.3" dy="2" layer="16"/>
-<smd name="MISO" x="-1.6" y="-4" dx="2" dy="2" layer="16"/>
-<smd name="GND" x="2" y="-4" dx="3.3" dy="2" layer="16"/>
-</package>
 </packages>
 <symbols>
-<symbol name="PAD_CONNECTION">
-<pin name="DATA" x="-10.16" y="-2.54" length="middle"/>
-<pin name="CLK" x="-10.16" y="2.54" length="middle"/>
-<pin name="+5V" x="-10.16" y="7.62" length="middle"/>
-<pin name="GND" x="-10.16" y="-7.62" length="middle"/>
-<wire x1="-5.08" y1="10.16" x2="-5.08" y2="-10.16" width="0.254" layer="94"/>
-<wire x1="-5.08" y1="-10.16" x2="5.08" y2="-10.16" width="0.254" layer="94"/>
-<wire x1="5.08" y1="-10.16" x2="5.08" y2="10.16" width="0.254" layer="94"/>
-<wire x1="5.08" y1="10.16" x2="-5.08" y2="10.16" width="0.254" layer="94"/>
-<text x="-4.826" y="11.176" size="1.778" layer="95">&gt;NAME</text>
-</symbol>
-<symbol name="TS2">
-<wire x1="0" y1="1.905" x2="0" y2="2.54" width="0.254" layer="94"/>
-<wire x1="-4.445" y1="1.905" x2="-3.175" y2="1.905" width="0.254" layer="94"/>
-<wire x1="-4.445" y1="-1.905" x2="-3.175" y2="-1.905" width="0.254" layer="94"/>
-<wire x1="-4.445" y1="1.905" x2="-4.445" y2="0" width="0.254" layer="94"/>
-<wire x1="-4.445" y1="0" x2="-4.445" y2="-1.905" width="0.254" layer="94"/>
-<wire x1="-2.54" y1="0" x2="-1.905" y2="0" width="0.1524" layer="94"/>
-<wire x1="-1.27" y1="0" x2="-0.635" y2="0" width="0.1524" layer="94"/>
-<wire x1="-4.445" y1="0" x2="-3.175" y2="0" width="0.1524" layer="94"/>
-<wire x1="2.54" y1="2.54" x2="0" y2="2.54" width="0.1524" layer="94"/>
-<wire x1="2.54" y1="-2.54" x2="0" y2="-2.54" width="0.1524" layer="94"/>
-<wire x1="0" y1="-2.54" x2="-1.27" y2="1.905" width="0.254" layer="94"/>
-<circle x="0" y="-2.54" radius="0.127" width="0.4064" layer="94"/>
-<circle x="0" y="2.54" radius="0.127" width="0.4064" layer="94"/>
-<text x="-6.35" y="-2.54" size="1.778" layer="95" rot="R90">&gt;NAME</text>
-<text x="-3.81" y="3.175" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
-<pin name="P" x="0" y="-5.08" visible="pad" length="short" direction="pas" swaplevel="2" rot="R90"/>
-<pin name="S" x="0" y="5.08" visible="pad" length="short" direction="pas" swaplevel="1" rot="R270"/>
-<pin name="S1" x="2.54" y="5.08" visible="pad" length="short" direction="pas" swaplevel="1" rot="R270"/>
-<pin name="P1" x="2.54" y="-5.08" visible="pad" length="short" direction="pas" swaplevel="2" rot="R90"/>
-</symbol>
 <symbol name="Q1">
 <wire x1="1.016" y1="0" x2="2.54" y2="0" width="0.1524" layer="94"/>
 <wire x1="-2.54" y1="0" x2="-1.016" y2="0" width="0.1524" layer="94"/>
@@ -4581,58 +4527,8 @@ type 0309, grid 2.5 mm</description>
 <pin name="2" x="5.08" y="0" visible="pad" length="short" direction="pas" swaplevel="1" rot="R180"/>
 <pin name="1" x="-5.08" y="0" visible="pad" length="short" direction="pas" swaplevel="1"/>
 </symbol>
-<symbol name="ICSP_PADS">
-<pin name="MISO" x="-22.86" y="15.24" length="middle"/>
-<pin name="SCK" x="-22.86" y="10.16" length="middle"/>
-<pin name="RST" x="-22.86" y="5.08" length="middle"/>
-<pin name="VCC" x="5.08" y="15.24" length="middle" rot="R180"/>
-<pin name="MOSI" x="5.08" y="10.16" length="middle" rot="R180"/>
-<pin name="GND" x="5.08" y="5.08" length="middle" rot="R180"/>
-<wire x1="-17.78" y1="20.32" x2="0" y2="20.32" width="0.254" layer="94"/>
-<wire x1="0" y1="20.32" x2="0" y2="0" width="0.254" layer="94"/>
-<wire x1="0" y1="0" x2="-17.78" y2="0" width="0.254" layer="94"/>
-<wire x1="-17.78" y1="0" x2="-17.78" y2="20.32" width="0.254" layer="94"/>
-<text x="-15.24" y="22.86" size="1.27" layer="95">ICSP</text>
-</symbol>
 </symbols>
 <devicesets>
-<deviceset name="PAD_CONNECTION">
-<gates>
-<gate name="G$1" symbol="PAD_CONNECTION" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="PAD_CONNECTION">
-<connects>
-<connect gate="G$1" pin="+5V" pad="1"/>
-<connect gate="G$1" pin="CLK" pad="2"/>
-<connect gate="G$1" pin="DATA" pad="3"/>
-<connect gate="G$1" pin="GND" pad="4"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-<deviceset name="KMR211G" prefix="S" uservalue="yes">
-<description>&lt;b&gt;KMR211G SWITCH&lt;/b&gt;</description>
-<gates>
-<gate name="1" symbol="TS2" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="KMR211G_SWITCH">
-<connects>
-<connect gate="1" pin="P" pad="P$1"/>
-<connect gate="1" pin="P1" pad="P$2"/>
-<connect gate="1" pin="S" pad="P$3"/>
-<connect gate="1" pin="S1" pad="P$4"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
 <deviceset name="ABMM2" prefix="Q" uservalue="yes">
 <description>&lt;b&gt;CRYSTAL&lt;/b&gt;</description>
 <gates>
@@ -4650,134 +4546,128 @@ type 0309, grid 2.5 mm</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="ICSP">
-<gates>
-<gate name="G$1" symbol="ICSP_PADS" x="10.16" y="-10.16"/>
-</gates>
-<devices>
-<device name="" package="ICSP_PADS">
-<connects>
-<connect gate="G$1" pin="GND" pad="GND"/>
-<connect gate="G$1" pin="MISO" pad="MISO"/>
-<connect gate="G$1" pin="MOSI" pad="MOSI"/>
-<connect gate="G$1" pin="RST" pad="RST"/>
-<connect gate="G$1" pin="SCK" pad="SCK`"/>
-<connect gate="G$1" pin="VCC" pad="VCC"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
 </devicesets>
 </library>
-<library name="Arduino_Leonardo-REV3b">
-<description>Generated from &lt;b&gt;Arduino_Leonardo-REV3b.sch&lt;/b&gt;&lt;p&gt;
+<library name="blinkyboard">
+<description>Generated from &lt;b&gt;atmega32u4bb.sch&lt;/b&gt;&lt;p&gt;
 by exp-project-lbr.ulp</description>
 <packages>
-<package name="SMARTPRJ_QFN44ML8X8">
-<description>&lt;b&gt;44-Lead Plastic Quad Flat No Lead Package (ML)&lt;/b&gt; 8x8 mm Body (QFN)&lt;p&gt;
-Source: http://ww1.microchip.com/downloads/en/devicedoc/39632c.pdf</description>
-<wire x1="-3.9" y1="-3.9" x2="3.9" y2="-3.9" width="0.2032" layer="51"/>
-<wire x1="3.9" y1="-3.9" x2="3.9" y2="3.9" width="0.2032" layer="51"/>
-<wire x1="3.9" y1="3.9" x2="-3.9" y2="3.9" width="0.2032" layer="51"/>
-<wire x1="-3.9" y1="3.9" x2="-3.9" y2="-3.9" width="0.2032" layer="51"/>
-<rectangle x1="-4.05" y1="3.05" x2="-3.525" y2="3.45" layer="29"/>
-<rectangle x1="-4.05" y1="2.4" x2="-3.525" y2="2.8" layer="29"/>
-<rectangle x1="-4.05" y1="1.75" x2="-3.525" y2="2.15" layer="29"/>
-<rectangle x1="-4.05" y1="1.1" x2="-3.525" y2="1.5" layer="29"/>
-<rectangle x1="-4.05" y1="0.45" x2="-3.525" y2="0.85" layer="29"/>
-<rectangle x1="-4.05" y1="-0.2" x2="-3.525" y2="0.2" layer="29"/>
-<rectangle x1="-4.05" y1="-0.85" x2="-3.525" y2="-0.45" layer="29"/>
-<rectangle x1="-4.05" y1="-1.5" x2="-3.525" y2="-1.1" layer="29"/>
-<rectangle x1="-4.05" y1="-2.15" x2="-3.525" y2="-1.75" layer="29"/>
-<rectangle x1="-4.05" y1="-2.8" x2="-3.525" y2="-2.4" layer="29"/>
-<rectangle x1="-4.05" y1="-3.45" x2="-3.525" y2="-3.05" layer="29"/>
-<rectangle x1="-3.5125" y1="-3.9875" x2="-2.9875" y2="-3.5875" layer="29" rot="R90"/>
-<rectangle x1="-2.8625" y1="-3.9875" x2="-2.3375" y2="-3.5875" layer="29" rot="R90"/>
-<rectangle x1="-2.2125" y1="-3.9875" x2="-1.6875" y2="-3.5875" layer="29" rot="R90"/>
-<rectangle x1="-1.5625" y1="-3.9875" x2="-1.0375" y2="-3.5875" layer="29" rot="R90"/>
-<rectangle x1="-0.9125" y1="-3.9875" x2="-0.3875" y2="-3.5875" layer="29" rot="R90"/>
-<rectangle x1="-0.2625" y1="-3.9875" x2="0.2625" y2="-3.5875" layer="29" rot="R90"/>
-<rectangle x1="0.3875" y1="-3.9875" x2="0.9125" y2="-3.5875" layer="29" rot="R90"/>
-<rectangle x1="1.0375" y1="-3.9875" x2="1.5625" y2="-3.5875" layer="29" rot="R90"/>
-<rectangle x1="1.6875" y1="-3.9875" x2="2.2125" y2="-3.5875" layer="29" rot="R90"/>
-<rectangle x1="2.3375" y1="-3.9875" x2="2.8625" y2="-3.5875" layer="29" rot="R90"/>
-<rectangle x1="2.9875" y1="-3.9875" x2="3.5125" y2="-3.5875" layer="29" rot="R90"/>
-<rectangle x1="3.525" y1="-3.45" x2="4.05" y2="-3.05" layer="29" rot="R180"/>
-<rectangle x1="3.525" y1="-2.8" x2="4.05" y2="-2.4" layer="29" rot="R180"/>
-<rectangle x1="3.525" y1="-2.15" x2="4.05" y2="-1.75" layer="29" rot="R180"/>
-<rectangle x1="3.525" y1="-1.5" x2="4.05" y2="-1.1" layer="29" rot="R180"/>
-<rectangle x1="3.525" y1="-0.85" x2="4.05" y2="-0.45" layer="29" rot="R180"/>
-<rectangle x1="3.525" y1="-0.2" x2="4.05" y2="0.2" layer="29" rot="R180"/>
-<rectangle x1="3.525" y1="0.45" x2="4.05" y2="0.85" layer="29" rot="R180"/>
-<rectangle x1="3.525" y1="1.1" x2="4.05" y2="1.5" layer="29" rot="R180"/>
-<rectangle x1="3.525" y1="1.75" x2="4.05" y2="2.15" layer="29" rot="R180"/>
-<rectangle x1="3.525" y1="2.4" x2="4.05" y2="2.8" layer="29" rot="R180"/>
-<rectangle x1="3.525" y1="3.05" x2="4.05" y2="3.45" layer="29" rot="R180"/>
-<rectangle x1="2.9875" y1="3.5875" x2="3.5125" y2="3.9875" layer="29" rot="R270"/>
-<rectangle x1="2.3375" y1="3.5875" x2="2.8625" y2="3.9875" layer="29" rot="R270"/>
-<rectangle x1="1.6875" y1="3.5875" x2="2.2125" y2="3.9875" layer="29" rot="R270"/>
-<rectangle x1="1.0375" y1="3.5875" x2="1.5625" y2="3.9875" layer="29" rot="R270"/>
-<rectangle x1="0.3875" y1="3.5875" x2="0.9125" y2="3.9875" layer="29" rot="R270"/>
-<rectangle x1="-0.2625" y1="3.5875" x2="0.2625" y2="3.9875" layer="29" rot="R270"/>
-<rectangle x1="-0.9125" y1="3.5875" x2="-0.3875" y2="3.9875" layer="29" rot="R270"/>
-<rectangle x1="-1.5625" y1="3.5875" x2="-1.0375" y2="3.9875" layer="29" rot="R270"/>
-<rectangle x1="-2.2125" y1="3.5875" x2="-1.6875" y2="3.9875" layer="29" rot="R270"/>
-<rectangle x1="-2.8625" y1="3.5875" x2="-2.3375" y2="3.9875" layer="29" rot="R270"/>
-<rectangle x1="-3.5125" y1="3.5875" x2="-2.9875" y2="3.9875" layer="29" rot="R270"/>
-<rectangle x1="-3.8375" y1="0.65" x2="-0.6625" y2="3.8375" layer="51"/>
-<rectangle x1="-2.9625" y1="-2.9625" x2="2.9625" y2="2.9625" layer="29"/>
-<smd name="1" x="-3.7875" y="3.25" dx="0.45" dy="0.33" layer="1" roundness="40" stop="no"/>
-<smd name="2" x="-3.7875" y="2.6" dx="0.45" dy="0.33" layer="1" stop="no"/>
-<smd name="3" x="-3.7875" y="1.95" dx="0.45" dy="0.33" layer="1" stop="no"/>
-<smd name="4" x="-3.7875" y="1.3" dx="0.45" dy="0.33" layer="1" stop="no"/>
-<smd name="5" x="-3.7875" y="0.65" dx="0.45" dy="0.33" layer="1" stop="no"/>
-<smd name="6" x="-3.7875" y="0" dx="0.45" dy="0.33" layer="1" stop="no"/>
-<smd name="7" x="-3.7875" y="-0.65" dx="0.45" dy="0.33" layer="1" stop="no"/>
-<smd name="8" x="-3.7875" y="-1.3" dx="0.45" dy="0.33" layer="1" stop="no"/>
-<smd name="9" x="-3.7875" y="-1.95" dx="0.45" dy="0.33" layer="1" stop="no"/>
-<smd name="10" x="-3.7875" y="-2.6" dx="0.45" dy="0.33" layer="1" stop="no"/>
-<smd name="11" x="-3.7875" y="-3.25" dx="0.45" dy="0.33" layer="1" roundness="40" stop="no"/>
-<smd name="12" x="-3.25" y="-3.7875" dx="0.45" dy="0.33" layer="1" roundness="40" rot="R90" stop="no"/>
-<smd name="13" x="-2.6" y="-3.7875" dx="0.45" dy="0.33" layer="1" rot="R90" stop="no"/>
-<smd name="14" x="-1.95" y="-3.7875" dx="0.45" dy="0.33" layer="1" rot="R90" stop="no"/>
-<smd name="15" x="-1.3" y="-3.7875" dx="0.45" dy="0.33" layer="1" rot="R90" stop="no"/>
-<smd name="16" x="-0.65" y="-3.7875" dx="0.45" dy="0.33" layer="1" rot="R90" stop="no"/>
-<smd name="17" x="0" y="-3.7875" dx="0.45" dy="0.33" layer="1" rot="R90" stop="no"/>
-<smd name="18" x="0.65" y="-3.7875" dx="0.45" dy="0.33" layer="1" rot="R90" stop="no"/>
-<smd name="19" x="1.3" y="-3.7875" dx="0.45" dy="0.33" layer="1" rot="R90" stop="no"/>
-<smd name="20" x="1.95" y="-3.7875" dx="0.45" dy="0.33" layer="1" rot="R90" stop="no"/>
-<smd name="21" x="2.6" y="-3.7875" dx="0.45" dy="0.33" layer="1" rot="R90" stop="no"/>
-<smd name="22" x="3.25" y="-3.7875" dx="0.45" dy="0.33" layer="1" roundness="40" rot="R90" stop="no"/>
-<smd name="23" x="3.7875" y="-3.25" dx="0.45" dy="0.33" layer="1" roundness="40" rot="R180" stop="no"/>
-<smd name="24" x="3.7875" y="-2.6" dx="0.45" dy="0.33" layer="1" rot="R180" stop="no"/>
-<smd name="25" x="3.7875" y="-1.95" dx="0.45" dy="0.33" layer="1" rot="R180" stop="no"/>
-<smd name="26" x="3.7875" y="-1.3" dx="0.45" dy="0.33" layer="1" rot="R180" stop="no"/>
-<smd name="27" x="3.7875" y="-0.65" dx="0.45" dy="0.33" layer="1" rot="R180" stop="no"/>
-<smd name="28" x="3.7875" y="0" dx="0.45" dy="0.33" layer="1" rot="R180" stop="no"/>
-<smd name="29" x="3.7875" y="0.65" dx="0.45" dy="0.33" layer="1" rot="R180" stop="no"/>
-<smd name="30" x="3.7875" y="1.3" dx="0.45" dy="0.33" layer="1" rot="R180" stop="no"/>
-<smd name="31" x="3.7875" y="1.95" dx="0.45" dy="0.33" layer="1" rot="R180" stop="no"/>
-<smd name="32" x="3.7875" y="2.6" dx="0.45" dy="0.33" layer="1" rot="R180" stop="no"/>
-<smd name="33" x="3.7875" y="3.25" dx="0.45" dy="0.33" layer="1" roundness="40" rot="R180" stop="no"/>
-<smd name="34" x="3.25" y="3.7875" dx="0.45" dy="0.33" layer="1" roundness="40" rot="R270" stop="no"/>
-<smd name="35" x="2.6" y="3.7875" dx="0.45" dy="0.33" layer="1" rot="R270" stop="no"/>
-<smd name="36" x="1.95" y="3.7875" dx="0.45" dy="0.33" layer="1" rot="R270" stop="no"/>
-<smd name="37" x="1.3" y="3.7875" dx="0.45" dy="0.33" layer="1" rot="R270" stop="no"/>
-<smd name="38" x="0.65" y="3.7875" dx="0.45" dy="0.33" layer="1" rot="R270" stop="no"/>
-<smd name="39" x="0" y="3.7875" dx="0.45" dy="0.33" layer="1" rot="R270" stop="no"/>
-<smd name="40" x="-0.65" y="3.7875" dx="0.45" dy="0.33" layer="1" rot="R270" stop="no"/>
-<smd name="41" x="-1.3" y="3.7875" dx="0.45" dy="0.33" layer="1" rot="R270" stop="no"/>
-<smd name="42" x="-1.95" y="3.7875" dx="0.45" dy="0.33" layer="1" rot="R270" stop="no"/>
-<smd name="43" x="-2.6" y="3.7875" dx="0.45" dy="0.33" layer="1" rot="R270" stop="no"/>
-<smd name="44" x="-3.25" y="3.7875" dx="0.45" dy="0.33" layer="1" roundness="40" rot="R270" stop="no"/>
-<smd name="EXP" x="0" y="0" dx="6" dy="6" layer="1" stop="no"/>
+<package name="GLOWBOARD_MINI_USB_PADS">
+<wire x1="-3.14" y1="3.64" x2="4.36" y2="3.64" width="0.127" layer="51"/>
+<wire x1="4.36" y1="3.64" x2="4.36" y2="-5.56" width="0.127" layer="51"/>
+<wire x1="4.36" y1="-5.56" x2="-3.14" y2="-5.56" width="0.127" layer="51"/>
+<wire x1="-3.14" y1="-5.56" x2="-3.14" y2="3.64" width="0.127" layer="51"/>
+<smd name="P$1" x="-0.99" y="2.99" dx="0.5" dy="2.25" layer="1"/>
+<smd name="P$2" x="-0.19" y="2.99" dx="0.5" dy="2.25" layer="1"/>
+<smd name="P$3" x="0.61" y="2.99" dx="0.5" dy="2.25" layer="1"/>
+<smd name="P$4" x="1.41" y="2.99" dx="0.5" dy="2.25" layer="1"/>
+<smd name="P$5" x="2.21" y="2.99" dx="0.5" dy="2.25" layer="1"/>
+<smd name="P$6" x="-3.84" y="2.84" dx="2" dy="2.5" layer="1"/>
+<smd name="P$7" x="-3.94" y="-2.61" dx="2" dy="2.5" layer="1"/>
+<smd name="P$8" x="5.06" y="2.84" dx="2" dy="2.5" layer="1"/>
+<smd name="P$9" x="5.06" y="-2.56" dx="2" dy="2.5" layer="1"/>
+<hole x="-1.59" y="0.29" drill="0.9"/>
+<hole x="2.81" y="0.29" drill="0.9"/>
+</package>
+<package name="GLOWBOARD_EXPANSION_HEADER">
+<smd name="P$1" x="-1.3" y="0" dx="1" dy="1.2" layer="1" cream="no"/>
+<smd name="P$2" x="0" y="0" dx="1" dy="1.2" layer="1" cream="no"/>
+<smd name="P$3" x="1.3" y="0" dx="1" dy="1.2" layer="1" cream="no"/>
+</package>
+<package name="GLOWBOARD_KMR211G_SWITCH">
+<description>KMR211G momentary surface mount switch</description>
+<smd name="P$1" x="-2" y="0.8" dx="0.9" dy="1" layer="1" rot="R180"/>
+<smd name="P$2" x="2.1" y="0.8" dx="0.9" dy="1" layer="1"/>
+<smd name="P$3" x="-2" y="-0.8" dx="0.9" dy="1" layer="1"/>
+<smd name="P$4" x="2.1" y="-0.8" dx="0.9" dy="1" layer="1"/>
+<wire x1="-1.9" y1="1.2" x2="2.4" y2="1.2" width="0.127" layer="21"/>
+<wire x1="2.4" y1="1.2" x2="2.4" y2="-1.2" width="0.127" layer="21"/>
+<wire x1="2.4" y1="-1.2" x2="-2.3" y2="-1.2" width="0.127" layer="21"/>
+<wire x1="-2.3" y1="-1.2" x2="-2.3" y2="0.8" width="0.127" layer="21"/>
+<wire x1="-2.3" y1="0.8" x2="-1.9" y2="1.2" width="0.127" layer="21"/>
+</package>
+<package name="GLOWBOARD_PAD_CONNECTION">
+<description>SMT pads for interfacing with a strip of individually controllable RGB LEDs</description>
+<smd name="1" x="0" y="4.6" dx="3.4" dy="2.4" layer="1" cream="no"/>
+<smd name="2" x="0" y="1.6" dx="3.4" dy="2.4" layer="1" cream="no"/>
+<smd name="3" x="0" y="-1.4" dx="3.4" dy="2.4" layer="1" cream="no"/>
+<smd name="4" x="0" y="-4.4" dx="3.4" dy="2.4" layer="1" cream="no"/>
+</package>
+<package name="GLOWBOARD_ICSP_PADS">
+<smd name="GND" x="2" y="-4" dx="3.3" dy="2" layer="16" cream="no"/>
+<smd name="MISO" x="-1.6" y="-4" dx="2" dy="2" layer="16" cream="no"/>
+<smd name="MOSI" x="2" y="0" dx="3.3" dy="2" layer="16" cream="no"/>
+<smd name="RST" x="-1.6" y="4" dx="2" dy="2" layer="16" cream="no"/>
+<smd name="SCK`" x="-1.6" y="0" dx="2" dy="2" layer="16" cream="no"/>
+<smd name="VCC" x="2" y="4" dx="3.3" dy="2" layer="16" cream="no"/>
+</package>
+<package name="ARDUINO_LEONARDO-REV3B_SMARTPRJ_QFN44ML7X7">
+<circle x="0" y="0" radius="0.635" width="2.54" layer="29"/>
+<circle x="0" y="0" radius="0.635" width="1.27" layer="31"/>
+<wire x1="-3.5" y1="-3.5" x2="3.5" y2="-3.5" width="0.2032" layer="51"/>
+<wire x1="3.5" y1="-3.5" x2="3.5" y2="3.5" width="0.2032" layer="51"/>
+<wire x1="3.5" y1="3.5" x2="-3.5" y2="3.5" width="0.2032" layer="51"/>
+<wire x1="-3.5" y1="3.5" x2="-3.5" y2="-3.5" width="0.2032" layer="51"/>
+<rectangle x1="-3.5" y1="0" x2="0" y2="3.5" layer="51"/>
+<smd name="1" x="-3.275" y="2.5" dx="0.75" dy="0.275" layer="1" roundness="80"/>
+<smd name="2" x="-3.275" y="2" dx="0.75" dy="0.275" layer="1" roundness="80"/>
+<smd name="3" x="-3.275" y="1.5" dx="0.75" dy="0.275" layer="1" roundness="80"/>
+<smd name="4" x="-3.275" y="1" dx="0.75" dy="0.275" layer="1" roundness="80"/>
+<smd name="5" x="-3.275" y="0.5" dx="0.75" dy="0.275" layer="1" roundness="80"/>
+<smd name="6" x="-3.275" y="0" dx="0.75" dy="0.275" layer="1" roundness="80"/>
+<smd name="7" x="-3.275" y="-0.5" dx="0.75" dy="0.275" layer="1" roundness="80"/>
+<smd name="8" x="-3.275" y="-1" dx="0.75" dy="0.275" layer="1" roundness="80"/>
+<smd name="9" x="-3.275" y="-1.5" dx="0.75" dy="0.275" layer="1" roundness="80"/>
+<smd name="10" x="-3.275" y="-2" dx="0.75" dy="0.275" layer="1" roundness="80"/>
+<smd name="11" x="-3.275" y="-2.5" dx="0.75" dy="0.275" layer="1" roundness="80"/>
+<smd name="12" x="-2.5" y="-3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R90"/>
+<smd name="13" x="-2" y="-3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R90"/>
+<smd name="14" x="-1.5" y="-3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R90"/>
+<smd name="15" x="-1" y="-3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R90"/>
+<smd name="16" x="-0.5" y="-3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R90"/>
+<smd name="17" x="0" y="-3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R90"/>
+<smd name="18" x="0.5" y="-3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R90"/>
+<smd name="19" x="1" y="-3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R90"/>
+<smd name="20" x="1.5" y="-3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R90"/>
+<smd name="21" x="2" y="-3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R90"/>
+<smd name="22" x="2.5" y="-3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R90"/>
+<smd name="23" x="3.275" y="-2.5" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R180"/>
+<smd name="24" x="3.275" y="-2" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R180"/>
+<smd name="25" x="3.275" y="-1.5" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R180"/>
+<smd name="26" x="3.275" y="-1" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R180"/>
+<smd name="27" x="3.275" y="-0.5" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R180"/>
+<smd name="28" x="3.275" y="0" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R180"/>
+<smd name="29" x="3.275" y="0.5" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R180"/>
+<smd name="30" x="3.275" y="1" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R180"/>
+<smd name="31" x="3.275" y="1.5" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R180"/>
+<smd name="32" x="3.275" y="2" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R180"/>
+<smd name="33" x="3.275" y="2.5" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R180"/>
+<smd name="34" x="2.5" y="3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R270"/>
+<smd name="35" x="2" y="3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R270"/>
+<smd name="36" x="1.5" y="3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R270"/>
+<smd name="37" x="1" y="3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R270"/>
+<smd name="38" x="0.5" y="3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R270"/>
+<smd name="39" x="0" y="3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R270"/>
+<smd name="40" x="-0.5" y="3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R270"/>
+<smd name="41" x="-1" y="3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R270"/>
+<smd name="42" x="-1.5" y="3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R270"/>
+<smd name="43" x="-2" y="3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R270"/>
+<smd name="44" x="-2.5" y="3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R270"/>
+<smd name="EXP" x="0" y="0" dx="4.826" dy="4.826" layer="1" roundness="10" stop="no" cream="no"/>
 <text x="-3.9" y="4.55" size="1.27" layer="25">&gt;NAME</text>
 <text x="-3.9" y="-5.525" size="1.27" layer="27">&gt;VALUE</text>
+<pad name="P$1" x="0" y="0" drill="0.5" shape="square" rot="R270" stop="no" thermals="no"/>
+<pad name="P$2" x="-1.5" y="-1.5" drill="0.5" shape="square" rot="R270" stop="no" thermals="no"/>
+<pad name="P$3" x="-1.5" y="1.5" drill="0.5" shape="square" rot="R270" stop="no" thermals="no"/>
+<pad name="P$5" x="1.5" y="-1.5" drill="0.5" shape="square" rot="R270" stop="no" thermals="no"/>
+<pad name="P$7" x="0" y="-1.5" drill="0.5" shape="square" rot="R270" stop="no" thermals="no"/>
+<pad name="P$8" x="-1.5" y="0" drill="0.5" shape="square" rot="R270" stop="no" thermals="no"/>
+<pad name="P$12" x="1.5" y="0" drill="0.5" shape="square" rot="R270" stop="no" thermals="no"/>
+<pad name="P$14" x="0" y="1.5" drill="0.5" shape="square" rot="R270" stop="no" thermals="no"/>
+<pad name="P$15" x="1.5" y="1.5" drill="0.5" shape="square" rot="R270" stop="no" thermals="no"/>
+<smd name="EXP1" x="0" y="0" dx="4.826" dy="4.826" layer="16" roundness="10" stop="no" cream="no"/>
 </package>
-<package name="SMARTPRJ_TQFP44-PAD">
+<package name="ARDUINO_LEONARDO-REV3B_SMARTPRJ_TQFP44-PAD">
 <description>&lt;b&gt;44-lead Thin Quad Flat Package&lt;/b&gt;</description>
 <circle x="-4" y="4" radius="0.2827" width="0.254" layer="21"/>
 <wire x1="-4.8" y1="4.4" x2="-4.4" y2="4.8" width="0.2032" layer="21"/>
@@ -4880,65 +4770,74 @@ Source: http://ww1.microchip.com/downloads/en/devicedoc/39632c.pdf</description>
 <text x="-3.81" y="6.985" size="1.778" layer="25">&gt;NAME</text>
 <text x="-4.445" y="-8.7551" size="1.778" layer="27">&gt;VALUE</text>
 </package>
-<package name="SMARTPRJ_QFN44ML7X7">
-<circle x="0" y="0" radius="0.635" width="2.54" layer="29"/>
-<circle x="0" y="0" radius="0.635" width="1.27" layer="31"/>
-<wire x1="-3.5" y1="-3.5" x2="3.5" y2="-3.5" width="0.2032" layer="51"/>
-<wire x1="3.5" y1="-3.5" x2="3.5" y2="3.5" width="0.2032" layer="51"/>
-<wire x1="3.5" y1="3.5" x2="-3.5" y2="3.5" width="0.2032" layer="51"/>
-<wire x1="-3.5" y1="3.5" x2="-3.5" y2="-3.5" width="0.2032" layer="51"/>
-<rectangle x1="-3.5" y1="0" x2="0" y2="3.5" layer="51"/>
-<smd name="1" x="-3.275" y="2.5" dx="0.75" dy="0.275" layer="1" roundness="80"/>
-<smd name="2" x="-3.275" y="2" dx="0.75" dy="0.275" layer="1" roundness="80"/>
-<smd name="3" x="-3.275" y="1.5" dx="0.75" dy="0.275" layer="1" roundness="80"/>
-<smd name="4" x="-3.275" y="1" dx="0.75" dy="0.275" layer="1" roundness="80"/>
-<smd name="5" x="-3.275" y="0.5" dx="0.75" dy="0.275" layer="1" roundness="80"/>
-<smd name="6" x="-3.275" y="0" dx="0.75" dy="0.275" layer="1" roundness="80"/>
-<smd name="7" x="-3.275" y="-0.5" dx="0.75" dy="0.275" layer="1" roundness="80"/>
-<smd name="8" x="-3.275" y="-1" dx="0.75" dy="0.275" layer="1" roundness="80"/>
-<smd name="9" x="-3.275" y="-1.5" dx="0.75" dy="0.275" layer="1" roundness="80"/>
-<smd name="10" x="-3.275" y="-2" dx="0.75" dy="0.275" layer="1" roundness="80"/>
-<smd name="11" x="-3.275" y="-2.5" dx="0.75" dy="0.275" layer="1" roundness="80"/>
-<smd name="12" x="-2.5" y="-3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R90"/>
-<smd name="13" x="-2" y="-3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R90"/>
-<smd name="14" x="-1.5" y="-3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R90"/>
-<smd name="15" x="-1" y="-3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R90"/>
-<smd name="16" x="-0.5" y="-3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R90"/>
-<smd name="17" x="0" y="-3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R90"/>
-<smd name="18" x="0.5" y="-3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R90"/>
-<smd name="19" x="1" y="-3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R90"/>
-<smd name="20" x="1.5" y="-3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R90"/>
-<smd name="21" x="2" y="-3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R90"/>
-<smd name="22" x="2.5" y="-3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R90"/>
-<smd name="23" x="3.275" y="-2.5" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R180"/>
-<smd name="24" x="3.275" y="-2" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R180"/>
-<smd name="25" x="3.275" y="-1.5" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R180"/>
-<smd name="26" x="3.275" y="-1" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R180"/>
-<smd name="27" x="3.275" y="-0.5" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R180"/>
-<smd name="28" x="3.275" y="0" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R180"/>
-<smd name="29" x="3.275" y="0.5" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R180"/>
-<smd name="30" x="3.275" y="1" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R180"/>
-<smd name="31" x="3.275" y="1.5" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R180"/>
-<smd name="32" x="3.275" y="2" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R180"/>
-<smd name="33" x="3.275" y="2.5" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R180"/>
-<smd name="34" x="2.5" y="3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R270"/>
-<smd name="35" x="2" y="3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R270"/>
-<smd name="36" x="1.5" y="3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R270"/>
-<smd name="37" x="1" y="3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R270"/>
-<smd name="38" x="0.5" y="3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R270"/>
-<smd name="39" x="0" y="3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R270"/>
-<smd name="40" x="-0.5" y="3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R270"/>
-<smd name="41" x="-1" y="3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R270"/>
-<smd name="42" x="-1.5" y="3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R270"/>
-<smd name="43" x="-2" y="3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R270"/>
-<smd name="44" x="-2.5" y="3.275" dx="0.75" dy="0.275" layer="1" roundness="80" rot="R270"/>
-<smd name="EXP" x="0" y="0" dx="4.826" dy="4.826" layer="1" roundness="10" stop="no" cream="no"/>
-<text x="-3.9" y="4.55" size="1.27" layer="25">&gt;NAME</text>
-<text x="-3.9" y="-5.525" size="1.27" layer="27">&gt;VALUE</text>
-</package>
 </packages>
 <symbols>
-<symbol name="SMARTPRJ_ATMEGA32U4">
+<symbol name="GLOWBOARD_USB_PADS">
+<wire x1="5.08" y1="10.16" x2="5.08" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="5.08" y1="-10.16" x2="-5.08" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="-10.16" x2="-5.08" y2="10.16" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="10.16" x2="5.08" y2="10.16" width="0.254" layer="94"/>
+<pin name="D+" x="10.16" y="-2.54" length="middle" rot="R180"/>
+<pin name="D-" x="10.16" y="2.54" length="middle" rot="R180"/>
+<pin name="GND" x="10.16" y="-7.62" length="middle" rot="R180"/>
+<pin name="VBUS" x="10.16" y="7.62" length="middle" rot="R180"/>
+<text x="-2.286" y="11.176" size="1.778" layer="95">&gt;NAME</text>
+</symbol>
+<symbol name="GLOWBOARD_EXPANSION_HEADER">
+<wire x1="-2.54" y1="5.08" x2="5.08" y2="5.08" width="0.254" layer="94"/>
+<wire x1="5.08" y1="5.08" x2="5.08" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="5.08" y1="-5.08" x2="-2.54" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="-5.08" x2="-2.54" y2="5.08" width="0.254" layer="94"/>
+<pin name="1" x="-7.62" y="2.54" length="middle"/>
+<pin name="2" x="-7.62" y="0" length="middle"/>
+<pin name="3" x="-7.62" y="-2.54" length="middle"/>
+</symbol>
+<symbol name="GLOWBOARD_TS2">
+<circle x="0" y="-2.54" radius="0.127" width="0.4064" layer="94"/>
+<circle x="0" y="2.54" radius="0.127" width="0.4064" layer="94"/>
+<wire x1="0" y1="1.905" x2="0" y2="2.54" width="0.254" layer="94"/>
+<wire x1="-4.445" y1="1.905" x2="-3.175" y2="1.905" width="0.254" layer="94"/>
+<wire x1="-4.445" y1="-1.905" x2="-3.175" y2="-1.905" width="0.254" layer="94"/>
+<wire x1="-4.445" y1="1.905" x2="-4.445" y2="0" width="0.254" layer="94"/>
+<wire x1="-4.445" y1="0" x2="-4.445" y2="-1.905" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="0" x2="-1.905" y2="0" width="0.1524" layer="94"/>
+<wire x1="-1.27" y1="0" x2="-0.635" y2="0" width="0.1524" layer="94"/>
+<wire x1="-4.445" y1="0" x2="-3.175" y2="0" width="0.1524" layer="94"/>
+<wire x1="2.54" y1="2.54" x2="0" y2="2.54" width="0.1524" layer="94"/>
+<wire x1="2.54" y1="-2.54" x2="0" y2="-2.54" width="0.1524" layer="94"/>
+<wire x1="0" y1="-2.54" x2="-1.27" y2="1.905" width="0.254" layer="94"/>
+<pin name="P" x="0" y="-5.08" visible="pad" length="short" direction="pas" swaplevel="2" rot="R90"/>
+<pin name="P1" x="2.54" y="-5.08" visible="pad" length="short" direction="pas" swaplevel="2" rot="R90"/>
+<pin name="S" x="0" y="5.08" visible="pad" length="short" direction="pas" swaplevel="1" rot="R270"/>
+<pin name="S1" x="2.54" y="5.08" visible="pad" length="short" direction="pas" swaplevel="1" rot="R270"/>
+<text x="-6.35" y="-2.54" size="1.778" layer="95" rot="R90">&gt;NAME</text>
+<text x="-3.81" y="3.175" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
+</symbol>
+<symbol name="GLOWBOARD_PAD_CONNECTION">
+<wire x1="-5.08" y1="10.16" x2="-5.08" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="-10.16" x2="5.08" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="5.08" y1="-10.16" x2="5.08" y2="10.16" width="0.254" layer="94"/>
+<wire x1="5.08" y1="10.16" x2="-5.08" y2="10.16" width="0.254" layer="94"/>
+<pin name="+5V" x="-10.16" y="7.62" length="middle"/>
+<pin name="CLK" x="-10.16" y="2.54" length="middle"/>
+<pin name="DATA" x="-10.16" y="-2.54" length="middle"/>
+<pin name="GND" x="-10.16" y="-7.62" length="middle"/>
+<text x="-4.826" y="11.176" size="1.778" layer="95">&gt;NAME</text>
+</symbol>
+<symbol name="GLOWBOARD_ICSP_PADS">
+<wire x1="-17.78" y1="20.32" x2="0" y2="20.32" width="0.254" layer="94"/>
+<wire x1="0" y1="20.32" x2="0" y2="0" width="0.254" layer="94"/>
+<wire x1="0" y1="0" x2="-17.78" y2="0" width="0.254" layer="94"/>
+<wire x1="-17.78" y1="0" x2="-17.78" y2="20.32" width="0.254" layer="94"/>
+<pin name="GND" x="5.08" y="5.08" length="middle" rot="R180"/>
+<pin name="MISO" x="-22.86" y="15.24" length="middle"/>
+<pin name="MOSI" x="5.08" y="10.16" length="middle" rot="R180"/>
+<pin name="RST" x="-22.86" y="5.08" length="middle"/>
+<pin name="SCK" x="-22.86" y="10.16" length="middle"/>
+<pin name="VCC" x="5.08" y="15.24" length="middle" rot="R180"/>
+<text x="-15.24" y="22.86" size="1.27" layer="95">ICSP</text>
+</symbol>
+<symbol name="ARDUINO_LEONARDO-REV3B_SMARTPRJ_ATMEGA32U4">
 <wire x1="-20.32" y1="25.4" x2="30.48" y2="25.4" width="0.254" layer="94"/>
 <wire x1="30.48" y1="25.4" x2="30.48" y2="-60.96" width="0.254" layer="94"/>
 <wire x1="30.48" y1="-60.96" x2="-20.32" y2="-60.96" width="0.254" layer="94"/>
@@ -4993,64 +4892,104 @@ Source: http://ww1.microchip.com/downloads/en/devicedoc/39632c.pdf</description>
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="SMARTPRJ_ATMEGA32U4-XU">
+<deviceset name="GLOWBOARD_MINI_USB">
 <gates>
-<gate name="G$1" symbol="SMARTPRJ_ATMEGA32U4" x="0" y="0"/>
+<gate name="G$1" symbol="GLOWBOARD_USB_PADS" x="0" y="0"/>
 </gates>
 <devices>
-<device name="" package="SMARTPRJ_QFN44ML8X8">
+<device name="" package="GLOWBOARD_MINI_USB_PADS">
 <connects>
-<connect gate="G$1" pin="(#HWB)PE2" pad="33"/>
-<connect gate="G$1" pin="(ADC0)PF0" pad="41"/>
-<connect gate="G$1" pin="(ADC1)PF1" pad="40"/>
-<connect gate="G$1" pin="(ADC11/PCINT4)PB4" pad="28"/>
-<connect gate="G$1" pin="(ADC4/TCK)PF4" pad="39"/>
-<connect gate="G$1" pin="(ADC5/TMS)PF5" pad="38"/>
-<connect gate="G$1" pin="(ADC6/TDO)PF6" pad="37"/>
-<connect gate="G$1" pin="(ADC7/TDI)PF7" pad="36"/>
-<connect gate="G$1" pin="(ICP1/ADC8)PD4" pad="25"/>
-<connect gate="G$1" pin="(ICP3/CLK0/OC4A)PC7" pad="32"/>
-<connect gate="G$1" pin="(INT6/AIN0)PE6" pad="1"/>
-<connect gate="G$1" pin="(OC0B/SCL/INT0)PD0" pad="18"/>
-<connect gate="G$1" pin="(OC3A/#0C4A)PC6" pad="31"/>
-<connect gate="G$1" pin="(PCINT5/OC1A/#OC4B/ADC12)PB5" pad="29"/>
-<connect gate="G$1" pin="(PCINT6/OC1B/OC4B/ADC13)PB6" pad="30"/>
-<connect gate="G$1" pin="(PCINT7/OC0A/OC1C/#RTS)PB7" pad="12"/>
-<connect gate="G$1" pin="(PD0/MISO/PCINT3)PB3" pad="11"/>
-<connect gate="G$1" pin="(PDI/MOSI/PCINT2)PB2" pad="10"/>
-<connect gate="G$1" pin="(RXD1/AIN1/INT2)PD2" pad="20"/>
-<connect gate="G$1" pin="(SCLK/PCINT1)PB1" pad="9"/>
-<connect gate="G$1" pin="(SDA/INT1)PD1" pad="19"/>
-<connect gate="G$1" pin="(SS/PCINT0)PB0" pad="8"/>
-<connect gate="G$1" pin="(T0/OC4D/ADC10)PD7" pad="27"/>
-<connect gate="G$1" pin="(T1/#OC4D/ADC9)PD6" pad="26"/>
-<connect gate="G$1" pin="(TXD1/INT3)PD3" pad="21"/>
-<connect gate="G$1" pin="(XCK1/#CTS)PD5" pad="22"/>
-<connect gate="G$1" pin="AREF" pad="42"/>
-<connect gate="G$1" pin="AVCC" pad="24"/>
-<connect gate="G$1" pin="AVCC1" pad="44"/>
-<connect gate="G$1" pin="D+" pad="4"/>
-<connect gate="G$1" pin="D-" pad="3"/>
-<connect gate="G$1" pin="GND" pad="15"/>
-<connect gate="G$1" pin="GND1" pad="23"/>
-<connect gate="G$1" pin="GND2" pad="35"/>
-<connect gate="G$1" pin="GND3" pad="43"/>
-<connect gate="G$1" pin="PAD" pad="EXP"/>
-<connect gate="G$1" pin="RESET" pad="13"/>
-<connect gate="G$1" pin="UCAP" pad="6"/>
-<connect gate="G$1" pin="UGND" pad="5"/>
-<connect gate="G$1" pin="UVCC" pad="2"/>
-<connect gate="G$1" pin="VBUS" pad="7"/>
-<connect gate="G$1" pin="VCC" pad="14"/>
-<connect gate="G$1" pin="VCC1" pad="34"/>
-<connect gate="G$1" pin="XTAL1" pad="17"/>
-<connect gate="G$1" pin="XTAL2" pad="16"/>
+<connect gate="G$1" pin="D+" pad="P$3"/>
+<connect gate="G$1" pin="D-" pad="P$2"/>
+<connect gate="G$1" pin="GND" pad="P$5 P$6 P$7 P$8 P$9"/>
+<connect gate="G$1" pin="VBUS" pad="P$1"/>
 </connects>
 <technologies>
 <technology name=""/>
 </technologies>
 </device>
-<device name="AU" package="SMARTPRJ_TQFP44-PAD">
+</devices>
+</deviceset>
+<deviceset name="GLOWBOARD_EXPANSION_HEADER">
+<gates>
+<gate name="G$1" symbol="GLOWBOARD_EXPANSION_HEADER" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="GLOWBOARD_EXPANSION_HEADER">
+<connects>
+<connect gate="G$1" pin="1" pad="P$1"/>
+<connect gate="G$1" pin="2" pad="P$2"/>
+<connect gate="G$1" pin="3" pad="P$3"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="GLOWBOARD_KMR211G" prefix="S" uservalue="yes">
+<description>&lt;b&gt;KMR211G SWITCH&lt;/b&gt;</description>
+<gates>
+<gate name="1" symbol="GLOWBOARD_TS2" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="GLOWBOARD_KMR211G_SWITCH">
+<connects>
+<connect gate="1" pin="P" pad="P$1"/>
+<connect gate="1" pin="P1" pad="P$2"/>
+<connect gate="1" pin="S" pad="P$3"/>
+<connect gate="1" pin="S1" pad="P$4"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="GLOWBOARD_PAD_CONNECTION">
+<gates>
+<gate name="G$1" symbol="GLOWBOARD_PAD_CONNECTION" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="GLOWBOARD_PAD_CONNECTION">
+<connects>
+<connect gate="G$1" pin="+5V" pad="1"/>
+<connect gate="G$1" pin="CLK" pad="2"/>
+<connect gate="G$1" pin="DATA" pad="3"/>
+<connect gate="G$1" pin="GND" pad="4"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="GLOWBOARD_ICSP">
+<gates>
+<gate name="G$1" symbol="GLOWBOARD_ICSP_PADS" x="10.16" y="-10.16"/>
+</gates>
+<devices>
+<device name="" package="GLOWBOARD_ICSP_PADS">
+<connects>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="MISO" pad="MISO"/>
+<connect gate="G$1" pin="MOSI" pad="MOSI"/>
+<connect gate="G$1" pin="RST" pad="RST"/>
+<connect gate="G$1" pin="SCK" pad="SCK`"/>
+<connect gate="G$1" pin="VCC" pad="VCC"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="ARDUINO_LEONARDO-REV3B_SMARTPRJ_ATMEGA32U4-XU">
+<gates>
+<gate name="G$1" symbol="ARDUINO_LEONARDO-REV3B_SMARTPRJ_ATMEGA32U4" x="0" y="0"/>
+</gates>
+<devices>
+<device name="AU" package="ARDUINO_LEONARDO-REV3B_SMARTPRJ_TQFP44-PAD">
 <connects>
 <connect gate="G$1" pin="(#HWB)PE2" pad="33"/>
 <connect gate="G$1" pin="(ADC0)PF0" pad="41"/>
@@ -5102,7 +5041,7 @@ Source: http://ww1.microchip.com/downloads/en/devicedoc/39632c.pdf</description>
 <technology name=""/>
 </technologies>
 </device>
-<device name="MU" package="SMARTPRJ_QFN44ML7X7">
+<device name="MU" package="ARDUINO_LEONARDO-REV3B_SMARTPRJ_QFN44ML7X7">
 <connects>
 <connect gate="G$1" pin="(#HWB)PE2" pad="33"/>
 <connect gate="G$1" pin="(ADC0)PF0" pad="41"/>
@@ -5158,93 +5097,6 @@ Source: http://ww1.microchip.com/downloads/en/devicedoc/39632c.pdf</description>
 </deviceset>
 </devicesets>
 </library>
-<library name="blinkyboard">
-<description>Generated from &lt;b&gt;atmega32u4bb.sch&lt;/b&gt;&lt;p&gt;
-by exp-project-lbr.ulp</description>
-<packages>
-<package name="GLOWBOARD_MINI_USB_PADS">
-<wire x1="-3.14" y1="3.64" x2="4.36" y2="3.64" width="0.127" layer="51"/>
-<wire x1="4.36" y1="3.64" x2="4.36" y2="-5.56" width="0.127" layer="51"/>
-<wire x1="4.36" y1="-5.56" x2="-3.14" y2="-5.56" width="0.127" layer="51"/>
-<wire x1="-3.14" y1="-5.56" x2="-3.14" y2="3.64" width="0.127" layer="51"/>
-<smd name="P$1" x="-0.99" y="2.99" dx="0.5" dy="2.25" layer="1"/>
-<smd name="P$2" x="-0.19" y="2.99" dx="0.5" dy="2.25" layer="1"/>
-<smd name="P$3" x="0.61" y="2.99" dx="0.5" dy="2.25" layer="1"/>
-<smd name="P$4" x="1.41" y="2.99" dx="0.5" dy="2.25" layer="1"/>
-<smd name="P$5" x="2.21" y="2.99" dx="0.5" dy="2.25" layer="1"/>
-<smd name="P$6" x="-3.84" y="2.84" dx="2" dy="2.5" layer="1"/>
-<smd name="P$7" x="-3.94" y="-2.61" dx="2" dy="2.5" layer="1"/>
-<smd name="P$8" x="5.06" y="2.84" dx="2" dy="2.5" layer="1"/>
-<smd name="P$9" x="5.06" y="-2.56" dx="2" dy="2.5" layer="1"/>
-<hole x="-1.59" y="0.29" drill="0.9"/>
-<hole x="2.81" y="0.29" drill="0.9"/>
-</package>
-<package name="GLOWBOARD_EXPANSION_HEADER">
-<smd name="P$1" x="-1.3" y="0" dx="1" dy="1.2" layer="1"/>
-<smd name="P$2" x="0" y="0" dx="1" dy="1.2" layer="1"/>
-<smd name="P$3" x="1.3" y="0" dx="1" dy="1.2" layer="1"/>
-</package>
-</packages>
-<symbols>
-<symbol name="GLOWBOARD_USB_PADS">
-<wire x1="5.08" y1="10.16" x2="5.08" y2="-10.16" width="0.254" layer="94"/>
-<wire x1="5.08" y1="-10.16" x2="-5.08" y2="-10.16" width="0.254" layer="94"/>
-<wire x1="-5.08" y1="-10.16" x2="-5.08" y2="10.16" width="0.254" layer="94"/>
-<wire x1="-5.08" y1="10.16" x2="5.08" y2="10.16" width="0.254" layer="94"/>
-<pin name="D+" x="10.16" y="-2.54" length="middle" rot="R180"/>
-<pin name="D-" x="10.16" y="2.54" length="middle" rot="R180"/>
-<pin name="GND" x="10.16" y="-7.62" length="middle" rot="R180"/>
-<pin name="VBUS" x="10.16" y="7.62" length="middle" rot="R180"/>
-<text x="-2.286" y="11.176" size="1.778" layer="95">&gt;NAME</text>
-</symbol>
-<symbol name="GLOWBOARD_EXPANSION_HEADER">
-<wire x1="-2.54" y1="5.08" x2="5.08" y2="5.08" width="0.254" layer="94"/>
-<wire x1="5.08" y1="5.08" x2="5.08" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="5.08" y1="-5.08" x2="-2.54" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="-2.54" y1="-5.08" x2="-2.54" y2="5.08" width="0.254" layer="94"/>
-<pin name="1" x="-7.62" y="2.54" length="middle"/>
-<pin name="2" x="-7.62" y="0" length="middle"/>
-<pin name="3" x="-7.62" y="-2.54" length="middle"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="GLOWBOARD_MINI_USB">
-<gates>
-<gate name="G$1" symbol="GLOWBOARD_USB_PADS" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="GLOWBOARD_MINI_USB_PADS">
-<connects>
-<connect gate="G$1" pin="D+" pad="P$3"/>
-<connect gate="G$1" pin="D-" pad="P$2"/>
-<connect gate="G$1" pin="GND" pad="P$5 P$6 P$7 P$8 P$9"/>
-<connect gate="G$1" pin="VBUS" pad="P$1"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-<deviceset name="GLOWBOARD_EXPANSION_HEADER">
-<gates>
-<gate name="G$1" symbol="GLOWBOARD_EXPANSION_HEADER" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="GLOWBOARD_EXPANSION_HEADER">
-<connects>
-<connect gate="G$1" pin="1" pad="P$1"/>
-<connect gate="G$1" pin="2" pad="P$2"/>
-<connect gate="G$1" pin="3" pad="P$3"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 </libraries>
 <attributes>
 </attributes>
@@ -5272,17 +5124,17 @@ by exp-project-lbr.ulp</description>
 <part name="C7" library="adafruit" deviceset="C-US" device="C0805K" value="0.1uF"/>
 <part name="P+1" library="supply1" deviceset="VCC" device=""/>
 <part name="FRAME1" library="frames" deviceset="FRAME_A_L" device=""/>
-<part name="U$3" library="glowboard" deviceset="PAD_CONNECTION" device=""/>
+<part name="U$3" library="blinkyboard" deviceset="GLOWBOARD_PAD_CONNECTION" device=""/>
 <part name="P+5" library="supply1" deviceset="VCC" device=""/>
 <part name="GND5" library="supply1" deviceset="GND" device=""/>
-<part name="U$1" library="Arduino_Leonardo-REV3b" deviceset="SMARTPRJ_ATMEGA32U4-XU" device="MU"/>
+<part name="U$1" library="blinkyboard" deviceset="ARDUINO_LEONARDO-REV3B_SMARTPRJ_ATMEGA32U4-XU" device="MU"/>
 <part name="GND8" library="supply1" deviceset="GND" device=""/>
 <part name="P+6" library="supply1" deviceset="VCC" device=""/>
 <part name="P+7" library="supply1" deviceset="VCC" device=""/>
 <part name="P+8" library="supply1" deviceset="VCC" device=""/>
-<part name="S1" library="glowboard" deviceset="KMR211G" device="" value="Normally open"/>
+<part name="S1" library="blinkyboard" deviceset="GLOWBOARD_KMR211G" device="" value="Normally open"/>
 <part name="Q1" library="glowboard" deviceset="ABMM2" device="" value="16 MHz"/>
-<part name="U$4" library="glowboard" deviceset="ICSP" device=""/>
+<part name="U$4" library="blinkyboard" deviceset="GLOWBOARD_ICSP" device=""/>
 <part name="P+2" library="supply1" deviceset="VCC" device=""/>
 <part name="GND2" library="supply1" deviceset="GND" device=""/>
 <part name="C8" library="adafruit" deviceset="C-US" device="C0805K" value="0.1uF"/>
