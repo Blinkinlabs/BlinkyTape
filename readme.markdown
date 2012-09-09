@@ -1,1 +1,1 @@
-Glowboard! A project by Matt Mets and Max Henstell
+Blinkyboard! A project by Matt Mets and Max Henstell
