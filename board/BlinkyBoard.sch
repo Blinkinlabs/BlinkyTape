@@ -2590,10 +2590,10 @@ by exp-project-lbr.ulp</description>
 </package>
 <package name="GLOWBOARD_PAD_CONNECTION">
 <description>SMT pads for interfacing with a strip of individually controllable RGB LEDs</description>
-<smd name="1" x="0" y="4.6" dx="3.4" dy="2.4" layer="1" cream="no"/>
-<smd name="2" x="0" y="1.6" dx="3.4" dy="2.4" layer="1" cream="no"/>
-<smd name="3" x="0" y="-1.4" dx="3.4" dy="2.4" layer="1" cream="no"/>
-<smd name="4" x="0" y="-4.4" dx="3.4" dy="2.4" layer="1" cream="no"/>
+<smd name="+5V" x="0" y="4.6" dx="3.4" dy="2.4" layer="1" cream="no"/>
+<smd name="CLK" x="0" y="1.6" dx="3.4" dy="2.4" layer="1" cream="no"/>
+<smd name="DATA" x="0" y="-1.4" dx="3.4" dy="2.4" layer="1" cream="no"/>
+<smd name="GND" x="0" y="-4.4" dx="3.4" dy="2.4" layer="1" cream="no"/>
 </package>
 <package name="GLOWBOARD_ICSP_PADS">
 <smd name="GND" x="2" y="-4" dx="3.3" dy="2" layer="16" cream="no"/>
@@ -2658,15 +2658,15 @@ by exp-project-lbr.ulp</description>
 <smd name="EXP" x="0" y="0" dx="4.826" dy="4.826" layer="1" roundness="10" stop="no" cream="no"/>
 <text x="-3.9" y="4.55" size="1.27" layer="25">&gt;NAME</text>
 <text x="-3.9" y="-5.525" size="1.27" layer="27">&gt;VALUE</text>
-<pad name="P$1" x="0" y="0" drill="0.5" shape="square" rot="R270" stop="no" thermals="no"/>
-<pad name="P$2" x="-1.5" y="-1.5" drill="0.5" shape="square" rot="R270" stop="no" thermals="no"/>
-<pad name="P$3" x="-1.5" y="1.5" drill="0.5" shape="square" rot="R270" stop="no" thermals="no"/>
-<pad name="P$5" x="1.5" y="-1.5" drill="0.5" shape="square" rot="R270" stop="no" thermals="no"/>
-<pad name="P$7" x="0" y="-1.5" drill="0.5" shape="square" rot="R270" stop="no" thermals="no"/>
-<pad name="P$8" x="-1.5" y="0" drill="0.5" shape="square" rot="R270" stop="no" thermals="no"/>
-<pad name="P$12" x="1.5" y="0" drill="0.5" shape="square" rot="R270" stop="no" thermals="no"/>
-<pad name="P$14" x="0" y="1.5" drill="0.5" shape="square" rot="R270" stop="no" thermals="no"/>
-<pad name="P$15" x="1.5" y="1.5" drill="0.5" shape="square" rot="R270" stop="no" thermals="no"/>
+<pad name="P$1" x="0" y="0" drill="0.508" rot="R270" stop="no" thermals="no"/>
+<pad name="P$2" x="-1.5" y="-1.5" drill="0.508" rot="R270" stop="no" thermals="no"/>
+<pad name="P$3" x="-1.5" y="1.5" drill="0.508" rot="R270" stop="no" thermals="no"/>
+<pad name="P$5" x="1.5" y="-1.5" drill="0.508" rot="R270" stop="no" thermals="no"/>
+<pad name="P$7" x="0" y="-1.5" drill="0.508" rot="R270" stop="no" thermals="no"/>
+<pad name="P$8" x="-1.5" y="0" drill="0.508" rot="R270" stop="no" thermals="no"/>
+<pad name="P$12" x="1.5" y="0" drill="0.508" rot="R270" stop="no" thermals="no"/>
+<pad name="P$14" x="0" y="1.5" drill="0.508" rot="R270" stop="no" thermals="no"/>
+<pad name="P$15" x="1.5" y="1.5" drill="0.508" rot="R270" stop="no" thermals="no"/>
 <smd name="EXP1" x="0" y="0" dx="4.826" dy="4.826" layer="16" roundness="10" stop="no" cream="no"/>
 </package>
 <package name="ARDUINO_LEONARDO-REV3B_SMARTPRJ_TQFP44-PAD">
@@ -2999,10 +2999,10 @@ chip</description>
 <devices>
 <device name="" package="GLOWBOARD_PAD_CONNECTION">
 <connects>
-<connect gate="G$1" pin="+5V" pad="1"/>
-<connect gate="G$1" pin="CLK" pad="2"/>
-<connect gate="G$1" pin="DATA" pad="3"/>
-<connect gate="G$1" pin="GND" pad="4"/>
+<connect gate="G$1" pin="+5V" pad="+5V"/>
+<connect gate="G$1" pin="CLK" pad="CLK"/>
+<connect gate="G$1" pin="DATA" pad="DATA"/>
+<connect gate="G$1" pin="GND" pad="GND"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -3188,7 +3188,7 @@ chip</description>
 <part name="R1" library="blinkyboard" deviceset="RESISTOR_0805" device="" value="22"/>
 <part name="R2" library="blinkyboard" deviceset="RESISTOR_0805" device="" value="22"/>
 <part name="GND1" library="supply1" deviceset="GND" device=""/>
-<part name="C1" library="adafruit" deviceset="C-US" device="C0805K" value="0.1uF"/>
+<part name="C1" library="adafruit" deviceset="C-US" device="C0805K" value=".1uF"/>
 <part name="GND3" library="supply1" deviceset="GND" device=""/>
 <part name="GND6" library="supply1" deviceset="GND" device=""/>
 <part name="+3V1" library="supply1" deviceset="+3V3" device=""/>
@@ -3544,14 +3544,14 @@ chip</description>
 <pinref part="P+2" gate="VCC" pin="VCC"/>
 </segment>
 </net>
-<net name="N$3" class="0">
+<net name="D-" class="0">
 <segment>
 <pinref part="R1" gate="G$1" pin="2"/>
 <pinref part="U$1" gate="G$1" pin="D-"/>
 <wire x1="5.08" y1="38.1" x2="35.56" y2="38.1" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$4" class="0">
+<net name="D+" class="0">
 <segment>
 <pinref part="U$1" gate="G$1" pin="D+"/>
 <pinref part="R2" gate="G$1" pin="2"/>
@@ -3571,11 +3571,11 @@ chip</description>
 </net>
 <net name="N$1" class="0">
 <segment>
-<pinref part="U$1" gate="G$1" pin="(ADC0)PF0"/>
-<wire x1="96.52" y1="5.08" x2="104.14" y2="5.08" width="0.1524" layer="91"/>
-<wire x1="104.14" y1="5.08" x2="104.14" y2="7.62" width="0.1524" layer="91"/>
 <pinref part="U$5" gate="G$1" pin="1"/>
 <wire x1="104.14" y1="7.62" x2="111.76" y2="7.62" width="0.1524" layer="91"/>
+<wire x1="104.14" y1="7.62" x2="104.14" y2="17.78" width="0.1524" layer="91"/>
+<pinref part="U$1" gate="G$1" pin="(ADC5/TMS)PF5"/>
+<wire x1="104.14" y1="17.78" x2="96.52" y2="17.78" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$6" class="0">
