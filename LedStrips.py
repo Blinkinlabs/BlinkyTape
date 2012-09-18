@@ -107,8 +107,18 @@ if __name__ == "__main__":
 	signal.signal(signal.SIGINT, strip.disconnect)
 
 
+	i = 0
+	j = 0
+
 	while True:
 		for pixel in range(0, options.strip_length):
-			strip.set_pixel(pixel, Pixel(colors['orange']))
-		strip.draw()
+			#strip.set_pixel(pixel, Pixel(colors['orange']))
+			if ((pixel+j)%3 == 0): strip.set_pixel(pixel, Pixel(colors['red']))
+			if ((pixel+j)%3 == 1): strip.set_pixel(pixel, Pixel(colors['green']))
+			if ((pixel+j)%3 == 2): strip.set_pixel(pixel, Pixel(colors['blue']))
+
+			i = (i+1)%20
+			if i == 0: j = (j+1)%255
+
+			strip.draw()
 
