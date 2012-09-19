@@ -5,6 +5,7 @@ import array
 import sys
 import math
 import signal
+import struct
 
 class Pixel:
 
@@ -39,7 +40,6 @@ class LedStrips:
 		self.data = [Pixel([0,0,0]) for x in range(0, self.length)]
 
 	def get_raw_data(self):
-		
 		out = ''
 		for pix in self.data:
 			ints = pix.ints()
@@ -65,6 +65,16 @@ class LedStrips:
 		"""
 		self.load_data()
 		self.flip()
+
+	def set_data(self, data):
+		s = ''
+		for x in range(0, len(data) / 3):
+			r =  struct.unpack("<B", data[(x*3) + 0])[0],
+			g =  struct.unpack("<B", data[(x*3) + 1])[0],
+			b =  struct.unpack("<B", data[(x*3) + 2])
+			self.data[x] = Pixel([r[0],g[0],b[0]])
+
+		self.load_data()
 
 	def load_data(self):
 		"""
@@ -120,5 +130,5 @@ if __name__ == "__main__":
 			i = (i+1)%20
 			if i == 0: j = (j+1)%255
 
-			strip.draw()
+		strip.draw()
 
