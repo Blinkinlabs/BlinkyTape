@@ -2,6 +2,8 @@ static int LED_COUNT = 32;
 
 void setup()
 {
+  Serial.begin(115200);
+  
   DDRB = 0xFF;
   DDRD = 0xFF;
 }
@@ -40,6 +42,15 @@ int k = 0;
 uint8_t i = 0;
 void loop()
 {
+  // If'n we get some data, switch to passthrough mode
+  if(Serial.available()) {
+    while(true) {
+      send_single_byte(Serial.read());
+      while(!Serial.available()) {}
+    }
+  }
+    
+  
   float brightness = random(100,100)/100.0;
   
   for (uint8_t i = 0; i < LED_COUNT; i++) {
