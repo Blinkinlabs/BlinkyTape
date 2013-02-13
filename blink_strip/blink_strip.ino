@@ -4,6 +4,8 @@ uint32_t led_array[LED_COUNT];
 
 void setup()
 {
+  Serial.begin(115200);
+  
   DDRB = 0xFF;
   DDRD = 0xFF;
 }
@@ -68,7 +70,14 @@ void color_loop() {
 
 void loop()
 {
- 
+  // If'n we get some data, switch to passthrough mode
+  if(Serial.available()) {
+    while(true) {
+      send_single_byte(Serial.read());
+      while(!Serial.available()) {}
+    }
+  }
+    
   color_loop();
   
   for (int x = 0; x < LED_COUNT; x++) {
