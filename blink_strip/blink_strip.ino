@@ -1,4 +1,6 @@
-static int LED_COUNT = 32;
+#define LED_COUNT 32
+
+uint32_t led_array[LED_COUNT];
 
 void setup()
 {
@@ -32,14 +34,19 @@ void send_pixel(uint8_t red, uint8_t green, uint8_t blue) {
   send_single_byte(0x80 | blue);
 }
 
+void send_pixel_32(uint32_t c) {
+  
+  send_single_byte((c >> 16) | 0x80);
+  send_single_byte((c >> 8) | 0x80);
+  send_single_byte((c >> 0) | 0x80);
+    
+}
+
 int j = 0;
 int f = 0;
 int k = 0;
 
-
-uint8_t i = 0;
-void loop()
-{
+void color_loop() {
   float brightness = random(100,100)/100.0;
   
   for (uint8_t i = 0; i < LED_COUNT; i++) {
@@ -47,42 +54,27 @@ void loop()
     uint8_t green = 64*(1+sin(i/1.0 + f/9.0  + 2.1))*brightness;
     uint8_t blue =  64*(1+sin(i/3.0 + k/14.0 + 4.2))*brightness;
     
-    send_pixel(red, green, blue);
+    uint32_t pix = green;
+    pix = (pix << 8) | red;
+    pix = (pix << 8) | blue;
+    
+    led_array[i] = pix;
   }
-
+  
   j = j + random(1,2);
   f = f + random(1,2);
   k = k + random(1,2);
+}
 
-//  j = k;
-//  for (uint8_t i = 0; i < LED_COUNT; i++) {
-//    if (j == 0) {
-//      send_pixel(127,64,0);
-//    }
-//    else if(j == 1) {
-//      send_pixel(64,127,0);
-//    }
-//    else if(j == 2) {
-//      send_pixel(0,127,64);
-//    }
-//    else if(j == 3) {
-//      send_pixel(0,64,127);
-//    }
-//    else if(j == 4) {
-//      send_pixel(64,0,127);
-//    }
-//    else {
-//      send_pixel(127,0,64);
-//    }
-//    
-//    j = (j+1)%6;
-//  }
-//  k = (k+1)%6;
+void loop()
+{
+ 
+  color_loop();
+  
+  for (int x = 0; x < LED_COUNT; x++) {
+    send_pixel_32(led_array[x]); 
+  }
   
   send_single_byte(0x00);
  
-
 }
-
-
-
