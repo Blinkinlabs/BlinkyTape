@@ -2,29 +2,29 @@ static int LED_COUNT = 32;
 
 void setup()
 {
-  Serial.begin(115200);
+  Serial.begin(57600);
   
-  DDRB = 0xFF;
-  DDRD = 0xFF;
+  bitClear(PORTB, PORTB1);
+  bitClear(PORTB, PORTB2);
+  
+  bitSet(DDRB, DDB1);
+  bitSet(DDRB, DDB2);
 }
-
-//// For teensy prototypes
-//void send_single_byte(uint8_t c)
-//{
-//  // D5 is clock, D4 is data
-//  for(uint8_t i = 0; i < 8; i++) {
-//    PORTD = (((c >> (7 - i)) & 0x01) << 4);
-//    PORTD = (((c >> (7 - i)) & 0x01) << 4) | 0x20;
-//  }
-//}
 
 // For blinkyboards
 void send_single_byte(uint8_t c)
 {
-  // D5 is clock, D4 is data
   for(uint8_t i = 0; i < 8; i++) {
-    PORTB = (((c >> (7 - i)) & 0x01) << 2);
-    PORTB = (((c >> (7 - i)) & 0x01) << 2) | 0x02;
+    // PB1 is clock, PB2 is data
+    if(c >> (7 - i) & 0x01) {
+      bitSet(PORTB, PORTB2);
+    }
+    else {
+      bitClear(PORTB, PORTB2);      
+    }
+    
+    bitSet(PORTB, PORTB1);
+    bitClear(PORTB, PORTB1);
   }
 }
 
@@ -34,22 +34,22 @@ void send_pixel(uint8_t red, uint8_t green, uint8_t blue) {
   send_single_byte(0x80 | blue);
 }
 
+uint8_t i = 0;
 int j = 0;
 int f = 0;
 int k = 0;
 
-
-uint8_t i = 0;
 void loop()
 {
   // If'n we get some data, switch to passthrough mode
-  if(Serial.available()) {
+  if(Serial.available() > 0) {
     while(true) {
-      send_single_byte(Serial.read());
-      while(!Serial.available()) {}
+      if(Serial.available() > 0) {
+        char c = Serial.read();
+        send_single_byte(c);
+      }
     }
   }
-    
   
   float brightness = random(100,100)/100.0;
   
@@ -64,35 +64,8 @@ void loop()
   j = j + random(1,2);
   f = f + random(1,2);
   k = k + random(1,2);
-
-//  j = k;
-//  for (uint8_t i = 0; i < LED_COUNT; i++) {
-//    if (j == 0) {
-//      send_pixel(127,64,0);
-//    }
-//    else if(j == 1) {
-//      send_pixel(64,127,0);
-//    }
-//    else if(j == 2) {
-//      send_pixel(0,127,64);
-//    }
-//    else if(j == 3) {
-//      send_pixel(0,64,127);
-//    }
-//    else if(j == 4) {
-//      send_pixel(64,0,127);
-//    }
-//    else {
-//      send_pixel(127,0,64);
-//    }
-//    
-//    j = (j+1)%6;
-//  }
-//  k = (k+1)%6;
   
   send_single_byte(0x00);
- 
-
 }
 
 
