@@ -1,4 +1,6 @@
-static int LED_COUNT = 32;
+#define LED_COUNT 32
+
+uint32_t led_array[LED_COUNT];
 
 void setup()
 {
@@ -11,7 +13,6 @@ void setup()
   bitSet(DDRB, DDB2);
 }
 
-// For blinkyboards
 void send_single_byte(uint8_t c)
 {
   for(uint8_t i = 0; i < 8; i++) {
@@ -28,10 +29,12 @@ void send_single_byte(uint8_t c)
   }
 }
 
-void send_pixel(uint8_t red, uint8_t green, uint8_t blue) {
-  send_single_byte(0x80 | red);
-  send_single_byte(0x80 | green);
-  send_single_byte(0x80 | blue);
+void send_pixel_32(uint32_t c) {
+  
+  send_single_byte((c >> 16) | 0x80);
+  send_single_byte((c >> 8) | 0x80);
+  send_single_byte((c >> 0) | 0x80);
+    
 }
 
 uint8_t i = 0;
@@ -39,18 +42,7 @@ int j = 0;
 int f = 0;
 int k = 0;
 
-void loop()
-{
-  // If'n we get some data, switch to passthrough mode
-  if(Serial.available() > 0) {
-    while(true) {
-      if(Serial.available() > 0) {
-        char c = Serial.read();
-        send_single_byte(c);
-      }
-    }
-  }
-  
+void color_loop() {
   float brightness = random(100,100)/100.0;
   
   for (uint8_t i = 0; i < LED_COUNT; i++) {
@@ -58,15 +50,38 @@ void loop()
     uint8_t green = 64*(1+sin(i/1.0 + f/9.0  + 2.1))*brightness;
     uint8_t blue =  64*(1+sin(i/3.0 + k/14.0 + 4.2))*brightness;
     
-    send_pixel(red, green, blue);
+    uint32_t pix = green;
+    pix = (pix << 8) | red;
+    pix = (pix << 8) | blue;
+    
+    led_array[i] = pix;
   }
-
+  
   j = j + random(1,2);
   f = f + random(1,2);
   k = k + random(1,2);
-  
-  send_single_byte(0x00);
 }
 
+void serialLoop() {
+  while(true) {
+    if(Serial.available() > 0) {
+      char c = Serial.read();
+      send_single_byte(c);
+    }
+  }
+}
 
-
+void loop()
+{
+  // If'n we get some data, switch to passthrough mode
+  if(Serial.available() > 0) {
+    serialLoop();
+  }
+    
+  color_loop();
+  
+  for(uint8_t x = 0; x < LED_COUNT; x++) {
+    send_pixel_32(led_array[x]); 
+  }
+  send_single_byte(0x00);
+}
