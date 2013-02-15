@@ -4,7 +4,6 @@ import time
 class blinkyBoard:
   def init(self, port, baud):
     self.serial = serial.Serial(port, baud)
-    self.serial.open()
 
   def sendPixel(self,r,g,b):
     data = bytearray()
@@ -22,7 +21,7 @@ class blinkyBoard:
     self.serial.flush()
 
 b = blinkyBoard()
-b.init('/dev/cu.usbmodemfd121', 57600)
+b.init('/dev/cu.usbmodemfa131', 57600)
 
 b.sendBreak()
 while True:
