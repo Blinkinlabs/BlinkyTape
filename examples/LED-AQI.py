@@ -1,47 +1,18 @@
-import serial
 import time
 import urllib
-from bs4 import BeautifulSoup
-import Image
+from bs4 import BeautifulSoup #pip install beautifulsoup4 html5lib
+import Image #pip install PIL
 import base64
 import tempfile
 import serial.tools.list_ports
 
-class blinkyBoard:
-  def init(self, port, baud):
-    self.serial = serial.Serial(port, baud)
-    self.rgamma = 2.0
-    self.ggamma = 1.0
-    self.bgamma = 4.0
-
-  def sendPixel(self,g,r,b):
-    data = bytearray()
-    
-    r = self.gamma(r, self.rgamma)
-    g = self.gamma(g, self.ggamma)
-    b = self.gamma(b, self.bgamma)
-    
-    data.append(0x80 | (r>>1))
-    data.append(0x80 | (g>>1))
-    data.append(0x80 | (b>>1))
-    self.serial.write(data)
-    self.serial.flush()
-    
-  def gamma(self, input, tweak):
-    return int(pow(input/256.0, tweak) * 256)
-
-  def sendBreak(self):
-    data = bytearray()
-    for i in range(0,8):
-      data.append(0x00)
-    self.serial.write(data)
-    self.serial.flush()
+from Blinkyboard import Blinkyboard
 
 ports = serial.tools.list_ports.comports();
 port = ports[0][0]
 
-blink = blinkyBoard()
-blink.init(port, 57600)
+bb = Blinkyboard(port, 60, 'WS2811', gamma=[2,1,4])
+bb.allOff()
 
 #url = "http://www.aqicn.info/city/hongkong/"
 #url = "http://www.aqicn.info/city/shenzhen/"
@@ -52,9 +23,6 @@ url = "http://www.aqicn.info/city/shenzhen/huaqiaocheng/"
 
 positions = [243, 238, 233, 228, 223, 218, 213, 208, 203, 198, 193, 188, 183, 178, 173, 168, 163, 158, 153, 148, 143, 138, 133, 128, 123, 118, 113]
 
-for i in range(0, 30):
-  blink.sendPixel(0,0,0);
-blink.sendBreak()
 
 try:
   while True:
@@ -85,8 +53,8 @@ try:
           for x in positions:
             r, g, b = img.getpixel((x, yheight))
             #print r, g, b
-            blink.sendPixel(r, g, b);
-          blink.sendBreak()
+            bb.sendPixel(r, g, b);
+          bb.show()
 
           time.sleep(delay)
 
@@ -97,8 +65,8 @@ try:
               g = 0
               b = 0
 
-            blink.sendPixel(r, g, b);
-          blink.sendBreak()
+            bb.sendPixel(r, g, b);
+          bb.show()
           
           time.sleep(delay)
         # time.sleep(60*30)
