@@ -93,9 +93,10 @@ if __name__ == "__main__":
 
   LED_COUNT = 60
   bb = None
+  gamma = [1,1,1]
 
   if len(sys.argv) > 1:
-    bb = Blinkyboard(sys.argv[1], 60, "WS2811", gamma=[1,2,3])
+    bb = Blinkyboard(sys.argv[1], 60, "WS2811", gamma=gamma)
 
   else:
     import os
@@ -105,7 +106,8 @@ if __name__ == "__main__":
     for filenames in os.walk('/dev'):
       for filename in filenames[2]:
         if regex.findall(filename):
-          bb = Blinkyboard(os.path.join("/dev", filename), "WS2811")
+          bb = Blinkyboard(os.path.join("/dev", filename), "WS2811", gamma=gamma)
+          break
 
   if not bb:
     sys.exit("Usage: python test.py (path to serial port)")
@@ -114,9 +116,9 @@ if __name__ == "__main__":
   while True:
 
     for x in range(0, LED_COUNT):
-      b.sendPixel(255,255,255)
-    b.show();
+      bb.sendPixel(255,255,255)
+    bb.show();
 
     for x in range(0, LED_COUNT):
-      b.sendPixel(0,0,0)
-    b.show()
+      bb.sendPixel(0,0,0)
+    bb.show()
