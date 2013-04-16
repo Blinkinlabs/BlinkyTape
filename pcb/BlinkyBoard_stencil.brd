@@ -150,30 +150,6 @@
 <text x="21" y="7" size="0.5" layer="25" font="vector" ratio="15" rot="R90" align="center">KEEP IT
 LOCKED</text>
 <text x="13.75" y="2.25" size="0.8128" layer="26" font="vector" ratio="20" rot="MR0" align="center">blinkiverse.com/bb</text>
-<circle x="-30" y="-30" radius="1.25" width="0.05" layer="31"/>
-<circle x="-10" y="-30" radius="1.15" width="0.05" layer="31"/>
-<circle x="-10" y="-50" radius="1.2" width="0.05" layer="31"/>
-<circle x="-30" y="-50" radius="1.2" width="0.05" layer="31"/>
-<circle x="40" y="-30" radius="1.25" width="0.05" layer="31"/>
-<circle x="60" y="-30" radius="1.15" width="0.05" layer="31"/>
-<circle x="60" y="-50" radius="1.2" width="0.05" layer="31"/>
-<circle x="40" y="-50" radius="1.2" width="0.05" layer="31"/>
-<circle x="110" y="-30" radius="1.25" width="0.05" layer="31"/>
-<circle x="130" y="-30" radius="1.15" width="0.05" layer="31"/>
-<circle x="130" y="-50" radius="1.2" width="0.05" layer="31"/>
-<circle x="110" y="-50" radius="1.2" width="0.05" layer="31"/>
-<circle x="-30" y="60" radius="1.25" width="0.05" layer="31"/>
-<circle x="-10" y="60" radius="1.15" width="0.05" layer="31"/>
-<circle x="-10" y="40" radius="1.2" width="0.05" layer="31"/>
-<circle x="-30" y="40" radius="1.2" width="0.05" layer="31"/>
-<circle x="40" y="60" radius="1.25" width="0.05" layer="31"/>
-<circle x="60" y="60" radius="1.15" width="0.05" layer="31"/>
-<circle x="60" y="40" radius="1.2" width="0.05" layer="31"/>
-<circle x="40" y="40" radius="1.2" width="0.05" layer="31"/>
-<circle x="110" y="60" radius="1.25" width="0.05" layer="31"/>
-<circle x="130" y="60" radius="1.15" width="0.05" layer="31"/>
-<circle x="130" y="40" radius="1.2" width="0.05" layer="31"/>
-<circle x="110" y="40" radius="1.2" width="0.05" layer="31"/>
 </plain>
 <libraries>
 <library name="blinkyboard">
@@ -385,6 +361,15 @@ by exp-project-lbr.ulp</description>
 </package>
 </packages>
 </library>
+<library name="Hoektronics">
+<packages>
+<package name="ALIGNMENT-HOLE-2.5MM">
+<smd name="P$1" x="0" y="0" dx="2.5" dy="2.5" layer="1" roundness="100"/>
+<smd name="P$2" x="0" y="0" dx="2.5" dy="2.5" layer="16" roundness="100"/>
+<hole x="0" y="0" drill="2.5"/>
+</package>
+</packages>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -569,6 +554,30 @@ design rules under a new name.</description>
 <element name="WS3" library="blinkiverse" package="WS2811_CONNECTOR" value="WS2811_CONNECTOR" x="94" y="5"/>
 <element name="JP1" library="blinkiverse" package="SMT_PAD-5.5MM-4" value="" x="72" y="5" rot="R90"/>
 <element name="U$9" library="blinkiverse" package="OSHW-LOGO-M" value="" x="89" y="5" rot="MR0"/>
+<element name="E$1" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="-30" y="-50"/>
+<element name="E$2" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="-10" y="-50"/>
+<element name="E$3" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="-10" y="-30"/>
+<element name="E$4" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="-30" y="-30"/>
+<element name="E$5" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="40" y="-50"/>
+<element name="E$6" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="60" y="-50"/>
+<element name="E$7" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="60" y="-30"/>
+<element name="E$8" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="40" y="-30"/>
+<element name="E$9" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="110" y="-50"/>
+<element name="E$10" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="130" y="-50"/>
+<element name="E$11" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="130" y="-30"/>
+<element name="E$12" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="110" y="-30"/>
+<element name="E$13" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="-30" y="40"/>
+<element name="E$14" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="-10" y="40"/>
+<element name="E$15" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="-10" y="60"/>
+<element name="E$16" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="-30" y="60"/>
+<element name="E$17" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="40" y="40"/>
+<element name="E$18" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="60" y="40"/>
+<element name="E$19" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="60" y="60"/>
+<element name="E$20" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="40" y="60"/>
+<element name="E$21" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="110" y="40"/>
+<element name="E$22" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="130" y="40"/>
+<element name="E$23" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="130" y="60"/>
+<element name="E$24" library="Hoektronics" package="ALIGNMENT-HOLE-2.5MM" value="" x="110" y="60"/>
 </elements>
 <signals>
 <signal name="GND">
