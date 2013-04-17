@@ -21,6 +21,7 @@ AudioPlayer song;
 AudioInput audioin;
 AudioOutput audioout;  // Need to run soundflower for this to work...
 
+FFT fft;
 BeatDetect beat;
 BeatListener bl;
 LedOutput led;
@@ -61,16 +62,21 @@ void setup()
 //  bl = new BeatListener(beat, song);  
   bl = new BeatListener(beat, audioin); 
   
+  fft = new FFT(audioin.bufferSize(), audioin.sampleRate());
+  
   textFont(createFont("Helvetica", 16));
   textAlign(CENTER);
 }
 
-int col = 0;
+float col = 0;
 
 void draw()
 {
   background(0);
   fill(255);
+  
+  fft.forward(audioin.mix);
+  
   if ( beat.isKick() ) kickSize = 32;
   if ( beat.isSnare() ) snareSize = 32;
   if ( beat.isHat() ) hatSize = 32;
@@ -80,50 +86,41 @@ void draw()
   text("SNARE", width/2, height/2);
   textSize(hatSize);
   text("HAT", 3*width/4, height/2);
-  
-  for(int i = 0; i < numberOfChannels; i++) {
-    switch(i%16) {
-      case 0:
-        values[i] = (int)((snareSize-16+.2)*2045);
-        break;
-      case 1:
-        values[i] = (int)((kickSize-16)*2045);
-        break;
-      case 2:
-        values[i] = (int)((hatSize-16+.2)*2045);
-        break;
-      case 8:
-        values[i] = (int)((kickSize-16+.2)*2045);
-        break;
-      case 9:
-        values[i] = (int)((hatSize-16+.2)*2045);
-        break;
-      case 10:
-        values[i] = (int)((snareSize-16)*2045);
-        break;
-      default:
-        values[i] = 0;
-        break;
-    }
-    
-//    bl.draw(this);
-  }
 
   if( hatSize == 32) {
-    col = (col+1)%3;
+//    col = (col+1)%3;
+    col = col + 3.14159*.1;
   }
     
+//  color colors[] = { color(255,255,0), color(0,255,255), color(255,0,255) };
+//  stroke(colors[col]);
+  for(int i = 0; i < 16; i++) {
+//    if(kickSize>16+i) {
+      float bright = (kickSize - 16 - i)/8;
+      println(bright);
+      stroke(color(bright*(sin(col + i*.05              )+1)*128,
+                   bright*(sin(col + i*.05 + 3.14159*2/3)+1)*128,
+                   bright*(sin(col + i*.05 + 3.14159*4/3)+1)*128
+                  ));
+      point(0,16+i);
+      point(0,16-i);
+//    }
+  }
+
+//  stroke(color((sin(col)+1)*128,(sin(col + 3.14159*2/3)+1)*128,(sin(col + 3.14159*4/3)+1)*128));
+
+//  line(1,16,1,kickSize);
+//  line(1,16,0,32-kickSize);
   
-  color colors[] = { color(255,255,0), color(0,255,255), color(255,0,255) };
-  stroke(colors[col]);
-  line(1,0,0,(kickSize - 16)*2);
+//  stroke(colors[(col+1)%2]);
+//  line(1,32,0,(kickSize - 16)*2);
 
   led.sendUpdate(0,0,0,32);
   
-  float fadePercent = .95;
-  kickSize = constrain(kickSize * fadePercent, 16, 32);
+  float fadePercent = .98;
+  kickSize  = constrain(kickSize  * fadePercent, 16, 32);
   snareSize = constrain(snareSize * fadePercent, 16, 32);
-  hatSize = constrain(hatSize * fadePercent, 16, 32);
+  hatSize   = constrain(hatSize   * fadePercent, 16, 32);
 
 }
 

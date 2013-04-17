@@ -4,7 +4,7 @@ LedOutput led;
 PFont myFont;
 
 void setup() {
-  size(500, 60, P2D);
+  size(420, 60, P2D);
   frameRate(60);
 
   led = new LedOutput(this, "/dev/cu.usbmodemfd121", 32);
@@ -32,7 +32,7 @@ void draw() {
   fill(155,0,255);
   text(message, 100, 48);
 
-  fill(0,255,0);
+  fill(0,255,255);
   text(message, 105, 53);
 
 
