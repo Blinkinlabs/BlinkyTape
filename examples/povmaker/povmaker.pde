@@ -7,7 +7,7 @@ void setup() {
   size(500, 60, P2D);
   frameRate(60);
 
-  led = new LedOutput(this, "/dev/cu.usbmodemfd121", 60);
+  led = new LedOutput(this, "/dev/cu.usbmodemfd121", 32);
   
   myFont = createFont("FFScala", 50);
 }
