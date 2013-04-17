@@ -11,6 +11,8 @@ long last_time;
 
 void setup()
 {
+  // Set the MOSI pin as digital output
+  DDRB |= _BV(2);
   
   Serial.begin(57600);
 
