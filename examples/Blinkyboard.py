@@ -53,15 +53,15 @@ class Blinkyboard_LPD8806:
   def __init__(self, port, count, gamma = None):
     self.serial = serial.Serial(port, 115200)
     self.LED_COUNT = count
-    self.gamma = gamma
+    self._gamma = gamma
     if gamma and (type(gamma) != type([]) or len(gamma) != 3):
       raise Exception("Bad Gamma correction value. Use a list with three values.")
 
   def sendPixel(self,r,g,b):
     data = bytearray()
-    data.append(0x80 | (self.gamma(r, self.gamma[0])>>1))
-    data.append(0x80 | (self.gamma(g, self.gamma[1])>>1))
-    data.append(0x80 | (self.gamma(b, self.gamma[2])>>1))
+    data.append(0x80 | (self.gamma(g, self._gamma[1])>>1))
+    data.append(0x80 | (self.gamma(r, self._gamma[0])>>1))
+    data.append(0x80 | (self.gamma(b, self._gamma[2])>>1))
     self.serial.write(data)
     self.serial.flush()
 
@@ -73,12 +73,12 @@ class Blinkyboard_LPD8806:
     self.serial.flush()
 
   def gamma(self, input, tweak):
-    if not self.gamma: return input
+    if not self._gamma: return input
     return int(pow(input/256.0, tweak) * 256)
 
   def allOn(self):
     for _ in range(0, self.LED_COUNT):
-      self.sendPixel(0,0,0)
+      self.sendPixel(255,255,255)
     self.show()
 
   def allOff(self):
@@ -91,12 +91,13 @@ if __name__ == "__main__":
 
   import sys
 
-  LED_COUNT = 60
+  BOARD_TYPE="LPD8806"
+  LED_COUNT = 32;
   bb = None
   gamma = [1,1,1]
 
   if len(sys.argv) > 1:
-    bb = Blinkyboard(sys.argv[1], 60, "WS2811", gamma=gamma)
+    bb = Blinkyboard(sys.argv[1], LED_COUNT, BOARD_TYPE, gamma=gamma)
 
   else:
     import os
@@ -106,7 +107,7 @@ if __name__ == "__main__":
     for filenames in os.walk('/dev'):
       for filename in filenames[2]:
         if regex.findall(filename):
-          bb = Blinkyboard(os.path.join("/dev", filename), "WS2811", gamma=gamma)
+          bb = Blinkyboard(os.path.join("/dev", filename), BOARD_TYPE, gamma=gamma)
           break
 
   if not bb:
@@ -114,11 +115,5 @@ if __name__ == "__main__":
 
 
   while True:
-
-    for x in range(0, LED_COUNT):
-      bb.sendPixel(255,255,255)
-    bb.show();
-
-    for x in range(0, LED_COUNT):
-      bb.sendPixel(0,0,0)
-    bb.show()
+    bb.allOn()
+    bb.allOff()
