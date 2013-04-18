@@ -93,16 +93,17 @@ void draw()
     
 //  color colors[] = { color(255,255,0), color(0,255,255), color(255,0,255) };
 //  stroke(colors[col]);
-  for(int i = 0; i < numberOfLEDs/2; i++) {
+
+
+  for(int i = 0; i < numberOfLEDs/4; i++) {
 //    if(kickSize>16+i) {
       float bright = (kickSize*2 - numberOfLEDs/2 - i)/8;
-      println(bright);
       stroke(color(bright*(sin(col + i*.05              )+1)*128,
                    bright*(sin(col + i*.05 + 3.14159*2/3)+1)*128,
                    bright*(sin(col + i*.05 + 3.14159*4/3)+1)*128
                   ));
-      point(0,16+i);
-      point(0,16-i);
+      point(0,numberOfLEDs/4+i);
+      point(0,numberOfLEDs/4-i);
 //    }
   }
 
