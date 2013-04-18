@@ -39,7 +39,7 @@ void setup()
   minim = new Minim(this);
   audioin = minim.getLineIn(Minim.STEREO, 2048);
     
-  led = new LedOutput(this, "/dev/cu.usbmodem1421", numberOfLEDs);
+  led = new LedOutput(this, "/dev/cu.usbmodemfa131", numberOfLEDs);
   
 //  song = minim.loadFile("Fog.mp3", 2048);
 //  song.play();
