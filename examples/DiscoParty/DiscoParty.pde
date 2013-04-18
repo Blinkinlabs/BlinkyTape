@@ -28,7 +28,7 @@ LedOutput led;
 
 float kickSize, snareSize, hatSize;
 
-int numberOfChannels = 8*4;
+int numberOfLEDs = 60;
 int[] values;
 
 void setup()
@@ -39,8 +39,7 @@ void setup()
   minim = new Minim(this);
   audioin = minim.getLineIn(Minim.STEREO, 2048);
     
-  led = new LedOutput(this, "/dev/cu.usbmodemfd121", 32);
-  values = new int[numberOfChannels];
+  led = new LedOutput(this, "/dev/cu.usbmodem1421", numberOfLEDs);
   
 //  song = minim.loadFile("Fog.mp3", 2048);
 //  song.play();
@@ -94,9 +93,9 @@ void draw()
     
 //  color colors[] = { color(255,255,0), color(0,255,255), color(255,0,255) };
 //  stroke(colors[col]);
-  for(int i = 0; i < 16; i++) {
+  for(int i = 0; i < numberOfLEDs/2; i++) {
 //    if(kickSize>16+i) {
-      float bright = (kickSize - 16 - i)/8;
+      float bright = (kickSize*2 - numberOfLEDs/2 - i)/8;
       println(bright);
       stroke(color(bright*(sin(col + i*.05              )+1)*128,
                    bright*(sin(col + i*.05 + 3.14159*2/3)+1)*128,
