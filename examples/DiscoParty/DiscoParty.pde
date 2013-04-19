@@ -25,6 +25,7 @@ FFT fft;
 BeatDetect beat;
 BeatListener bl;
 LedOutput led;
+LedOutput led2;
 
 float kickSize, snareSize, hatSize;
 
@@ -40,6 +41,7 @@ void setup()
   audioin = minim.getLineIn(Minim.STEREO, 2048);
     
   led = new LedOutput(this, "/dev/cu.usbmodemfa131", numberOfLEDs);
+  led2 = new LedOutput(this, "/dev/cu.usbmodemfd121", numberOfLEDs);
   
 //  song = minim.loadFile("Fog.mp3", 2048);
 //  song.play();
@@ -76,8 +78,8 @@ void draw()
   
   fft.forward(audioin.mix);
   
-  if ( beat.isKick() ) kickSize = 32;
-  if ( beat.isSnare() ) snareSize = 32;
+  if ( beat.isKick() ) kickSize = min(32, kickSize+1.5);
+  if ( beat.isSnare() ) snareSize = min(32, snareSize+1.5);
   if ( beat.isHat() ) hatSize = 32;
   textSize(kickSize);
   text("KICK", width/4, height/2);
@@ -88,14 +90,14 @@ void draw()
 
   if( hatSize == 32) {
 //    col = (col+1)%3;
-    col = col + 3.14159*.1;
+    col = col + 3.14159*.05;
   }
     
 //  color colors[] = { color(255,255,0), color(0,255,255), color(255,0,255) };
 //  stroke(colors[col]);
 
 
-  for(int i = 0; i < numberOfLEDs/4; i++) {
+  for(int i = 0; i < numberOfLEDs/4 + 1; i++) {
 //    if(kickSize>16+i) {
       float bright = (kickSize*2 - numberOfLEDs/2 - i)/8;
       stroke(color(bright*(sin(col + i*.05              )+1)*128,
@@ -104,6 +106,14 @@ void draw()
                   ));
       point(0,numberOfLEDs/4+i);
       point(0,numberOfLEDs/4-i);
+      
+      bright = (snareSize*2 - numberOfLEDs/2 - i)/8;
+      stroke(color(bright*(sin(col + i*.05 + 3.14159*2/3)+1)*128,
+                   bright*(sin(col + i*.05 + 3.14159*4/3)+1)*128,
+                   bright*(sin(col + i*.05              )+1)*128
+                  ));
+      point(0,numberOfLEDs*3/4+i);
+      point(0,numberOfLEDs*3/4-i);
 //    }
   }
 
@@ -115,7 +125,8 @@ void draw()
 //  stroke(colors[(col+1)%2]);
 //  line(1,32,0,(kickSize - 16)*2);
 
-  led.sendUpdate(0,0,0,32);
+  led.sendUpdate(0,0,0,60);
+  led2.sendUpdate(0,0,0,60);
   
   float fadePercent = .98;
   kickSize  = constrain(kickSize  * fadePercent, 16, 32);
