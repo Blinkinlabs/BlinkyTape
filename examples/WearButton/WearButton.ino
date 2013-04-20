@@ -1,3 +1,4 @@
+#include <Button.h>
 #include <Adafruit_NeoPixel.h>
 
 #define LED_COUNT 60
@@ -8,6 +9,21 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, 5, NEO_GRB + NEO_KHZ800);
 uint8_t pixel_index;
 
 long last_time;
+
+Button button = Button(13, BUTTON_PULLUP_INTERNAL, true, 50);
+
+float brightness = 1.0;
+
+void onPress(Button& b){
+  brightness = brightness - 0.25;
+  if(brightness < 0) brightness = 0;
+  Serial.println("Btn pressed");
+}
+
+void onHold(Button& b){
+  brightness = 1.0;
+  Serial.println("Btn held");
+}
 
 void setup()
 {
@@ -20,8 +36,10 @@ void setup()
   strip.begin();
   strip.show();
   last_time = millis();
-}
 
+  button.pressHandler(onPress);
+  button.holdHandler(onHold, 1000); // must be held for at least 1000 ms to trigger
+}
 
 
 uint8_t i = 0;
@@ -32,8 +50,6 @@ int k = 0;
 int count;
 
 void color_loop() {  
-  float brightness = random(100,100)/100.0;
-  
   for (uint8_t i = 0; i < LED_COUNT; i++) {
     uint8_t red =   64*(1+sin(i/2.0 + j/4.0       ))*brightness;
     uint8_t green = 64*(1+sin(i/1.0 + f/9.0  + 2.1))*brightness;
@@ -101,6 +117,7 @@ void loop()
   }
   
   color_loop();
+  button.process();
 }
 
 
