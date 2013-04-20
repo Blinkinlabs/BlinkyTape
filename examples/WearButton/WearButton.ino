@@ -1,35 +1,62 @@
 #include <Button.h>
 #include <Adafruit_NeoPixel.h>
+#include <math.h>
 
 #define LED_COUNT 60
 #define THRESHOLD 1
+
+#define COLOR_MODE 0
+#define COUNTDOWN_MODE 1
+#define SEIZURE_MODE 2
+#define COOLDOWN_MODE 3
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, 5, NEO_GRB + NEO_KHZ800);
 
 uint8_t pixel_index;
 
 long last_time;
+long countdown_start;
+long cooldown_start;
+long countdown_length = 500;
+long cooldown_length;
 
 Button button = Button(13, BUTTON_PULLUP_INTERNAL, true, 50);
 
 float brightness = 1.0;
+boolean all_on = false;
 
-void onPress(Button& b){
-  brightness = brightness - 0.25;
-  if(brightness < 0) brightness = 0;
-  Serial.println("Btn pressed");
+int draw_mode = COLOR_MODE;
+
+void onPress(Button& b) {
+  if(draw_mode == COLOR_MODE) {
+    countdown_start = millis();
+    draw_mode = COUNTDOWN_MODE;
+  }
+  if(draw_mode == COOLDOWN_MODE) {
+    countdown_start = millis();
+    countdown_start = countdown_start - (cooldown_length - (countdown_start - cooldown_start));
+    draw_mode = COUNTDOWN_MODE;
+  }
 }
 
-void onHold(Button& b){
-  brightness = 1.0;
-  Serial.println("Btn held");
+void onRelease(Button& b) {
+  if(draw_mode == COUNTDOWN_MODE) {
+    cooldown_start = millis();
+    cooldown_length = cooldown_start - countdown_start;
+    draw_mode = COOLDOWN_MODE;
+  }
+}
+
+void onHold(Button& b) {
+  if(draw_mode == SEIZURE_MODE)
+    draw_mode = COLOR_MODE;
 }
 
 void setup()
 {
   // Set the MOSI pin as digital output
   // (only for BB RevA)
-//  DDRB |= _BV(2);
+  //  DDRB |= _BV(2);
   
   Serial.begin(57600);
 
@@ -38,6 +65,7 @@ void setup()
   last_time = millis();
 
   button.pressHandler(onPress);
+  button.releaseHandler(onRelease);
   button.holdHandler(onHold, 1000); // must be held for at least 1000 ms to trigger
 }
 
@@ -80,6 +108,59 @@ void color_loop() {
   k = k + random(1,2);
 }
 
+void countdown_loop() {
+  long elapsed = millis() - countdown_start;
+  if(elapsed > countdown_length) {
+    Serial.println("SEIZURE MODE ACTIVATE");
+    draw_mode = SEIZURE_MODE;
+    last_time = millis();
+  } else {
+    draw_progress(elapsed, countdown_length);
+  }
+}
+
+void cooldown_loop() {
+  long elapsed = millis() - cooldown_start;
+  if(elapsed > cooldown_length) {
+    draw_mode = COLOR_MODE;
+    last_time = millis();
+  } else {
+    draw_progress(cooldown_length - elapsed, countdown_length);
+  }
+}
+
+void draw_progress(long elapsed, long countdown_length) {
+  Serial.print("Elapsed: "); Serial.println(elapsed);
+  float progress = (float) elapsed / (float) countdown_length;
+  int count = round((float)LED_COUNT * progress);
+  for (int x = 0; x < count; x++) {
+    strip.setPixelColor(x, strip.Color(255,255,255));
+  }
+  for(int x = count+1; x < LED_COUNT; x++) {
+    strip.setPixelColor(x, strip.Color(255,0,0));
+  }
+  strip.show();
+}
+
+void seizure_loop() {
+  long elapsed = millis() - last_time;
+  uint32_t new_color;
+  Serial.print("Seizure time Elapsed: ");
+  Serial.println(elapsed);
+  if(elapsed > 30) {
+    all_on = ~all_on;
+    last_time = millis();
+  }
+  if(all_on)
+    new_color = strip.Color(255,255,255);
+  else
+    new_color = strip.Color(0,0,0);
+  for(int x = LED_COUNT; x >= 0; x--) {
+    strip.setPixelColor(x, new_color);
+  }
+  strip.show();
+}
+
 void serialLoop() {
 
   while(true) {
@@ -115,8 +196,20 @@ void loop()
   if(Serial.available() > 0) {
     serialLoop();
   }
-  
-  color_loop();
+  switch(draw_mode) {
+    case COLOR_MODE:
+      color_loop();
+      break;
+    case COUNTDOWN_MODE:
+      countdown_loop();
+      break;
+    case COOLDOWN_MODE:
+      cooldown_loop();
+      break;
+    case SEIZURE_MODE:
+      seizure_loop();
+      break;
+  }
   button.process();
 }
 
