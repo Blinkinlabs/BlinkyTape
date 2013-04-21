@@ -76,10 +76,13 @@ void animation::draw16bitRLE(Adafruit_NeoPixel& strip) {
   uint8_t count = 0;
   while(count < 60) {
     uint8_t run_length = 0x7F & pgm_read_byte(currentFrameData);
-    uint8_t r = ((pgm_read_byte(currentFrameData + 1) & 0xF8)     );
-    uint8_t g = ((pgm_read_byte(currentFrameData + 1) & 0x07) << 5)
-              | ((pgm_read_byte(currentFrameData + 2) & 0xE0) >> 3);
-    uint8_t b = ((pgm_read_byte(currentFrameData + 2) & 0x1F) << 3);
+    uint8_t upperByte = pgm_read_byte(currentFrameData + 1);
+    uint8_t lowerByte = pgm_read_byte(currentFrameData + 2);
+    
+    uint8_t r = ((upperByte & 0xF8)     );
+    uint8_t g = ((upperByte & 0x07) << 5)
+              | ((lowerByte & 0xE0) >> 3);
+    uint8_t b = ((lowerByte & 0x1F) << 3);
     
     for(uint8_t i = 0; i < run_length; i+=1) {
       strip.setPixelColor(count + i, strip.Color(r,g,b));
