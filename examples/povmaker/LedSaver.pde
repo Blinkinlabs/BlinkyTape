@@ -52,6 +52,8 @@ class LedSaver
     
     file.println("const PROGMEM prog_uint8_t " + m_name + "Data[]  = {");
 
+    
+
     for(int i = 0; i < m_frameData.size()/3; i++) {
       if(i%m_numberOfLEDs == 0 && i != 0) {
         file.println("");
@@ -63,6 +65,75 @@ class LedSaver
     
     file.println("};");
     file.println("animation " + m_name + "(" + (m_frameData.size()/m_numberOfLEDs/3) + "," + m_name + "Data);");
+    file.flush();
+    file.close();
+  }
+  
+  // Actually write out the data
+  void writeRLE() {
+    println("Saving animation to: " + m_name);
+    PrintWriter file = createWriter(m_name + ".h");
+    
+    List<Integer> colors = new ArrayList<Integer>();
+    
+    file.println("// Data file for animation " + m_name);
+    file.println("// Compression: RLE");
+    file.println("// Uncompressed size: " + m_frameData.size() + " bytes");
+    
+    // Print all data to a string buffer now, so we can add more stats to the output file.
+    StringWriter data = new StringWriter();
+    
+    data.write("const PROGMEM prog_uint8_t " + m_name + "Data[]  = {\n");
+
+    int totalRuns = 0;
+        
+    // for each frame
+    // We want to make RLE: 1 bit new frame marker, 7 bits length, 8 bits r, 8 bits g, 8 bits b
+    for(int frame = 0; frame < m_frameData.size()/m_numberOfLEDs/3; frame++) {
+      int runCount = 0;
+      int startingOffset = frame*m_numberOfLEDs*3;
+      
+      // Read in the first pixel
+      int rleCount = 1;
+      int rleData =   (m_frameData.get(startingOffset  ) << 16)
+                    + (m_frameData.get(startingOffset+1) <<  8)
+                    + (m_frameData.get(startingOffset+2)      );
+      
+      for(int i = 1; i < m_numberOfLEDs; i++) {
+        int newData =  (m_frameData.get(startingOffset + i*3   ) << 16)
+                     + (m_frameData.get(startingOffset + i*3 +1) <<  8)
+                     + (m_frameData.get(startingOffset + i*3 +2)      );
+
+        if(rleData == newData) {
+          rleCount++;
+        }
+        else {
+          data.write(String.format("  %3d, %3d, %3d, %3d,\n",rleCount,
+                                                             (rleData >> 16) & 0xff,
+                                                             (rleData >> 8)  & 0xff,
+                                                             (rleData)       & 0xff));
+          rleCount = 1;
+          rleData = newData;
+          runCount++;
+          totalRuns++;
+        }
+
+      }
+      data.write(String.format("  %3d, %3d, %3d, %3d,\n",rleCount,
+                                                         (rleData >> 16) & 0xff,
+                                                         (rleData >> 8)  & 0xff,
+                                                         (rleData)       & 0xff));
+    }
+    
+    data.write("};\n");
+    
+    file.println("// Compressed size: " + totalRuns*4 + " bytes");
+    file.println("// Unique runs: " + totalRuns);
+    
+    file.print(data);
+    
+    file.println("animation " + m_name + "(" + (m_frameData.size()/m_numberOfLEDs/3) + "," + m_name + "Data, ENCODING_RLE);");
+    
     file.flush();
     file.close();
   }

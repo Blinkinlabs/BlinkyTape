@@ -6,7 +6,7 @@ LedSaver saver;
 PFont myFont;
 
 void setup() {
-  size(240, 60, P2D);
+  size(400, 60, P2D);
   frameRate(60);
 
   led = new LedOutput(this, "/dev/cu.usbmodemfd121", 60);
@@ -26,10 +26,6 @@ void draw() {
   rect(0,0,15,height);
   rect(30,0,15,height);
   
-  
-//  line(0,0,width/2, height);
-//  line(width/2,height,width, 0);
-  
   String message = new String("Blinkiverse!");
   textFont(myFont);
 
@@ -40,7 +36,7 @@ void draw() {
   text(message, 105, 53);
 
 
-  led.sendUpdate(pos,height-1,pos,0);
+//  led.sendUpdate(pos,height-1,pos,0);
   saver.sendUpdate(pos,height-1,pos,0);
 
   stroke(255,128);
@@ -50,6 +46,6 @@ void draw() {
   pos = (pos + rate)%width;
   
   if(pos< rate) {
-    saver.write();
+    saver.writeRLE();
   }
 }
