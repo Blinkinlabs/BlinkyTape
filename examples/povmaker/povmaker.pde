@@ -1,13 +1,17 @@
 import processing.serial.*;
 LedOutput led;
 
+LedSaver saver;
+
 PFont myFont;
 
 void setup() {
-  size(420, 60, P2D);
+  size(240, 60, P2D);
   frameRate(60);
 
-  led = new LedOutput(this, "/dev/cu.usbmodemfd121", 32);
+  led = new LedOutput(this, "/dev/cu.usbmodemfd121", 60);
+  
+  saver = new LedSaver("pov", 60);
   
   myFont = createFont("FFScala", 50);
 }
@@ -37,10 +41,15 @@ void draw() {
 
 
   led.sendUpdate(pos,height-1,pos,0);
+  saver.sendUpdate(pos,height-1,pos,0);
 
   stroke(255,128);
   line(pos, 0,pos, height);
   
 //  rate = (float)mouseX/width*4;
   pos = (pos + rate)%width;
+  
+  if(pos< rate) {
+    saver.write();
+  }
 }

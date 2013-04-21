@@ -44,22 +44,22 @@ class LedOutput
 //      }
 
 // For WS2811
-//      data[dataIndex++] = (byte)min(254, r);
-//      data[dataIndex++] = (byte)min(254, g);
-//      data[dataIndex++] = (byte)min(254, b);
+      data[dataIndex++] = (byte)min(254, r);
+      data[dataIndex++] = (byte)min(254, g);
+      data[dataIndex++] = (byte)min(254, b);
 
 // For LPD8806
-      data[dataIndex++] = (byte)(0x80 + (g >> 1));
-      data[dataIndex++] = (byte)(0x80 + (r >> 1));
-      data[dataIndex++] = (byte)(0x80 + (b >> 1));
+//      data[dataIndex++] = (byte)(0x80 + (g >> 1));
+//      data[dataIndex++] = (byte)(0x80 + (r >> 1));
+//      data[dataIndex++] = (byte)(0x80 + (b >> 1));
 
     }
     
 // For WS2811
-//    data[dataIndex++] = (byte)255;
+    data[dataIndex++] = (byte)255;
 
 // For LPD8806
-    data[dataIndex++] = (byte)0;
+//    data[dataIndex++] = (byte)0;
     
     // Don't send data too fast, the arduino can't handle it.
     int maxChunkSize = 5;
