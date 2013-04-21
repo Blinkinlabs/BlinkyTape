@@ -1,5 +1,5 @@
-#include <Adafruit_NeoPixel.h>
-#include <Button.h>
+#include <Adafruit_NeoPixel.h> // http://github.com/adafruit/Adafruit_NeoPixel
+#include <Button.h> // http://github.com/virgildisgr4ce/Button
 
 #define LED_COUNT 60
 
