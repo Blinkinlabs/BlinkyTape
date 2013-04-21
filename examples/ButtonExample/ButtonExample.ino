@@ -1,54 +1,49 @@
-#include <Button.h>
 #include <Adafruit_NeoPixel.h>
-#include <math.h>
+#include <Button.h>
 
 #define LED_COUNT 60
-#define THRESHOLD 1
 
 #define COLOR_MODE 0
-#define COUNTDOWN_MODE 1
-#define SEIZURE_MODE 2
+#define POWERUP_MODE 1
+#define PARTY_MODE 2
 #define COOLDOWN_MODE 3
+
+uint8_t draw_mode = COLOR_MODE;
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, 5, NEO_GRB + NEO_KHZ800);
 
 uint8_t pixel_index;
-
 long last_time;
-long countdown_start;
+long powerup_start;
+long powerup_length = 500;
 long cooldown_start;
-long countdown_length = 500;
 long cooldown_length;
+boolean party_on = false;
 
 Button button = Button(13, BUTTON_PULLUP_INTERNAL, true, 50);
 
-float brightness = 1.0;
-boolean all_on = false;
-
-int draw_mode = COLOR_MODE;
-
 void onPress(Button& b) {
   if(draw_mode == COLOR_MODE) {
-    countdown_start = millis();
-    draw_mode = COUNTDOWN_MODE;
+    powerup_start = millis();
+    draw_mode = POWERUP_MODE;
   }
   if(draw_mode == COOLDOWN_MODE) {
-    countdown_start = millis();
-    countdown_start = countdown_start - (cooldown_length - (countdown_start - cooldown_start));
-    draw_mode = COUNTDOWN_MODE;
+    powerup_start = millis();
+    powerup_start = powerup_start - (cooldown_length - (powerup_start - cooldown_start));
+    draw_mode = POWERUP_MODE;
   }
 }
 
 void onRelease(Button& b) {
-  if(draw_mode == COUNTDOWN_MODE) {
+  if(draw_mode == POWERUP_MODE) {
     cooldown_start = millis();
-    cooldown_length = cooldown_start - countdown_start;
+    cooldown_length = cooldown_start - powerup_start;
     draw_mode = COOLDOWN_MODE;
   }
 }
 
 void onHold(Button& b) {
-  if(draw_mode == SEIZURE_MODE)
+  if(draw_mode == PARTY_MODE)
     draw_mode = COLOR_MODE;
 }
 
@@ -79,9 +74,9 @@ int count;
 
 void color_loop() {  
   for (uint8_t i = 0; i < LED_COUNT; i++) {
-    uint8_t red =   64*(1+sin(i/2.0 + j/4.0       ))*brightness;
-    uint8_t green = 64*(1+sin(i/1.0 + f/9.0  + 2.1))*brightness;
-    uint8_t blue =  64*(1+sin(i/3.0 + k/14.0 + 4.2))*brightness;
+    uint8_t red =   64*(1+sin(i/2.0 + j/4.0       ));
+    uint8_t green = 64*(1+sin(i/1.0 + f/9.0  + 2.1));
+    uint8_t blue =  64*(1+sin(i/3.0 + k/14.0 + 4.2));
     
     uint32_t pix = green;
     pix = (pix << 8) | red;
@@ -89,7 +84,7 @@ void color_loop() {
     
     strip.setPixelColor(i, pix);
     
-    if ((millis() - last_time > 15) && pixel_index <= LED_COUNT + 1) {
+    if ((millis() - last_time > 15) && pixel_index < LED_COUNT) {
       last_time = millis();
       count = LED_COUNT - pixel_index;
       pixel_index++; 
@@ -108,14 +103,13 @@ void color_loop() {
   k = k + random(1,2);
 }
 
-void countdown_loop() {
-  long elapsed = millis() - countdown_start;
-  if(elapsed > countdown_length) {
-    Serial.println("SEIZURE MODE ACTIVATE");
-    draw_mode = SEIZURE_MODE;
+void powerup_loop() {
+  long elapsed = millis() - powerup_start;
+  if(elapsed > powerup_length) {
+    draw_mode = PARTY_MODE;
     last_time = millis();
   } else {
-    draw_progress(elapsed, countdown_length);
+    draw_progress(elapsed, powerup_length);
   }
 }
 
@@ -125,14 +119,13 @@ void cooldown_loop() {
     draw_mode = COLOR_MODE;
     last_time = millis();
   } else {
-    draw_progress(cooldown_length - elapsed, countdown_length);
+    draw_progress(cooldown_length - elapsed, powerup_length);
   }
 }
 
-void draw_progress(long elapsed, long countdown_length) {
-  Serial.print("Elapsed: "); Serial.println(elapsed);
-  float progress = (float) elapsed / (float) countdown_length;
-  int count = round((float)LED_COUNT * progress);
+void draw_progress(long elapsed, long powerup_length) {
+  float progress = (float) elapsed / (float) powerup_length;
+  int count = (int)((float)LED_COUNT * progress);
   for (int x = 0; x < count; x++) {
     strip.setPixelColor(x, strip.Color(255,255,255));
   }
@@ -142,16 +135,14 @@ void draw_progress(long elapsed, long countdown_length) {
   strip.show();
 }
 
-void seizure_loop() {
+void party_loop() {
   long elapsed = millis() - last_time;
   uint32_t new_color;
-  Serial.print("Seizure time Elapsed: ");
-  Serial.println(elapsed);
   if(elapsed > 30) {
-    all_on = ~all_on;
+    party_on = ~party_on;
     last_time = millis();
   }
-  if(all_on)
+  if(party_on)
     new_color = strip.Color(255,255,255);
   else
     new_color = strip.Color(0,0,0);
@@ -200,14 +191,14 @@ void loop()
     case COLOR_MODE:
       color_loop();
       break;
-    case COUNTDOWN_MODE:
-      countdown_loop();
+    case POWERUP_MODE:
+      powerup_loop();
       break;
     case COOLDOWN_MODE:
       cooldown_loop();
       break;
-    case SEIZURE_MODE:
-      seizure_loop();
+    case PARTY_MODE:
+      party_loop();
       break;
   }
   button.process();
