@@ -206,6 +206,8 @@ class LedSaver
     
     file.flush();
     file.close();
+    
+    println("Compressed size: " + totalRuns*3 + " bytes");
   }
 }
 

@@ -154,11 +154,14 @@ void serialLoop() {
 
     if(Serial.available() > 2) {
 
-      int buffer[3]; // Buffer to store three incoming bytes used to compile a single LED color
-      int x;
-      for (x=0; x<3; x++) { // Read three incoming bytes
-        int c = Serial.read();
-        if (c < 255) buffer[x] = c; // Using 255 as a latch semaphore
+      uint8_t buffer[3]; // Buffer to store three incoming bytes used to compile a single LED color
+
+      for (uint8_t x=0; x<3; x++) { // Read three incoming bytes
+        uint8_t c = Serial.read();
+        
+        if (c < 255) {
+          buffer[x] = c; // Using 255 as a latch semaphore
+        }
         else {
           strip.show();
           pixel_index = 0;
@@ -166,11 +169,8 @@ void serialLoop() {
         }
 
         if (x == 2) {   // If we received three serial bytes
-
-          uint32_t color = strip.Color(buffer[0], buffer[1], buffer[2]);
-          strip.setPixelColor(pixel_index, color);
+          strip.setPixelColor(pixel_index, strip.Color(buffer[0], buffer[1], buffer[2]));
           pixel_index++;
-
         }
       }
     }
@@ -185,7 +185,7 @@ void loop()
   }
   
   pov.draw(strip);
-  delay(33);
+  delay(20);
   
 //  star_loop();
   
