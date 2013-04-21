@@ -84,7 +84,7 @@ void color_loop() {
     
     strip.setPixelColor(i, pix);
     
-    if ((millis() - last_time > 15) && pixel_index < LED_COUNT) {
+    if ((millis() - last_time > 15) && pixel_index <= LED_COUNT + 1) {
       last_time = millis();
       count = LED_COUNT - pixel_index;
       pixel_index++; 
