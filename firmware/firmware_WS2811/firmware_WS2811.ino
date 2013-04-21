@@ -11,8 +11,6 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, &PORTB, _BV(2), NEO_GRB +
 uint8_t pixel_index;
 long last_time;
 
-
-
 void setup()
 {
   // Set the MOSI pin as digital outputf

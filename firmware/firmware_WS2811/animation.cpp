@@ -23,6 +23,9 @@ void animation::draw(Adafruit_NeoPixel& strip) {
     case ENCODING_RLE:
       drawRLE(strip);
       break;
+    case ENCODING_16RLE:
+      draw16bitRLE(strip);
+      break;
   }
 };
 
@@ -52,11 +55,38 @@ void animation::drawRLE(Adafruit_NeoPixel& strip) {
     uint8_t b = pgm_read_byte(currentFrameData + 3);
     
     for(uint8_t i = 0; i < run_length; i+=1) {
-      strip.setPixelColor(i, strip.Color(r,g,b));
+      strip.setPixelColor(count + i, strip.Color(r,g,b));
     }
     
     count += run_length;
     currentFrameData += 4;
+  }
+  
+  strip.show();
+
+  m_frameIndex = (m_frameIndex + 1)%m_frameCount;
+  if(m_frameIndex == 0) {
+    currentFrameData = const_cast<prog_uint8_t*>(m_frameData);
+  }
+};
+
+void animation::draw16bitRLE(Adafruit_NeoPixel& strip) {
+
+  // Read runs of RLE data until we get enough data.
+  uint8_t count = 0;
+  while(count < 60) {
+    uint8_t run_length = 0x7F & pgm_read_byte(currentFrameData);
+    uint8_t r = ((pgm_read_byte(currentFrameData + 1) & 0xF8)     );
+    uint8_t g = ((pgm_read_byte(currentFrameData + 1) & 0x07) << 5)
+              | ((pgm_read_byte(currentFrameData + 2) & 0xE0) >> 3);
+    uint8_t b = ((pgm_read_byte(currentFrameData + 2) & 0x1F) << 3);
+    
+    for(uint8_t i = 0; i < run_length; i+=1) {
+      strip.setPixelColor(count + i, strip.Color(r,g,b));
+    }
+    
+    count += run_length;
+    currentFrameData += 3;
   }
   
   strip.show();

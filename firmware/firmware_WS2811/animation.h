@@ -6,6 +6,7 @@
 
 #define ENCODING_NONE  0
 #define ENCODING_RLE   1
+#define ENCODING_16RLE 2
 
 class animation {
  private:
@@ -19,6 +20,7 @@ class animation {
 
   void drawNoEncoding(Adafruit_NeoPixel& strip);  
   void drawRLE(Adafruit_NeoPixel& strip);
+  void draw16bitRLE(Adafruit_NeoPixel& strip);
   
  public:
   animation(uint16_t frameCount, const prog_uint8_t* frameData, const uint8_t encoding = ENCODING_NONE);

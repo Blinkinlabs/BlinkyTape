@@ -35,6 +35,25 @@ void draw() {
   fill(0,255,255);
   text(message, 105, 53);
 
+  background(0);
+  stroke(0);
+  fill(255,  0,  0);
+  rect( 0, 0,15,height);
+  
+  fill(  0,255,  0);
+  rect(15, 0,15,height);
+  
+  fill(  0,  0, 32);
+  rect(30, 0,15,height);
+  
+  fill( 32,  0,  0);
+  rect( 0, 0,15,height);
+  
+  fill(  0, 32,  0);
+  rect(15, 0,15,height);
+  
+  fill(  0,  0,255);
+  rect(30, 0,15,height);
 
 //  led.sendUpdate(pos,height-1,pos,0);
   saver.sendUpdate(pos,height-1,pos,0);
@@ -46,6 +65,6 @@ void draw() {
   pos = (pos + rate)%width;
   
   if(pos< rate) {
-    saver.writeRLE();
+    saver.write16bitRLE();
   }
 }
