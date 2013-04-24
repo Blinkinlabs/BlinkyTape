@@ -10,17 +10,22 @@ int buffOffX = 120;
 int buffOffY = 10;
 int buffScale = 6;
 
+LineTool tool;
+
 void setup() {
   buffer = createGraphics(120, 60, JAVA2D);
   
   size((buffScale * buffer.width) + buffOffX + 10, 500, JAVA2D);
   frameRate(60);
+  
+  cp = new ColorPicker( 10, 10, 100, 100, 255 );
+
+  myFont = createFont("FFScala", 50);
+  drawInitialArt();
+
+  tool = new LineTool(buffer, cp, buffOffX, buffOffY, buffScale * buffer.width, buffScale * buffer.height);
 
   led = new LedOutput(this, "/dev/cu.usbmodem1a21", 60);
-  
-  myFont = createFont("FFScala", 50);
-  cp = new ColorPicker( 10, 10, 100, 100, 255 );
-  drawInitialArt();
 }
 
 float pos = 0;
@@ -31,18 +36,6 @@ void drawInitialArt() {
   buffer.beginDraw();
   buffer.noSmooth();
   buffer.background(0);
-  /*
-  buffer.fill(255,0,0);
-  buffer.stroke(255,0,0);
-  buffer.rect(0,0,15,buffer.height);
-  buffer.rect(30,0,15,buffer.height);
-  String msg = new String("Blinkiverse");
-  buffer.textFont(myFont);
-  buffer.fill(155,0,255);
-  buffer.text(msg, 100, 48);
-  buffer.fill(0,255,0);
-  buffer.text(msg, 105, 53);
-  */
   buffer.endDraw();
 }
 
@@ -50,15 +43,16 @@ void draw() {
   background(80);
 
   cp.render();
+
   drawBuffer();
-  updateBuffer();
+  tool.render();
   drawPos();
   updatePos();
   led.sendUpdate(buffer, pos, 0, pos, buffer.height);  
 }
 
 void keyPressed() {
-  println("Pressed " + int(key) + " " + keyCode);  
+  println("Pressed " + keyCode);  
   switch(keyCode){
     case 32:
       scanning = !scanning;
@@ -80,13 +74,24 @@ void keyPressed() {
     case 40:
       rate--; if(rate < 0) rate = 0;
       break;
+    case 83: // save
+      savePattern();
   }
 }
 
 void drawBuffer() {
   noSmooth();  
-  img = buffer.get(0,0, buffer.width, buffer.height);
+  //img = buffer.get(0,0, buffer.width, buffer.height);
+  img = tool.toolBuff.get(0,0, buffer.width, buffer.height);
   image(img, buffToScreenX(0), buffToScreenY(0), buffScale * buffer.width, buffScale * buffer.height);
+  // draw a nice grid to show the pixel separation
+  stroke(80);
+  for(int x = 0; x < buffer.width; x++) {
+    line(buffToScreenX(x), buffToScreenY(0), buffToScreenX(x), buffToScreenY(buffer.height));
+  }
+  for(int y = 0; y < buffer.height; y++) {
+    line(buffToScreenX(0), buffToScreenY(y), buffToScreenX(buffer.width), buffToScreenY(y));
+  }
 }
 
 void drawPos() {
@@ -100,25 +105,6 @@ void updatePos() {
     pos = (pos + rate) % buffer.width; 
 }
 
-void updateBuffer() {
- if( mousePressed )
- {
-   float buffX = screenToBuffX(mouseX - 4);
-   float buffY = screenToBuffY(mouseY - 3);
-   if(buffX >= 0 && 
-     buffX < buffer.width &&
-     buffY >= 0 &&
-     buffY < buffer.height )
-    {
-      buffer.beginDraw();
-      buffer.noSmooth();
-      buffer.stroke(cp.c);
-      buffer.point(buffX, buffY);
-      buffer.endDraw();
-    }
-  }
-}
-
 float buffToScreenX(float buffX){
   return (buffScale * buffX) + buffOffX;
 }
@@ -127,10 +113,10 @@ float buffToScreenY(float buffY){
   return (buffScale * buffY) + buffOffY;
 }
 
-float screenToBuffX(float scrX){
-  return (scrX - buffOffX) / buffScale;
-}
-
-float screenToBuffY(float scrY){
-  return (scrY - buffOffY) / buffScale;
+void savePattern() {
+  LedSaver saver = new LedSaver("pov", 60);
+  for(int x = 0; x < buffer.width; x++) {
+    saver.sendUpdate(buffer, x, 0, x, buffer.height);
+  }
+  saver.write16bitRLE();
 }
