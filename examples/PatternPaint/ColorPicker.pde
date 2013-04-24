@@ -21,7 +21,7 @@ public class ColorPicker
   private void init ()
   {
     // draw color.
-    int cw = w - 20;
+    int cw = w - 10;
     for( int i=0; i<cw; i++ ) 
     {
       float nColorPercent = i / (float)cw;
@@ -36,14 +36,14 @@ public class ColorPicker
     }
 		
     // draw black/white.
-    drawRect( cw, 0,   10, h/2, 0xFFFFFF );
-    drawRect( cw, h/2, 10, h/2, 0 );
+    drawRect( cw, 0,   5, h/2, 0xFFFFFF );
+    drawRect( cw, h/2, 5, h/2, 0 );
 		
     // draw grey scale.
     for( int j=0; j<h; j++ )
     {
       int g = 255 - (int)(j/(float)(h-1) * 255 );
-      drawRect( w-10, j, 10, 1, color( g, g, g ) );
+      drawRect( w-5, j, 5, 1, color( g, g, g ) );
     }
   }
 
