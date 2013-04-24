@@ -17,14 +17,13 @@ void setup() {
   
   size((buffScale * buffer.width) + buffOffX + 10, 500, JAVA2D);
   frameRate(60);
-  
-  cp = new ColorPicker( 10, 10, 100, 100, 255 );
 
-  myFont = createFont("FFScala", 50);
+  cp = new ColorPicker( 10, 10, 100, 100, 255 );
+  myFont = createFont("FFScala", 12);
+  textFont(myFont);
   drawInitialArt();
 
   tool = new LineTool(buffer, cp, buffOffX, buffOffY, buffScale * buffer.width, buffScale * buffer.height);
-
   led = new LedOutput(this, "/dev/cu.usbmodem1a21", 60);
 }
 
@@ -43,12 +42,12 @@ void draw() {
   background(80);
 
   cp.render();
-
+  drawToolState(tool);
   drawBuffer();
   tool.render();
   drawPos();
   updatePos();
-  led.sendUpdate(buffer, pos, 0, pos, buffer.height);  
+  led.sendUpdate(buffer, pos, 0, pos, buffer.height);
 }
 
 void keyPressed() {
@@ -74,6 +73,12 @@ void keyPressed() {
     case 40:
       rate--; if(rate < 0) rate = 0;
       break;
+    case 45: // -
+      tool.size -= 1; if(tool.size < 1) tool.size = 1;
+      break;
+    case 61: // +
+      tool.size += 1;
+      break;
     case 83: // save
       savePattern();
   }
@@ -98,6 +103,12 @@ void drawPos() {
   stroke(255,255);
   fill(255,64);
   rect(buffToScreenX(pos), buffToScreenY(0), buffScale, (buffScale* buffer.height) - 1);
+}
+
+void drawToolState(LineTool tool) {
+  fill(255,255);
+  text("Line Size: " + tool.size
+       + "\n    +/- to adjust", 10, 150, 100, 100);
 }
 
 void updatePos() {
