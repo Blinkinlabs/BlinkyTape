@@ -26,69 +26,36 @@ AudioOutput audioout;  // Need to run soundflower for this to work...
 FFT fft;
 BeatDetect beat;
 BeatListener bl;
-LedOutput led;
+
+ArrayList<LedOutput> leds = new ArrayList<LedOutput>();
 
 float kickSize, snareSize, hatSize;
 
 int numberOfLEDs = 60;
 int[] values;
 
-
-class star {
-  float posX;
-  float posY;
-  float rateX;
-  float rateY;
-
-  star() {
-    reset();
-  }
-
-  void reset() {
-    posX = random(2, 10);
-    posY = random(0, height);
-    rateX = -random(0, .2);
-    rateY = 0;
-  }
-
-  void draw() {
-    stroke(255);
-    point(posX, posY);
-
-    posX += rateX;
-    posY += rateY;
-
-    if (posY < 0 | posY > height | posX < 0 | posX > width) {
-      reset();
-    }
-  }
-};
-
-ArrayList<star> stars = new ArrayList<star>();
-
-
+// A bunch of dynamic pulsers
 ArrayList<Pulser> pulsers = new ArrayList<Pulser>();
+
+
+// A couple of static pulsers
+Pulser kickPulser;
+Pulser hatPulser;
 
 
 void setup()
 {
-  frameRate(60);
-//  size(512, 200, OPENGL);
-  size(screen.width, screen.height, OPENGL);
+  frameRate(30);
+  size(15, 200, OPENGL);
+//  size(screen.width, screen.height, OPENGL);
 
   println(this);
   minim = new Minim(this);
   audioin = minim.getLineIn(Minim.STEREO, 2048);
 
-  led = new LedOutput(this, "/dev/cu.usbmodemfa131", numberOfLEDs);
-
-  for (int i = 0; i < 100; i++) {
-    stars.add(new star());
-  }
-
-  for (int i = 0; i < 100; i++) {
-    pulsers.add(new Pulser(random(0,width), random(0,height), random(10,200), random(0,6.28)));
-  }
+  
+  leds.add(new LedOutput(this, "/dev/cu.usbmodemfd1221", numberOfLEDs));
+  leds.add(new LedOutput(this, "/dev/cu.usbmodemfd1211", numberOfLEDs));
 
   //  song = minim.loadFile("Fog.mp3", 2048);
   //  song.play();
@@ -111,6 +78,35 @@ void setup()
   bl = new BeatListener(beat, audioin); 
 
   fft = new FFT(audioin.bufferSize(), audioin.sampleRate());
+  fft.logAverages(10,1);
+
+  for (int i = 0; i < fft.avgSize(); i++) {
+    Pulser p = new Pulser();
+    p.m_band = i;
+    
+//    if(random(0,1) > .5) {
+//      p.m_h = 70;
+//      p.m_s = random(100,100);
+//      p.m_yv = random(.1,1.5);
+//    }
+//    else {
+      p.m_h = 49;
+      p.m_s = random(100,100);
+      p.m_yv = random(-.1,-1.5);
+//    }
+    
+    p.m_xv = 0;
+
+    pulsers.add(p);
+  }
+  
+//  kickPulser = new Pulser(width/2, height, 50);
+//  kickPulser.m_band = 5;
+//  kickPulser.m_falloff = .90;
+//
+//  hatPulser = new Pulser(width/2, 0, 50);
+//  hatPulser.m_band = 18;
+//  hatPulser.m_falloff = .90;
 
   textFont(createFont("Helvetica", 16));
   textAlign(CENTER);
@@ -124,10 +120,12 @@ void draw()
 {
 //  loadPixels();
   
-  background(color(1+cos(backgroundAngle), 
-  1+cos(backgroundAngle+6.28/3), 
-  1+cos(backgroundAngle+6.28*2/3)));
-  backgroundAngle += .01;
+//  background(color(1+cos(backgroundAngle), 
+//  1+cos(backgroundAngle+6.28/3), 
+//  1+cos(backgroundAngle+6.28*2/3)));
+//  backgroundAngle += .01;
+
+  background(0);
 
   fft.forward(audioin.mix);
 
@@ -136,60 +134,59 @@ void draw()
   if ( beat.isKick() ) kickSize = min(32, kickSize+1.5);
   if ( beat.isSnare() ) snareSize = min(32, snareSize+1.5);
   if ( beat.isHat() ) hatSize = 32;
-  textSize(kickSize);
-  text("KICK", width/4, height/2);
-  textSize(snareSize);
-  text("SNARE", width/2, height/2);
-  textSize(hatSize);
-  text("HAT", 3*width/4, height/2);
 
-  if ( hatSize == 32) {
-    col = col + 3.14159*.05;
+//  if ( hatSize == 32) {
+//    col = col + 3.14159*.05;
+//  }
+//  for (int i = 0; i < numberOfLEDs/4 + 1; i++) {
+//    float bright = (kickSize*2 - numberOfLEDs/2 - i)/8;
+//    stroke(color((sin(col + i*.05              )+1)*128, 
+//    (sin(col + i*.05 + 3.14159*2/3)+1)*128, 
+//    (sin(col + i*.05 + 3.14159*4/3)+1)*128, 
+//    bright*255
+//      ));
+//    point(0, numberOfLEDs/4+i);
+//    point(0, numberOfLEDs/4-i);
+//
+//
+//
+//    bright = (snareSize*2 - numberOfLEDs/2 - i)/8;
+//    stroke(color((sin(col + i*.05 + 3.14159*2/3)+1)*128, 
+//    (sin(col + i*.05 + 3.14159*4/3)+1)*128, 
+//    (sin(col + i*.05              )+1)*128, 
+//    bright*255
+//      ));
+//    point(0, numberOfLEDs*3/4+i);
+//    point(0, numberOfLEDs*3/4-i);
+//  }
+
+  if ( beat.isKick() ) {
+      for(Pulser p : pulsers) {
+        for(int i = 0; i < random(0,3); i++) {
+          p.draw(fft);
+        }
+    }
   }
-
-
-  for (int i = 0; i < numberOfLEDs/4 + 1; i++) {
-    float bright = (kickSize*2 - numberOfLEDs/2 - i)/8;
-    stroke(color((sin(col + i*.05              )+1)*128, 
-    (sin(col + i*.05 + 3.14159*2/3)+1)*128, 
-    (sin(col + i*.05 + 3.14159*4/3)+1)*128, 
-    bright*255
-      ));
-    point(0, numberOfLEDs/4+i);
-    point(0, numberOfLEDs/4-i);
-
-
-
-    bright = (snareSize*2 - numberOfLEDs/2 - i)/8;
-    stroke(color((sin(col + i*.05 + 3.14159*2/3)+1)*128, 
-    (sin(col + i*.05 + 3.14159*4/3)+1)*128, 
-    (sin(col + i*.05              )+1)*128, 
-    bright*255
-      ));
-    point(0, numberOfLEDs*3/4+i);
-    point(0, numberOfLEDs*3/4-i);
-  }
-
-  // Now, rotate that shit
-
-
-  //  for(star s : stars) {
-  //    s.draw();
-  //  }
-
-//  updatePixels();
-
+  
+  background(0);
 
   for(Pulser p : pulsers) {
-    p.draw(kickSize);
+    p.draw(fft);
   }
+  
+//  pulsers.get(0).draw(fft);
+  
+//  kickPulser.draw(fft);
+//  hatPulser.draw(fft);
 
-  //  bl.draw(this);
-//  led.sendUpdate(0, 0, 0, 60);
-  float pos = (backgroundAngle*50)%width;
-  led.sendUpdate(pos, 0, pos, height);
-  stroke(255);
-  line(pos, 0, pos, height);
+
+  for(int i = 0; i < leds.size(); i++) {
+    float pos = width/2 + 5*i;
+    leds.get(i).sendUpdate(pos, 0, pos, height);
+    
+    stroke(255);
+    line(pos, 0, pos, height);
+  }
 
   float fadePercent = .98;
   kickSize  = constrain(kickSize  * fadePercent, 16, 32);
