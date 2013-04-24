@@ -22,7 +22,7 @@ class BeatListener implements AudioListener
     beat.detect(source.mix);
   }
   
-//  void draw(processing.core.pApplet p) {
-//    beat.drawGraph(p);
-//  }
+  void draw(PApplet p) {
+    beat.drawGraph(p);
+  }
 }
