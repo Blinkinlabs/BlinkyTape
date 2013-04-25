@@ -1,4 +1,7 @@
 import processing.serial.*;
+import controlP5.*;
+
+ControlP5 controlP5;
 LedOutput led;
 
 PFont myFont;
@@ -25,6 +28,32 @@ void setup() {
 
   tool = new LineTool(buffer, cp, buffOffX, buffOffY, buffScale * buffer.width, buffScale * buffer.height);
   led = new LedOutput(this, "/dev/cu.usbmodem1d11", 60);
+
+  controlP5 = new ControlP5(this);
+  controlP5.addNumberbox("toolSize")
+    .setPosition(10,160)
+    .setSize(100,15)
+    .setRange(1, 50)
+    .setScrollSensitivity(1)
+    .setDirection(Controller.VERTICAL)
+    .setValue(1)
+    .setId(1)
+    .getCaptionLabel().align(ControlP5.LEFT, ControlP5.TOP_OUTSIDE).setPaddingX(0);
+
+  controlP5.addButton("pause")
+    .setPosition(10, 185)
+    .setSize(100,15)
+    .setId(2);
+
+  controlP5.addButton("load_image")
+    .setPosition(10, 210)
+    .setSize(100,15)
+    .setId(3);
+
+  controlP5.addButton("save_to_strip")
+    .setPosition(10, 230)
+    .setSize(100,15)
+    .setId(4);
 }
 
 float pos = 0;
@@ -42,9 +71,8 @@ void draw() {
   background(80);
 
   cp.render();
-  drawToolState(tool);
   drawBuffer();
-  tool.render();
+  tool.update();
   drawPos();
   updatePos();
   led.sendUpdate(buffer, pos, 0, pos, buffer.height);
@@ -55,11 +83,7 @@ void keyPressed() {
     
     switch(keyCode) {
   case 32:
-    scanning = !scanning;
-    if (rate == 0) {
-      scanning = true;
-      rate = 1;
-    }
+    pause(0);
     break;
   case 37:
     pos--; 
@@ -76,13 +100,6 @@ void keyPressed() {
   case 40:
     rate--; 
     if (rate < 0) rate = 0;
-    break;
-  case 45: // -
-    tool.size -= 1; 
-    if (tool.size < 1) tool.size = 1;
-    break;
-  case 61: // +
-    tool.size += 1;
     break;
   case 83: // save
     savePattern();
@@ -114,12 +131,6 @@ void drawPos() {
   rect(buffToScreenX(pos), buffToScreenY(0), buffScale, (buffScale* buffer.height) - 1);
 }
 
-void drawToolState(LineTool tool) {
-  fill(255, 255);
-  text("Line Size: " + tool.size
-    + "\n    +/- to adjust", 10, 150, 100, 100);
-}
-
 void updatePos() {
   if (scanning)
     pos = (pos + rate) % buffer.width;
@@ -139,6 +150,7 @@ void savePattern() {
     saver.sendUpdate(buffer, x, 0, x, buffer.height);
   }
   saver.write16bitRLE();
+  println("Saved to 'pov.h'");
 }
 
 void importImage() {
@@ -148,7 +160,28 @@ void importImage() {
     buffer.beginDraw();
     buffer.image(img, 0, 0, buffer.width, buffer.height);
     buffer.endDraw();
+    // reinit tool to get new buffer
+    tool = new LineTool(buffer, cp, buffOffX, buffOffY, buffScale * buffer.width, buffScale * buffer.height);
   }
 }
 
+/** ControlP5 callbacks */
+void toolSize(int newSize){
+  tool.size = newSize;
+}
 
+void pause(int val){
+  scanning = !scanning;
+  if (rate == 0) {
+    scanning = true;
+    rate = 1;
+  }
+}
+
+void load_image(int val){
+  importImage();
+}
+
+void save_to_strip(int val){
+  savePattern();
+}

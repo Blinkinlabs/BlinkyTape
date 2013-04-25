@@ -15,6 +15,10 @@ class LineTool {
     this.y = y;
     this.w = w;
     this.h = h;
+    img = buff.get(0, 0, buff.width, buff.height);
+    toolBuff.beginDraw();
+    toolBuff.background(img);
+    toolBuff.endDraw();
   }
 
   protected void finalize() {
@@ -22,7 +26,7 @@ class LineTool {
     buff.background(img);
   }
 
-  public void render() {
+  public void update() {
     if ( !mousePressed && active ) {
       finalize();
       active = false;
@@ -42,8 +46,8 @@ class LineTool {
       endY = screenToBuffY(mouseY);
       img = buff.get(0, 0, buff.width, buff.height);
       toolBuff.beginDraw();
-      toolBuff.strokeWeight(size);
       toolBuff.background(img);
+      toolBuff.strokeWeight(size);
       toolBuff.stroke(cp.c);
       toolBuff.line(startX, startY, endX, endY);
       toolBuff.endDraw();
