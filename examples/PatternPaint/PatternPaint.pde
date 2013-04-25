@@ -27,7 +27,10 @@ void setup() {
   textFont(myFont);
   drawInitialArt();
 
-  tool = new LineTool(buffer, cp, buffOffX, buffOffY, buffScale * buffer.width, buffScale * buffer.height);
+  tool = new LineTool(buffer, cp,
+                      buffOffX, buffOffY,
+                      buffScale * buffer.width,
+                      buffScale * buffer.height);
   led = new LedOutput(this, "/dev/cu.usbmodem1d11", 60);
 
   controlP5 = new ControlP5(this);
@@ -39,7 +42,9 @@ void setup() {
     .setDirection(Controller.VERTICAL)
     .setValue(1)
     .setId(1)
-    .getCaptionLabel().align(ControlP5.LEFT, ControlP5.TOP_OUTSIDE).setPaddingX(0);
+    .getCaptionLabel()
+      .align(ControlP5.LEFT,ControlP5.TOP_OUTSIDE)
+      .setPaddingX(0);
 
   controlP5.addButton("pause")
     .setPosition(10, 190)
@@ -127,21 +132,25 @@ void drawBuffer() {
   noSmooth();  
   //img = buffer.get(0,0, buffer.width, buffer.height);
   img = tool.toolBuff.get(0, 0, buffer.width, buffer.height);
-  image(img, buffToScreenX(0), buffToScreenY(0), buffScale * buffer.width, buffScale * buffer.height);
+  image(img, buffToScreenX(0), buffToScreenY(0),
+        buffScale * buffer.width, buffScale * buffer.height);
   // draw a nice grid to show the pixel separation
   stroke(80);
   for (int x = 0; x < buffer.width; x++) {
-    line(buffToScreenX(x), buffToScreenY(0), buffToScreenX(x), buffToScreenY(buffer.height));
+    line(buffToScreenX(x), buffToScreenY(0),
+         buffToScreenX(x), buffToScreenY(buffer.height));
   }
   for (int y = 0; y < buffer.height; y++) {
-    line(buffToScreenX(0), buffToScreenY(y), buffToScreenX(buffer.width), buffToScreenY(y));
+    line(buffToScreenX(0), buffToScreenY(y),
+         buffToScreenX(buffer.width), buffToScreenY(y));
   }
 }
 
 void drawPos() {
   stroke(255, 255);
   fill(255, 64);
-  rect(buffToScreenX(pos), buffToScreenY(0), buffScale, (buffScale* buffer.height) - 1);
+  rect(buffToScreenX(pos), buffToScreenY(0),
+       buffScale, (buffScale* buffer.height) - 1);
 }
 
 void updatePos() {
@@ -167,7 +176,7 @@ void savePattern() {
 }
 
 void importImage() {
-  String imgPath = selectInput("Select a file to import (60px height)");
+  String imgPath = selectInput("Select an imagefile to import");
   if (imgPath != null) {
     PImage img = loadImage(imgPath);
     // create a new buffer to fit this image
@@ -176,7 +185,9 @@ void importImage() {
     buffer.image(img, 0, 0, buffer.width, buffer.height);
     buffer.endDraw();
     // reinit tool to get new buffer
-    tool = new LineTool(buffer, cp, buffOffX, buffOffY, buffScale * buffer.width, buffScale * buffer.height);
+    tool = new LineTool(buffer, cp, buffOffX, buffOffY,
+                        buffScale * buffer.width,
+                        buffScale * buffer.height);
     // resize the window frame
     frame.setSize(windowWidthForBuffer(buffer), height);
     // reset scrubber
