@@ -16,10 +16,11 @@ int buffScale = 6;
 LineTool tool;
 
 void setup() {
-  buffer = createGraphics(120, 60, JAVA2D);
+  buffer = createGraphics(67, 60, JAVA2D);
 
-  size((buffScale * buffer.width) + buffOffX + 10, 500, JAVA2D);
+  size(windowWidthForBuffer(buffer), 500, JAVA2D);
   frameRate(60);
+  frame.setResizable(true);
 
   cp = new ColorPicker( 10, 10, 100, 100, 255 );
   myFont = createFont("FFScala", 12);
@@ -41,31 +42,32 @@ void setup() {
     .getCaptionLabel().align(ControlP5.LEFT, ControlP5.TOP_OUTSIDE).setPaddingX(0);
 
   controlP5.addButton("pause")
-    .setPosition(10, 185)
+    .setPosition(10, 190)
     .setSize(100,15)
     .setId(2);
 
   controlP5.addButton("load_image")
-    .setPosition(10, 210)
+    .setPosition(10, 215)
     .setSize(100,15)
-    .setId(3);
+    .setId(3)
+    .getCaptionLabel().set("Load PNG Image");
+
+  controlP5.addButton("save_as_png")
+    .setPosition(10, 235)
+    .setSize(100,15)
+    .setId(4)
+    .getCaptionLabel().set("Save PNG Image");
 
   controlP5.addButton("save_to_strip")
-    .setPosition(10, 230)
+    .setPosition(10, 265)
     .setSize(100,15)
-    .setId(4);
+    .setId(5)
+    .getCaptionLabel().set("Save to BlinkyTape");
 }
 
 float pos = 0;
 boolean scanning = true;
 float rate = 1;
-
-void drawInitialArt() {
-  buffer.beginDraw();
-  buffer.noSmooth();
-  buffer.background(0);
-  buffer.endDraw();
-}
 
 void draw() {
   background(80);
@@ -108,6 +110,17 @@ void keyPressed() {
     importImage();
     break;
   }
+}
+
+int windowWidthForBuffer(PGraphics buff) {
+  return  (buffScale * buff.width) + buffOffX + 10;
+}
+
+void drawInitialArt() {
+  buffer.beginDraw();
+  buffer.noSmooth();
+  buffer.background(0);
+  buffer.endDraw();
 }
 
 void drawBuffer() {
@@ -154,14 +167,29 @@ void savePattern() {
 }
 
 void importImage() {
-  String imgPath = selectInput("Select a file to import (120x60)");
+  String imgPath = selectInput("Select a file to import (60px height)");
   if (imgPath != null) {
     PImage img = loadImage(imgPath);
+    // create a new buffer to fit this image
+    buffer = createGraphics(img.width, img.height, JAVA2D);
     buffer.beginDraw();
     buffer.image(img, 0, 0, buffer.width, buffer.height);
     buffer.endDraw();
     // reinit tool to get new buffer
     tool = new LineTool(buffer, cp, buffOffX, buffOffY, buffScale * buffer.width, buffScale * buffer.height);
+    // resize the window frame
+    frame.setSize(windowWidthForBuffer(buffer), height);
+    // reset scrubber
+    pos = 0;
+  }
+}
+
+void saveAsImage() {
+  String imgPath = selectOutput("Save PNG file");
+  if(imgPath != null) {
+    PImage img = buffer.get(0, 0, buffer.width, buffer.height);
+    img.save(imgPath);
+    println("Saved PNG file to '" + imgPath + "'.");
   }
 }
 
@@ -180,6 +208,10 @@ void pause(int val){
 
 void load_image(int val){
   importImage();
+}
+
+void save_as_png(int val){
+  saveAsImage();
 }
 
 void save_to_strip(int val){
