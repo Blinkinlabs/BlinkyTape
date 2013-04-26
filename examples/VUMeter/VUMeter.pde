@@ -57,8 +57,8 @@ void setup()
     leftPulser.m_band  = 1;
     leftPulser.m_h     = 100;
     leftPulser.m_s     = 0;
-    leftPulser.m_size  = 10;
-    leftPulser.m_scale = 18;
+    leftPulser.m_size  = 0;
+    leftPulser.m_scale = 30;
     leftPulser.m_x     = width/4;
     leftPulser.m_y     = height/2;
     leftPulser.m_xv    = 0;
@@ -68,8 +68,8 @@ void setup()
     rightPulser.m_band  = 1;
     rightPulser.m_h     = 96;
     rightPulser.m_s     = 0;
-    rightPulser.m_size  = 10;    
-    rightPulser.m_scale = 18; 
+    rightPulser.m_size  = 0;    
+    rightPulser.m_scale = 30; 
     rightPulser.m_x     = width*3/4;
     rightPulser.m_y     = height/2;
     rightPulser.m_xv    = 0;

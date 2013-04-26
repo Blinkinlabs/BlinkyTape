@@ -65,11 +65,15 @@ class Pulser {
     noStroke();
     colorMode(HSB, 100);
 
+    if(value < 1) {
+      value = 0;
+    }
+
     float b = max(0,min(100,m_scale*value));
     float a = max(0,min(100,m_scale*value));
 
-    b = 100;
-    a = 100;
+//    b = 100;
+//    a = 100;
 
     color fgcolor = color(m_h, m_s, b, a);
     color bgcolor = color(m_h, m_s, b, 0);
