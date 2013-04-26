@@ -23,7 +23,9 @@ AudioPlayer song;
 AudioInput audioin;
 AudioOutput audioout;  // Need to run soundflower for this to work...
 
-FFT fft;
+FFT leftFft;
+FFT rightFft;
+
 BeatDetect beat;
 BeatListener bl;
 
@@ -35,12 +37,8 @@ int numberOfLEDs = 60;
 int[] values;
 
 // A bunch of dynamic pulsers
-ArrayList<Pulser> pulsers = new ArrayList<Pulser>();
-
-
-// A couple of static pulsers
-Pulser kickPulser;
-Pulser hatPulser;
+ArrayList<Pulser> leftPulsers = new ArrayList<Pulser>();
+ArrayList<Pulser> rightPulsers = new ArrayList<Pulser>();
 
 
 void setup()
@@ -53,10 +51,10 @@ void setup()
   minim = new Minim(this);
   audioin = minim.getLineIn(Minim.STEREO, 2048);
 
-  
+  leds.add(new LedOutput(this, "/dev/cu.usbmodemfa131", numberOfLEDs));
   leds.add(new LedOutput(this, "/dev/cu.usbmodemfd1221", numberOfLEDs));
-  leds.add(new LedOutput(this, "/dev/cu.usbmodemfd1211", numberOfLEDs));
-
+  leds.add(new LedOutput(this, "/dev/cu.usbmodemfd1231", numberOfLEDs));
+  
   //  song = minim.loadFile("Fog.mp3", 2048);
   //  song.play();
   // a beat detection object that is FREQ_ENERGY mode that 
@@ -77,36 +75,52 @@ void setup()
   //  bl = new BeatListener(beat, song);  
   bl = new BeatListener(beat, audioin); 
 
-  fft = new FFT(audioin.bufferSize(), audioin.sampleRate());
-  fft.logAverages(10,1);
+  leftFft = new FFT(audioin.bufferSize(), audioin.sampleRate());
+  leftFft.logAverages(10,1);
+  
+  rightFft = new FFT(audioin.bufferSize(), audioin.sampleRate());
+  rightFft.logAverages(10,1);
 
-  for (int i = 0; i < fft.avgSize(); i++) {
+  for (int i = 0; i < leftFft.avgSize(); i++) {
     Pulser p = new Pulser();
     p.m_band = i;
     
-//    if(random(0,1) > .5) {
-//      p.m_h = 70;
-//      p.m_s = random(100,100);
-//      p.m_yv = random(.1,1.5);
-//    }
-//    else {
+    if(random(0,1) > .5) {
+      p.m_h = 70;
+      p.m_s = random(100,100);
+      p.m_yv = random(.2,2);
+    }
+    else {
       p.m_h = 49;
       p.m_s = random(100,100);
-      p.m_yv = random(-.1,-1.5);
-//    }
+      p.m_yv = random(-.2,-2);
+    }
     
     p.m_xv = 0;
 
-    pulsers.add(p);
+    leftPulsers.add(p);
   }
-  
-//  kickPulser = new Pulser(width/2, height, 50);
-//  kickPulser.m_band = 5;
-//  kickPulser.m_falloff = .90;
-//
-//  hatPulser = new Pulser(width/2, 0, 50);
-//  hatPulser.m_band = 18;
-//  hatPulser.m_falloff = .90;
+
+  for (int i = 0; i < rightFft.avgSize(); i++) {
+    Pulser p = new Pulser();
+    p.m_band = i;
+    
+    if(random(0,1) > .5) {
+      p.m_h = 70;
+      p.m_s = random(100,100);
+      p.m_yv = random(.2,2);
+    }
+    else {
+      p.m_h = 49;
+      p.m_s = random(100,100);
+      p.m_yv = random(-.2,-2);
+    }
+    
+    p.m_xv = 0;
+
+    rightPulsers.add(p);
+  }
+
 
   textFont(createFont("Helvetica", 16));
   textAlign(CENTER);
@@ -115,6 +129,8 @@ void setup()
 float col = 0;
 
 float backgroundAngle = 0;
+
+int zzz = 0;
 
 void draw()
 {
@@ -127,7 +143,8 @@ void draw()
 
   background(0);
 
-  fft.forward(audioin.mix);
+  rightFft.forward(audioin.mix);
+  leftFft.forward(audioin.mix);
 
   color(255);
   stroke(255);
@@ -161,18 +178,31 @@ void draw()
 //  }
 
   if ( beat.isKick() ) {
-      for(Pulser p : pulsers) {
-        for(int i = 0; i < random(0,3); i++) {
-          p.draw(fft);
-        }
+    for(Pulser p : rightPulsers) {
+      for(int i = 0; i < random(0,3); i++) {
+        p.draw(rightFft);
+      }
+    }
+    for(Pulser p : leftPulsers) {
+      for(int i = 0; i < random(0,3); i++) {
+        p.draw(leftFft);
+      }
     }
   }
   
   background(0);
 
-  for(Pulser p : pulsers) {
-    p.draw(fft);
+  for(Pulser p : leftPulsers) {
+    p.draw(leftFft);
   }
+
+  for(Pulser p : rightPulsers) {
+    p.draw(rightFft);
+  }
+  
+  stroke(255,0,0);
+  line(zzz,0,zzz,height);
+  zzz = (zzz+.1)%width;
   
 //  pulsers.get(0).draw(fft);
   

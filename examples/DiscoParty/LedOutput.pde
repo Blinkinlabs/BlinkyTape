@@ -14,7 +14,7 @@ class LedOutput
     m_numberOfLEDs = numberOfLEDs;
     
     m_gammaCorrection = true;
-    m_gammaValue = .99;
+    m_gammaValue = .85;
 
     println("Connecting to BlinkyBoard on: " + portName);
     m_outPort = new Serial(parent, portName, 115200);
