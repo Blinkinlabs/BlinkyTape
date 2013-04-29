@@ -40,20 +40,27 @@ int[] values;
 ArrayList<Pulser> leftPulsers = new ArrayList<Pulser>();
 ArrayList<Pulser> rightPulsers = new ArrayList<Pulser>();
 
-
 void setup()
 {
   frameRate(30);
-  size(15, 200, OPENGL);
+  size(100, 200, OPENGL);
 //  size(screen.width, screen.height, OPENGL);
 
   println(this);
   minim = new Minim(this);
   audioin = minim.getLineIn(Minim.STEREO, 2048);
 
-  leds.add(new LedOutput(this, "/dev/cu.usbmodemfa131", numberOfLEDs));
-  leds.add(new LedOutput(this, "/dev/cu.usbmodemfd1221", numberOfLEDs));
-  leds.add(new LedOutput(this, "/dev/cu.usbmodemfd1231", numberOfLEDs));
+
+  // auto connect to all blinkyboards
+  for(String p : Serial.list()) {
+    if(p.startsWith("/dev/cu.usbmodem")) {
+      leds.add(new LedOutput(this, p, numberOfLEDs));
+    }
+  }
+
+//  leds.add(new LedOutput(this, "/dev/cu.usbmodemfa131", numberOfLEDs));
+//  leds.add(new LedOutput(this, "/dev/cu.usbmodemfd1241", numberOfLEDs));
+//  leds.add(new LedOutput(this, "/dev/cu.usbmodemfd1231", numberOfLEDs));
   
   //  song = minim.loadFile("Fog.mp3", 2048);
   //  song.play();
@@ -86,7 +93,7 @@ void setup()
     p.m_band = i;
     
     if(random(0,1) > .5) {
-      p.m_h = 70;
+      p.m_h = 97;//70;
       p.m_s = random(100,100);
       p.m_yv = random(.2,2);
     }
@@ -106,7 +113,7 @@ void setup()
     p.m_band = i;
     
     if(random(0,1) > .5) {
-      p.m_h = 70;
+      p.m_h = 97;//70;
       p.m_s = random(100,100);
       p.m_yv = random(.2,2);
     }
@@ -130,7 +137,7 @@ float col = 0;
 
 float backgroundAngle = 0;
 
-int zzz = 0;
+float zzz = 0;
 
 void draw()
 {
@@ -200,18 +207,18 @@ void draw()
     p.draw(rightFft);
   }
   
-  stroke(255,0,0);
-  line(zzz,0,zzz,height);
-  zzz = (zzz+.1)%width;
+//  stroke(255,0,0);
+//  line(zzz,0,zzz,height);
+//  zzz = (zzz+.1)%width;
   
 //  pulsers.get(0).draw(fft);
   
 //  kickPulser.draw(fft);
 //  hatPulser.draw(fft);
 
-
+  
   for(int i = 0; i < leds.size(); i++) {
-    float pos = width/2 + 5*i;
+    float pos = 15 + 5*i;
     leds.get(i).sendUpdate(pos, 0, pos, height);
     
     stroke(255);

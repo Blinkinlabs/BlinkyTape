@@ -1,4 +1,7 @@
 // Pulse to the music
+
+float maxWidth = 30;
+
 class Pulser {
   float m_x;
   float m_y;
@@ -18,7 +21,7 @@ class Pulser {
   ArrayList<Float> m_values = new ArrayList<Float>();
 
   Pulser() {
-    m_x = random(0,width);
+    m_x = random(0,maxWidth);
     m_y = random(0,height);
     m_xv = random(-.2,.2);
     m_yv = random(-.2,.2);
@@ -75,22 +78,22 @@ class Pulser {
     m_x = (m_x + m_xv);
     m_y = (m_y + m_yv);
     
-    if(m_x > width) {
+    if(m_x > maxWidth) {
       m_x = 0;
       m_y = random(0,height);
     }
     else if(m_x < 0) {
-      m_x = width;
+      m_x = maxWidth;
       m_y = random(0,height);
     }
     
     if(m_y > height) {
       m_y = 0;
-      m_x = random(0,width);
+      m_x = random(0,maxWidth);
     }
     else if(m_y < 0) {
       m_y = height;
-      m_x = random(0,width);
+      m_x = random(0,maxWidth);
     }
 
     
@@ -118,7 +121,7 @@ class Pulser {
 //    drawFuzzyRectangle((int)(m_x-w/2),(int)( m_y-w/2), w, w, w, fgcolor, bgcolor);
 //    stroke(1);
 //    
-//    m_x = (m_x + m_xv + width)%width;
+//    m_x = (m_x + m_xv + maxWidth)%maxWidth;
 //    m_y = (m_y + m_yv + height)%height;
 //  }
 }
