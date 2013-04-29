@@ -46,7 +46,8 @@ void setup()
   minim = new Minim(this);
   audioin = minim.getLineIn(Minim.STEREO, 2048);
 
-  leds.add(new LedOutput(this, "/dev/cu.usbmodemfd121", numberOfLEDs));
+  leds.add(new LedOutput(this, "/dev/cu.usbmodemfa131", numberOfLEDs));
+//  leds.add(new LedOutput(this, "/dev/cu.usbmodemfd121", numberOfLEDs));
 //  leds.add(new LedOutput(this, "/dev/cu.usbmodemfa131", numberOfLEDs));
 
   leftFft = new FFT(audioin.bufferSize(), audioin.sampleRate());
@@ -82,7 +83,7 @@ void setup()
     leftPulser.m_band  = 1;
     leftPulser.m_h     = 5;
     leftPulser.m_s     = 60;
-    leftPulser.m_size  = 10;
+    leftPulser.m_size  = 5;
     leftPulser.m_scale = 18;
     leftPulser.m_x     = width/4;
     leftPulser.m_y     = 56;
@@ -93,7 +94,7 @@ void setup()
     rightPulser.m_band  = 1;
     rightPulser.m_h     = 96;
     rightPulser.m_s     = 60;
-    rightPulser.m_size  = 10;    
+    rightPulser.m_size  = 5;    
     rightPulser.m_scale = 18; 
     rightPulser.m_x     = width/4;
     rightPulser.m_y     = 155;
