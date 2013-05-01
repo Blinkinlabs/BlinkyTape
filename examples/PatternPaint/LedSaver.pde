@@ -52,8 +52,6 @@ class LedSaver
     
     file.println("const PROGMEM prog_uint8_t " + m_name + "Data[]  = {");
 
-    
-
     for(int i = 0; i < m_frameData.size()/3; i++) {
       if(i%m_numberOfLEDs == 0 && i != 0) {
         file.println("");

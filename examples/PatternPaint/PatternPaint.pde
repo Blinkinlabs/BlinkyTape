@@ -15,6 +15,8 @@ int buffScale = 6;
 
 LineTool tool;
 
+Hexifier hexifier;
+
 void setup() {
   buffer = createGraphics(67, 60, JAVA2D);
 
@@ -32,6 +34,8 @@ void setup() {
                       buffScale * buffer.width,
                       buffScale * buffer.height);
   led = new LedOutput(this, "/dev/cu.usbmodem1d11", 60);
+  
+  hexifier = new Hexifier();
 
   controlP5 = new ControlP5(this);
   controlP5.addNumberbox("toolSize")
