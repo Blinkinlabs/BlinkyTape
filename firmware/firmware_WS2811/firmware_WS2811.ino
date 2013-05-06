@@ -6,17 +6,13 @@
 #define LED_COUNT 60
 #define THRESHOLD 1
 
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, &PORTB, _BV(2), NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, 5, NEO_GRB + NEO_KHZ800);
 
 uint8_t pixel_index;
 long last_time;
 
 void setup()
-{
-  // Set the MOSI pin as digital outputf
-  // (only for BB RevA)
-  DDRB |= _BV(2);
-  
+{  
   Serial.begin(57600);
 
   strip.begin();
@@ -184,13 +180,11 @@ void loop()
     serialLoop();
   }
   
-  pov.draw(strip);
-  delay(20);
-  
-//  star_loop();
+//  pov.draw(strip);
+//  delay(20);
   
 //  strobe();
-//  color_loop();
+  color_loop();
 //  star_loop();
 }
 
