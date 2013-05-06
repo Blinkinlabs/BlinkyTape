@@ -93,13 +93,13 @@ void setup()
     p.m_band = i;
     
     if(random(0,1) > .5) {
-      p.m_h = 97;//70;
-      p.m_s = random(100,100);
+      p.m_h = 87 + i;//70;
+      p.m_s = 100;
       p.m_yv = random(.2,2);
     }
     else {
-      p.m_h = 49;
-      p.m_s = random(100,100);
+      p.m_h = 52 + i;
+      p.m_s = 100;
       p.m_yv = random(-.2,-2);
     }
     
@@ -113,13 +113,13 @@ void setup()
     p.m_band = i;
     
     if(random(0,1) > .5) {
-      p.m_h = 97;//70;
-      p.m_s = random(100,100);
+      p.m_h = 87 + i;//70;
+      p.m_s = 100;
       p.m_yv = random(.2,2);
     }
     else {
-      p.m_h = 49;
-      p.m_s = random(100,100);
+      p.m_h = 52 + i;
+      p.m_s = 100;
       p.m_yv = random(-.2,-2);
     }
     
@@ -218,7 +218,7 @@ void draw()
 
   
   for(int i = 0; i < leds.size(); i++) {
-    float pos = 15 + 5*i;
+    float pos = 15 + 15*i;
     leds.get(i).sendUpdate(pos, 0, pos, height);
     
     stroke(255);

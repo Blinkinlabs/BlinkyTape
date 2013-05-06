@@ -27,7 +27,7 @@ class Pulser {
     m_yv = random(-.2,.2);
 
     m_size  = 1;
-    m_scale = 6;
+    m_scale = 3;
     
     m_falloff = .70;
     
