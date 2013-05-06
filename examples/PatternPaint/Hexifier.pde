@@ -43,6 +43,8 @@ int calculateChecksum(byte[] data, int offset, int len) {
 }
 
 
+
+
 class Hexifier {
   int m_freeSpaceStart;  // First free memory location (end of the application program)
   int m_freeSpaceEnd;    // Last free memory location (beginning of the bootloader - 1)

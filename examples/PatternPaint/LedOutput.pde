@@ -2,10 +2,14 @@
 
 class LedOutput
 {
-  private String m_portName;  // TODO: How to request cu.* devices?
+  private String m_portName;
   private Serial m_outPort;
 
   private int m_numberOfLEDs;
+  
+  float m_brightness = .6;
+  float m_gammaValue = .65;
+  boolean m_enableGammaCorrection = true;
 
   LedOutput(PApplet parent, String portName, int numberOfLEDs) {
     m_portName = portName;
@@ -33,15 +37,15 @@ class LedOutput
       int x = (int)((x2 - x1)/m_numberOfLEDs*i + x1);
       int y = (int)((y2 - y1)/m_numberOfLEDs*i + y1);
       
-      int r = int(red(image.pixels[y*image.width+x]));
-      int g = int(green(image.pixels[y*image.width+x]));
-      int b = int(blue(image.pixels[y*image.width+x]));
+      int r = int(red(image.pixels[y*image.width+x])*m_brightness);
+      int g = int(green(image.pixels[y*image.width+x])*m_brightness);
+      int b = int(blue(image.pixels[y*image.width+x])*m_brightness);
       
-//      if (enableGammaCorrection) {
-//        r = (int)(Math.pow(r/256.0,this.gammaValue)*256*bright);
-//        g = (int)(Math.pow(g/256.0,this.gammaValue)*256*bright);
-//        b = (int)(Math.pow(b/256.0,this.gammaValue)*256*bright);
-//      }
+      if (m_enableGammaCorrection) {
+        r = (int)(Math.pow(r/256.0,m_gammaValue)*256);
+        g = (int)(Math.pow(g/256.0,m_gammaValue)*256);
+        b = (int)(Math.pow(b/256.0,m_gammaValue)*256);
+      }
 
 // For WS2811
       data[dataIndex++] = (byte)min(254, r);

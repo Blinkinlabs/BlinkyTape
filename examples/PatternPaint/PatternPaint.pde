@@ -33,45 +33,65 @@ void setup() {
                       buffOffX, buffOffY,
                       buffScale * buffer.width,
                       buffScale * buffer.height);
-  led = new LedOutput(this, "/dev/cu.usbmodem1d11", 60);
+                      
+  for(String p : Serial.list()) {
+    if(p.startsWith("/dev/cu.usbmodem")) {
+      println("here!");
+      led = new LedOutput(this, p, 60);
+      break;  // TODO: does this work?
+    }
+  }
   
   hexifier = new Hexifier();
 
   controlP5 = new ControlP5(this);
-  controlP5.addNumberbox("toolSize")
+
+  controlP5.Slider s = controlP5.addSlider("toolSize")
     .setPosition(10,160)
     .setSize(100,15)
     .setRange(1, 50)
-    .setScrollSensitivity(1)
-    .setDirection(Controller.VERTICAL)
     .setValue(1)
-    .setId(1)
-    .getCaptionLabel()
-      .align(ControlP5.LEFT,ControlP5.TOP_OUTSIDE)
-      .setPaddingX(0);
+    .setId(1);  
+  s.getValueLabel()
+      .align(ControlP5.RIGHT,ControlP5.CENTER);
+  s.getCaptionLabel()
+      .align(ControlP5.LEFT,ControlP5.CENTER);
+
+  controlP5.Slider speed = controlP5.addSlider("speed")
+    .setPosition(10,190)
+    .setSize(100,15)
+    .setRange(0, 5)
+    .setValue(1)
+    .setId(2);
+  speed.getValueLabel()
+      .align(ControlP5.RIGHT,ControlP5.CENTER);
+  speed.getCaptionLabel()
+      .align(ControlP5.LEFT,ControlP5.CENTER);
 
   controlP5.addButton("pause")
-    .setPosition(10, 190)
-    .setSize(100,15)
-    .setId(2);
-
-  controlP5.addButton("load_image")
     .setPosition(10, 215)
     .setSize(100,15)
-    .setId(3)
-    .getCaptionLabel().set("Load PNG Image");
+    .setId(3);
 
-  controlP5.addButton("save_as_png")
+  controlP5.addButton("load_image")
     .setPosition(10, 235)
     .setSize(100,15)
     .setId(4)
-    .getCaptionLabel().set("Save PNG Image");
+    .getCaptionLabel().set("Load PNG Image");
 
-  controlP5.addButton("save_to_strip")
+  controlP5.addButton("save_as_png")
     .setPosition(10, 265)
     .setSize(100,15)
     .setId(5)
+    .getCaptionLabel().set("Save PNG Image");
+
+  controlP5.addButton("save_to_strip")
+    .setPosition(10, 295)
+    .setSize(100,15)
+    .setId(5)
     .getCaptionLabel().set("Save to BlinkyTape");
+    
+    
 }
 
 float pos = 0;
@@ -86,38 +106,45 @@ void draw() {
   tool.update();
   drawPos();
   updatePos();
-  led.sendUpdate(buffer, pos, 0, pos, buffer.height);
+  
+  if(led != null) {
+    led.sendUpdate(buffer, pos, 0, pos, buffer.height);
+  }
 }
 
 void keyPressed() {
-  println("Pressed " + keyCode);
-    
-    switch(keyCode) {
-  case 32:
-    pause(0);
-    break;
-  case 37:
-    pos--; 
-    if (pos < 0) pos = buffer.width - 1;
-    break;
-  case 38:
-    rate++;
-    scanning = true;
-    break;
-  case 39:
-    pos++; 
-    if (pos >= buffer.width) pos = 0;
-    break;
-  case 40:
-    rate--; 
-    if (rate < 0) rate = 0;
-    break;
-  case 83: // save
-    savePattern();
-    break;
-  case 79: // open
-    importImage();
-    break;
+  switch(keyCode) {
+    case 32:
+      pause(0);
+      break;
+    case 37:
+      pos--; 
+      if (pos < 0) {
+        pos = buffer.width - 1;
+      }
+      break;
+    case 38:
+      rate++;
+      scanning = true;
+      break;
+    case 39:
+      pos++; 
+      if (pos >= buffer.width) {
+        pos = 0;
+      }
+      break;
+    case 40:
+      rate--; 
+      if (rate < 0) {
+        rate = 0;
+      }
+      break;
+    case 83: // save
+      savePattern();
+      break;
+    case 79: // open
+      importImage();
+      break;
   }
 }
 
@@ -211,6 +238,10 @@ void saveAsImage() {
 /** ControlP5 callbacks */
 void toolSize(int newSize){
   tool.size = newSize;
+}
+
+void speed(float newSpeed){
+  rate = newSpeed;
 }
 
 void pause(int val){
