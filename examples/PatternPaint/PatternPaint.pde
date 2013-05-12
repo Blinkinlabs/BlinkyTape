@@ -2,7 +2,7 @@ import processing.serial.*;
 import controlP5.*;
 
 ControlP5 controlP5;
-LedOutput led;
+LedOutput led = null;
 
 PFont myFont;
 ColorPicker cp;
