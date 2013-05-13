@@ -2,7 +2,10 @@
 #define ANIMATOR_H
 
 #include "Arduino.h"
+#ifndef _NEOPIXEL_H
+#define _NEOPIXEL_H
 #include <Adafruit_NeoPixel.h>
+#endif
 
 #define ENCODING_NONE  0
 #define ENCODING_RLE   1
