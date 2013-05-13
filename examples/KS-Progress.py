@@ -1,6 +1,7 @@
 # Based on LED-AQI by Zach Hoeken Smith (http://hoektronics.com)
 
 import time
+import math
 import urllib
 from bs4 import BeautifulSoup #pip install beautifulsoup4 html5lib
 import tempfile
@@ -52,24 +53,32 @@ def get_ks_amount():
 if __name__ == "__main__":
 
   bb = connect()
+  progress = get_ks_amount()
+  leds = int(progress * 60)
+  print "Progress: %s, %s" % (progress, leds)
+  last_time = time.time()
   while True:
     try:
-      progress = get_ks_amount();
+      now = time.time()
+      if(now > last_time + time_delay):
+        print "Updating..."
+        progress = get_ks_amount()
+        leds = int(progress * 60)
+        print "Progress: %s, %s" % (progress, leds)
+        last_time = now
 
-      if not progress:
-        print("Site could not be scraped. Check your proxy settings and try again. Try: export http_proxy=PROXY_IP:PROXY_PORT before running this script.")
-
-      leds = int(progress * 60)
-      print "Progress: %s, %s" % (progress, leds)
     
       for i in range(60):
         if(i < leds):
-          bb.sendPixel(255,255,255)
+          time_part = time.time() * 10.0
+          redval = int(math.sin(time_part - i) * 128.0 + 127.0)
+          greenval = int(math.sin(time_part - i + math.pi) * 128.0 + 127.0)
+          blueval = int(math.sin(time_part - i + math.pi + math.pi) * 128.0 + 127.0)
+          bb.sendPixel(redval, greenval, blueval)
         else:
           bb.sendPixel(0,0,0)
       bb.show()
 
-      time.sleep(time_delay)
 
     except KeyboardInterrupt as ex:
       print "Exiting."
