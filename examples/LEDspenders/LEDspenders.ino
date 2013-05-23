@@ -1,4 +1,7 @@
+#ifndef _NEOPIXEL_H
+#define _NEOPIXEL_H
 #include <Adafruit_NeoPixel.h>
+#endif
 
 #include "animation.h"
 #include "pov.h"
