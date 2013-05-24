@@ -32,9 +32,9 @@
 <layer number="22" name="bPlace" color="3" fill="1" visible="yes" active="yes"/>
 <layer number="23" name="tOrigins" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="24" name="bOrigins" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="25" name="tNames" color="7" fill="1" visible="no" active="yes"/>
+<layer number="25" name="tNames" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="26" name="bNames" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="27" name="tValues" color="7" fill="1" visible="no" active="yes"/>
+<layer number="27" name="tValues" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="28" name="bValues" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="29" name="tStop" color="7" fill="3" visible="yes" active="yes"/>
 <layer number="30" name="bStop" color="7" fill="6" visible="yes" active="yes"/>
@@ -142,9 +142,8 @@ Tape</text>
 <text x="24" y="8.75" size="0.75" layer="25" font="vector" ratio="15" align="bottom-center">SIG</text>
 <text x="24" y="5.75" size="0.75" layer="25" font="vector" ratio="15" align="bottom-center">5V</text>
 <text x="24" y="2.75" size="0.75" layer="25" font="vector" ratio="15" align="bottom-center">GND</text>
-<text x="19.5" y="7.5" size="0.75" layer="25" font="vector" ratio="15" rot="R90" align="bottom-center">PUSH</text>
-<text x="7" y="7.1" size="0.69" layer="25" font="vector" ratio="15" rot="R90" align="bottom-center">BOARD</text>
-<text x="6" y="6.7" size="0.69" layer="25" font="vector" ratio="15" rot="R90" align="bottom-center">BLINKY</text>
+<text x="19.5" y="8" size="0.75" layer="25" font="vector" ratio="15" rot="R90" align="bottom-center">PUSH</text>
+<text x="8.2" y="2" size="0.65" layer="25" font="vector" ratio="15" align="center">BlinkyTape</text>
 <text x="21" y="7" size="0.5" layer="25" font="vector" ratio="15" rot="R90" align="center">KEEP IT
 LOCKED</text>
 <text x="10.75" y="2.5" size="0.9" layer="26" font="vector" ratio="20" rot="MR0" align="center">blinkytape.com</text>
@@ -153,6 +152,15 @@ LOCKED</text>
 <rectangle x1="0.25" y1="0.25" x2="5" y2="2.5" layer="1"/>
 <rectangle x1="0.25" y1="7.5" x2="4.75" y2="9.75" layer="1"/>
 <rectangle x1="0.25" y1="2.5" x2="2.75" y2="7.5" layer="1"/>
+<text x="24" y="8.75" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="bottom-center">SIG</text>
+<text x="24" y="5.75" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="bottom-center">5V</text>
+<text x="24" y="2.75" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="bottom-center">GND</text>
+<text x="20.5" y="8.75" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="bottom-center">5V</text>
+<text x="20.75" y="2" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="center">GND</text>
+<text x="20.5" y="8.75" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="bottom-center">5V</text>
+<text x="20.75" y="5" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="center">A10</text>
+<text x="4.85" y="6" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="center">MOSI</text>
+<text x="4.65" y="4" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="center">SCK</text>
 </plain>
 <libraries>
 <library name="blinkyboard">
