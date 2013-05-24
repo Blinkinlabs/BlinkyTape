@@ -749,6 +749,9 @@ MCSB5ABSQ-4-GXX-R1K-H</description>
 <pad name="PAD@15" x="0.5" y="-1.5" drill="0.35" diameter="2" shape="square" stop="no" thermals="no"/>
 <pad name="PAD@16" x="1.5" y="-1.5" drill="0.35" diameter="2" stop="no" thermals="no"/>
 </package>
+<package name="TEST_PAD_SMT">
+<smd name="P$1" x="0" y="0" dx="2" dy="3" layer="1" thermals="no" cream="no"/>
+</package>
 </packages>
 <symbols>
 <symbol name="Q">
@@ -868,6 +871,9 @@ MCSB5ABSQ-4-GXX-R1K-H</description>
 <text x="-3.81" y="-3.302" size="1.778" layer="96">&gt;VALUE</text>
 <pin name="2" x="5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1" rot="R180"/>
 <pin name="1" x="-5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1"/>
+</symbol>
+<symbol name="TEST_PAD_SMT">
+<pin name="P$1" x="-5.08" y="0" length="middle"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -1216,6 +1222,21 @@ MCSB5ABSQ-4-GXX-R1K-H</description>
 </device>
 </devices>
 </deviceset>
+<deviceset name="TEST_PAD_SMT">
+<gates>
+<gate name="G$1" symbol="TEST_PAD_SMT" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="TEST_PAD_SMT">
+<connects>
+<connect gate="G$1" pin="P$1" pad="P$1"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
 </devicesets>
 </library>
 </libraries>
@@ -1266,6 +1287,11 @@ MCSB5ABSQ-4-GXX-R1K-H</description>
 <part name="GND2" library="supply1" deviceset="GND" device=""/>
 <part name="WS3" library="blinkiverse" deviceset="WS2811_CONNECTOR" device=""/>
 <part name="P+5" library="supply1" deviceset="VCC" device=""/>
+<part name="U$10" library="blinkiverse" deviceset="TEST_PAD_SMT" device=""/>
+<part name="U$11" library="blinkiverse" deviceset="TEST_PAD_SMT" device=""/>
+<part name="U$12" library="blinkiverse" deviceset="TEST_PAD_SMT" device=""/>
+<part name="U$13" library="blinkiverse" deviceset="TEST_PAD_SMT" device=""/>
+<part name="U$14" library="blinkiverse" deviceset="TEST_PAD_SMT" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -1312,9 +1338,14 @@ MCSB5ABSQ-4-GXX-R1K-H</description>
 <instance part="U$8" gate="G$1" x="114.3" y="137.16"/>
 <instance part="P+2" gate="VCC" x="101.6" y="137.16" rot="R90"/>
 <instance part="GND1" gate="1" x="101.6" y="132.08" rot="R270"/>
-<instance part="GND2" gate="1" x="170.18" y="86.36"/>
+<instance part="GND2" gate="1" x="170.18" y="81.28"/>
 <instance part="WS3" gate="G$1" x="182.88" y="33.02"/>
 <instance part="P+5" gate="VCC" x="180.34" y="106.68"/>
+<instance part="U$10" gate="G$1" x="187.96" y="91.44"/>
+<instance part="U$11" gate="G$1" x="187.96" y="96.52"/>
+<instance part="U$12" gate="G$1" x="187.96" y="99.06"/>
+<instance part="U$13" gate="G$1" x="187.96" y="86.36"/>
+<instance part="U$14" gate="G$1" x="187.96" y="93.98"/>
 </instances>
 <busses>
 </busses>
@@ -1408,8 +1439,9 @@ MCSB5ABSQ-4-GXX-R1K-H</description>
 </segment>
 <segment>
 <pinref part="GND2" gate="1" pin="GND"/>
-<wire x1="182.88" y1="93.98" x2="170.18" y2="93.98" width="0.1524" layer="91"/>
-<wire x1="170.18" y1="93.98" x2="170.18" y2="88.9" width="0.1524" layer="91"/>
+<wire x1="182.88" y1="86.36" x2="170.18" y2="86.36" width="0.1524" layer="91"/>
+<wire x1="170.18" y1="86.36" x2="170.18" y2="83.82" width="0.1524" layer="91"/>
+<pinref part="U$13" gate="G$1" pin="P$1"/>
 </segment>
 </net>
 <net name="MOSI" class="0">
@@ -1422,6 +1454,11 @@ MCSB5ABSQ-4-GXX-R1K-H</description>
 <wire x1="109.22" y1="121.92" x2="104.14" y2="121.92" width="0.1524" layer="91"/>
 <label x="104.14" y="121.92" size="1.778" layer="95" rot="R180" xref="yes"/>
 <pinref part="U$3" gate="G$1" pin="P$1"/>
+</segment>
+<segment>
+<pinref part="U$14" gate="G$1" pin="P$1"/>
+<wire x1="182.88" y1="93.98" x2="180.34" y2="93.98" width="0.1524" layer="91"/>
+<label x="180.34" y="93.98" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="MISO" class="0">
@@ -1450,6 +1487,7 @@ MCSB5ABSQ-4-GXX-R1K-H</description>
 <segment>
 <label x="180.34" y="91.44" size="1.778" layer="95" rot="R180" xref="yes"/>
 <wire x1="180.34" y1="91.44" x2="182.88" y2="91.44" width="0.1524" layer="91"/>
+<pinref part="U$10" gate="G$1" pin="P$1"/>
 </segment>
 </net>
 <net name="RST" class="0">
@@ -1539,6 +1577,7 @@ MCSB5ABSQ-4-GXX-R1K-H</description>
 <segment>
 <label x="180.34" y="96.52" size="1.778" layer="95" rot="R180" xref="yes"/>
 <wire x1="182.88" y1="96.52" x2="180.34" y2="96.52" width="0.1524" layer="91"/>
+<pinref part="U$11" gate="G$1" pin="P$1"/>
 </segment>
 </net>
 <net name="LED_DATA" class="0">
@@ -1561,6 +1600,7 @@ MCSB5ABSQ-4-GXX-R1K-H</description>
 <wire x1="182.88" y1="99.06" x2="180.34" y2="99.06" width="0.1524" layer="91"/>
 <wire x1="180.34" y1="99.06" x2="180.34" y2="104.14" width="0.1524" layer="91"/>
 <pinref part="P+5" gate="VCC" pin="VCC"/>
+<pinref part="U$12" gate="G$1" pin="P$1"/>
 </segment>
 <segment>
 <pinref part="C1" gate="G$1" pin="1"/>
