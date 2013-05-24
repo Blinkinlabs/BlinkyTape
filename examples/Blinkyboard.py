@@ -40,7 +40,7 @@ class Blinkyboard_WS2811:
 
   def allOn(self):
     for _ in range(0, self.LED_COUNT):
-      self.sendPixel(0,0,0)
+      self.sendPixel(255,255,255)
     self.show()
 
   def allOff(self):
@@ -91,13 +91,13 @@ if __name__ == "__main__":
 
   import sys
 
-  BOARD_TYPE="LPD8806"
-  LED_COUNT = 32;
+  BOARD_TYPE="WS2811"
+  LED_COUNT = 60;
   bb = None
   gamma = [1,1,1]
 
   if len(sys.argv) > 1:
-    bb = Blinkyboard(sys.argv[1], LED_COUNT, BOARD_TYPE, gamma=gamma)
+    bb = Blinkyboard(sys.argv[1], LED_COUNT, gamma=gamma)
 
   else:
     import os
@@ -107,7 +107,7 @@ if __name__ == "__main__":
     for filenames in os.walk('/dev'):
       for filename in filenames[2]:
         if regex.findall(filename):
-          bb = Blinkyboard(os.path.join("/dev", filename), BOARD_TYPE, gamma=gamma)
+          bb = Blinkyboard(os.path.join("/dev", filename), LED_COUNT, BOARD_TYPE, gamma=gamma)
           break
 
   if not bb:
