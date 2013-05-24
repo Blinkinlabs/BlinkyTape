@@ -63,6 +63,8 @@ if __name__ == "__main__":
       if(now > last_time + time_delay):
         print "Updating..."
         progress = get_ks_amount()
+        if progress > 1.0:
+          progress = 1.0
         leds = int(progress * 60)
         print "Progress: %s, %s" % (progress, leds)
         last_time = now
@@ -71,9 +73,10 @@ if __name__ == "__main__":
       for i in range(60):
         if(i < leds):
           time_part = time.time() * 10.0
-          redval = int(math.sin(time_part - i) * 128.0 + 127.0)
-          greenval = int(math.sin(time_part - i + math.pi) * 128.0 + 127.0)
-          blueval = int(math.sin(time_part - i + math.pi + math.pi) * 128.0 + 127.0)
+          dimval = 0.05
+          redval = int(dimval * (math.sin(time_part - i) * 128.0 + 127.0))
+          greenval = int(dimval * (math.sin(time_part - i + math.pi) * 128.0 + 127.0))
+          blueval = int(dimval * (math.sin(time_part - i + math.pi + math.pi) * 128.0 + 127.0))
           bb.sendPixel(redval, greenval, blueval)
         else:
           bb.sendPixel(0,0,0)
