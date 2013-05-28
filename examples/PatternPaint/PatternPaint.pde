@@ -1,5 +1,7 @@
 import processing.serial.*;
 import controlP5.*;
+//import processing.opengl.*;
+//import javax.media.opengl.GL;
 
 ControlP5 controlP5;
 LedOutput led = null;
@@ -18,9 +20,16 @@ LineTool tool;
 Hexifier hexifier;
 
 void setup() {
-  buffer = createGraphics(67, 60, JAVA2D);
+  buffer = createGraphics(60, 60, JAVA2D);
+  size(windowWidthForBuffer(buffer), 380, JAVA2D);
 
-  size(windowWidthForBuffer(buffer), 500, JAVA2D);
+//  noSmooth();
+//  // Turn on vsync to prevent tearing
+//  PGraphicsOpenGL pgl = (PGraphicsOpenGL) g; //processing graphics object
+//  GL gl = pgl.beginGL(); //begin opengl
+//  gl.setSwapInterval(2); //set vertical sync on
+//  pgl.endGL(); //end opengl
+  
   frameRate(60);
   frame.setResizable(true);
 
@@ -107,6 +116,8 @@ void draw() {
   drawPos();
   updatePos();
   
+  drawCrosshair();
+  
   if(led != null) {
     led.sendUpdate(buffer, pos, 0, pos, buffer.height);
   }
@@ -178,10 +189,23 @@ void drawBuffer() {
 }
 
 void drawPos() {
-  stroke(255, 255);
   fill(255, 64);
+  stroke(255);
   rect(buffToScreenX(pos), buffToScreenY(0),
        buffScale, (buffScale* buffer.height) - 1);
+}
+
+void drawCrosshair() {
+  pushStyle();
+    noStroke();
+    fill(255, 32);
+    if(screenToBuffX(mouseX) > -1 && screenToBuffY(mouseY) > -1) {
+      rect(buffToScreenX(screenToBuffX(mouseX)), buffToScreenY(0),
+           buffScale+1, (buffScale* buffer.height)+1);
+      rect(buffToScreenX(0), buffToScreenY(screenToBuffY(mouseY)),
+           (buffScale* buffer.width)+1, buffScale+1);
+    }
+  popStyle();
 }
 
 void updatePos() {
@@ -195,6 +219,22 @@ float buffToScreenX(float buffX) {
 
 float buffToScreenY(float buffY) {
   return (buffScale * buffY) + buffOffY;
+}
+
+float screenToBuffX(float screenX) {
+  int buffX = (int)((screenX - buffOffX)/buffScale);
+  if ((buffX < 0) | (buffX > buffer.width)) {
+    return -1;
+  }
+  return buffX;
+}
+
+float screenToBuffY(float screenY) {
+  int buffY = (int)((screenY - buffOffY)/buffScale);
+  if ((buffY < 0) | (buffY > buffer.height)) {
+    return -1;
+  }
+  return buffY;
 }
 
 void savePattern() {
