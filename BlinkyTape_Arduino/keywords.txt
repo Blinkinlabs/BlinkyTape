@@ -1,0 +1,3 @@
+Animation	KEYWORD1
+reset		KEYWORD2
+draw		KEYWORD2

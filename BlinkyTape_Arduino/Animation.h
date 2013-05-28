@@ -1,14 +1,17 @@
 #ifndef ANIMATION_H
-#define ANIMATOR_H
+#define ANIMATION_H
 
 #include "Arduino.h"
+#ifndef _ADAFRUIT_NEOPIXEL_H
+#define _ADAFRUIT_NEOPIXEL_H
 #include <Adafruit_NeoPixel.h>
+#endif
 
 #define ENCODING_NONE  0
 #define ENCODING_RLE   1
 #define ENCODING_16RLE 2
 
-class animation {
+class Animation {
  private:
   const uint16_t m_frameCount;
   const prog_uint8_t* m_frameData;
@@ -23,7 +26,7 @@ class animation {
   void draw16bitRLE(Adafruit_NeoPixel& strip);
   
  public:
-  animation(uint16_t frameCount, const prog_uint8_t* frameData, const uint8_t encoding = ENCODING_NONE);
+  Animation(uint16_t frameCount, const prog_uint8_t* frameData, const uint8_t encoding = ENCODING_NONE);
  
   // Reset the animation
   void reset();

@@ -1,7 +1,7 @@
 
-#include "animation.h"
+#include "Animation.h"
 
-animation::animation(uint16_t frameCount, const prog_uint8_t* frameData, const uint8_t encoding) :
+Animation::Animation(uint16_t frameCount, const prog_uint8_t* frameData, const uint8_t encoding) :
   m_frameCount(frameCount),
   m_frameData(frameData),
   m_encoding(encoding),
@@ -10,12 +10,12 @@ animation::animation(uint16_t frameCount, const prog_uint8_t* frameData, const u
   reset();
 }
  
-void animation::reset() {
+void Animation::reset() {
   m_frameIndex = 0;
   currentFrameData = const_cast<prog_uint8_t*>(m_frameData);
 }
 
-void animation::draw(Adafruit_NeoPixel& strip) {
+void Animation::draw(Adafruit_NeoPixel& strip) {
   switch(m_encoding) {
     case ENCODING_NONE:
       drawNoEncoding(strip);
@@ -29,7 +29,7 @@ void animation::draw(Adafruit_NeoPixel& strip) {
   }
 };
 
-void animation::drawNoEncoding(Adafruit_NeoPixel& strip) {
+void Animation::drawNoEncoding(Adafruit_NeoPixel& strip) {
   currentFrameData = const_cast<prog_uint8_t*>(m_frameData) + m_frameIndex*m_ledCount*3;
   
   for(uint8_t i = 0; i < m_ledCount; i+=1) {
@@ -44,7 +44,7 @@ void animation::drawNoEncoding(Adafruit_NeoPixel& strip) {
   m_frameIndex = (m_frameIndex + 1)%m_frameCount;
 }
 
-void animation::drawRLE(Adafruit_NeoPixel& strip) {
+void Animation::drawRLE(Adafruit_NeoPixel& strip) {
 
   // Read runs of RLE data until we get enough data.
   uint8_t count = 0;
@@ -70,7 +70,7 @@ void animation::drawRLE(Adafruit_NeoPixel& strip) {
   }
 };
 
-void animation::draw16bitRLE(Adafruit_NeoPixel& strip) {
+void Animation::draw16bitRLE(Adafruit_NeoPixel& strip) {
 
   // Read runs of RLE data until we get enough data.
   uint8_t count = 0;
