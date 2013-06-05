@@ -1,27 +1,42 @@
 
 #include "Animation.h"
 
-Animation::Animation(uint16_t frameCount, const prog_uint8_t* frameData, const uint8_t encoding) :
-  m_frameCount(frameCount),
-  m_frameData(frameData),
-  m_encoding(encoding),
-  m_ledCount(60)
+Animation::Animation() {
+  init(0, NULL, ENCODING_NONE, 0);
+}
+
+Animation::Animation(uint16_t frameCount,
+                     const prog_uint8_t* frameData,
+                     const uint8_t encoding,
+                     const uint8_t ledCount)
 {
+  init(frameCount, frameData, encoding, ledCount);
   reset();
+}
+
+void Animation::init(uint16_t frameCount,
+                     const prog_uint8_t* frameData,
+                     const uint8_t encoding,
+                     const uint8_t ledCount)
+{
+  m_frameCount = frameCount;
+  m_frameData = const_cast<prog_uint8_t*>(frameData);
+  m_encoding = encoding;
+  m_ledCount = ledCount;
+
+  m_frameIndex = 0;
+  currentFrameData = m_frameData;
 }
  
 void Animation::reset() {
   m_frameIndex = 0;
-  currentFrameData = const_cast<prog_uint8_t*>(m_frameData);
+  currentFrameData = m_frameData;
 }
 
 void Animation::draw(Adafruit_NeoPixel& strip) {
   switch(m_encoding) {
     case ENCODING_NONE:
       drawNoEncoding(strip);
-      break;
-    case ENCODING_RLE:
-      drawRLE(strip);
       break;
     case ENCODING_16RLE:
       draw16bitRLE(strip);
@@ -30,7 +45,7 @@ void Animation::draw(Adafruit_NeoPixel& strip) {
 };
 
 void Animation::drawNoEncoding(Adafruit_NeoPixel& strip) {
-  currentFrameData = const_cast<prog_uint8_t*>(m_frameData) + m_frameIndex*m_ledCount*3;
+  currentFrameData = m_frameData + m_frameIndex*m_ledCount*3;
   
   for(uint8_t i = 0; i < m_ledCount; i+=1) {
 
@@ -66,7 +81,7 @@ void Animation::drawRLE(Adafruit_NeoPixel& strip) {
 
   m_frameIndex = (m_frameIndex + 1)%m_frameCount;
   if(m_frameIndex == 0) {
-    currentFrameData = const_cast<prog_uint8_t*>(m_frameData);
+    currentFrameData = m_frameData;
   }
 };
 
@@ -96,6 +111,6 @@ void Animation::draw16bitRLE(Adafruit_NeoPixel& strip) {
 
   m_frameIndex = (m_frameIndex + 1)%m_frameCount;
   if(m_frameIndex == 0) {
-    currentFrameData = const_cast<prog_uint8_t*>(m_frameData);
+    currentFrameData = m_frameData;
   }
 };

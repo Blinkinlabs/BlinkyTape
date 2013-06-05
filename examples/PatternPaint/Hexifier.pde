@@ -31,20 +31,6 @@
 //     :1005F000C90108958EE291E060EE7AE10E94A701C0
 //     Plug that back into the hex file, and we're ready to add our data structure to the end.
 
-
-// Starting at offset in array data, calculate the checksum for len characters.
-// Checksum is a simple 2's compliment of the addition of the data
-int calculateChecksum(byte[] data, int offset, int len) {
-  int sum = 0;
-  for(int i = offset; i < offset + len; i++) {
-    sum = (sum + data[i])&0xFF;
-  }
-  return ((0x100 - sum)&0xFF);
-}
-
-
-
-
 class Hexifier {
   int m_freeSpaceStart;  // First free memory location (end of the application program)
   int m_freeSpaceEnd;    // Last free memory location (beginning of the bootloader - 1)
@@ -61,3 +47,90 @@ class Hexifier {
     println(m_maxLength);
   }
 }
+
+
+// Starting at offset in array data, calculate the checksum for len characters.
+// Checksum is a simple 2's compliment of the addition of the data
+int calculateChecksum(byte[] data, int offset, int length) {
+  int sum = 0;
+  for(int i = offset; i < offset + length; i++) {
+    sum = (sum + data[i])&0xFF;
+  }
+  return ((0x100 - sum)&0xFF);
+}
+
+// Print an Intel HEX output line for a given set of binary data
+// @param address Address where the data should be stored (16-bit only)
+// @param data Data array to read from
+// @param offset Offset into the data array we want to read from
+// @param length Length of the data line (must be 1-255)
+String makeDataLine(int address, byte[] data, int offset, int length) {
+
+  // Stuff all of the things we care about into a byte array, so we can calculate the checksum  
+  byte[] outputData = new byte[1+2+1+length+1];
+  
+  // Byte count (two hex digits)
+  outputData[0] = (byte)length;
+
+  // Address (four hex digits)
+  outputData[1] = (byte)((address >> 8) & 0xFF);
+  outputData[2] = (byte)(address & 0xFF);
+
+  // Record type (we only support data)
+  outputData[3] = (byte)0x00;
+
+  // Data
+  for(int i = 0; i < length; i++) {
+    outputData[4+i] = data[offset+i];
+  }
+
+  // Checksum
+  outputData[4+length] = (byte)(calculateChecksum(outputData, 0, 4 + length));
+
+  // Now, make it a string!
+  String outputString = ":";
+  for(int i = 0; i < outputData.length; i++) {
+    outputString += String.format("%02X", outputData[i]);
+  }
+
+  return outputString;
+}
+
+
+// Print an Intel HEX output block for a given set of binary data
+// @param address Address where the data should be stored (16-bit only)
+// @param data Data array to read from
+// @param offset Offset into the data array we want to read from
+// @param length Length of the data line (must be 1-255)
+String writeOutData(int address, byte[] data, int offset, int length) {
+  int maxLineLength = 16;
+
+  StringWriter outputData = new StringWriter();
+
+  for(int i = 0; i < length; i+= maxLineLength) {
+    int currentLineLength = min(maxLineLength, length - i);
+    
+    outputData.write(makeDataLine(address+i, data, offset + i, currentLineLength));
+    outputData.write('\n');
+  }
+
+  return outputData.toString();
+}
+
+
+//class DataBlock() {
+//  byte[] m_data;
+//  int m_startAddress;
+//  
+//  // Create a new data block
+//  // @param data Data to represent
+//  // @param startAddress Starting addres of this data
+//  DataBlock(byte[] data, int startAddress) {
+//    m_data = data.clone();
+//    m_startAddress = startAddress;
+//  }
+//  
+//  // Write out the data block as Intel HEX format
+//  String 
+//}
+

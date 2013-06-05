@@ -17,8 +17,6 @@ int buffScale = 6;
 
 LineTool tool;
 
-Hexifier hexifier;
-
 void setup() {
   buffer = createGraphics(60, 60, JAVA2D);
   size(windowWidthForBuffer(buffer), 380, JAVA2D);
@@ -50,8 +48,6 @@ void setup() {
       break;  // TODO: does this work?
     }
   }
-  
-  hexifier = new Hexifier();
 
   controlP5 = new ControlP5(this);
 
@@ -240,9 +236,10 @@ float screenToBuffY(float screenY) {
 void savePattern() {
   LedSaver saver = new LedSaver("pov", 60);
   for (int x = 0; x < buffer.width; x++) {
-    saver.sendUpdate(buffer, x, 0, x, buffer.height);
+    saver.addFrame(buffer, x, 0, x, buffer.height);
   }
   saver.write16bitRLE();
+  saver.write16bitRLEHex();
   println("Saved to 'pov.h'");
 }
 
