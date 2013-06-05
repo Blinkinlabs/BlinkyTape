@@ -13,5 +13,5 @@ stty -f ${SERIAL_DEVICE} 1200
 
 sleep 1
 # Next, program the board.
-avrdude -cavr109 -pm32u4  -b57600 -P${SERIAL_DEVICE} -D -Uflash:w:${FIRMWARE_FILE}:i 
+./avrdude-mac -cavr109 -pm32u4  -b57600 -P${SERIAL_DEVICE} -D -Uflash:w:${FIRMWARE_FILE}:i 
 

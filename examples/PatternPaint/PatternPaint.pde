@@ -42,11 +42,10 @@ void setup() {
                       buffScale * buffer.height);
                       
   for(String p : Serial.list()) {
-    if(p.startsWith("/dev/cu.usbmodem")) {
-      println("here!");
-      led = new LedOutput(this, p, 60);
-      break;  // TODO: does this work?
-    }
+//    if(p.startsWith("/dev/cu.usbmodem")) {
+//      led = new LedOutput(this, p, 60);
+//      break;  // TODO: does this work?
+//    }
   }
 
   controlP5 = new ControlP5(this);
@@ -121,36 +120,39 @@ void draw() {
 
 void keyPressed() {
   switch(keyCode) {
-    case 32:
+    case KeyEvent.VK_SPACE:
       pause(0);
       break;
-    case 37:
+    case KeyEvent.VK_LEFT:
       pos--; 
       if (pos < 0) {
         pos = buffer.width - 1;
       }
       break;
-    case 38:
-      rate++;
+    case KeyEvent.VK_UP:
+      rate+=.2;
       scanning = true;
       break;
-    case 39:
+    case KeyEvent.VK_RIGHT:
       pos++; 
       if (pos >= buffer.width) {
         pos = 0;
       }
       break;
-    case 40:
-      rate--; 
+    case KeyEvent.VK_DOWN:
+      rate-=.2; 
       if (rate < 0) {
         rate = 0;
       }
       break;
-    case 83: // save
+    case KeyEvent.VK_S: // save
       savePattern();
       break;
-    case 79: // open
+    case KeyEvent.VK_O: // open
       importImage();
+      break;
+    case KeyEvent.VK_L: // launch, for testing
+      launchProcess();
       break;
   }
 }
@@ -241,6 +243,13 @@ void savePattern() {
   saver.write16bitRLE();
   saver.write16bitRLEHex();
   println("Saved to 'pov.h'");
+}
+
+void launchProcess() {
+  savePattern();
+  ProcessLauncher p = new ProcessLauncher(sketchPath("program.sh") + " " + "/dev/cu.usbmodemfa131");
+  delay(100);
+  print(p.read());
 }
 
 void importImage() {
