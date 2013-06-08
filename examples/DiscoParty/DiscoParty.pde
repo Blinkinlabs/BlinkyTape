@@ -29,8 +29,9 @@ FFT rightFft;
 BeatDetect beat;
 BeatListener bl;
 
-float globalVolume = 10;  // amplification value
+float globalVolume = 1;  // amplification value
 float globalFalloff = 1;  // how fast things die off
+float globalSat = 100;
 
 float colorSpeed = .05;
 
@@ -101,12 +102,12 @@ void setup()
     
     if(random(0,1) > .5) {
       p.m_h = 87 + i;//70;
-      p.m_s = 100;
+      p.m_s = globalSat;
       p.m_yv = random(.2,2);
     }
     else {
       p.m_h = 52 + i;
-      p.m_s = 100;
+      p.m_s = globalSat;
       p.m_yv = random(-.2,-2);
     }
     
@@ -121,12 +122,12 @@ void setup()
     
     if(random(0,1) > .5) {
       p.m_h = 87 + i;//70;
-      p.m_s = 100;
+      p.m_s = globalSat;
       p.m_yv = random(.2,2);
     }
     else {
       p.m_h = 52 + i;
-      p.m_s = 100;
+      p.m_s = globalSat;
       p.m_yv = random(-.2,-2);
     }
     
@@ -255,11 +256,11 @@ void stop()
 void keyPressed()
 {
   if(keyCode==UP) {
-    globalVolume += 1;
+    globalVolume += .3;
     println(globalVolume);
   }
   else if(keyCode==DOWN) {
-    globalVolume -= 1;
+    globalVolume -= .3;
     println(globalVolume);
   }
   if(keyCode==RIGHT) {

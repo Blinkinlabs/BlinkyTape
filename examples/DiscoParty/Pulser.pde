@@ -26,7 +26,7 @@ class Pulser {
     m_xv = random(-.2,.2);
     m_yv = random(-.2,.2);
 
-    m_size  = 1;
+    m_size  = 10;
     m_scale = 3;
     
     m_falloff = .70;
@@ -68,8 +68,8 @@ class Pulser {
     float b = max(0,min(100,m_scale*value));
     float a = max(0,min(100,m_scale*value));
 
-    color fgcolor = color((m_h + sin(colorAngle)*100+50)%100, m_s, b, a);
-    color bgcolor = color((m_h + sin(colorAngle)*100+50)%100, m_s, b, 0);
+    color fgcolor = color((m_h + sin(colorAngle)*100+50)%99, m_s, b, a);
+    color bgcolor = color((m_h + sin(colorAngle)*100+50)%99, m_s, b, 0);
 
     int w = (int)(m_scale*value + m_size);
 
