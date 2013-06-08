@@ -45,6 +45,7 @@ class Pulser {
   }
   
   void draw(FFT fft) {
+    m_scale = globalVolume;
     
     m_values.add(fft.getAvg(m_band));
     
@@ -67,8 +68,8 @@ class Pulser {
     float b = max(0,min(100,m_scale*value));
     float a = max(0,min(100,m_scale*value));
 
-    color fgcolor = color(m_h, m_s, b, a);
-    color bgcolor = color(m_h, m_s, b, 0);
+    color fgcolor = color((m_h + sin(colorAngle)*100+50)%100, m_s, b, a);
+    color bgcolor = color((m_h + sin(colorAngle)*100+50)%100, m_s, b, 0);
 
     int w = (int)(m_scale*value + m_size);
 

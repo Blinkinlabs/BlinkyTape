@@ -29,9 +29,16 @@ FFT rightFft;
 BeatDetect beat;
 BeatListener bl;
 
+float globalVolume = 10;  // amplification value
+float globalFalloff = 1;  // how fast things die off
+
+float colorSpeed = .05;
+
 ArrayList<LedOutput> leds = new ArrayList<LedOutput>();
 
 float kickSize, snareSize, hatSize;
+
+float colorAngle = 0;
 
 int numberOfLEDs = 60;
 int[] values;
@@ -224,6 +231,8 @@ void draw()
     stroke(255);
     line(pos, 0, pos, height);
   }
+  
+  colorAngle += colorSpeed;
 
   float fadePercent = .98;
   kickSize  = constrain(kickSize  * fadePercent, 16, 32);
@@ -241,5 +250,25 @@ void stop()
   minim.stop();
   // this closes the sketch
   super.stop();
+}
+
+void keyPressed()
+{
+  if(keyCode==UP) {
+    globalVolume += 1;
+    println(globalVolume);
+  }
+  else if(keyCode==DOWN) {
+    globalVolume -= 1;
+    println(globalVolume);
+  }
+  if(keyCode==RIGHT) {
+    globalFalloff += 1;
+    println(globalFalloff);
+  }
+  else if(keyCode==LEFT) {
+    globalFalloff -= 1;
+    println(globalFalloff);
+  }
 }
 
