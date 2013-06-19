@@ -3703,11 +3703,6 @@ Metric Code Size 5664</description>
 <label x="104.14" y="121.92" size="1.778" layer="95" rot="R180" xref="yes"/>
 <pinref part="U$3" gate="G$1" pin="P$1"/>
 </segment>
-<segment>
-<pinref part="U$14" gate="G$1" pin="P$1"/>
-<wire x1="182.88" y1="93.98" x2="180.34" y2="93.98" width="0.1524" layer="91"/>
-<label x="180.34" y="93.98" size="1.778" layer="95" rot="R180" xref="yes"/>
-</segment>
 </net>
 <net name="MISO" class="0">
 <segment>
@@ -3731,11 +3726,6 @@ Metric Code Size 5664</description>
 <wire x1="109.22" y1="116.84" x2="104.14" y2="116.84" width="0.1524" layer="91"/>
 <label x="104.14" y="116.84" size="1.778" layer="95" rot="R180" xref="yes"/>
 <pinref part="U$5" gate="G$1" pin="P$1"/>
-</segment>
-<segment>
-<label x="180.34" y="91.44" size="1.778" layer="95" rot="R180" xref="yes"/>
-<wire x1="180.34" y1="91.44" x2="182.88" y2="91.44" width="0.1524" layer="91"/>
-<pinref part="U$10" gate="G$1" pin="P$1"/>
 </segment>
 </net>
 <net name="RST" class="0">
@@ -3816,7 +3806,7 @@ Metric Code Size 5664</description>
 <wire x1="7.62" y1="30.48" x2="7.62" y2="43.18" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="ANALOG_IN" class="0">
+<net name="A11" class="0">
 <segment>
 <pinref part="U$2" gate="G$1" pin="(PCINT6/OC1B/OC4B/ADC13)PB6"/>
 <wire x1="96.52" y1="83.82" x2="99.06" y2="83.82" width="0.1524" layer="91"/>
@@ -3914,6 +3904,30 @@ Metric Code Size 5664</description>
 <pinref part="U$8" gate="G$1" pin="P$1"/>
 <pinref part="P+2" gate="VCC" pin="VCC"/>
 <wire x1="109.22" y1="137.16" x2="104.14" y2="137.16" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="D11" class="0">
+<segment>
+<pinref part="U$2" gate="G$1" pin="(PCINT7/OC0A/OC1C/#RTS)PB7"/>
+<wire x1="96.52" y1="86.36" x2="99.06" y2="86.36" width="0.1524" layer="91"/>
+<label x="99.06" y="86.36" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="U$14" gate="G$1" pin="P$1"/>
+<wire x1="182.88" y1="93.98" x2="180.34" y2="93.98" width="0.1524" layer="91"/>
+<label x="180.34" y="93.98" size="1.778" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="D7" class="0">
+<segment>
+<pinref part="U$2" gate="G$1" pin="(INT6/AIN0)PE6"/>
+<wire x1="96.52" y1="53.34" x2="99.06" y2="53.34" width="0.1524" layer="91"/>
+<label x="99.06" y="53.34" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="U$10" gate="G$1" pin="P$1"/>
+<wire x1="180.34" y1="91.44" x2="182.88" y2="91.44" width="0.1524" layer="91"/>
+<label x="180.34" y="91.44" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 </nets>

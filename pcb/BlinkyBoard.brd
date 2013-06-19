@@ -584,11 +584,11 @@ Please make sure your boards conform to these design rules.</description>
 <element name="U$7" library="blinkiverse" package="TEST_VIA_.5MM" value="TEST_VIA" x="6.25" y="4.75"/>
 <element name="U$8" library="blinkiverse" package="TEST_VIA_.5MM" value="TEST_VIA" x="5.75" y="8.75"/>
 <element name="WS3" library="blinkiverse" package="WS2811_CONNECTOR" value="WS2811_CONNECTOR" x="24" y="5" rot="MR0"/>
-<element name="U$10" library="blinkiverse" package="TEST_PAD_SMT" value="TEST_PAD_SMT" x="2" y="3.75" rot="MR90"/>
+<element name="U$10" library="blinkiverse" package="TEST_PAD_SMT" value="TEST_PAD_SMT" x="2" y="6.25" rot="MR90"/>
 <element name="U$11" library="blinkiverse" package="TEST_PAD_SMT" value="TEST_PAD_SMT" x="18" y="5" rot="MR90"/>
 <element name="U$12" library="blinkiverse" package="TEST_PAD_SMT" value="TEST_PAD_SMT" x="18" y="7.9" rot="MR270"/>
 <element name="U$13" library="blinkiverse" package="TEST_PAD_SMT" value="TEST_PAD_SMT" x="18" y="2.1" rot="MR270"/>
-<element name="U$14" library="blinkiverse" package="TEST_PAD_SMT" value="TEST_PAD_SMT" x="2" y="6.25" rot="MR270"/>
+<element name="U$14" library="blinkiverse" package="TEST_PAD_SMT" value="TEST_PAD_SMT" x="2" y="3.75" rot="MR270"/>
 <element name="U$15" library="blinkiverse" package="OSHW-LOGO-S" value="" x="21.25" y="6.75" rot="MR0"/>
 </elements>
 <signals>
@@ -689,12 +689,6 @@ Please make sure your boards conform to these design rules.</description>
 <contactref element="U$3" pad="P$1"/>
 <wire x1="9.51" y1="3.25" x2="10.225" y2="3.25" width="0.254" layer="1"/>
 <wire x1="9.51" y1="3.25" x2="7.25" y2="1" width="0.254" layer="1"/>
-<contactref element="U$14" pad="P$1"/>
-<wire x1="2" y1="6.25" x2="4" y2="6.25" width="0.254" layer="16"/>
-<wire x1="4" y1="6.25" x2="4.5" y2="5.75" width="0.254" layer="16"/>
-<wire x1="4.5" y1="5.75" x2="4.5" y2="4.25" width="0.254" layer="16"/>
-<wire x1="4.5" y1="4.25" x2="7.25" y2="1.5" width="0.254" layer="16"/>
-<wire x1="7.25" y1="1.5" x2="7.25" y2="1" width="0.254" layer="16"/>
 </signal>
 <signal name="MISO">
 <contactref element="U$2" pad="11"/>
@@ -709,10 +703,6 @@ Please make sure your boards conform to these design rules.</description>
 <wire x1="9.35" y1="3.75" x2="7.5" y2="2" width="0.254" layer="1"/>
 <wire x1="7.5" y1="2" x2="6.25" y2="2" width="0.254" layer="1"/>
 <wire x1="6.25" y1="2" x2="5.75" y2="1" width="0.254" layer="1"/>
-<contactref element="U$10" pad="P$1"/>
-<wire x1="2" y1="3.75" x2="4.25" y2="3.75" width="0.254" layer="16"/>
-<wire x1="4.25" y1="3.75" x2="5.75" y2="2.25" width="0.254" layer="16"/>
-<wire x1="5.75" y1="2.25" x2="5.75" y2="1" width="0.254" layer="16"/>
 </signal>
 <signal name="RST">
 <contactref element="U$2" pad="13"/>
@@ -803,7 +793,7 @@ Please make sure your boards conform to these design rules.</description>
 <wire x1="8.75" y1="4.75" x2="9.375" y2="5.25" width="0.254" layer="1"/>
 <wire x1="9.375" y1="5.25" x2="10.225" y2="5.25" width="0.254" layer="1"/>
 </signal>
-<signal name="ANALOG_IN">
+<signal name="A11">
 <contactref element="U$2" pad="30"/>
 <wire x1="17.275" y1="6.25" x2="18.5" y2="6.25" width="0.254" layer="1"/>
 <via x="18.5" y="6.25" extent="1-16" drill="0.35"/>
@@ -847,9 +837,9 @@ Please make sure your boards conform to these design rules.</description>
 <wire x1="12.25" y1="1.725" x2="12.25" y2="0.7" width="0.254" layer="1"/>
 <via x="12.25" y="0.7" extent="1-16" drill="0.35"/>
 <via x="6.5" y="3.25" extent="1-16" drill="0.35"/>
-<wire x1="6.5" y1="3.25" x2="7.75" y2="2" width="0.4" layer="16"/>
-<wire x1="7.75" y1="2" x2="11" y2="2" width="0.4" layer="16"/>
-<wire x1="11" y1="2" x2="12.25" y2="0.7" width="0.4" layer="16"/>
+<wire x1="6.5" y1="3.25" x2="7" y2="2.75" width="0.4" layer="16"/>
+<wire x1="7" y1="2.75" x2="10.25" y2="2.75" width="0.4" layer="16"/>
+<wire x1="10.25" y1="2.75" x2="12.25" y2="0.7" width="0.4" layer="16"/>
 <via x="10.25" y="8.75" extent="1-16" drill="0.35"/>
 <wire x1="11.25" y1="8.775" x2="10.225" y2="8.775" width="0.254" layer="1"/>
 <wire x1="10.225" y1="8.775" x2="10.25" y2="8.75" width="0.254" layer="1"/>
@@ -915,6 +905,24 @@ Please make sure your boards conform to these design rules.</description>
 </signal>
 <signal name="N$1">
 <wire x1="18.5" y1="1.5" x2="19.5" y2="1.5" width="0.254" layer="1"/>
+</signal>
+<signal name="D11">
+<contactref element="U$2" pad="12"/>
+<contactref element="U$14" pad="P$1"/>
+<wire x1="2" y1="3.75" x2="4.5" y2="3.75" width="0.254" layer="16"/>
+<wire x1="4.5" y1="3.75" x2="5.25" y2="3" width="0.254" layer="16"/>
+<wire x1="5.25" y1="3" x2="5.25" y2="2.25" width="0.254" layer="16"/>
+<wire x1="5.25" y1="2.25" x2="5.5" y2="2" width="0.254" layer="16"/>
+<wire x1="5.5" y1="2" x2="9.5" y2="2" width="0.254" layer="16"/>
+<via x="9.5" y="2" extent="1-16" drill="0.35"/>
+<wire x1="9.5" y1="2" x2="10.5" y2="2" width="0.254" layer="1"/>
+<wire x1="11.25" y1="1.85" x2="10.65" y2="1.85" width="0.254" layer="1"/>
+<wire x1="10.65" y1="1.85" x2="10.5" y2="2" width="0.254" layer="1"/>
+</signal>
+<signal name="D7">
+<contactref element="U$2" pad="1"/>
+<contactref element="U$10" pad="P$1"/>
+<wire x1="2" y1="6.25" x2="10.225" y2="7.75" width="0" layer="19" extent="1-16"/>
 </signal>
 </signals>
 </board>
