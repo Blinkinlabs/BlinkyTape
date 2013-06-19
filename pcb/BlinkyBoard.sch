@@ -554,9 +554,9 @@ by exp-project-lbr.ulp</description>
 <pad name="PAD@16" x="1.5" y="-1.5" drill="0.35" diameter="2" stop="no" thermals="no"/>
 </package>
 <package name="WS2811_CONNECTOR">
-<smd name="DATA" x="0" y="2.95" dx="2.5" dy="1" layer="1"/>
-<smd name="5V" x="0" y="0" dx="2.5" dy="1" layer="1"/>
-<smd name="GND" x="0" y="-2.95" dx="2.5" dy="1" layer="1"/>
+<smd name="DATA" x="0" y="2.95" dx="2.5" dy="1" layer="1" thermals="no" cream="no"/>
+<smd name="5V" x="0" y="0" dx="2.5" dy="1" layer="1" thermals="no" cream="no"/>
+<smd name="GND" x="0" y="-2.95" dx="2.5" dy="1" layer="1" thermals="no" cream="no"/>
 </package>
 <package name="CRYSTAL_3225">
 <smd name="P$1" x="-1.1" y="-0.8" dx="1.4" dy="1.15" layer="1"/>
@@ -568,12 +568,6 @@ by exp-project-lbr.ulp</description>
 <wire x1="1.7" y1="1.3" x2="-1.7" y2="1.3" width="0.127" layer="51"/>
 <wire x1="-1.7" y1="1.3" x2="-1.7" y2="-0.9" width="0.127" layer="51"/>
 <wire x1="-1.7" y1="-0.9" x2="-1.3" y2="-1.3" width="0.127" layer="51"/>
-</package>
-<package name="CRYSTAL_3215">
-<smd name="P$1" x="-1.27" y="0" dx="1" dy="1.8" layer="1"/>
-<smd name="P$2" x="1.23" y="0" dx="1" dy="1.8" layer="1"/>
-<wire x1="-0.77" y1="1" x2="0.73" y2="1" width="0.127" layer="51"/>
-<wire x1="0.73" y1="-1" x2="-0.77" y2="-1" width="0.127" layer="51"/>
 </package>
 <package name="MICRO_USB_FCI_THRUHOLE">
 <smd name="PIN$1" x="-1.3" y="2.7" dx="0.4" dy="1.35" layer="1"/>
@@ -744,7 +738,7 @@ by exp-project-lbr.ulp</description>
 </package>
 </packages>
 <symbols>
-<symbol name="Q">
+<symbol name="CRYSTAL_4PAD">
 <wire x1="1.016" y1="0" x2="2.54" y2="0" width="0.1524" layer="94"/>
 <wire x1="-2.54" y1="0" x2="-1.016" y2="0" width="0.1524" layer="94"/>
 <wire x1="-0.381" y1="1.524" x2="-0.381" y2="-1.524" width="0.254" layer="94"/>
@@ -759,6 +753,9 @@ by exp-project-lbr.ulp</description>
 <text x="1.524" y="-1.143" size="0.8636" layer="93">2</text>
 <pin name="2" x="2.54" y="0" visible="off" length="point" direction="pas" swaplevel="1" rot="R180"/>
 <pin name="1" x="-2.54" y="0" visible="off" length="point" direction="pas" swaplevel="1"/>
+<pin name="P$1" x="0" y="-5.08" length="short" rot="R90"/>
+<wire x1="-1.905" y1="-2.54" x2="1.905" y2="-2.54" width="0.254" layer="94"/>
+<text x="-2.54" y="-3.81" size="1.27" layer="95" distance="90" align="center">GND</text>
 </symbol>
 <symbol name="ARDUINO_LEONARDO-REV3B_SMARTPRJ_ATMEGA32U4">
 <wire x1="-20.32" y1="25.4" x2="30.48" y2="25.4" width="0.254" layer="94"/>
@@ -867,34 +864,26 @@ by exp-project-lbr.ulp</description>
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="CRYSTAL" prefix="Q" uservalue="yes">
-<description>&lt;b&gt;CRYSTAL&lt;/b&gt;</description>
+<deviceset name="CRYSTAL_4PAD">
 <gates>
-<gate name="G$1" symbol="Q" x="0" y="0"/>
+<gate name="G$1" symbol="CRYSTAL_4PAD" x="0" y="0"/>
 </gates>
 <devices>
-<device name="3225" package="CRYSTAL_3225">
-<connects>
-<connect gate="G$1" pin="1" pad="P$1"/>
-<connect gate="G$1" pin="2" pad="P$3"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="3215" package="CRYSTAL_3215">
-<connects>
-<connect gate="G$1" pin="1" pad="P$1"/>
-<connect gate="G$1" pin="2" pad="P$2"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
 <device name="2520" package="CRSYTAL_2520">
 <connects>
 <connect gate="G$1" pin="1" pad="P$1"/>
 <connect gate="G$1" pin="2" pad="P$3"/>
+<connect gate="G$1" pin="P$1" pad="P$2 P$4"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="" package="CRYSTAL_3225">
+<connects>
+<connect gate="G$1" pin="1" pad="P$1"/>
+<connect gate="G$1" pin="2" pad="P$3"/>
+<connect gate="G$1" pin="P$1" pad="P$2 P$4"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -3512,7 +3501,7 @@ Metric Code Size 5664</description>
 <part name="P+6" library="supply1" deviceset="VCC" device=""/>
 <part name="P+7" library="supply1" deviceset="VCC" device=""/>
 <part name="S1" library="blinkyboard" deviceset="GLOWBOARD_KMR211G" device="" value="Normally open"/>
-<part name="Q1" library="blinkiverse" deviceset="CRYSTAL" device="2520" value="16 MHz"/>
+<part name="Q1" library="blinkiverse" deviceset="CRYSTAL_4PAD" device="2520" value="16 MHz"/>
 <part name="C4" library="blinkiverse" deviceset="C_US" device="" value="0.1uF"/>
 <part name="WS1" library="blinkiverse" deviceset="WS2811_CONNECTOR" device=""/>
 <part name="P+3" library="supply1" deviceset="VCC" device=""/>
@@ -3536,6 +3525,7 @@ Metric Code Size 5664</description>
 <part name="U$12" library="blinkiverse" deviceset="TEST_PAD_SMT" device=""/>
 <part name="U$13" library="blinkiverse" deviceset="TEST_PAD_SMT" device=""/>
 <part name="U$14" library="blinkiverse" deviceset="TEST_PAD_SMT" device=""/>
+<part name="GND9" library="supply1" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -3594,6 +3584,7 @@ Metric Code Size 5664</description>
 <instance part="U$12" gate="G$1" x="187.96" y="99.06"/>
 <instance part="U$13" gate="G$1" x="187.96" y="86.36"/>
 <instance part="U$14" gate="G$1" x="187.96" y="93.98"/>
+<instance part="GND9" gate="1" x="20.32" y="63.5"/>
 </instances>
 <busses>
 </busses>
@@ -3690,6 +3681,11 @@ Metric Code Size 5664</description>
 <wire x1="182.88" y1="86.36" x2="170.18" y2="86.36" width="0.1524" layer="91"/>
 <wire x1="170.18" y1="86.36" x2="170.18" y2="83.82" width="0.1524" layer="91"/>
 <pinref part="U$13" gate="G$1" pin="P$1"/>
+</segment>
+<segment>
+<pinref part="Q1" gate="G$1" pin="P$1"/>
+<pinref part="GND9" gate="1" pin="GND"/>
+<wire x1="20.32" y1="71.12" x2="20.32" y2="66.04" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="MOSI" class="0">
