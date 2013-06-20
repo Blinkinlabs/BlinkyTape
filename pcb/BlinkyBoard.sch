@@ -554,9 +554,9 @@ by exp-project-lbr.ulp</description>
 <pad name="PAD@16" x="1.5" y="-1.5" drill="0.35" diameter="2" stop="no" thermals="no"/>
 </package>
 <package name="WS2811_CONNECTOR">
-<smd name="DATA" x="0" y="2.95" dx="2.5" dy="1" layer="1" thermals="no" cream="no"/>
-<smd name="5V" x="0" y="0" dx="2.5" dy="1" layer="1" thermals="no" cream="no"/>
-<smd name="GND" x="0" y="-2.95" dx="2.5" dy="1" layer="1" thermals="no" cream="no"/>
+<smd name="DATA" x="0" y="2.95" dx="2.5" dy="1" layer="1" roundness="50" thermals="no" cream="no"/>
+<smd name="5V" x="0" y="0" dx="2.5" dy="1" layer="1" roundness="50" thermals="no" cream="no"/>
+<smd name="GND" x="0" y="-2.95" dx="2.5" dy="1" layer="1" roundness="50" thermals="no" cream="no"/>
 </package>
 <package name="CRYSTAL_3225">
 <smd name="P$1" x="-1.1" y="-0.8" dx="1.4" dy="1.15" layer="1"/>
@@ -588,8 +588,8 @@ by exp-project-lbr.ulp</description>
 <smd name="PAD$7" x="-3.5" y="0" dx="0.9" dy="1.55" layer="16" roundness="100" thermals="no" cream="no"/>
 <smd name="PAD$8" x="3.5" y="0" dx="0.9" dy="1.55" layer="16" roundness="100" thermals="no" cream="no"/>
 <smd name="PAD$6" x="2.5" y="2.7" dx="1.25" dy="0.95" layer="1" roundness="75" thermals="no" cream="no"/>
-<smd name="PAD$2" x="-1" y="0" dx="1.5" dy="1.55" layer="1"/>
-<smd name="PAD$3" x="1" y="0" dx="1.5" dy="1.55" layer="1"/>
+<smd name="PAD$2" x="-1" y="0" dx="1.5" dy="1.55" layer="1" thermals="no"/>
+<smd name="PAD$3" x="1" y="0" dx="1.5" dy="1.55" layer="1" thermals="no"/>
 <wire x1="-2.925" y1="2.7" x2="-2.925" y2="2.725" width="0.127" layer="46"/>
 <wire x1="-2.925" y1="2.725" x2="-2.65" y2="3" width="0.127" layer="46" curve="-90"/>
 <wire x1="-2.65" y1="3" x2="-2.35" y2="3" width="0.127" layer="46"/>
@@ -734,7 +734,7 @@ by exp-project-lbr.ulp</description>
 <pad name="PAD@16" x="1.5" y="-1.5" drill="0.35" diameter="2" stop="no" thermals="no"/>
 </package>
 <package name="TEST_PAD_SMT">
-<smd name="P$1" x="0" y="0" dx="2" dy="3" layer="1" thermals="no" cream="no"/>
+<smd name="P$1" x="0" y="0" dx="1.8" dy="3" layer="1" roundness="50" thermals="no" cream="no"/>
 </package>
 </packages>
 <symbols>
@@ -829,6 +829,8 @@ by exp-project-lbr.ulp</description>
 <pin name="ID" x="7.62" y="-2.54" visible="pin" length="middle" rot="R180"/>
 <pin name="GND" x="7.62" y="-5.08" visible="pin" length="middle" rot="R180"/>
 <text x="-5.08" y="0" size="2.54" layer="94" rot="R90" align="center">USB</text>
+<pin name="SHIELD" x="7.62" y="-10.16" length="middle" rot="R180"/>
+<wire x1="2.54" y1="-10.16" x2="2.54" y2="-7.62" width="0.254" layer="94" style="shortdash"/>
 </symbol>
 <symbol name="TEST_VIA">
 <pin name="P$1" x="-5.08" y="0" length="middle"/>
@@ -1134,6 +1136,7 @@ by exp-project-lbr.ulp</description>
 <connect gate="G$1" pin="D-" pad="P$2"/>
 <connect gate="G$1" pin="GND" pad="P$5"/>
 <connect gate="G$1" pin="ID" pad="P$4"/>
+<connect gate="G$1" pin="SHIELD" pad="PAD$1 PAD$2 PAD$3 PAD$4 PAD$5 PAD$6"/>
 <connect gate="G$1" pin="VCC" pad="P$1"/>
 </connects>
 <technologies>
@@ -1146,6 +1149,7 @@ by exp-project-lbr.ulp</description>
 <connect gate="G$1" pin="D-" pad="PIN$2"/>
 <connect gate="G$1" pin="GND" pad="PIN$5"/>
 <connect gate="G$1" pin="ID" pad="PIN$4"/>
+<connect gate="G$1" pin="SHIELD" pad="PAD$1 PAD$2 PAD$3 PAD$4 PAD$5 PAD$6 PAD$7 PAD$8 PAD$9 PAD$10"/>
 <connect gate="G$1" pin="VCC" pad="PIN$1"/>
 </connects>
 <technologies>
@@ -3567,7 +3571,7 @@ Metric Code Size 5664</description>
 <instance part="GND4" gate="1" x="162.56" y="25.4"/>
 <instance part="P+4" gate="VCC" x="-20.32" y="73.66"/>
 <instance part="U$4" gate="G$1" x="-27.94" y="35.56"/>
-<instance part="GND5" gate="1" x="-17.78" y="25.4"/>
+<instance part="GND5" gate="1" x="-12.7" y="27.94"/>
 <instance part="U$1" gate="G$1" x="114.3" y="127"/>
 <instance part="U$3" gate="G$1" x="114.3" y="121.92"/>
 <instance part="U$5" gate="G$1" x="114.3" y="116.84"/>
@@ -3667,9 +3671,8 @@ Metric Code Size 5664</description>
 </segment>
 <segment>
 <pinref part="U$4" gate="G$1" pin="GND"/>
-<wire x1="-20.32" y1="30.48" x2="-17.78" y2="30.48" width="0.1524" layer="91"/>
+<wire x1="-20.32" y1="30.48" x2="-12.7" y2="30.48" width="0.1524" layer="91"/>
 <pinref part="GND5" gate="1" pin="GND"/>
-<wire x1="-17.78" y1="30.48" x2="-17.78" y2="27.94" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="GND1" gate="1" pin="GND"/>
@@ -3925,6 +3928,13 @@ Metric Code Size 5664</description>
 <label x="180.34" y="96.52" size="1.778" layer="95" rot="R180" xref="yes"/>
 <wire x1="182.88" y1="96.52" x2="180.34" y2="96.52" width="0.1524" layer="91"/>
 <pinref part="U$11" gate="G$1" pin="P$1"/>
+</segment>
+</net>
+<net name="SHIELD" class="0">
+<segment>
+<pinref part="U$4" gate="G$1" pin="SHIELD"/>
+<wire x1="-20.32" y1="25.4" x2="-20.32" y2="20.32" width="0.1524" layer="91"/>
+<label x="-20.32" y="20.32" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 </nets>
