@@ -1,11 +1,8 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
-#include "Arduino.h"
-#ifndef _ADAFRUIT_NEOPIXEL_H
-#define _ADAFRUIT_NEOPIXEL_H
-#include <Adafruit_NeoPixel.h>
-#endif
+#include <Arduino.h>
+#include <FastSPI_LED2.h>
 
 #define ENCODING_NONE  0
 #define ENCODING_16RLE 1
@@ -20,8 +17,8 @@ class Animation {
   uint16_t m_frameIndex;
   prog_uint8_t* currentFrameData;
 
-  void drawNoEncoding(Adafruit_NeoPixel& strip);  
-  void draw16bitRLE(Adafruit_NeoPixel& strip);
+  void drawNoEncoding(struct CRGB strip[]);
+  void draw16bitRLE(struct CRGB strip[]);
   
  public:
   Animation();
@@ -34,7 +31,7 @@ class Animation {
   void reset();
   
   // Draw the next frame of the animation
-  void draw(Adafruit_NeoPixel& strip);
+  void draw(struct CRGB strip[]);
 };
 
 #endif

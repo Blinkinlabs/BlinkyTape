@@ -299,4 +299,4 @@
 //   58,   0,   0,
 //    1, 255, 255,
 //};
-//Animation pov(60,povData, ENCODING_16RLE);
+//Animation pov(60,povData, ENCODING_16RLE, 60);

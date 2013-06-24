@@ -1,11 +1,9 @@
-#include <Adafruit_NeoPixel.h>
-
+#include <FastSPI_LED2.h>
 #include <Animation.h>
 #include "pov.h"
 
 #define LED_COUNT 60
-
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, 5, NEO_GRB + NEO_KHZ800);
+struct CRGB leds[LED_COUNT];
 
 float animationStartTime;
 int frameCount;
@@ -19,8 +17,10 @@ void setup()
 {  
   Serial.begin(57600);
 
-  strip.begin();
-  strip.show();
+  LEDS.addLeds<WS2811, 5, GRB>(leds, LED_COUNT);
+  LEDS.showColor(CRGB(0, 0, 0));
+  LEDS.setBrightness(255); // 90% brightness
+  LEDS.show();
   
   frameCount = 0;
   animationStartTime = millis();
@@ -31,7 +31,7 @@ void setup()
 }
 
 void serialLoop() {
-  static uint8_t pixelIndex;
+  static int pixelIndex;
 
   while(true) {
 
@@ -46,13 +46,13 @@ void serialLoop() {
           buffer[x] = c; // Using 255 as a latch semaphore
         }
         else {
-          strip.show();
+          LEDS.show();
           pixelIndex = 0;
           break;
         }
 
         if (x == 2) {   // If we received three serial bytes
-          strip.setPixelColor(pixelIndex, strip.Color(buffer[0], buffer[1], buffer[2]));
+          leds[pixelIndex] = CRGB(buffer[0], buffer[1], buffer[2]);
           pixelIndex++;
         }
       }
@@ -68,7 +68,7 @@ void loop()
   }
   
   endTime += frameDelayUs;
-  pov.draw(strip);
+  pov.draw(leds);
   while(micros() < endTime) {};
   
   frameCount++;

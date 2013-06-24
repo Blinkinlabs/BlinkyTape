@@ -1,4 +1,3 @@
-
 #include "Animation.h"
 
 Animation::Animation() {
@@ -33,7 +32,7 @@ void Animation::reset() {
   currentFrameData = m_frameData;
 }
 
-void Animation::draw(Adafruit_NeoPixel& strip) {
+void Animation::draw(struct CRGB strip[]) {
   switch(m_encoding) {
     case ENCODING_NONE:
       drawNoEncoding(strip);
@@ -44,48 +43,21 @@ void Animation::draw(Adafruit_NeoPixel& strip) {
   }
 };
 
-void Animation::drawNoEncoding(Adafruit_NeoPixel& strip) {
+void Animation::drawNoEncoding(struct CRGB strip[]) {
   currentFrameData = m_frameData + m_frameIndex*m_ledCount*3;
   
   for(uint8_t i = 0; i < m_ledCount; i+=1) {
-
-    strip.setPixelColor(i, strip.Color(pgm_read_byte(currentFrameData + i*3    ),
-                                       pgm_read_byte(currentFrameData + i*3 + 1),
-                                       pgm_read_byte(currentFrameData + i*3 + 2)));
+    strip[i] = CRGB(pgm_read_byte(currentFrameData + i*3    ),
+                    pgm_read_byte(currentFrameData + i*3 + 1),
+                    pgm_read_byte(currentFrameData + i*3 + 2));
   }
   
-  strip.show();
+  LEDS.show();
   
   m_frameIndex = (m_frameIndex + 1)%m_frameCount;
 }
 
-void Animation::drawRLE(Adafruit_NeoPixel& strip) {
-
-  // Read runs of RLE data until we get enough data.
-  uint8_t count = 0;
-  while(count < 60) {
-    uint8_t run_length = 0x7F & pgm_read_byte(currentFrameData);
-    uint8_t r = pgm_read_byte(currentFrameData + 1);
-    uint8_t g = pgm_read_byte(currentFrameData + 2);
-    uint8_t b = pgm_read_byte(currentFrameData + 3);
-    
-    for(uint8_t i = 0; i < run_length; i+=1) {
-      strip.setPixelColor(count + i, strip.Color(r,g,b));
-    }
-    
-    count += run_length;
-    currentFrameData += 4;
-  }
-  
-  strip.show();
-
-  m_frameIndex = (m_frameIndex + 1)%m_frameCount;
-  if(m_frameIndex == 0) {
-    currentFrameData = m_frameData;
-  }
-};
-
-void Animation::draw16bitRLE(Adafruit_NeoPixel& strip) {
+void Animation::draw16bitRLE(struct CRGB strip[]) {
 
   // Read runs of RLE data until we get enough data.
   uint8_t count = 0;
@@ -100,14 +72,14 @@ void Animation::draw16bitRLE(Adafruit_NeoPixel& strip) {
     uint8_t b = ((lowerByte & 0x1F) << 3);
     
     for(uint8_t i = 0; i < run_length; i+=1) {
-      strip.setPixelColor(count + i, strip.Color(r,g,b));
+      strip[count + i] = CRGB(r,g,b);
     }
     
     count += run_length;
     currentFrameData += 3;
   }
   
-  strip.show();
+  LEDS.show();
 
   m_frameIndex = (m_frameIndex + 1)%m_frameCount;
   if(m_frameIndex == 0) {

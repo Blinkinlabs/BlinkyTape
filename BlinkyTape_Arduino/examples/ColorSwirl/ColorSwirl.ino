@@ -1,19 +1,20 @@
-#include <Adafruit_NeoPixel.h>
+#include <FastSPI_LED2.h>
 #include <Animation.h>
 
 #define LED_COUNT 60
-#define THRESHOLD 1
-
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, 5, NEO_GRB + NEO_KHZ800);
+struct CRGB leds[LED_COUNT];
 
 long last_time;
 
 void setup()
 {  
   Serial.begin(57600);
-
-  strip.begin();
-  strip.show();
+  
+  LEDS.addLeds<WS2811, 5, GRB>(leds, LED_COUNT);
+  LEDS.showColor(CRGB(0, 0, 0));
+  LEDS.setBrightness(230); // 90% brightness
+  LEDS.show();
+  
   last_time = millis();
 }
 
@@ -26,19 +27,11 @@ void color_loop() {
   static int count;
 
   static int pixelIndex;
-
-  float brightness = .9;
   
   for (uint8_t i = 0; i < LED_COUNT; i++) {
-    uint8_t red =   64*(1+sin(i/2.0 + j/4.0       ))*brightness;
-    uint8_t green = 64*(1+sin(i/1.0 + f/9.0  + 2.1))*brightness;
-    uint8_t blue =  64*(1+sin(i/3.0 + k/14.0 + 4.2))*brightness;
-    
-    uint32_t pix = green;
-    pix = (pix << 8) | red;
-    pix = (pix << 8) | blue;
-    
-    strip.setPixelColor(i, pix);
+    leds[i].r = 64*(1+sin(i/2.0 + j/4.0       ));
+    leds[i].g = 64*(1+sin(i/1.0 + f/9.0  + 2.1));
+    leds[i].b = 64*(1+sin(i/3.0 + k/14.0 + 4.2));
     
     if ((millis() - last_time > 15) && pixelIndex <= LED_COUNT + 1) {
       last_time = millis();
@@ -46,16 +39,17 @@ void color_loop() {
       pixelIndex++; 
     }
     
+    // why is this per LED?
     for (int x = count; x >= 0; x--) {
-      strip.setPixelColor(x, strip.Color(0,0,0));
+      leds[x] = CRGB(0, 0, 0);
     }
     
   }
-  strip.show();
+  LEDS.show();
   
-  j = j + random(1,2);
-  f = f + random(1,2);
-  k = k + random(1,2);
+  j = j + 1;
+  f = f + 1;
+  k = k + 2;
 }
 
 void serialLoop() {
@@ -74,13 +68,13 @@ void serialLoop() {
           buffer[x] = c; // Using 255 as a latch semaphore
         }
         else {
-          strip.show();
+          LEDS.show();
           pixelIndex = 0;
           break;
         }
 
         if (x == 2) {   // If we received three serial bytes
-          strip.setPixelColor(pixelIndex, strip.Color(buffer[0], buffer[1], buffer[2]));
+          leds[pixelIndex] = CRGB(buffer[0], buffer[1], buffer[2]);
           pixelIndex++;
         }
       }

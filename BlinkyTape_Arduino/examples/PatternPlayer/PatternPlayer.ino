@@ -1,37 +1,31 @@
-#include <Adafruit_NeoPixel.h>
-
+#include <FastSPI_LED2.h>
 #include <avr/pgmspace.h>
 #include <Animation.h>
 #include "pov.h"
 
 #define LED_COUNT 60
-#define THRESHOLD 1
-
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, 5, NEO_GRB + NEO_KHZ800);
+struct CRGB leds[LED_COUNT];
 
 Animation pov;
-
-uint8_t pixel_index;
-long last_time;
 
 void setup()
 {  
   Serial.begin(57600);
 
-  strip.begin();
-  strip.show();
-  last_time = millis();
+  LEDS.addLeds<WS2811, 5, GRB>(leds, LED_COUNT);
+  LEDS.showColor(CRGB(0, 0, 0));
+  LEDS.setBrightness(230); // 90% brightness
+  LEDS.show();
   
   // Read the animation data from the end of the program memory, and construct a new Animation from it.
   int frameCount;
   prog_uint8_t* frameData;
 
-  // These could be whereever, but ne ed to agree with Processing.
+  // These could be whereever, but need to agree with Processing.
   #define CONTROL_DATA_ADDRESS (0x7000 - 4)
   #define FRAME_DATA_ADDRESS   (CONTROL_DATA_ADDRESS)
   #define FRAME_COUNT_ADDRESS  (CONTROL_DATA_ADDRESS + 2)
 
-//  frameData  = (prog_uint8_t*)0x4000;
   frameData  =
   (prog_uint8_t*)((pgm_read_byte(FRAME_DATA_ADDRESS    ) << 8)
                   + (pgm_read_byte(FRAME_DATA_ADDRESS + 1)));
@@ -45,6 +39,7 @@ void setup()
 }
 
 void serialLoop() {
+  static int pixelIndex;
 
   while(true) {
 
@@ -59,14 +54,14 @@ void serialLoop() {
           buffer[x] = c; // Using 255 as a latch semaphore
         }
         else {
-          strip.show();
-          pixel_index = 0;
+          LEDS.show();
+          pixelIndex = 0;
           break;
         }
 
         if (x == 2) {   // If we received three serial bytes
-          strip.setPixelColor(pixel_index, strip.Color(buffer[0], buffer[1], buffer[2]));
-          pixel_index++;
+          leds[pixelIndex] = CRGB(buffer[0], buffer[1], buffer[2]);
+          pixelIndex++;
         }
       }
     }
@@ -80,7 +75,7 @@ void loop()
     serialLoop();
   }
   
-  pov.draw(strip);
+  pov.draw(leds);
   delay(20);
 }
 
