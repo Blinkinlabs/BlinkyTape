@@ -58,7 +58,7 @@
 <layer number="48" name="Document" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="49" name="Reference" color="7" fill="1" visible="no" active="yes"/>
 <layer number="50" name="dxf" color="7" fill="1" visible="no" active="yes"/>
-<layer number="51" name="tDocu" color="14" fill="1" visible="yes" active="yes"/>
+<layer number="51" name="tDocu" color="14" fill="1" visible="no" active="yes"/>
 <layer number="52" name="bDocu" color="14" fill="1" visible="no" active="yes"/>
 <layer number="53" name="tGND_GNDA" color="7" fill="9" visible="no" active="no"/>
 <layer number="54" name="bGND_GNDA" color="1" fill="9" visible="no" active="no"/>
@@ -155,8 +155,6 @@ Tape</text>
 <text x="4.35" y="6.25" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="center">D7</text>
 <text x="4.65" y="3.75" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="center">D11</text>
 <text x="0.5" y="10.75" size="0.8128" layer="46">Slot drill with copper</text>
-<dimension x1="0" y1="0" x2="25.25" y2="0" x3="12.625" y3="-2.5" textsize="1.27" layer="48" width="0.1"/>
-<dimension x1="0" y1="10" x2="0" y2="0" x3="-2.25" y3="5" textsize="1.27" layer="48" width="0.1"/>
 <text x="13.75" y="8.75" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="center">5/13</text>
 </plain>
 <libraries>
@@ -990,51 +988,6 @@ Modified from Laen's PCB Order Design Rules</description>
 <wire x1="4.2" y1="7.5" x2="4.2" y2="7.5" width="0" layer="19" extent="1-16"/>
 </signal>
 </signals>
-<errors>
-<approved hash="4,1,fa078cea160a20f5"/>
-<approved hash="4,1,54016ae98c098af7"/>
-<approved hash="5,1,5a6bbacdf0075e45"/>
-<approved hash="5,1,f77134fa38526f2a"/>
-<approved hash="5,1,330e78872257cd52"/>
-<approved hash="19,1,acf01e0a1612a4e8"/>
-<approved hash="19,1,cce26e186602c4f8"/>
-<approved hash="19,1,4a060754fd9db0e5"/>
-<approved hash="4,1,f5c92e2ef2eb26c3"/>
-<approved hash="19,1,ac181ee21c1aaee0"/>
-<approved hash="19,1,cc0a6ef06c0acef0"/>
-<approved hash="19,1,6fbf2f8ddc9e9e56"/>
-<approved hash="4,1,d45a2388f8970730"/>
-<approved hash="19,1,aea41c5e1211a0eb"/>
-<approved hash="19,1,ceb66c4c6201c0fb"/>
-<approved hash="19,1,d31d9d2e605b2218"/>
-<approved hash="4,1,6460a239fcdb3239"/>
-<approved hash="4,1,80c9b89742907ace"/>
-<approved hash="4,1,a53c9bfa61fd5f3b"/>
-<approved hash="4,1,32b50b6ef169c8b2"/>
-<approved hash="4,16,fa078cea160a20f5"/>
-<approved hash="4,16,54016ae98c098af7"/>
-<approved hash="19,16,86e7b6a36d5f44f5"/>
-<approved hash="19,16,6e865cf95d49531c"/>
-<approved hash="19,16,80fb0aef65944a72"/>
-<approved hash="19,16,ac181ee21c1aaee0"/>
-<approved hash="19,16,cc0a6ef06c0acef0"/>
-<approved hash="19,16,6fbf2f8ddc9e9e56"/>
-<approved hash="4,16,d45a2388f8970730"/>
-<approved hash="19,16,aea41c5e1211a0eb"/>
-<approved hash="19,16,ceb66c4c6201c0fb"/>
-<approved hash="19,16,d31d9d2e605b2218"/>
-<approved hash="4,16,6460a239fcdb3239"/>
-<approved hash="19,16,acf01e0a1612a4e8"/>
-<approved hash="19,16,cce26e186602c4f8"/>
-<approved hash="19,16,4a060754fd9db0e5"/>
-<approved hash="4,16,f5c92e2ef2eb26c3"/>
-<approved hash="4,16,343c0508312c1410"/>
-<approved hash="4,16,3a3d0439301e1a9e"/>
-<approved hash="4,16,357d04d931ba1402"/>
-<approved hash="4,16,80c9b89742907ace"/>
-<approved hash="4,16,32b50b6ef169c8b2"/>
-<approved hash="4,16,a53c9bfa61fd5f3b"/>
-</errors>
 </board>
 </drawing>
 <compatibility>

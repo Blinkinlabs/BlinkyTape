@@ -3534,8 +3534,8 @@ Metric Code Size 5664</description>
 <sheets>
 <sheet>
 <plain>
-<text x="104.14" y="-30.48" size="2.54" layer="94">BlinkyBoard LED controller RevB</text>
-<text x="104.14" y="-35.56" size="2.54" layer="94">http://blinkyverse.com</text>
+<text x="104.14" y="-30.48" size="2.54" layer="94">BlinkyTape LED controller RevD</text>
+<text x="104.14" y="-35.56" size="2.54" layer="94">http://blinkiverse.com</text>
 <text x="177.8" y="-30.48" size="2.54" layer="94">CC 2.5 BY-SA</text>
 <text x="190.5" y="-53.34" size="2.54" layer="94">1</text>
 <text x="-48.26" y="137.16" size="1.778" layer="91">Bypass caps</text>
