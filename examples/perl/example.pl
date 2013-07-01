@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 #
 # If you are on Mac OS X do consider installing Perlbrew from http://perlbrew.pl/,
-# then the latest stable Perl and cpan usin git.
+# then the latest stable Perl and cpanm using it.
 #
 # Install Device::BlinkyTape from CPAN
 #
