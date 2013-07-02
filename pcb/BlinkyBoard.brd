@@ -36,7 +36,7 @@
 <layer number="26" name="bNames" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="27" name="tValues" color="7" fill="1" visible="no" active="yes"/>
 <layer number="28" name="bValues" color="7" fill="1" visible="no" active="yes"/>
-<layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
+<layer number="29" name="tStop" color="7" fill="3" visible="yes" active="yes"/>
 <layer number="30" name="bStop" color="7" fill="6" visible="yes" active="yes"/>
 <layer number="31" name="tCream" color="7" fill="4" visible="no" active="yes"/>
 <layer number="32" name="bCream" color="7" fill="5" visible="no" active="yes"/>
@@ -138,7 +138,7 @@
 <wire x1="25.25" y1="10" x2="25.25" y2="0" width="0.127" layer="20"/>
 <text x="8.75" y="6" size="1.016" layer="26" font="vector" ratio="20" rot="MR0" align="center">Blinky
 Tape</text>
-<text x="8.75" y="3.85" size="0.8128" layer="26" font="vector" ratio="20" rot="MR0" align="center">Rev D</text>
+<text x="8.75" y="3.85" size="0.8128" layer="26" font="vector" ratio="20" rot="MR0" align="center">Rev Exx</text>
 <text x="24" y="8.75" size="0.75" layer="25" font="vector" ratio="15" align="bottom-center">D13</text>
 <text x="24" y="5.75" size="0.75" layer="25" font="vector" ratio="15" align="bottom-center">5V</text>
 <text x="24" y="2.75" size="0.75" layer="25" font="vector" ratio="15" align="bottom-center">GND</text>
@@ -278,14 +278,14 @@ by exp-project-lbr.ulp</description>
 <wire x1="4" y1="3" x2="4" y2="-2.5" width="0.127" layer="51"/>
 <wire x1="4" y1="-2.5" x2="-4" y2="-2.5" width="0.127" layer="51"/>
 <wire x1="-3" y1="-1.45" x2="3" y2="-1.45" width="0.127" layer="51" style="shortdash"/>
-<smd name="PAD$5" x="-2.5" y="2.7" dx="1.25" dy="0.95" layer="1" roundness="75" thermals="no" cream="no"/>
+<smd name="PAD$5" x="-2.5" y="2.7" dx="1.25" dy="0.95" layer="1" roundness="75" thermals="no"/>
 <smd name="PAD$10" x="2.5" y="2.7" dx="1.25" dy="0.95" layer="16" roundness="75" thermals="no" cream="no"/>
-<smd name="PAD$1" x="-3.1225" y="0" dx="1.645" dy="1.55" layer="1" thermals="no" cream="no"/>
-<smd name="PAD$4" x="3.1225" y="0" dx="1.645" dy="1.55" layer="1" thermals="no" cream="no"/>
+<smd name="PAD$1" x="-3.1225" y="0" dx="1.645" dy="1.55" layer="1" thermals="no"/>
+<smd name="PAD$4" x="3.1225" y="0" dx="1.645" dy="1.55" layer="1" thermals="no"/>
 <smd name="PAD$9" x="-2.5" y="2.7" dx="1.25" dy="0.95" layer="16" roundness="75" thermals="no" cream="no"/>
 <smd name="PAD$7" x="-3.5" y="0" dx="0.9" dy="1.55" layer="16" roundness="100" thermals="no" cream="no"/>
 <smd name="PAD$8" x="3.5" y="0" dx="0.9" dy="1.55" layer="16" roundness="100" thermals="no" cream="no"/>
-<smd name="PAD$6" x="2.5" y="2.7" dx="1.25" dy="0.95" layer="1" roundness="75" thermals="no" cream="no"/>
+<smd name="PAD$6" x="2.5" y="2.7" dx="1.25" dy="0.95" layer="1" roundness="75" thermals="no"/>
 <smd name="PAD$2" x="-1" y="0" dx="1.5" dy="1.55" layer="1" thermals="no"/>
 <smd name="PAD$3" x="1" y="0" dx="1.5" dy="1.55" layer="1" thermals="no"/>
 <wire x1="-2.925" y1="2.7" x2="-2.925" y2="2.725" width="0.127" layer="46"/>
@@ -569,7 +569,7 @@ Modified from Laen's PCB Order Design Rules</description>
 <element name="S1" library="blinkyboard" package="GLOWBOARD_KMR211G_SWITCH" value="Normally open" x="21" y="7" rot="R270"/>
 <element name="Q1" library="blinkiverse" package="CRSYTAL_2520" value="16 MHz" x="20.25" y="2.25" smashed="yes" rot="R270"/>
 <element name="C4" library="blinkiverse" package="CAP_0402_KEMET_MEDIAN" value="0.1uF" x="19" y="4.75" smashed="yes" rot="R270"/>
-<element name="WS1" library="blinkiverse" package="WS2811_CONNECTOR" value="WS2811_CONNECTOR" x="24" y="5"/>
+<element name="WS1" library="blinkiverse" package="WS2811_CONNECTOR" value="WS2811_CONNECTORSTRIP" x="24" y="5"/>
 <element name="U$4" library="blinkiverse" package="MICRO_USB_FCI_THRUHOLE" value="MICRO_USBSMT+THRUHULE" x="1.5" y="5" rot="R270"/>
 <element name="U$1" library="blinkiverse" package="TEST_VIA_.5MM" value="TEST_VIA" x="9" y="1"/>
 <element name="U$3" library="blinkiverse" package="TEST_VIA_.5MM" value="TEST_VIA" x="7.5" y="1"/>
@@ -577,7 +577,7 @@ Modified from Laen's PCB Order Design Rules</description>
 <element name="U$6" library="blinkiverse" package="TEST_VIA_.5MM" value="TEST_VIA" x="10.5" y="1"/>
 <element name="U$7" library="blinkiverse" package="TEST_VIA_.5MM" value="TEST_VIA" x="6.25" y="4.25"/>
 <element name="U$8" library="blinkiverse" package="TEST_VIA_.5MM" value="TEST_VIA" x="5.75" y="8.75"/>
-<element name="WS3" library="blinkiverse" package="WS2811_CONNECTOR" value="WS2811_CONNECTOR" x="24" y="5" rot="MR0"/>
+<element name="WS3" library="blinkiverse" package="WS2811_CONNECTOR" value="WS2811_CONNECTORSTRIP" x="24" y="5" rot="MR0"/>
 <element name="U$10" library="blinkiverse" package="TEST_PAD_SMT" value="TEST_PAD_SMT" x="2" y="6.25" rot="MR90"/>
 <element name="U$11" library="blinkiverse" package="TEST_PAD_SMT" value="TEST_PAD_SMT" x="18" y="5" rot="MR90"/>
 <element name="U$12" library="blinkiverse" package="TEST_PAD_SMT" value="TEST_PAD_SMT" x="18" y="7.9" rot="MR270"/>

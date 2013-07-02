@@ -580,14 +580,14 @@ by exp-project-lbr.ulp</description>
 <wire x1="4" y1="3" x2="4" y2="-2.5" width="0.127" layer="51"/>
 <wire x1="4" y1="-2.5" x2="-4" y2="-2.5" width="0.127" layer="51"/>
 <wire x1="-3" y1="-1.45" x2="3" y2="-1.45" width="0.127" layer="51" style="shortdash"/>
-<smd name="PAD$5" x="-2.5" y="2.7" dx="1.25" dy="0.95" layer="1" roundness="75" thermals="no" cream="no"/>
+<smd name="PAD$5" x="-2.5" y="2.7" dx="1.25" dy="0.95" layer="1" roundness="75" thermals="no"/>
 <smd name="PAD$10" x="2.5" y="2.7" dx="1.25" dy="0.95" layer="16" roundness="75" thermals="no" cream="no"/>
-<smd name="PAD$1" x="-3.1225" y="0" dx="1.645" dy="1.55" layer="1" thermals="no" cream="no"/>
-<smd name="PAD$4" x="3.1225" y="0" dx="1.645" dy="1.55" layer="1" thermals="no" cream="no"/>
+<smd name="PAD$1" x="-3.1225" y="0" dx="1.645" dy="1.55" layer="1" thermals="no"/>
+<smd name="PAD$4" x="3.1225" y="0" dx="1.645" dy="1.55" layer="1" thermals="no"/>
 <smd name="PAD$9" x="-2.5" y="2.7" dx="1.25" dy="0.95" layer="16" roundness="75" thermals="no" cream="no"/>
 <smd name="PAD$7" x="-3.5" y="0" dx="0.9" dy="1.55" layer="16" roundness="100" thermals="no" cream="no"/>
 <smd name="PAD$8" x="3.5" y="0" dx="0.9" dy="1.55" layer="16" roundness="100" thermals="no" cream="no"/>
-<smd name="PAD$6" x="2.5" y="2.7" dx="1.25" dy="0.95" layer="1" roundness="75" thermals="no" cream="no"/>
+<smd name="PAD$6" x="2.5" y="2.7" dx="1.25" dy="0.95" layer="1" roundness="75" thermals="no"/>
 <smd name="PAD$2" x="-1" y="0" dx="1.5" dy="1.55" layer="1" thermals="no"/>
 <smd name="PAD$3" x="1" y="0" dx="1.5" dy="1.55" layer="1" thermals="no"/>
 <wire x1="-2.925" y1="2.7" x2="-2.925" y2="2.725" width="0.127" layer="46"/>
@@ -735,6 +735,11 @@ by exp-project-lbr.ulp</description>
 </package>
 <package name="TEST_PAD_SMT">
 <smd name="P$1" x="0" y="0" dx="1.8" dy="3" layer="1" roundness="50" thermals="no" cream="no"/>
+</package>
+<package name="BLINKYTILE_PCB_EDGE">
+<smd name="P$1" x="-5.08" y="0" dx="6.5" dy="3.6" layer="1" thermals="no" cream="no"/>
+<smd name="P$2" x="0" y="0" dx="1.66" dy="3.6" layer="1" thermals="no" cream="no"/>
+<smd name="P$3" x="5.08" y="0" dx="6.5" dy="3.6" layer="1" thermals="no" cream="no"/>
 </package>
 </packages>
 <symbols>
@@ -1113,11 +1118,21 @@ by exp-project-lbr.ulp</description>
 <gate name="G$1" symbol="WS2811_CONNECTOR" x="2.54" y="0"/>
 </gates>
 <devices>
-<device name="" package="WS2811_CONNECTOR">
+<device name="STRIP" package="WS2811_CONNECTOR">
 <connects>
 <connect gate="G$1" pin="5V" pad="5V"/>
 <connect gate="G$1" pin="DATA" pad="DATA"/>
 <connect gate="G$1" pin="GND" pad="GND"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="BLINKYTILE_EDGE" package="BLINKYTILE_PCB_EDGE">
+<connects>
+<connect gate="G$1" pin="5V" pad="P$3"/>
+<connect gate="G$1" pin="DATA" pad="P$2"/>
+<connect gate="G$1" pin="GND" pad="P$1"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -3507,7 +3522,7 @@ Metric Code Size 5664</description>
 <part name="S1" library="blinkyboard" deviceset="GLOWBOARD_KMR211G" device="" value="Normally open"/>
 <part name="Q1" library="blinkiverse" deviceset="CRYSTAL_4PAD" device="2520" value="16 MHz"/>
 <part name="C4" library="blinkiverse" deviceset="C_US" device="" value="0.1uF"/>
-<part name="WS1" library="blinkiverse" deviceset="WS2811_CONNECTOR" device=""/>
+<part name="WS1" library="blinkiverse" deviceset="WS2811_CONNECTOR" device="STRIP"/>
 <part name="P+3" library="supply1" deviceset="VCC" device=""/>
 <part name="GND4" library="supply1" deviceset="GND" device=""/>
 <part name="P+4" library="supply1" deviceset="VCC" device=""/>
@@ -3522,7 +3537,7 @@ Metric Code Size 5664</description>
 <part name="P+2" library="supply1" deviceset="VCC" device=""/>
 <part name="GND1" library="supply1" deviceset="GND" device=""/>
 <part name="GND2" library="supply1" deviceset="GND" device=""/>
-<part name="WS3" library="blinkiverse" deviceset="WS2811_CONNECTOR" device=""/>
+<part name="WS3" library="blinkiverse" deviceset="WS2811_CONNECTOR" device="STRIP"/>
 <part name="P+5" library="supply1" deviceset="VCC" device=""/>
 <part name="U$10" library="blinkiverse" deviceset="TEST_PAD_SMT" device=""/>
 <part name="U$11" library="blinkiverse" deviceset="TEST_PAD_SMT" device=""/>
