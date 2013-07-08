@@ -1,0 +1,7 @@
+For next revision:
+- add decoupling caps
+- space out .1 headers for ribbon cable connectors
+- fix diode size
+- change usb a header
+- change power resistor header
+- add a polyfuse on input VCC line
