@@ -5,6 +5,7 @@ import BlinkyTapeUnitTest
 import TestRig
 import UserInterface
 import BlinkyTape
+import DetectPlatform
 
 class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
   def __init__(self, methodName):
@@ -45,7 +46,11 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
 
   def test_020_usbEnumeration(self):
     MAX_ENUMERATION_TIME_S = 5
-    SERIAL_DEVICE_PATH = "/dev/cu.usbmodem*"
+    platform = DetectPlatform.DetectPlatform()
+    if platform == 'Darwin':
+      SERIAL_DEVICE_PATH = "/dev/cu.usbmodem*"
+    else:
+      SERIAL_DEVICE_PATH = "/dev/cu.usbmodem*"
 
     # Scan for all connected devices; platform dependent
     originalPorts = set(glob.glob(SERIAL_DEVICE_PATH))
