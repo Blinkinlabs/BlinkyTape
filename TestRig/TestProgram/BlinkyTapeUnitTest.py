@@ -9,9 +9,13 @@ class BlinkyTapeTestCase(unittest.TestCase):
     super(BlinkyTapeTestCase, self).__init__(methodName)
     self.l = Logger.logger
     self.testResultData = None
+    self.stopTests = False
 
   def StoreTestResultData(self, trd):
     self.testResultData = trd
+
+  def Stop(self):
+    self.stopTests = True
 
   def LogDataPoint(self, message, data):
     """Record a datapoint from testing.  This will log to all available logging outputs w/ the included data (db, sdcard, usb)."""
@@ -49,7 +53,7 @@ class BlinkyTapeTestRunner():
       output += "\nALL OK!\n"
       textColor = (0, 0, 0)
       outColor = (0, 255, 0)
-    self.i.DisplayMessage(output, color = textColor, bgcolor = outColor)
+    self.i.DisplayMessage(output, color = textColor, bgcolor = outColor, boxed=True)
     time.sleep(2)
       
     return result
@@ -70,6 +74,9 @@ class BlinkyTapeTestResult(unittest.TestResult):
   def startTest(self, test):
     unittest.TestResult.startTest(self, test)
     self.l.TestStart(test)
+
+  def stopTest(self, test):
+    self.shouldStop = test.stopTests
 
   def addSuccess(self, test):
     unittest.TestResult.addSuccess(self, test)

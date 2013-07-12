@@ -4,6 +4,7 @@ import glob
 import RemoteArduino
 
 
+
 class ArduinoPin:
   def __init__(self, name, number, net = None, suppressHigh = False, suppressLow = False):
     self.name = name
@@ -16,6 +17,16 @@ class ArduinoPin:
 
     self.suppressHigh = suppressHigh
     self.suppressLow = suppressLow
+
+  def __str__(self):
+    return self.name
+
+class MeasurementPin():
+  def __init__(self, name, number, M, B):
+    self.name = name
+    self.number = number
+    self.M = M
+    self.B = B
 
   def __str__(self):
     return self.name
@@ -74,7 +85,8 @@ class TestRig:
     """ Read a measurement pin """
     for pin in self.measurementPins:
       if pin.name == measurementName:
-        return self.arduino.analogRead(pin.number)
+        return pin.M*self.arduino.analogRead(pin.number) + pin.B
+
     raise Exception("Measurement pin " + measurementName + "not found!")
     
 
@@ -133,7 +145,7 @@ def MakeDefaultRig():
 
   # List of pins that are connected to analog sensors on the board
   measurementPins = [
-    ArduinoPin('DUT_CURRENT',    0),  # Note: an analog pin!
+    MeasurementPin('DUT_CURRENT',    0, 1, 0),  # Note: an analog pin!
     ]
 
   # List of pins that control a relay on the test rig

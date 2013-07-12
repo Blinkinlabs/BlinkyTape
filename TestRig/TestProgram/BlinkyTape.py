@@ -1,17 +1,23 @@
 import serial
-import time
+import glob
 
-class BlinkyTape(object):
-  def __new__(typ, *args, **kwargs):
-    if "WS2811" in args:
-      return BlinkyTape_WS2811(args[0])
-    elif "LPD8806" in args:
-      return BlinkyTape_LPD8806(args[0])
+class BlinkyTape:
+  def __init__(self, port=None):
+    self.port = port
 
-class BlinkyTape_WS2811:
-  def __init__(self, port):
+    if port != None:
+      self.serial = serial.Serial(port, 115200)
+      self.show() # Flush
+
+  def connect(self, port):
+    self.port = port
+
     self.serial = serial.Serial(port, 115200)
     self.show() # Flush
+
+  def disconnct(self):
+    self.port = None
+    self.serial = None
 
   def sendPixel(self,r,g,b):
     data = bytearray()
@@ -53,23 +59,19 @@ if __name__ == "__main__":
   import sys
 
   LED_COUNT = 60
-  bb = None
 
-  if len(sys.argv) > 1:
-    bb = BlinkyTape(sys.argv[1], "WS2811")
+  parser = optparse.OptionParser()
+  parser.add_option("-p", "--port", dest="portname",
+                    help="serial port (ex: /dev/ttyUSB0)", default=None)
+  (options, args) = parser.parse_args()
 
+  if options.portName != None:
+    port = options.portname
   else:
-    import os
-    import re
-    regex = re.compile(".*usbmodem.*")
-   
-    for filenames in os.walk('/dev'):
-      for filename in filenames[2]:
-        if regex.findall(filename):
-          bb = BlinkyTape(os.path.join("/dev", filename), "WS2811")
+    serialPorts = glob.glob("/dev/cu.usbmodem*")
+    port = serialPorts[0]
 
-  if not bb:
-    sys.exit("Usage: python test.py (path to serial port)")
+  bb = BlinkyTape(port)
 
 
   while True:

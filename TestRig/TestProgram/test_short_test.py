@@ -10,19 +10,27 @@ class TestShortTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     self.i = UserInterface.interface
 
   def setUp(self):
+    self.stopMe = True
+
     self.testRig.resetState()
 
   def tearDown(self):
     self.testRig.resetState()
 
+    if self.stopMe:
+      self.Stop()
+
   def test_010_short_tests(self):
     """ Run the n*n test case """
-
+    
+    allFaults = []
     for pin in self.testRig.shortTestPins:
       self.i.DisplayMessage("testing pin %s..." % pin.name)
 
       faults = self.testRig.shortTest(pin.name)
       for fault in faults:
-        print fault
-      self.assertEquals(len(faults), 0)
+        self.i.DisplayMessage(fault)
+      allFaults += faults
 
+    self.assertEquals(len(allFaults), 0)
+    self.stopMe = False

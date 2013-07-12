@@ -30,14 +30,23 @@ class PcbaTestMenu(Menu.Menu):
 
   def HandleSelection(self, selection):
     # Remove the extension before attempting to load the module.
-    module_name = os.path.splitext(selection[1])[0]
+    module_name = selection[1]
 
-    if (module_name.startswith('test')):
+    if type(module_name) is list:
+      allTests = unittest.TestSuite()
+      for module_n in module_name:
+        module = __import__(module_n)
+        tests = unittest.defaultTestLoader.loadTestsFromModule(module)
+        allTests.addTests(tests)
+
+      runner = BlinkyTapeUnitTest.BlinkyTapeTestRunner()
+      result = runner.run(allTests)
+
+    elif (module_name.startswith('test')):
       module = __import__(module_name)
 
       tests = unittest.defaultTestLoader.loadTestsFromModule(module)
 
-      #log_file = open("/media/usb/logs/" + selection[0] + '.log', 'a')
       runner = BlinkyTapeUnitTest.BlinkyTapeTestRunner()
       result = runner.run(tests)
 

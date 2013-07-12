@@ -24,7 +24,7 @@ class UserInterface():
 #    pygame.display.flip()
     pass
 
-  def DisplayMessage(self, message, color=(255,255,255), bgcolor=(0,0,0)): 
+  def DisplayMessage(self, message, color=(255,255,255), bgcolor=(0,0,0), boxed=False): 
     """
     Display a message on the screen
     @param message Message to display, can be multi-line
@@ -44,7 +44,13 @@ class UserInterface():
 #    self.screen.blit(screen, self.displayRect.topleft)
 #
 #    pygame.display.flip()
+    if boxed:
+      print "**********************************************************************"
+      print ""
     print message
+    if boxed:
+      print ""
+      print "**********************************************************************"
 
   def DisplayPass(self, message = 'PASS', timeout=.5):
     """
@@ -52,7 +58,7 @@ class UserInterface():
     @param timeout Time to display the message, in seconds
     """
 #    self.r.SetRgbLed(0, 1, 0)  # show green
-    self.DisplayMessage(message, color=(0,0,0), bgcolor=(0,255,0))
+    self.DisplayMessage(message, color=(0,0,0), bgcolor=(0,255,0), boxed=True)
     time.sleep(timeout)
 #    self.r.SetRgbLed(1,1,1)  # leds on
 
@@ -62,7 +68,7 @@ class UserInterface():
     @param timeout Time to display the message, in seconds
     """
 #    self.r.SetRgbLed(1, 0, 0)  # show red
-    self.DisplayMessage(message, color=(0,0,0), bgcolor=(255,0,0))
+    self.DisplayMessage(message, color=(0,0,0), bgcolor=(255,0,0), boxed=True)
 #    self.r.SetRgbLed(1,1,1)  # leds on
     
   def DisplayFail(self, message = 'FAIL', timeout=.5):
@@ -71,7 +77,7 @@ class UserInterface():
     @param timeout Time to display the message, in seconds
     """
 #    self.r.SetRgbLed(1, 0, 0)  # show red
-    self.DisplayMessage(message, color=(0,0,0), bgcolor=(255,0,0))
+    self.DisplayMessage(message, color=(0,0,0), bgcolor=(255,0,0), boxed=True)
     time.sleep(timeout)
 #    self.r.SetRgbLed(1,1,1)  # leds on
 
@@ -81,7 +87,7 @@ class UserInterface():
     To confirm that a message was received, press the right arrow key.
     @param message Messgae to display, can be multi-line
     """
-    self.DisplayMessage(message, color, bgcolor)
+    self.DisplayMessage(message, color, bgcolor, boxed=True)
     
 #    pygame.event.clear()  # clear previous events
 #    
@@ -127,7 +133,7 @@ class UserInterface():
     @param message Messgae to display, can be multi-line
     @return true if yes was selected, false otherwise
     """
-    self.DisplayMessage(message, color, bgcolor)
+    self.DisplayMessage(message, color, bgcolor, boxed=True)
 
 #    pygame.event.clear()  # clear previous events
 #

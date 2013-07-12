@@ -1,6 +1,6 @@
 import subprocess
 import time
-from optparse import OptionParser
+import optparse
 
 def writeFuses(portName, lockFuses, eFuses, hFuses, lFuses):
   """
@@ -41,7 +41,7 @@ def loadFlash(portName, flashFile):
 
 
 if __name__ == '__main__':
-  parser = OptionParser()
+  parser = optparse.OptionParser()
   parser.add_option("-p", "--port", dest="portname",
                     help="serial port (ex: /dev/ttyUSB0)", default="/dev/ttyACM0")
   (options, args) = parser.parse_args()
