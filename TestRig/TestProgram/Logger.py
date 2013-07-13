@@ -6,12 +6,12 @@ import sys
 
 import TestRig
 import UserInterface
-import JsonConfig
+import Config
 
 class FileSink():
   def __init__(self, fileName):
     self.fileName = fileName
-    print "Logging to USB logfile: %s" % self.fileName
+    print "Logging to logfile: %s" % self.fileName
 
     try:
       self.logFile = open(self.fileName, 'a')
@@ -35,7 +35,7 @@ class Logger():
     self.r = TestRig.testRig
     self.i = UserInterface.interface
 
-    config = JsonConfig.JsonConfig()
+    config = Config.Config()
     self.RequireDB = config.get('Logger','RequireDB',False)
 
     self.Verbose       = config.get('Logger','Verbose',True)

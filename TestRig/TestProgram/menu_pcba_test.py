@@ -10,7 +10,7 @@ import Logger
 import Menu  
 import UserInterface
 import BlinkyTapeUnitTest
-import JsonConfig
+import Config
 import menus
 
 class PcbaTestMenu(Menu.Menu):
@@ -22,7 +22,7 @@ class PcbaTestMenu(Menu.Menu):
 
   def __init__(self, interface):
     # Look up which menu item to display, then display it.
-    config = JsonConfig.JsonConfig()
+    config = Config.Config()
     self.menu_name = config.get('Menu','name','pcba_test')
     self.items = list(menus.menus[self.menu_name])
 

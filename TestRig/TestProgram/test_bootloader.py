@@ -5,7 +5,7 @@ import BlinkyTapeUnitTest
 import TestRig
 import UserInterface
 import IcspUtils
-import JsonConfig
+import Config
 
 
 class TestProgramBootloader(BlinkyTapeUnitTest.BlinkyTapeTestCase):
@@ -31,7 +31,7 @@ class TestProgramBootloader(BlinkyTapeUnitTest.BlinkyTapeTestCase):
       self.Stop()
 
   def test_010_program_fuses(self):
-    config = JsonConfig.JsonConfig()
+    config = Config.Config()
     lockFuses = config.get('ICSP', 'lockFuses', 0x2f)
     eFuses = config.get('ICSP', 'eFuses', 0xcb)
     hFuses = config.get('ICSP', 'hFuses', 0xd8)
@@ -43,7 +43,7 @@ class TestProgramBootloader(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     self.stopMe = False
 
   def test_020_program_fuses(self):
-    config = JsonConfig.JsonConfig()
+    config = Config.Config()
     bootloaderFile = config.get('ICSP', 'bootloaderFile', "Caterina-BlinkyTape.hex")
     
     returnCode = IcspUtils.loadFlash(self.port, bootloaderFile)

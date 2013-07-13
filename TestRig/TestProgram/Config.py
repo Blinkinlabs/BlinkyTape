@@ -1,6 +1,6 @@
 import json
 
-class JsonConfig():
+class Config():
   """
   Hopefully the simplest configuration object that could possibly work.
   Configurations are stored in json format to a text file, and are updated
@@ -64,14 +64,3 @@ class JsonConfig():
       self.save()
 
     return self.data[module][key]
-
-
-if __name__ == '__main__':
-  config = JsonConfig('json_config_test.cfg')
-  config.set('test','a',1)
-
-  config = []
-  
-  config = JsonConfig('json_config_test.cfg')
-  assert config.get('test','a') == 1
-
