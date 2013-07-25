@@ -5066,9 +5066,9 @@ We've spent an enormous amount of time creating and checking these footprints an
 <label x="-35.56" y="83.82" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="U$11" gate="G$1" pin="IP+"/>
-<wire x1="134.62" y1="81.28" x2="132.08" y2="81.28" width="0.1524" layer="91"/>
-<label x="132.08" y="81.28" size="1.778" layer="95" rot="R180" xref="yes"/>
+<label x="129.54" y="71.12" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="U$11" gate="G$1" pin="IP-"/>
+<wire x1="129.54" y1="71.12" x2="134.62" y2="71.12" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="TAP_USB_D+" class="0">
@@ -5494,9 +5494,9 @@ We've spent an enormous amount of time creating and checking these footprints an
 <label x="15.24" y="45.72" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="U$11" gate="G$1" pin="IP-"/>
-<wire x1="132.08" y1="71.12" x2="134.62" y2="71.12" width="0.1524" layer="91"/>
-<label x="132.08" y="71.12" size="1.778" layer="95" rot="R180" xref="yes"/>
+<label x="129.54" y="81.28" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="U$11" gate="G$1" pin="IP+"/>
+<wire x1="134.62" y1="81.28" x2="129.54" y2="81.28" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="DUT_OUT_VCC" class="0">
