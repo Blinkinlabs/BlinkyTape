@@ -21,10 +21,39 @@ class TestPowerOnTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     if self.stopMe:
       self.Stop()
 
+  def skip_test_005_current_interference(self):
+
+    self.testRig.disableRelay('EN_USB_VCC')
+    self.testRig.disableRelay('EN_USB_VCC_LIMIT')
+
+    while True:
+      self.testRig.disableRelay('EN_LED_OUT')
+      time.sleep(2)
+      current = self.testRig.measure('DUT_CURRENT_RAW')
+      print current, 
+
+      self.testRig.enableRelay('EN_LED_OUT')
+      time.sleep(1)
+      current = self.testRig.measure('DUT_CURRENT_RAW')
+      print current
+
+  def test_005_current_calibration(self):
+
+    self.testRig.enableRelay('EN_USB_VCC')
+    self.testRig.enableRelay('EN_USB_GND')
+
+    while True:
+      current = self.testRig.measure('DUT_CURRENT_RAW')
+      print current
+      time.sleep(.2)
+
   def test_010_off_current(self):
-    MIN_OFF_CURRENT = -100
-    MAX_OFF_CURRENT = 100
-    current = self.testRig.measure('DUT_CURRENT')
+    MIN_OFF_CURRENT = 20
+    MAX_OFF_CURRENT = 40
+    self.testRig.enableRelay('EN_USB_GND')
+    time.sleep(.5)
+
+    current = self.testRig.measure('DUT_CURRENT_RAW')
 
     self.i.DisplayMessage("Off current: %0.2f < %0.2f < %0.2f." % (MIN_OFF_CURRENT, current, MAX_OFF_CURRENT))
     self.StoreTestResultData("%0.2f" % current)
@@ -34,18 +63,12 @@ class TestPowerOnTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     self.stopMe = False
 
   def test_020_limited_current(self):
-    MIN_LIMITED_CURRENT= 50
-    MAX_LIMITED_CURRENT = 70
+    MIN_LIMITED_CURRENT= 0
+    MAX_LIMITED_CURRENT = 10
 
     self.testRig.enableRelay('EN_USB_GND')
-    self.testRig.enableRelay('EN_USB_VCC')
-    self.testRig.enableRelay('EN_USB_DATA')
+    self.testRig.enableRelay('EN_USB_VCC_LIMIT')
     time.sleep(.5)
-
-    while True:
-      current = self.testRig.measure('DUT_CURRENT')
-      print current
-      time.sleep(.2)
 
     current = self.testRig.measure('DUT_CURRENT')
 
@@ -57,8 +80,8 @@ class TestPowerOnTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     self.stopMe = False
 
   def test_030_full_current(self):
-    MIN_OPERATING_CURRENT = 25
-    MAX_OPERATING_CURRENT = 35
+    MIN_OPERATING_CURRENT = 40
+    MAX_OPERATING_CURRENT = 55
  
     self.testRig.enableRelay('EN_USB_GND')
     self.testRig.enableRelay('EN_USB_VCC')

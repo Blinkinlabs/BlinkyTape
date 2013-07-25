@@ -85,7 +85,7 @@ class TestRig:
     """ Read a measurement pin """
     for pin in self.measurementPins:
       if pin.name == measurementName:
-        return pin.M*self.arduino.analogRead(pin.number) + pin.B
+        return pin.M*(self.arduino.analogRead(pin.number) + pin.B)
 
     raise Exception("Measurement pin " + measurementName + "not found!")
     
@@ -109,11 +109,12 @@ class TestRig:
 
       # Reset all pins to inputs
       for p in self.shortTestPins:
-        self.arduino.pinMode(p.number, 'INPUT')
+        self.arduino.pinMode(p.number, 'INPUT_PULLUP')
 
       # Set the left-side pin to low output
       self.arduino.pinMode(pin.number, 'OUTPUT')
       self.arduino.digitalWrite(pin.number, 'LOW')
+
 
       # Now, iterate through all the other pins
       # There are a few cases here:
@@ -124,16 +125,11 @@ class TestRig:
           if (pin.suppressLow or inputPin.suppressHigh) and (pin.net != inputPin.net):
             continue
 
-          self.arduino.pinMode(inputPin.number, 'INPUT_PULLUP')
-          time.sleep(.05)
-
           shorted = (0 == self.arduino.digitalRead(inputPin.number))
           expectedShorted = (inputPin.net == pin.net)
 
           if shorted != expectedShorted:
             faults.append((pin.name, inputPin.name, expectedShorted, shorted))
-
-          self.arduino.pinMode(inputPin.number, 'INPUT')
    
     return sorted(list(dict.fromkeys(faults)))
 
@@ -145,7 +141,8 @@ def MakeDefaultRig():
 
   # List of pins that are connected to analog sensors on the board
   measurementPins = [
-    MeasurementPin('DUT_CURRENT',    0, 1, 0),  # Note: an analog pin!
+    MeasurementPin('DUT_CURRENT',    0, 2.63, -14),  # Note: an analog pin! Values determined by experiment
+    MeasurementPin('DUT_CURRENT_RAW',1, 1, 0),  # Note: an analog pin! Values determined by experiment
     ]
 
   # List of pins that control a relay on the test rig

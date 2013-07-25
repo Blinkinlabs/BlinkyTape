@@ -48,7 +48,7 @@ class RemoteArduino:
 
   def digitalRead(self, pin):
     """Read the value of a digital pin"""
-    return self.sendCommand('r', pin, 1)
+    return (self.sendCommand('r', pin, 1))[0]
 
   def pinMode(self, pin, mode):
     """Change the mode of a digital pin"""
