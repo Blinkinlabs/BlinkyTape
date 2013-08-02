@@ -5,7 +5,6 @@ import BlinkyTapeUnitTest
 import TestRig
 import UserInterface
 import IcspUtils
-import Config
 
 
 class TestProgramBootloader(BlinkyTapeUnitTest.BlinkyTapeTestCase):
@@ -19,8 +18,8 @@ class TestProgramBootloader(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     self.stopMe = True
 
     self.testRig.resetState()
-    self.testRig.disableRelay('EN_USB_VCC')
-    self.testRig.disableRelay('EN_USB_GND')
+    self.testRig.enableRelay('EN_USB_VCC')
+    self.testRig.enableRelay('EN_USB_GND')
     self.testRig.disconnect()
 
   def tearDown(self):
@@ -31,22 +30,20 @@ class TestProgramBootloader(BlinkyTapeUnitTest.BlinkyTapeTestCase):
       self.Stop()
 
   def test_010_program_fuses(self):
-    config = Config.Config()
-    lockFuses = config.get('ICSP', 'lockFuses', 0x2f)
-    eFuses = config.get('ICSP', 'eFuses', 0xcb)
-    hFuses = config.get('ICSP', 'hFuses', 0xd8)
-    lFuses = config.get('ICSP', 'lFuses', 0xff)
+    lockFuses = 0x3f
+    eFuses = 0xcb
+    hFuses = 0xd8
+    lFuses = 0xff
     
     returnCode = IcspUtils.writeFuses(self.port, lockFuses, eFuses, hFuses, lFuses)
     
     self.assertEqual(returnCode, 0)
     self.stopMe = False
 
-  def test_020_program_fuses(self):
-    config = Config.Config()
-    bootloaderFile = config.get('ICSP', 'bootloaderFile', "Caterina-BlinkyTape.hex")
-    
-    returnCode = IcspUtils.loadFlash(self.port, bootloaderFile)
+  def test_020_program_production(self):
+    productionFile = "firmware/BlinkyTape-Production.hex"
+
+    returnCode = IcspUtils.loadFlash(self.port, productionFile)
 
     self.assertEqual(returnCode, 0)
     self.stopMe = False

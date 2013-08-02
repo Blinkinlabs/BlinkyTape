@@ -12,19 +12,22 @@ def writeFuses(portName, lockFuses, eFuses, hFuses, lFuses):
     "-c", "avrisp",
     "-p", "m32u4",
     "-P", portName,
-    " -B", "200",
-    "-Ulock:w:"  + hex(lockFuses) + ":m",
-    "-Uefuse:w:" + hex(eFuses)    + ":m",
-    "-Uhfuse:w:" + hex(hFuses)    + ":m",
-    "-Ulfuse:w:" + hex(lFuses)    + ":m",
+    "-B", "200",
+    "-u",
+    "-U", "lock:w:%#02X:m"  % lockFuses,
+    "-U", "efuse:w:%#02X:m" % eFuses,
+    "-U", "hfuse:w:%#02X:m" % hFuses,
+    "-U", "lfuse:w:%#02X:m" % lFuses,
   ]
+  print command
 
   return subprocess.call(command)
   
 def loadFlash(portName, flashFile):
   """
   Attempt to write a .hex file to the flash of the attached Atmega device.
-
+  @param portName String of the port name to write to
+  @param flashFile Array of file(s) to write to the device
   """
   command = [
     "avrdude",
@@ -32,11 +35,10 @@ def loadFlash(portName, flashFile):
     "-p", "m32u4",
     "-P", portName,
     "-B", "1",
-    "-Uflash:w:" + flashFile + ":i",
+    "-U" "flash:w:%s:i" % flashFile,
   ]
 
   return subprocess.call(command)
-
 
 
 

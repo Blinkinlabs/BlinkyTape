@@ -37,7 +37,7 @@ class TestPowerOnTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
       current = self.testRig.measure('DUT_CURRENT_RAW')
       print current
 
-  def test_005_current_calibration(self):
+  def skip_test_005_current_calibration(self):
 
     self.testRig.enableRelay('EN_USB_VCC')
     self.testRig.enableRelay('EN_USB_GND')

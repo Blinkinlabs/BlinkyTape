@@ -1,0 +1,5 @@
+Remove the last two lines of the bootloader.
+
+Merge the two files together:
+cat Caterina-BlinkyTape.hex BlinkyTape-Application.hex > BlinkyTape-Production.hex
+

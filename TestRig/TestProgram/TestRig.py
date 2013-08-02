@@ -51,6 +51,8 @@ class TestRig:
     if remoteVersion < 1:
       raise Exception("Remote version (" + hex(remoteVersion) + ") too low, upgrade the Arduino sketch")
 
+    self.resetState()
+
   def disconnect(self):
     self.arduino = None
 
