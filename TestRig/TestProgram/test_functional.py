@@ -1,5 +1,4 @@
 import time
-import glob
 import serial
 
 import BlinkyTapeUnitTest
@@ -51,15 +50,8 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     self.i.DisplayMessage("Waiting for device to enumerate on USB...")
 
     MAX_ENUMERATION_TIME_S = 5
-    platform = DetectPlatform.detectPlatform()
-    if platform == 'Darwin':
-      SERIAL_DEVICE_PATH = "/dev/cu.usbmodem*"
-    else:
-      # TODO: linux?
-      SERIAL_DEVICE_PATH = "/dev/cu.usbmodem*"
-
     # Scan for all connected devices; platform dependent
-    originalPorts = set(glob.glob(SERIAL_DEVICE_PATH))
+    originalPorts = set(DetectPlatform.ListSerialPorts())
  
     self.testRig.enableRelay('EN_USB_GND')
     self.testRig.enableRelay('EN_USB_VCC')
@@ -68,7 +60,7 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     # Wait for the device to enumerate
     startTime = time.time()
     while(time.time() < startTime + 5):
-      finalPorts =set(glob.glob("/dev/cu.usbmodem*"))
+      finalPorts = set(DetectPlatform.ListSerialPorts())
       newPorts = finalPorts - originalPorts
       if len(newPorts) == 1:
         self.dut.port = list(newPorts)[0]
@@ -95,7 +87,7 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
   def test_040_dutConnectedCurrent(self):
     self.i.DisplayMessage("Checking connected current...")
 
-    MIN_CONNECTED_CURRENT = 30
+    MIN_CONNECTED_CURRENT = 25
     MAX_CONNECTED_CURRENT = 36
 
     current = self.testRig.measure('DUT_CURRENT')
@@ -187,7 +179,7 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
   def test_080_whiteLedsOnCurrent(self):
     self.i.DisplayMessage("Checking white LEDs on...")
 
-    MIN_WHITE_CURRENT = 300
+    MIN_WHITE_CURRENT = 280
     MAX_WHITE_CURRENT = 330
     # TODO: Why send this twice?
     for j in range (0, 2):

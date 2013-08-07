@@ -103,7 +103,10 @@ class Menu(object):
       self.DrawMenu()
       s = raw_input("type a selection and press enter ")
       try:
-        n = int(s) - 1
+        if len(s) == 0:
+	  n = 1
+        else:
+          n = int(s) - 1
       except ValueError:
         pass
       else:

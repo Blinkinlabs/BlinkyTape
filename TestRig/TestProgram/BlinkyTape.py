@@ -27,7 +27,7 @@ class BlinkyTape:
     data.append(r)
     data.append(g)
     data.append(b)
-    self.serial.write(data)
+    self.serial.write(str(data))  # change for new python/pyserial?
     self.serial.flush()
 
   def show(self):

@@ -1,6 +1,6 @@
 import time
-import glob
 
+import DetectPlatform
 import RemoteArduino
 
 
@@ -138,7 +138,7 @@ class TestRig:
 def MakeDefaultRig():
   """ Actually we only have one version of the hardware. Make a class instance to represent it.
   """
-  serialPorts = glob.glob("/dev/cu.usbmodem*")
+  serialPorts = DetectPlatform.ListSerialPorts()
   port = serialPorts[0]
 
   # List of pins that are connected to analog sensors on the board
