@@ -143,8 +143,7 @@ def MakeDefaultRig():
 
   # List of pins that are connected to analog sensors on the board
   measurementPins = [
-    MeasurementPin('DUT_CURRENT',    0, 2.63, -14),  # Note: an analog pin! Values determined by experiment
-    MeasurementPin('DUT_CURRENT_RAW',1, 1, 0),  # Note: an analog pin! Values determined by experiment
+    MeasurementPin('DUT_CURRENT',0, 1, 0),  # Note: an analog pin! Values determined by experiment
     ]
 
   # List of pins that control a relay on the test rig
@@ -168,8 +167,9 @@ def MakeDefaultRig():
     ArduinoPin('DUT_OUT_GND',    22, net='GND', suppressHigh=True),
     ArduinoPin('DUT_USB_VCC',    20, net='VCC', suppressLow=True),
     ArduinoPin('DUT_OUT_VCC',    21, net='VCC', suppressLow=True),
-    ArduinoPin('ICSP_RESET',      2),  # Regular digital pins
-    ArduinoPin('DUT_A10',         3),
+    ArduinoPin('ICSP_RESET',      0),  # Regular digital pins
+    ArduinoPin('DUT_A10',         1),
+    # 2,3 used by I2C port for current sensor
     ArduinoPin('DUT_D11',         4),
     ArduinoPin('DUT_D7',          5),
     ArduinoPin('DUT_D13',         6),

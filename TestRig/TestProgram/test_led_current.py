@@ -88,8 +88,7 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
         for x in range(0, 60):
           self.dut.sendPixel(bright,0,0)
         self.dut.show();
-      time.sleep(.6)
-      current = self.testRig.measure('DUT_CURRENT_RAW')
+      current = self.testRig.measure('DUT_CURRENT')
       print bright, current
 
     self.stopMe = False

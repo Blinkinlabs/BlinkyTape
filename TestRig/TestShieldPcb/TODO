@@ -1,8 +1,10 @@
 For next revision:
-- add decoupling caps
+x- reverse current sensor direction
 x- space out .1 headers for ribbon cable connectors
+- add decoupling caps
 - fix diode size
 - change usb a header
-- change power resistor header
-- add a polyfuse on input VCC line
-x- reverse current sensor direction
+- change power resistor package
+- move reset and A10 input from 2,3 to pins 0,1 
+- replace current sensor with an on-board INA219 (not sensitive to magnetic fields)
+- Add limiting resistors on detect pins?

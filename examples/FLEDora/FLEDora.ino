@@ -19,12 +19,12 @@
 #define LED_COUNT 60
 #define THRESHOLD 1
 
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, 5, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, 13, NEO_GRB + NEO_KHZ800);
 
 uint8_t pixel_index;
 long last_time;
 
-uint8_t btn_pin = 13;
+//uint8_t btn_pin = 13;
 
 uint8_t anim_delay_ms = 30;
 
@@ -36,8 +36,8 @@ void setup()
   strip.show();
   last_time = millis();
 
-  pinMode(btn_pin, INPUT);
-  digitalWrite(btn_pin, HIGH);
+//  pinMode(btn_pin, INPUT);
+//  digitalWrite(btn_pin, HIGH);
 }
 
 void serialLoop() {

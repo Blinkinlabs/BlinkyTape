@@ -4,17 +4,23 @@
 #define LED_COUNT 60
 struct CRGB leds[LED_COUNT];
 
+#define PIN_BUTTON 10
+#define PIN_IO_A   7
+#define PIN_IO_B   11
+#define PIN_SIGNAL 13
+#define PIN_INPUT  10
+
 long last_time;
 
 void setup()
 {  
   Serial.begin(57600);
   
-  LEDS.addLeds<WS2811, 5, GRB>(leds, LED_COUNT);
+  LEDS.addLeds<WS2811, PIN_SIGNAL, GRB>(leds, LED_COUNT);
   LEDS.showColor(CRGB(0, 0, 0));
   LEDS.setBrightness(230); // 90% brightness
   LEDS.show();
-  
+   
   last_time = millis();
 }
 

@@ -4871,9 +4871,9 @@ We've spent an enormous amount of time creating and checking these footprints an
 <label x="-33.02" y="129.54" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
-<pinref part="U1" gate="G$1" pin="D2"/>
-<wire x1="106.68" y1="132.08" x2="109.22" y2="132.08" width="0.1524" layer="91"/>
-<label x="109.22" y="132.08" size="1.778" layer="95" xref="yes"/>
+<label x="109.22" y="139.7" size="1.778" layer="95" xref="yes"/>
+<pinref part="U1" gate="G$1" pin="RX"/>
+<wire x1="109.22" y1="139.7" x2="106.68" y2="139.7" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="DUT_A10" class="0">
@@ -4883,9 +4883,9 @@ We've spent an enormous amount of time creating and checking these footprints an
 <label x="-33.02" y="119.38" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
-<pinref part="U1" gate="G$1" pin="*D3"/>
-<wire x1="109.22" y1="129.54" x2="106.68" y2="129.54" width="0.1524" layer="91"/>
-<label x="109.22" y="129.54" size="1.778" layer="95" xref="yes"/>
+<label x="109.22" y="137.16" size="1.778" layer="95" xref="yes"/>
+<pinref part="U1" gate="G$1" pin="TX"/>
+<wire x1="109.22" y1="137.16" x2="106.68" y2="137.16" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="DUT_D11" class="0">

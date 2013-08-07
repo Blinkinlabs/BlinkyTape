@@ -12,7 +12,7 @@
 // using the following arduino pins:
 //
 // pin name:    BlinkyTape:
-// slave reset: 2
+// slave reset: 0
 // MOSI:        (MOSI, ICSP header)
 // MISO:        (MISO, ICSP header)
 // SCK:         (SCK, ICSP header)
@@ -22,8 +22,13 @@
 // 0: Error       - Lights up if something goes wrong (use red if that makes sense)
 // 1: Programming - In communication with the slave
 //
+// 6 August 2013 Matt Mets
+// -Replace the analog current measurement with an INA219 courtesy Adafruit
+// -Remove all LEDs (really no spare pins!)
+// -move target reset pin to 0
+//
 // 7 July 2013 Matt Mets
-// -Disable 'heartbeat' LED (no free pins!), move error, programming to pins 0 and 1.
+// -Disable 'heartbeat' (no free pins!), move error, programming to pins 0 and 1.
 // -Move target reset to pin 2.
 // -Add 0x21 command for BlinkyTape Test rig functionality (!)
 //
@@ -54,12 +59,17 @@
 // - More information at http://code.google.com/p/mega-isp
 
 #include "pins_arduino.h"
-#define RESET     2
+#include <Wire.h>
+#include <Adafruit_INA219.h>
+
+Adafruit_INA219 ina219;
+
+#define RESET     0
 
 //#define LED_HB    0
-#define LED_ERR   0
-#define LED_PMODE 1
-#define PROG_FLICKER true
+//#define LED_ERR   0
+//#define LED_PMODE 1
+//#define PROG_FLICKER true
 
 #define HWVER 2
 #define SWMAJ 1
@@ -77,12 +87,14 @@ void pulse(int pin, int times);
 
 void setup() {
   Serial.begin(19200);
-  pinMode(LED_PMODE, OUTPUT);
-  pulse(LED_PMODE, 2);
-  pinMode(LED_ERR, OUTPUT);
-  pulse(LED_ERR, 2);
+//  pinMode(LED_PMODE, OUTPUT);
+//  pulse(LED_PMODE, 2);
+//  pinMode(LED_ERR, OUTPUT);
+//  pulse(LED_ERR, 2);
 //  pinMode(LED_HB, OUTPUT);
 //  pulse(LED_HB, 2);
+
+  ina219.begin();
 }
 
 int error=0;
@@ -124,12 +136,12 @@ parameter param;
 
 
 void loop(void) {
-  // is pmode active?
-  if (pmode) digitalWrite(LED_PMODE, HIGH); 
-  else digitalWrite(LED_PMODE, LOW);
-  // is there an error?
-  if (error) digitalWrite(LED_ERR, HIGH); 
-  else digitalWrite(LED_ERR, LOW);
+//  // is pmode active?
+//  if (pmode) digitalWrite(LED_PMODE, HIGH); 
+//  else digitalWrite(LED_PMODE, LOW);
+//  // is there an error?
+//  if (error) digitalWrite(LED_ERR, HIGH); 
+//  else digitalWrite(LED_ERR, LOW);
 
 //  // light the heartbeat LED
 //  heartbeat();
@@ -159,10 +171,10 @@ void pulse(int pin, int times) {
   while (times--);
 }
 
-void prog_lamp(int state) {
-  if (PROG_FLICKER)
-    digitalWrite(LED_PMODE, state);
-}
+//void prog_lamp(int state) {
+//  if (PROG_FLICKER)
+//    digitalWrite(LED_PMODE, state);
+//}
 
 void spi_init() {
   uint8_t x;
@@ -474,43 +486,43 @@ void read_signature() {
 
 uint8_t versionNumber = 1;  // Simple I/O controller for use as a test rig
 
-// Mode averaging code from here:
-// http://www.elcojacobs.com/eleminating-noise-from-sensor-readings-on-arduino-with-digital-filtering/
-#define NUM_READS 500
-#define NUM_MODE_SAMPLES 50
-float readTemperature(int sensorpin){
-   // read multiple values and sort them to take the mode
-   int sortedValues[NUM_READS];
-   for(int i=0;i<NUM_READS;i++){
-     int value = analogRead(sensorpin);
-     int j;
-     if(value<sortedValues[0] || i==0){
-        j=0; //insert at first position
-     }
-     else{
-       for(j=1;j<i;j++){
-          if(sortedValues[j-1]<=value && sortedValues[j]>=value){
-            // j is insert position
-            break;
-          }
-       }
-     }
-     for(int k=i;k>j;k--){
-       // move all values higher than current reading up one position
-       sortedValues[k]=sortedValues[k-1];
-     }
-     sortedValues[j]=value; //insert current reading
-   }
-   
-   //return scaled mode of NUM_MODE_SAMPLES values
-   float returnval = 0;
-   for(int i=NUM_READS/2-NUM_MODE_SAMPLES/2;i<(NUM_READS/2+NUM_MODE_SAMPLES/2);i++){
-     returnval += sortedValues[i];
-   }
-   returnval = returnval/(NUM_MODE_SAMPLES);
-   
-   return returnval;
-}
+//// Mode averaging code from here:
+//// http://www.elcojacobs.com/eleminating-noise-from-sensor-readings-on-arduino-with-digital-filtering/
+//#define NUM_READS 500
+//#define NUM_MODE_SAMPLES 50
+//float readTemperature(int sensorpin){
+//   // read multiple values and sort them to take the mode
+//   int sortedValues[NUM_READS];
+//   for(int i=0;i<NUM_READS;i++){
+//     int value = analogRead(sensorpin);
+//     int j;
+//     if(value<sortedValues[0] || i==0){
+//        j=0; //insert at first position
+//     }
+//     else{
+//       for(j=1;j<i;j++){
+//          if(sortedValues[j-1]<=value && sortedValues[j]>=value){
+//            // j is insert position
+//            break;
+//          }
+//       }
+//     }
+//     for(int k=i;k>j;k--){
+//       // move all values higher than current reading up one position
+//       sortedValues[k]=sortedValues[k-1];
+//     }
+//     sortedValues[j]=value; //insert current reading
+//   }
+//   
+//   //return scaled mode of NUM_MODE_SAMPLES values
+//   float returnval = 0;
+//   for(int i=NUM_READS/2-NUM_MODE_SAMPLES/2;i<(NUM_READS/2+NUM_MODE_SAMPLES/2);i++){
+//     returnval += sortedValues[i];
+//   }
+//   returnval = returnval/(NUM_MODE_SAMPLES);
+//   
+//   return returnval;
+//}
 
 void testRigCommand(uint8_t command, uint8_t channel) {
 // Command descriptions:
@@ -530,12 +542,14 @@ void testRigCommand(uint8_t command, uint8_t channel) {
     case 'm':
       {
         // Convert a float into an integer, but with the decimal place shifted one digit to the right
-        int current = readTemperature(channel)*10;
+//        int current = 0;
+//        int current = readTemperature(channel)*10;
+        int current = int(ina219.getCurrent_mA());
         
         if (CRC_EOP == getch()) {
           Serial.print((char)STK_INSYNC);
-          Serial.print((char)((current >> 8)&0xFF));
-          Serial.print((char)(0xFF));
+          Serial.print((char)((current >> 8) & 0xFF));
+          Serial.print((char)(current & 0xFF));
           Serial.print((char)STK_OK);
         } 
         else {

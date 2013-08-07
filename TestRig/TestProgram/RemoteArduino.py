@@ -42,9 +42,12 @@ class RemoteArduino:
   def analogRead(self, pin):
     """Read the value of an analog pin"""
     # TODO: How to send float cleanly?
-    response = self.sendCommand('m', pin, 2)
-    analogValue = (response[0]*256 + response[1])/10
-    return float(analogValue)
+    counts = 100
+    analogValue = 0
+    for i in range(0, counts):
+      response = self.sendCommand('m', pin, 2)
+      analogValue += (response[0]*256 + response[1])
+    return float(analogValue/counts)
 
   def digitalRead(self, pin):
     """Read the value of a digital pin"""
