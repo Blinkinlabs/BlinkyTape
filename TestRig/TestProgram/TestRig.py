@@ -83,6 +83,23 @@ class TestRig:
         return
     raise Exception("Relay " + relayName + "not found!")
 
+  def setOutputLow(self, pinName):
+    """ Disable an output relay """
+    for pin in self.shortTestPins:
+      if pin.name == pinName:
+        self.arduino.pinMode(pin.number, 'OUTPUT')
+        self.arduino.digitalWrite(pin.number, 'LOW')
+        return
+    raise Exception("Pin" + pinName + "not found!")
+
+  def setInput(self, pinName):
+    """ Disable an output relay """
+    for pin in self.shortTestPins:
+      if pin.name == pinName:
+        self.arduino.pinMode(pin.number, 'INPUT')
+        return
+    raise Exception("Pin" + pinName + "not found!")
+
   def measure(self, measurementName):
     """ Read a measurement pin """
     for pin in self.measurementPins:

@@ -104,7 +104,7 @@ class Menu(object):
       s = raw_input("type a selection and press enter ")
       try:
         if len(s) == 0:
-	  n = 1
+	  n = 0
         else:
           n = int(s) - 1
       except ValueError:

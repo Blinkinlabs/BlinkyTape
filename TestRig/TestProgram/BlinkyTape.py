@@ -13,7 +13,8 @@ class BlinkyTape:
     self.port = port
 
     self.serial = serial.Serial(port, 115200)
-    self.show() # Flush
+    self.serial.write(chr(255))
+    self.serial.flush()
 
   def disconnct(self):
     self.port = None
@@ -33,25 +34,8 @@ class BlinkyTape:
   def show(self):
     self.serial.write(chr(255))
     self.serial.flush()
-
-class BlinkyTape_LPD8806:
-  def __init__(self, port):
-    self.serial = serial.Serial(port, 115200)
-
-  def sendPixel(self,r,g,b):
-    data = bytearray()
-    data.append(0x80 | (r>>1))
-    data.append(0x80 | (g>>1))
-    data.append(0x80 | (b>>1))
-    self.serial.write(data)
-    self.serial.flush()
-
-  def show(self):
-    data = bytearray()
-    for i in range(0,8):
-      data.append(0x00)
-    self.serial.write(data)
-    self.serial.flush()
+    ret = self.serial.read(1)
+    return ret
 
 
 if __name__ == "__main__":

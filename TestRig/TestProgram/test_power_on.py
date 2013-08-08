@@ -24,7 +24,7 @@ class TestPowerOnTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
 
   def test_010_off_current(self):
     MIN_OFF_CURRENT = -1
-    MAX_OFF_CURRENT = 1
+    MAX_OFF_CURRENT = 2
     self.testRig.enableRelay('EN_USB_GND')
     time.sleep(.5)
 
@@ -38,8 +38,8 @@ class TestPowerOnTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     self.stopMe = False
 
   def test_020_limited_current(self):
-    MIN_LIMITED_CURRENT= 15
-    MAX_LIMITED_CURRENT = 36
+    MIN_LIMITED_CURRENT = 15
+    MAX_LIMITED_CURRENT = 35
 
     self.testRig.enableRelay('EN_USB_GND')
     self.testRig.enableRelay('EN_USB_VCC_LIMIT')
@@ -55,8 +55,8 @@ class TestPowerOnTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     self.stopMe = False
 
   def test_030_full_current(self):
-    MIN_OPERATING_CURRENT = 30
-    MAX_OPERATING_CURRENT = 36
+    MIN_OPERATING_CURRENT = 20
+    MAX_OPERATING_CURRENT = 40
  
     self.testRig.enableRelay('EN_USB_GND')
     self.testRig.enableRelay('EN_USB_VCC')

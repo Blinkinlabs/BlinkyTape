@@ -179,8 +179,8 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
   def test_080_whiteLedsOnCurrent(self):
     self.i.DisplayMessage("Checking white LEDs on...")
 
-    MIN_WHITE_CURRENT = 280
-    MAX_WHITE_CURRENT = 330
+    MIN_WHITE_CURRENT = 250
+    MAX_WHITE_CURRENT = 350
     # TODO: Why send this twice?
     for j in range (0, 2):
       for x in range(0, 60):
@@ -195,3 +195,77 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     self.assertTrue(current > MIN_WHITE_CURRENT
                     and current < MAX_WHITE_CURRENT)
     self.stopMe = False
+
+  def test_090_D7_connected(self):
+    self.i.DisplayMessage("Checking D7 input works...")
+    self.testRig.setOutputLow('DUT_D7')
+
+    pinStates = 0
+    for j in range (0, 2):
+      for x in range(0, 60):
+        self.dut.sendPixel(0,0,0)
+      pinStates = self.dut.show();
+
+    self.testRig.setInput('DUT_D7')
+    
+    self.assertTrue(ord(pinStates[0]) == 11)
+    self.stopMe = False
+
+  def test_091_D11_connected(self):
+    self.i.DisplayMessage("Checking D11 input works...")
+    self.testRig.setOutputLow('DUT_D11')
+
+    pinStates = 0
+    for j in range (0, 2):
+      for x in range(0, 60):
+        self.dut.sendPixel(0,0,0)
+      pinStates = self.dut.show();
+
+    self.testRig.setInput('DUT_D11')
+    
+    self.assertTrue(ord(pinStates[0]) == 13)
+    self.stopMe = False
+
+  def test_092_A10_connected(self):
+    self.i.DisplayMessage("Checking A10 input works...")
+    self.testRig.setOutputLow('DUT_A10')
+
+    pinStates = 0
+    for j in range (0, 2):
+      for x in range(0, 60):
+        self.dut.sendPixel(0,0,0)
+      pinStates = self.dut.show();
+
+    self.testRig.setInput('DUT_A10')
+   
+    self.assertTrue(ord(pinStates[0]) == 14)
+    self.stopMe = False
+
+  def test_100_button_connected(self):
+    self.i.DisplayMessage("Checking button input works...")
+
+    MAX_TIME_SECONDS = 60;
+
+    startTime = time.time()
+    found = False
+    mode = True
+
+    while((not found) and (time.time() < startTime + MAX_TIME_SECONDS)):
+      pinStates = 0
+      for j in range (0, 2):
+        for x in range(0, 60):
+	  if mode:
+            self.dut.sendPixel(0,0,100)
+          else:
+            self.dut.sendPixel(0,0,0)
+        pinStates = self.dut.show();
+
+      if ord(pinStates[0]) == 0x07:
+        found = True
+
+      mode = not mode
+      time.sleep(.5)
+   
+    self.assertTrue(found)
+    self.stopMe = False
+
