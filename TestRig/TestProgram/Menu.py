@@ -101,7 +101,7 @@ class Menu(object):
     """ Run an interactive menu """
     while True:
       self.DrawMenu()
-      s = raw_input("type a selection and press enter ")
+      s = raw_input("Type a selection or press enter to run all tests")
       try:
         if len(s) == 0:
 	  n = 0

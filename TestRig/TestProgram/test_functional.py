@@ -87,8 +87,8 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
   def test_040_dutConnectedCurrent(self):
     self.i.DisplayMessage("Checking connected current...")
 
-    MIN_CONNECTED_CURRENT = 25
-    MAX_CONNECTED_CURRENT = 36
+    MIN_CONNECTED_CURRENT = 20
+    MAX_CONNECTED_CURRENT = 40
 
     current = self.testRig.measure('DUT_CURRENT')
 
@@ -102,8 +102,8 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
   def test_045_LedsConnectedCurrent(self):
     self.i.DisplayMessage("Checking LEDs connected current...")
 
-    MIN_CONNECTED_CURRENT = 35
-    MAX_CONNECTED_CURRENT = 45
+    MIN_CONNECTED_CURRENT = 30
+    MAX_CONNECTED_CURRENT = 50
 
     self.testRig.enableRelay('EN_LED_OUT')
 
