@@ -553,11 +553,6 @@ by exp-project-lbr.ulp</description>
 <pad name="PAD@15" x="0.5" y="-1.5" drill="0.35" diameter="2" shape="square" stop="no" thermals="no"/>
 <pad name="PAD@16" x="1.5" y="-1.5" drill="0.35" diameter="2" stop="no" thermals="no"/>
 </package>
-<package name="WS2811_CONNECTOR">
-<smd name="DATA" x="0" y="2.95" dx="2.5" dy="1" layer="1" roundness="50" thermals="no" cream="no"/>
-<smd name="5V" x="0" y="0" dx="2.5" dy="1" layer="1" roundness="50" thermals="no" cream="no"/>
-<smd name="GND" x="0" y="-2.95" dx="2.5" dy="1" layer="1" roundness="50" thermals="no" cream="no"/>
-</package>
 <package name="CRYSTAL_3225">
 <smd name="P$1" x="-1.1" y="-0.8" dx="1.4" dy="1.15" layer="1"/>
 <smd name="P$2" x="1.1" y="-0.8" dx="1.4" dy="1.15" layer="1"/>
@@ -736,10 +731,19 @@ by exp-project-lbr.ulp</description>
 <package name="TEST_PAD_SMT">
 <smd name="P$1" x="0" y="0" dx="1.8" dy="3" layer="1" roundness="50" thermals="no" cream="no"/>
 </package>
-<package name="BLINKYTILE_PCB_EDGE">
-<smd name="P$1" x="-5.08" y="0" dx="6.5" dy="3.6" layer="1" thermals="no" cream="no"/>
-<smd name="P$2" x="0" y="0" dx="1.66" dy="3.6" layer="1" thermals="no" cream="no"/>
-<smd name="P$3" x="5.08" y="0" dx="6.5" dy="3.6" layer="1" thermals="no" cream="no"/>
+<package name="WS2812B_CONNECTOR">
+<smd name="5V" x="0" y="2.5" dx="2.7" dy="1.6" layer="16" roundness="25" rot="R180" thermals="no" cream="no"/>
+<smd name="DATA" x="0" y="0" dx="2.7" dy="1.6" layer="1" roundness="25" thermals="no" cream="no"/>
+<smd name="GND" x="0" y="-2.5" dx="2.7" dy="1.6" layer="1" roundness="50" thermals="no" cream="no"/>
+<pad name="5V_1" x="1.35" y="2.5" drill="1" thermals="no"/>
+<pad name="DATA_1" x="1.35" y="0" drill="1" diameter="1.5" thermals="no"/>
+<pad name="GND_1" x="1.35" y="-2.5" drill="1" diameter="1.5" thermals="no"/>
+<pad name="5V_2" x="-0.5" y="2.5" drill="1" thermals="no"/>
+<pad name="DATA_2" x="-0.5" y="0" drill="1" diameter="1.5" thermals="no"/>
+<pad name="GND_2" x="-0.5" y="-2.5" drill="1" diameter="1.5" thermals="no"/>
+<smd name="5V1" x="0" y="2.5" dx="2.7" dy="1.6" layer="1" roundness="25" thermals="no" cream="no"/>
+<smd name="DATA1" x="0" y="0" dx="2.7" dy="1.6" layer="16" roundness="25" rot="R180" thermals="no" cream="no"/>
+<smd name="GND1" x="0" y="-2.5" dx="2.7" dy="1.6" layer="16" roundness="50" rot="R180" thermals="no" cream="no"/>
 </package>
 </packages>
 <symbols>
@@ -815,15 +819,6 @@ by exp-project-lbr.ulp</description>
 <text x="-20.32" y="-63.5" size="1.778" layer="96">&gt;VALUE</text>
 <text x="-20.32" y="26.162" size="1.778" layer="95">&gt;NAME</text>
 </symbol>
-<symbol name="WS2811_CONNECTOR">
-<pin name="DATA" x="-7.62" y="2.54" visible="pad" length="middle"/>
-<pin name="5V" x="-7.62" y="0" visible="pad" length="middle"/>
-<pin name="GND" x="-7.62" y="-2.54" visible="pad" length="middle"/>
-<wire x1="-2.54" y1="5.08" x2="0" y2="5.08" width="0.254" layer="94"/>
-<wire x1="0" y1="5.08" x2="0" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="0" y1="-5.08" x2="-2.54" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="-2.54" y1="-5.08" x2="-2.54" y2="5.08" width="0.254" layer="94"/>
-</symbol>
 <symbol name="MICRO_USB">
 <wire x1="-7.62" y1="7.62" x2="2.54" y2="7.62" width="0.254" layer="94"/>
 <wire x1="2.54" y1="7.62" x2="2.54" y2="-7.62" width="0.254" layer="94"/>
@@ -868,6 +863,15 @@ by exp-project-lbr.ulp</description>
 </symbol>
 <symbol name="TEST_PAD_SMT">
 <pin name="P$1" x="-5.08" y="0" length="middle"/>
+</symbol>
+<symbol name="WS2812B_CONNECTOR">
+<pin name="DATA" x="-5.08" y="0" visible="pad" length="middle"/>
+<pin name="5V" x="-5.08" y="2.54" visible="pad" length="middle"/>
+<pin name="GND" x="-5.08" y="-2.54" visible="pad" length="middle"/>
+<wire x1="0" y1="5.08" x2="5.08" y2="5.08" width="0.254" layer="94"/>
+<wire x1="5.08" y1="5.08" x2="5.08" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="5.08" y1="-5.08" x2="0" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="0" y1="-5.08" x2="0" y2="5.08" width="0.254" layer="94"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -1113,33 +1117,6 @@ by exp-project-lbr.ulp</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="WS2811_CONNECTOR">
-<gates>
-<gate name="G$1" symbol="WS2811_CONNECTOR" x="2.54" y="0"/>
-</gates>
-<devices>
-<device name="STRIP" package="WS2811_CONNECTOR">
-<connects>
-<connect gate="G$1" pin="5V" pad="5V"/>
-<connect gate="G$1" pin="DATA" pad="DATA"/>
-<connect gate="G$1" pin="GND" pad="GND"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="BLINKYTILE_EDGE" package="BLINKYTILE_PCB_EDGE">
-<connects>
-<connect gate="G$1" pin="5V" pad="P$3"/>
-<connect gate="G$1" pin="DATA" pad="P$2"/>
-<connect gate="G$1" pin="GND" pad="P$1"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
 <deviceset name="MICRO_USB">
 <gates>
 <gate name="G$1" symbol="MICRO_USB" x="-2.54" y="0"/>
@@ -1228,6 +1205,23 @@ by exp-project-lbr.ulp</description>
 <device name="" package="TEST_PAD_SMT">
 <connects>
 <connect gate="G$1" pin="P$1" pad="P$1"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="WS2812B_CONNECTOR">
+<gates>
+<gate name="G$1" symbol="WS2812B_CONNECTOR" x="-2.54" y="0"/>
+</gates>
+<devices>
+<device name="" package="WS2812B_CONNECTOR">
+<connects>
+<connect gate="G$1" pin="5V" pad="5V 5V1 5V_1 5V_2"/>
+<connect gate="G$1" pin="DATA" pad="DATA DATA1 DATA_1 DATA_2"/>
+<connect gate="G$1" pin="GND" pad="GND GND1 GND_1 GND_2"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -3522,7 +3516,6 @@ Metric Code Size 5664</description>
 <part name="S1" library="blinkyboard" deviceset="GLOWBOARD_KMR211G" device="" value="Normally open"/>
 <part name="Q1" library="blinkiverse" deviceset="CRYSTAL_4PAD" device="2520" value="16 MHz"/>
 <part name="C4" library="blinkiverse" deviceset="C_US" device="" value="0.1uF"/>
-<part name="WS1" library="blinkiverse" deviceset="WS2811_CONNECTOR" device="STRIP"/>
 <part name="P+3" library="supply1" deviceset="VCC" device=""/>
 <part name="GND4" library="supply1" deviceset="GND" device=""/>
 <part name="P+4" library="supply1" deviceset="VCC" device=""/>
@@ -3537,7 +3530,6 @@ Metric Code Size 5664</description>
 <part name="P+2" library="supply1" deviceset="VCC" device=""/>
 <part name="GND1" library="supply1" deviceset="GND" device=""/>
 <part name="GND2" library="supply1" deviceset="GND" device=""/>
-<part name="WS3" library="blinkiverse" deviceset="WS2811_CONNECTOR" device="STRIP"/>
 <part name="P+5" library="supply1" deviceset="VCC" device=""/>
 <part name="U$10" library="blinkiverse" deviceset="TEST_PAD_SMT" device=""/>
 <part name="U$11" library="blinkiverse" deviceset="TEST_PAD_SMT" device=""/>
@@ -3545,6 +3537,7 @@ Metric Code Size 5664</description>
 <part name="U$13" library="blinkiverse" deviceset="TEST_PAD_SMT" device=""/>
 <part name="U$14" library="blinkiverse" deviceset="TEST_PAD_SMT" device=""/>
 <part name="GND9" library="supply1" deviceset="GND" device=""/>
+<part name="U$9" library="blinkiverse" deviceset="WS2812B_CONNECTOR" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -3581,7 +3574,6 @@ Metric Code Size 5664</description>
 <instance part="S1" gate="1" x="134.62" y="78.74" rot="MR0"/>
 <instance part="Q1" gate="G$1" x="15.24" y="71.12" rot="R90"/>
 <instance part="C4" gate="G$1" x="-20.32" y="121.92"/>
-<instance part="WS1" gate="G$1" x="172.72" y="33.02"/>
 <instance part="P+3" gate="VCC" x="162.56" y="43.18"/>
 <instance part="GND4" gate="1" x="162.56" y="25.4"/>
 <instance part="P+4" gate="VCC" x="-20.32" y="73.66"/>
@@ -3596,7 +3588,6 @@ Metric Code Size 5664</description>
 <instance part="P+2" gate="VCC" x="101.6" y="137.16" rot="R90"/>
 <instance part="GND1" gate="1" x="101.6" y="132.08" rot="R270"/>
 <instance part="GND2" gate="1" x="170.18" y="81.28"/>
-<instance part="WS3" gate="G$1" x="182.88" y="33.02"/>
 <instance part="P+5" gate="VCC" x="180.34" y="106.68"/>
 <instance part="U$10" gate="G$1" x="187.96" y="91.44"/>
 <instance part="U$11" gate="G$1" x="187.96" y="96.52"/>
@@ -3604,6 +3595,7 @@ Metric Code Size 5664</description>
 <instance part="U$13" gate="G$1" x="187.96" y="86.36"/>
 <instance part="U$14" gate="G$1" x="187.96" y="93.98"/>
 <instance part="GND9" gate="1" x="20.32" y="63.5"/>
+<instance part="U$9" gate="G$1" x="172.72" y="33.02"/>
 </instances>
 <busses>
 </busses>
@@ -3676,13 +3668,10 @@ Metric Code Size 5664</description>
 <junction x="33.02" y="10.16"/>
 </segment>
 <segment>
-<pinref part="WS1" gate="G$1" pin="GND"/>
-<wire x1="165.1" y1="30.48" x2="162.56" y2="30.48" width="0.1524" layer="91"/>
 <pinref part="GND4" gate="1" pin="GND"/>
 <wire x1="162.56" y1="30.48" x2="162.56" y2="27.94" width="0.1524" layer="91"/>
-<pinref part="WS3" gate="G$1" pin="GND"/>
-<wire x1="175.26" y1="30.48" x2="165.1" y2="30.48" width="0.1524" layer="91"/>
-<junction x="165.1" y="30.48"/>
+<pinref part="U$9" gate="G$1" pin="GND"/>
+<wire x1="162.56" y1="30.48" x2="167.64" y2="30.48" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="U$4" gate="G$1" pin="GND"/>
@@ -3823,17 +3812,14 @@ Metric Code Size 5664</description>
 </net>
 <net name="D13" class="0">
 <segment>
-<pinref part="WS1" gate="G$1" pin="DATA"/>
-<wire x1="165.1" y1="35.56" x2="157.48" y2="35.56" width="0.1524" layer="91"/>
-<label x="157.48" y="35.56" size="1.778" layer="95" rot="R180" xref="yes"/>
-<pinref part="WS3" gate="G$1" pin="DATA"/>
-<wire x1="175.26" y1="35.56" x2="165.1" y2="35.56" width="0.1524" layer="91"/>
-<junction x="165.1" y="35.56"/>
-</segment>
-<segment>
 <pinref part="U$2" gate="G$1" pin="(ICP3/CLK0/OC4A)PC7"/>
 <wire x1="96.52" y1="60.96" x2="99.06" y2="60.96" width="0.1524" layer="91"/>
 <label x="99.06" y="60.96" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<wire x1="167.64" y1="33.02" x2="157.48" y2="33.02" width="0.1524" layer="91"/>
+<label x="157.48" y="33.02" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="U$9" gate="G$1" pin="DATA"/>
 </segment>
 </net>
 <net name="VCC" class="0">
@@ -3890,13 +3876,10 @@ Metric Code Size 5664</description>
 <pinref part="C4" gate="G$1" pin="1"/>
 </segment>
 <segment>
-<pinref part="WS1" gate="G$1" pin="5V"/>
-<wire x1="165.1" y1="33.02" x2="162.56" y2="33.02" width="0.1524" layer="91"/>
 <pinref part="P+3" gate="VCC" pin="VCC"/>
-<wire x1="162.56" y1="33.02" x2="162.56" y2="40.64" width="0.1524" layer="91"/>
-<pinref part="WS3" gate="G$1" pin="5V"/>
-<wire x1="165.1" y1="33.02" x2="175.26" y2="33.02" width="0.1524" layer="91"/>
-<junction x="165.1" y="33.02"/>
+<wire x1="162.56" y1="35.56" x2="162.56" y2="40.64" width="0.1524" layer="91"/>
+<pinref part="U$9" gate="G$1" pin="5V"/>
+<wire x1="162.56" y1="35.56" x2="167.64" y2="35.56" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="P+4" gate="VCC" pin="VCC"/>
@@ -3955,6 +3938,20 @@ Metric Code Size 5664</description>
 </nets>
 </sheet>
 </sheets>
+<errors>
+<approved hash="204,1,35.56,55.88,U$2,AREF,,,,"/>
+<approved hash="104,1,35.56,60.96,U$2,AVCC,VCC,,,"/>
+<approved hash="104,1,35.56,63.5,U$2,AVCC1,VCC,,,"/>
+<approved hash="104,1,35.56,48.26,U$2,GND1,GND,,,"/>
+<approved hash="104,1,35.56,45.72,U$2,GND2,GND,,,"/>
+<approved hash="104,1,35.56,83.82,U$2,GND3,GND,,,"/>
+<approved hash="104,1,35.56,10.16,U$2,PAD,GND,,,"/>
+<approved hash="104,1,35.56,33.02,U$2,UGND,GND,,,"/>
+<approved hash="104,1,35.56,40.64,U$2,UVCC,VCC,,,"/>
+<approved hash="104,1,35.56,86.36,U$2,VCC1,VCC,,,"/>
+<approved hash="106,1,-20.32,25.4,SHIELD,,,,,"/>
+<approved hash="115,1,68.476,46.886,FRAME1,,,,,"/>
+</errors>
 </schematic>
 </drawing>
 </eagle>
