@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.4">
+<eagle version="6.5.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -231,77 +231,15 @@
 </deviceset>
 </devicesets>
 </library>
-<library name="blinkyboard">
-<description>Generated from &lt;b&gt;atmega32u4bb.sch&lt;/b&gt;&lt;p&gt;
-by exp-project-lbr.ulp</description>
-<packages>
-<package name="GLOWBOARD_KMR211G_SWITCH">
-<description>KMR211G momentary surface mount switch</description>
-<smd name="P$1" x="-2" y="0.8" dx="0.9" dy="1" layer="1" rot="R180"/>
-<smd name="P$2" x="2.1" y="0.8" dx="0.9" dy="1" layer="1"/>
-<smd name="P$3" x="-2" y="-0.8" dx="0.9" dy="1" layer="1"/>
-<smd name="P$4" x="2.1" y="-0.8" dx="0.9" dy="1" layer="1"/>
-<wire x1="-1.9" y1="1.2" x2="2.4" y2="1.2" width="0.127" layer="51"/>
-<wire x1="2.4" y1="1.2" x2="2.4" y2="-1.2" width="0.127" layer="51"/>
-<wire x1="2.4" y1="-1.2" x2="-2.3" y2="-1.2" width="0.127" layer="51"/>
-<wire x1="-2.3" y1="-1.2" x2="-2.3" y2="0.8" width="0.127" layer="51"/>
-<wire x1="-2.3" y1="0.8" x2="-1.9" y2="1.2" width="0.127" layer="51"/>
-</package>
-</packages>
-<symbols>
-<symbol name="GLOWBOARD_TS2">
-<circle x="0" y="-2.54" radius="0.127" width="0.4064" layer="94"/>
-<circle x="0" y="2.54" radius="0.127" width="0.4064" layer="94"/>
-<wire x1="0" y1="1.905" x2="0" y2="2.54" width="0.254" layer="94"/>
-<wire x1="-4.445" y1="1.905" x2="-3.175" y2="1.905" width="0.254" layer="94"/>
-<wire x1="-4.445" y1="-1.905" x2="-3.175" y2="-1.905" width="0.254" layer="94"/>
-<wire x1="-4.445" y1="1.905" x2="-4.445" y2="0" width="0.254" layer="94"/>
-<wire x1="-4.445" y1="0" x2="-4.445" y2="-1.905" width="0.254" layer="94"/>
-<wire x1="-2.54" y1="0" x2="-1.905" y2="0" width="0.1524" layer="94"/>
-<wire x1="-1.27" y1="0" x2="-0.635" y2="0" width="0.1524" layer="94"/>
-<wire x1="-4.445" y1="0" x2="-3.175" y2="0" width="0.1524" layer="94"/>
-<wire x1="2.54" y1="2.54" x2="0" y2="2.54" width="0.1524" layer="94"/>
-<wire x1="2.54" y1="-2.54" x2="0" y2="-2.54" width="0.1524" layer="94"/>
-<wire x1="0" y1="-2.54" x2="-1.27" y2="1.905" width="0.254" layer="94"/>
-<pin name="P" x="0" y="-5.08" visible="pad" length="short" direction="pas" swaplevel="2" rot="R90"/>
-<pin name="P1" x="2.54" y="-5.08" visible="pad" length="short" direction="pas" swaplevel="2" rot="R90"/>
-<pin name="S" x="0" y="5.08" visible="pad" length="short" direction="pas" swaplevel="1" rot="R270"/>
-<pin name="S1" x="2.54" y="5.08" visible="pad" length="short" direction="pas" swaplevel="1" rot="R270"/>
-<text x="-6.35" y="-2.54" size="1.778" layer="95" rot="R90">&gt;NAME</text>
-<text x="-3.81" y="3.175" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="GLOWBOARD_KMR211G" prefix="S" uservalue="yes">
-<description>&lt;b&gt;KMR211G SWITCH&lt;/b&gt;</description>
-<gates>
-<gate name="1" symbol="GLOWBOARD_TS2" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="GLOWBOARD_KMR211G_SWITCH">
-<connects>
-<connect gate="1" pin="P" pad="P$1"/>
-<connect gate="1" pin="P1" pad="P$2"/>
-<connect gate="1" pin="S" pad="P$3"/>
-<connect gate="1" pin="S1" pad="P$4"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="blinkiverse">
 <description>Library of parts that we use for our Blinkiverse designs. Some parts copied (and modified) from the excellent Sparkfun libraries.
 </description>
 <packages>
 <package name="CRSYTAL_2520">
-<smd name="P$1" x="-0.85" y="-0.65" dx="1.2" dy="1" layer="1"/>
-<smd name="P$2" x="0.85" y="-0.65" dx="1.2" dy="1" layer="1"/>
-<smd name="P$3" x="0.85" y="0.65" dx="1.2" dy="1" layer="1"/>
-<smd name="P$4" x="-0.85" y="0.65" dx="1.2" dy="1" layer="1"/>
+<smd name="P$1" x="-0.85" y="-0.65" dx="1.2" dy="1" layer="1" thermals="no"/>
+<smd name="P$2" x="0.85" y="-0.65" dx="1.2" dy="1" layer="1" thermals="no"/>
+<smd name="P$3" x="0.85" y="0.65" dx="1.2" dy="1" layer="1" thermals="no"/>
+<smd name="P$4" x="-0.85" y="0.65" dx="1.2" dy="1" layer="1" thermals="no"/>
 <wire x1="-1" y1="-1" x2="1.3" y2="-1" width="0.127" layer="51"/>
 <wire x1="1.3" y1="-1" x2="1.3" y2="1" width="0.127" layer="51"/>
 <wire x1="1.3" y1="1" x2="-1.3" y2="1" width="0.127" layer="51"/>
@@ -745,6 +683,18 @@ by exp-project-lbr.ulp</description>
 <smd name="DATA1" x="0" y="0" dx="2.7" dy="1.6" layer="16" roundness="25" rot="R180" thermals="no" cream="no"/>
 <smd name="GND1" x="0" y="-2.5" dx="2.7" dy="1.6" layer="16" roundness="50" rot="R180" thermals="no" cream="no"/>
 </package>
+<package name="GLOWBOARD_KMR211G_SWITCH">
+<description>KMR211G momentary surface mount switch</description>
+<smd name="P$1" x="-2" y="0.8" dx="0.9" dy="1" layer="1" rot="R180" thermals="no"/>
+<smd name="P$2" x="2.1" y="0.8" dx="0.9" dy="1" layer="1" thermals="no"/>
+<smd name="P$3" x="-2" y="-0.8" dx="0.9" dy="1" layer="1" thermals="no"/>
+<smd name="P$4" x="2.1" y="-0.8" dx="0.9" dy="1" layer="1" thermals="no"/>
+<wire x1="-1.9" y1="1.2" x2="2.4" y2="1.2" width="0.127" layer="51"/>
+<wire x1="2.4" y1="1.2" x2="2.4" y2="-1.2" width="0.127" layer="51"/>
+<wire x1="2.4" y1="-1.2" x2="-2.3" y2="-1.2" width="0.127" layer="51"/>
+<wire x1="-2.3" y1="-1.2" x2="-2.3" y2="0.8" width="0.127" layer="51"/>
+<wire x1="-2.3" y1="0.8" x2="-1.9" y2="1.2" width="0.127" layer="51"/>
+</package>
 </packages>
 <symbols>
 <symbol name="CRYSTAL_4PAD">
@@ -872,6 +822,27 @@ by exp-project-lbr.ulp</description>
 <wire x1="5.08" y1="5.08" x2="5.08" y2="-5.08" width="0.254" layer="94"/>
 <wire x1="5.08" y1="-5.08" x2="0" y2="-5.08" width="0.254" layer="94"/>
 <wire x1="0" y1="-5.08" x2="0" y2="5.08" width="0.254" layer="94"/>
+</symbol>
+<symbol name="GLOWBOARD_TS2">
+<circle x="0" y="-2.54" radius="0.127" width="0.4064" layer="94"/>
+<circle x="0" y="2.54" radius="0.127" width="0.4064" layer="94"/>
+<wire x1="0" y1="1.905" x2="0" y2="2.54" width="0.254" layer="94"/>
+<wire x1="-4.445" y1="1.905" x2="-3.175" y2="1.905" width="0.254" layer="94"/>
+<wire x1="-4.445" y1="-1.905" x2="-3.175" y2="-1.905" width="0.254" layer="94"/>
+<wire x1="-4.445" y1="1.905" x2="-4.445" y2="0" width="0.254" layer="94"/>
+<wire x1="-4.445" y1="0" x2="-4.445" y2="-1.905" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="0" x2="-1.905" y2="0" width="0.1524" layer="94"/>
+<wire x1="-1.27" y1="0" x2="-0.635" y2="0" width="0.1524" layer="94"/>
+<wire x1="-4.445" y1="0" x2="-3.175" y2="0" width="0.1524" layer="94"/>
+<wire x1="2.54" y1="2.54" x2="0" y2="2.54" width="0.1524" layer="94"/>
+<wire x1="2.54" y1="-2.54" x2="0" y2="-2.54" width="0.1524" layer="94"/>
+<wire x1="0" y1="-2.54" x2="-1.27" y2="1.905" width="0.254" layer="94"/>
+<pin name="P" x="0" y="-5.08" visible="pad" length="short" direction="pas" swaplevel="2" rot="R90"/>
+<pin name="P1" x="2.54" y="-5.08" visible="pad" length="short" direction="pas" swaplevel="2" rot="R90"/>
+<pin name="S" x="0" y="5.08" visible="pad" length="short" direction="pas" swaplevel="1" rot="R270"/>
+<pin name="S1" x="2.54" y="5.08" visible="pad" length="short" direction="pas" swaplevel="1" rot="R270"/>
+<text x="-6.35" y="-2.54" size="1.778" layer="95" rot="R90">&gt;NAME</text>
+<text x="-3.81" y="3.175" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
 </symbol>
 </symbols>
 <devicesets>
@@ -1222,6 +1193,25 @@ by exp-project-lbr.ulp</description>
 <connect gate="G$1" pin="5V" pad="5V 5V1 5V_1 5V_2"/>
 <connect gate="G$1" pin="DATA" pad="DATA DATA1 DATA_1 DATA_2"/>
 <connect gate="G$1" pin="GND" pad="GND GND1 GND_1 GND_2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="GLOWBOARD_KMR211G" prefix="S" uservalue="yes">
+<description>&lt;b&gt;KMR211G SWITCH&lt;/b&gt;</description>
+<gates>
+<gate name="1" symbol="GLOWBOARD_TS2" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="GLOWBOARD_KMR211G_SWITCH">
+<connects>
+<connect gate="1" pin="P" pad="P$1"/>
+<connect gate="1" pin="P1" pad="P$2"/>
+<connect gate="1" pin="S" pad="P$3"/>
+<connect gate="1" pin="S1" pad="P$4"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -3513,7 +3503,7 @@ Metric Code Size 5664</description>
 <part name="GND8" library="supply1" deviceset="GND" device=""/>
 <part name="P+6" library="supply1" deviceset="VCC" device=""/>
 <part name="P+7" library="supply1" deviceset="VCC" device=""/>
-<part name="S1" library="blinkyboard" deviceset="GLOWBOARD_KMR211G" device="" value="Normally open"/>
+<part name="S1" library="blinkiverse" deviceset="GLOWBOARD_KMR211G" device="" value="Normally open"/>
 <part name="Q1" library="blinkiverse" deviceset="CRYSTAL_4PAD" device="2520" value="16 MHz"/>
 <part name="C4" library="blinkiverse" deviceset="C_US" device="" value="0.1uF"/>
 <part name="P+3" library="supply1" deviceset="VCC" device=""/>
@@ -3633,13 +3623,11 @@ Metric Code Size 5664</description>
 <pinref part="C4" gate="G$1" pin="2"/>
 </segment>
 <segment>
-<wire x1="127" y1="68.58" x2="127" y2="73.66" width="0.1524" layer="91"/>
+<wire x1="127" y1="68.58" x2="127" y2="71.12" width="0.1524" layer="91"/>
 <pinref part="GND7" gate="1" pin="GND"/>
 <pinref part="S1" gate="1" pin="P"/>
-<pinref part="S1" gate="1" pin="P1"/>
-<wire x1="134.62" y1="73.66" x2="132.08" y2="73.66" width="0.1524" layer="91"/>
-<wire x1="132.08" y1="73.66" x2="127" y2="73.66" width="0.1524" layer="91"/>
-<junction x="132.08" y="73.66"/>
+<wire x1="134.62" y1="73.66" x2="134.62" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="134.62" y1="71.12" x2="127" y2="71.12" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="U$2" gate="G$1" pin="UGND"/>
@@ -3794,11 +3782,8 @@ Metric Code Size 5664</description>
 <net name="D10" class="0">
 <segment>
 <pinref part="S1" gate="1" pin="S1"/>
-<pinref part="S1" gate="1" pin="S"/>
-<wire x1="134.62" y1="83.82" x2="132.08" y2="83.82" width="0.1524" layer="91"/>
 <pinref part="U$2" gate="G$1" pin="(PCINT6/OC1B/OC4B/ADC13)PB6"/>
 <wire x1="96.52" y1="83.82" x2="132.08" y2="83.82" width="0.1524" layer="91"/>
-<junction x="132.08" y="83.82"/>
 <label x="99.06" y="83.82" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
