@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.5.0">
+<eagle version="6.4">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -147,10 +147,9 @@ Tape</text>
 <text x="23.9" y="0.85" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="bottom-center">5V</text>
 <text x="23.9" y="5.89" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="bottom-center">D13</text>
 <text x="23.9" y="8.45" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="bottom-center">GND</text>
-<text x="20.5" y="8.75" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="bottom-center">5V</text>
+<text x="20.3" y="8.75" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="bottom-center">5V</text>
 <text x="20.75" y="2" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="center">GND</text>
-<text x="20.5" y="8.75" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="bottom-center">5V</text>
-<text x="20.75" y="5" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="center">A11</text>
+<text x="20.35" y="5" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="center">A9</text>
 <text x="4.35" y="6.25" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="center">D7</text>
 <text x="4.65" y="3.75" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="center">D11</text>
 <text x="0.5" y="10.75" size="0.8128" layer="46">Slot drill with copper</text>
@@ -1001,7 +1000,7 @@ Modified from Laen's PCB Order Design Rules</description>
 <wire x1="9.18" y1="7.82" x2="9.14" y2="7.75" width="0.254" layer="1"/>
 <wire x1="9.14" y1="7.75" x2="10.225" y2="7.75" width="0.254" layer="1"/>
 </signal>
-<signal name="A10">
+<signal name="A9">
 <contactref element="U$2" pad="29"/>
 <via x="18.8" y="6.07" extent="1-16" drill="0.35"/>
 <contactref element="U$11" pad="P$1"/>
@@ -1046,41 +1045,6 @@ Modified from Laen's PCB Order Design Rules</description>
 <wire x1="4.2" y1="7.5" x2="4.2" y2="7.5" width="0" layer="19" extent="1-16"/>
 </signal>
 </signals>
-<errors>
-<approved hash="3,16,df2e07d607a6df5e"/>
-<approved hash="4,1,9fbd681f6f88a3de"/>
-<approved hash="4,1,70c57e4ee6830a91"/>
-<approved hash="4,1,b7642e26b1e3de12"/>
-<approved hash="4,16,70c57e4ee6830a91"/>
-<approved hash="4,16,9fbd681f6f88a3de"/>
-<approved hash="3,1,7ade462645ee7916"/>
-<approved hash="19,1,878c6dc0811a6fee"/>
-<approved hash="3,16,7e8e077606a17f59"/>
-<approved hash="3,1,7ae0461847e27b1a"/>
-<approved hash="3,16,5b2e59d659a75b5f"/>
-<approved hash="5,1,790bd713719bf6b8"/>
-<approved hash="5,1,f77134fa38526f2a"/>
-<approved hash="5,1,330e78872257cd52"/>
-<approved hash="19,1,f160e3ea33c22c51"/>
-<approved hash="19,1,4f1305db7f06a0c6"/>
-<approved hash="4,1,979f681d6e70abaa"/>
-<approved hash="4,1,60d14460c1751b7d"/>
-<approved hash="4,1,808d798f6e7cbcb2"/>
-<approved hash="4,1,dde0af5da35ad1e7"/>
-<approved hash="4,1,f58a97079b00f98d"/>
-<approved hash="4,1,c145a3baafbdcd42"/>
-<approved hash="19,16,86e7b6a36d5f44f5"/>
-<approved hash="19,16,765aa335ef4ce4c6"/>
-<approved hash="19,16,c93997ea27c57ac2"/>
-<approved hash="19,16,80fb0aef65944a72"/>
-<approved hash="4,16,808d798f6e7cbcb2"/>
-<approved hash="4,16,60d14460c1751b7d"/>
-<approved hash="4,16,979f681d6e70abaa"/>
-<approved hash="4,16,a6199cae98b45be2"/>
-<approved hash="4,16,c145a3baafbdcd42"/>
-<approved hash="4,16,dde0af5da35ad1e7"/>
-<approved hash="4,16,f58a97079b00f98d"/>
-</errors>
 </board>
 </drawing>
 <compatibility>
