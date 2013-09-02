@@ -4,11 +4,22 @@
 #define LED_COUNT 60
 struct CRGB leds[LED_COUNT];
 
-#define PIN_BUTTON 10
-#define PIN_IO_A   7
-#define PIN_IO_B   11
-#define PIN_SIGNAL 13
-#define PIN_INPUT  10
+#ifdef REVB // RevB boards have a slightly different pinout.
+
+#define LED_OUT      5
+#define BUTTON_IN    13
+#define ANALOG_INPUT 11
+#define IO_A         15
+
+#else
+
+#define LED_OUT      13
+#define BUTTON_IN    10
+#define ANALOG_INPUT 10
+#define IO_A         7
+#define IO_B         11
+
+#endif
 
 long last_time;
 
@@ -16,7 +27,7 @@ void setup()
 {  
   Serial.begin(57600);
   
-  LEDS.addLeds<WS2811, PIN_SIGNAL, GRB>(leds, LED_COUNT);
+  LEDS.addLeds<WS2811, LED_OUT, GRB>(leds, LED_COUNT);
   LEDS.showColor(CRGB(0, 0, 0));
   LEDS.setBrightness(230); // 90% brightness
   LEDS.show();
