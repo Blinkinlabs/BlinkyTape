@@ -226,9 +226,9 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     self.assertTrue(ord(pinStates[0]) == 13)
     self.stopMe = False
 
-  def test_092_A10_connected(self):
-    self.i.DisplayMessage("Checking A10 input works...")
-    self.testRig.setOutputLow('DUT_A10')
+  def test_092_A9_connected(self):
+    self.i.DisplayMessage("Checking A9 input works...")
+    self.testRig.setOutputLow('DUT_A9')
 
     pinStates = 0
     for j in range (0, 2):
@@ -236,7 +236,7 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
         self.dut.sendPixel(0,0,0)
       pinStates = self.dut.show();
 
-    self.testRig.setInput('DUT_A10')
+    self.testRig.setInput('DUT_A9')
    
     self.assertTrue(ord(pinStates[0]) == 14)
     self.stopMe = False

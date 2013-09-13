@@ -185,7 +185,7 @@ def MakeDefaultRig():
     ArduinoPin('DUT_USB_VCC',    20, net='VCC', suppressLow=True),
     ArduinoPin('DUT_OUT_VCC',    21, net='VCC', suppressLow=True),
     ArduinoPin('ICSP_RESET',      0),  # Regular digital pins
-    ArduinoPin('DUT_A10',         1),
+    ArduinoPin('DUT_A9',          1),
     # 2,3 used by I2C port for current sensor
     ArduinoPin('DUT_D11',         4),
     ArduinoPin('DUT_D7',          5),

@@ -30,10 +30,10 @@ class TestProgramBootloader(BlinkyTapeUnitTest.BlinkyTapeTestCase):
       self.Stop()
 
   def test_010_program_fuses(self):
-    lockFuses = 0x3f
-    eFuses = 0xcb
-    hFuses = 0xd8
-    lFuses = 0xff
+    lockFuses = 0x2F
+    eFuses    = 0xCB
+    hFuses    = 0xD8
+    lFuses    = 0xFF
     
     returnCode = IcspUtils.writeFuses(self.port, lockFuses, eFuses, hFuses, lFuses)
     

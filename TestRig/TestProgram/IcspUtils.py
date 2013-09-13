@@ -2,18 +2,18 @@ import subprocess
 import time
 import optparse
 
-def writeFuses(portName, lockFuses, eFuses, hFuses, lFuses):
+def writeFuses(portName, lockFuses, eFuses, hFuses, lFuses, programmer="avrisp"):
   """
   Attempt to write the fuses of the attached Atmega device.
 
   """
   command = [
     "./avrdude",
-    "-c", "avrisp",
-    "-p", "m32u4",
+    "-c", programmer,
     "-P", portName,
+    "-p", "m32u4",
     "-B", "200",
-    "-u",
+    "-e",
     "-U", "lock:w:%#02X:m"  % lockFuses,
     "-U", "efuse:w:%#02X:m" % eFuses,
     "-U", "hfuse:w:%#02X:m" % hFuses,
@@ -23,7 +23,7 @@ def writeFuses(portName, lockFuses, eFuses, hFuses, lFuses):
 
   return subprocess.call(command)
   
-def loadFlash(portName, flashFile):
+def loadFlash(portName, flashFile, programmer="avrisp"):
   """
   Attempt to write a .hex file to the flash of the attached Atmega device.
   @param portName String of the port name to write to
@@ -31,9 +31,9 @@ def loadFlash(portName, flashFile):
   """
   command = [
     "./avrdude",
-    "-c", "avrisp",
-    "-p", "m32u4",
+    "-c", programmer,
     "-P", portName,
+    "-p", "m32u4",
     "-B", "1",
     "-U" "flash:w:%s:i" % flashFile,
   ]
@@ -44,39 +44,31 @@ def loadFlash(portName, flashFile):
 
 if __name__ == '__main__':
   parser = optparse.OptionParser()
+
   parser.add_option("-p", "--port", dest="portname",
                     help="serial port (ex: /dev/ttyUSB0)", default="/dev/ttyACM0")
   (options, args) = parser.parse_args()
 
-  config = {
-    "bootlader_filename" : "Caterina-BlinkyTape.hex",
-    "lockFuses"          : "0x2f",
-    "eFuses"             : "0xcb",
-    "hFuses"             : "0xd8",
-    "lFuses"             : "0xff",
-  }
+  port=options.portname
 
+  lockFuses = 0x2F
+  eFuses    = 0xCB
+  hFuses    = 0xD8
+  lFuses    = 0xFF
+  
+  returnCode = writeFuses(port, lockFuses, eFuses, hFuses, lFuses, programmer="usbtiny")
 
-  # Write the fuses
-  print "Writing fuses..."
-  fuseResult = writeFuses(options.portname,
-                          config['lockFuses'],
-                          config['eFuses'],
-                          config['hFuses'],
-                          config['lFuses'])
  
-  if (fuseResult != 0):
+  if (returnCode != 0):
     print "FAIL. Error writing the fuses!"
     exit(1)
   print "PASS. Fuses written correctly"
 
+  productionFile = "firmware/BlinkyTape-Production.hex"
 
-  # Program the bootloader
-  print "Programming bootloader"
-  bootloaderResult = loadFlash(options.portname,
-                               config["bootlader_filename"])
-  
-  if (bootloaderResult != 0):
+  returnCode = loadFlash(port, productionFile, programmer="usbtiny")
+
+  if (returnCode!= 0):
     print "FAIL. Error programming bootloader!"
     exit(1)
   print "PASS. Bootlaoder programmed successfully"
