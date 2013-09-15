@@ -19,15 +19,13 @@ def detectPlatform():
   return "Unknown"
 
 def ListSerialPorts():
+  # Scan for all connected devices; platform dependent
   platform = detectPlatform()
 
   if platform == 'Darwin':
-    SERIAL_DEVICE_PATH = "/dev/cu.usbmodem*"
+    SERIAL_DEVICE_PATH = "/dev/cu.usb*"
   else:
     # TODO: linux?
     SERIAL_DEVICE_PATH = "/dev/ttyACM*"
 
-  # Scan for all connected devices; platform dependent
   return glob.glob(SERIAL_DEVICE_PATH)
-  
-

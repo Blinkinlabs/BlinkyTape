@@ -1,4 +1,5 @@
 import serial
+import time
 
 STK_OK      = 0x10
 STK_INSYNC  = 0x14
@@ -13,7 +14,7 @@ class RemoteArduino:
     """ Open a connection to an arduino running the SerialTester sketch.
     port: Serial port device name, for example: '/dev/cu.usbmodelfa1321'
     """
-    self.serial = serial.Serial(port)
+    self.serial = serial.Serial(port, baudrate=19200, timeout=2)
 
   def sendCommand(self, command, channel, responseCount):
     self.serial.write(chr(BT_COMMAND))
@@ -22,7 +23,12 @@ class RemoteArduino:
     self.serial.write(chr(CRC_EOP))
     # TODO: Read back response?
     # response is: STK_INSYNC, [data], STK_OK
-    response = ord(self.serial.read(1))
+    try:
+      data = self.serial.read(1)
+      response = ord(data)
+    except TypeError:
+      raise Exception(" Bad response from test rig. Data='" + data + "'")
+
     if(STK_INSYNC != response):
       raise Exception(" Bad response from test rig. Expected: " + hex(STK_INSYNC) + ", got: " + hex(response))
 
