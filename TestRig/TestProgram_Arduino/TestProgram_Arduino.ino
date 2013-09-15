@@ -313,12 +313,12 @@ void flash(uint8_t hilo, int addr, uint8_t data) {
   data);
 }
 void commit(int addr) {
-  if (PROG_FLICKER) prog_lamp(LOW);
+//  if (PROG_FLICKER) prog_lamp(LOW);
   spi_transaction(0x4C, (addr >> 8) & 0xFF, addr & 0xFF, 0);
-  if (PROG_FLICKER) {
-    delay(PTIME);
-    prog_lamp(HIGH);
-  }
+//  if (PROG_FLICKER) {
+//    delay(PTIME);
+//    prog_lamp(HIGH);
+//  }
 }
 
 //#define _current_page(x) (here & 0xFFFFE0)
@@ -383,13 +383,13 @@ uint8_t write_eeprom_chunk(int start, int length) {
   // this writes byte-by-byte,
   // page writing may be faster (4 bytes at a time)
   fill(length);
-  prog_lamp(LOW);
+//  prog_lamp(LOW);
   for (int x = 0; x < length; x++) {
     int addr = start+x;
     spi_transaction(0xC0, (addr>>8) & 0xFF, addr & 0xFF, buff[x]);
     delay(45);
   }
-  prog_lamp(HIGH); 
+//  prog_lamp(HIGH); 
   return STK_OK;
 }
 
@@ -678,6 +678,7 @@ int avrisp() {
       Serial.print((char)STK_NOSYNC);
   }
 }
+
 
 
 
