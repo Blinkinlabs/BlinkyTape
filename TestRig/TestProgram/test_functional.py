@@ -1,3 +1,8 @@
+# NOTE: The Producion version of this is slighly different. The guard bands for current
+# measurement were changed, and the LED strip output is turned on before USB power, to
+# prevent the LEDs from being damaged. This version is an attempt to bring these changes
+# in, however they have to be retrieved from the factory test rig.
+
 import time
 import serial
 
@@ -53,6 +58,8 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     # Scan for all connected devices; platform dependent
     originalPorts = set(DetectPlatform.ListSerialPorts())
  
+    self.testRig.enableRelay('EN_LED_OUT')
+
     self.testRig.enableRelay('EN_USB_GND')
     self.testRig.enableRelay('EN_USB_VCC')
     self.testRig.enableRelay('EN_USB_DATA')
@@ -105,7 +112,6 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     MIN_CONNECTED_CURRENT = 30
     MAX_CONNECTED_CURRENT = 50
 
-    self.testRig.enableRelay('EN_LED_OUT')
 
     current = self.testRig.measure('DUT_CURRENT')
 
@@ -119,8 +125,8 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
   def test_050_redLedsOnCurrent(self):
     self.i.DisplayMessage("Checking red LEDs on...")
 
-    MIN_RED_CURRENT = 130
-    MAX_RED_CURRENT = 150
+    MIN_RED_CURRENT = 50
+    MAX_RED_CURRENT = 100
     # TODO: Why send this twice?
     for j in range (0, 2):
       for x in range(0, 60):
@@ -139,8 +145,8 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
   def skip_test_060_greenLedsOnCurrent(self):
     self.i.DisplayMessage("Checking green LEDs on...")
 
-    MIN_GREEN_CURRENT = 130
-    MAX_GREEN_CURRENT = 150
+    MIN_GREEN_CURRENT = 50
+    MAX_GREEN_CURRENT = 100
     # TODO: Why send this twice?
     for j in range (0, 2):
       for x in range(0, 60):
@@ -159,8 +165,8 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
   def skip_test_070_blueLedsOnCurrent(self):
     self.i.DisplayMessage("Checking blue LEDs on...")
 
-    MIN_BLUE_CURRENT = 130
-    MAX_BLUE_CURRENT = 150
+    MIN_BLUE_CURRENT = 50
+    MAX_BLUE_CURRENT = 100
     # TODO: Why send this twice?
     for j in range (0, 2):
       for x in range(0, 60):
@@ -179,8 +185,8 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
   def test_080_whiteLedsOnCurrent(self):
     self.i.DisplayMessage("Checking white LEDs on...")
 
-    MIN_WHITE_CURRENT = 250
-    MAX_WHITE_CURRENT = 350
+    MIN_WHITE_CURRENT = 100
+    MAX_WHITE_CURRENT = 300
     # TODO: Why send this twice?
     for j in range (0, 2):
       for x in range(0, 60):
