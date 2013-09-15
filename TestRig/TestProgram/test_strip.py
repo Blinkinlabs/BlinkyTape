@@ -1,3 +1,6 @@
+# Note: the current sensor on this board is a little whack, and also it uses the wrong sense resistor,
+# so these constants were adjusted accordingly.
+
 import time
 import serial
 
@@ -32,30 +35,48 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     if self.stopMe:
       self.Stop()
 
-  def test_010_dutDisconnectedCurrent(self):
-    self.i.DisplayMessage("Checking disconnected current...")
+  def test_010_off_current(self):
     MIN_OFF_CURRENT = -1
-    MAX_OFF_CURRENT = 1
+    MAX_OFF_CURRENT = 2
+    self.testRig.enableRelay('EN_USB_GND')
+    time.sleep(.5)
 
     current = self.testRig.measure('DUT_CURRENT')
 
-    self.i.DisplayMessage("DUT disconnectd current: %0.2f < %0.2f < %0.2f." % (MIN_OFF_CURRENT, current, MAX_OFF_CURRENT))
+    self.i.DisplayMessage("Off current: %0.2f < %0.2f < %0.2f." % (MIN_OFF_CURRENT, current, MAX_OFF_CURRENT))
     self.StoreTestResultData("%0.2f" % current)
 
-    self.assertTrue(current> MIN_OFF_CURRENT
-                    and current < MAX_OFF_CURRENT)
+    result = current > MIN_OFF_CURRENT and current < MAX_OFF_CURRENT
+    self.assertTrue(result)
     self.stopMe = False
 
-  def test_020_usbEnumeration(self):
+  def test_020_limited_current(self):
+    MIN_LIMITED_CURRENT = 200
+    MAX_LIMITED_CURRENT = 500
+
+    self.testRig.enableRelay('EN_USB_VCC_LIMIT')
+    time.sleep(.5)
+
+    current = self.testRig.measure('DUT_CURRENT')
+
+    self.testRig.disableRelay('EN_USB_VCC_LIMIT')
+
+    self.i.DisplayMessage("Limited current: %0.2f < %0.2f < %0.2f." % (MIN_LIMITED_CURRENT, current, MAX_LIMITED_CURRENT))
+    self.StoreTestResultData("%0.2f" % current)
+
+    result = current > MIN_LIMITED_CURRENT and current < MAX_LIMITED_CURRENT
+    self.assertTrue(result)
+    self.stopMe = False
+
+
+  def test_040_usbEnumeration(self):
     self.i.DisplayMessage("Waiting for device to enumerate on USB...")
 
     MAX_ENUMERATION_TIME_S = 5
     # Scan for all connected devices; platform dependent
     originalPorts = set(DetectPlatform.ListSerialPorts())
  
-    self.testRig.enableRelay('EN_USB_GND')
     self.testRig.enableRelay('EN_USB_VCC')
-    self.testRig.enableRelay('EN_USB_DATA')
 
     # Wait for the device to enumerate
     startTime = time.time()
@@ -70,7 +91,7 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     self.assertTrue(self.dut.port != '')
     self.stopMe = False
 
-  def test_030_dutConnected(self):
+  def test_050_dutConnected(self):
     self.i.DisplayMessage("Connecting to DUT")
 
     connected = False
@@ -84,11 +105,11 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     self.assertTrue(connected)
     self.stopMe = False
 
-  def test_040_dutConnectedCurrent(self):
+  def test_060_dutConnectedCurrent(self):
     self.i.DisplayMessage("Checking connected current...")
 
-    MIN_CONNECTED_CURRENT = 20
-    MAX_CONNECTED_CURRENT = 40
+    MIN_CONNECTED_CURRENT = 200
+    MAX_CONNECTED_CURRENT = 4000
 
     current = self.testRig.measure('DUT_CURRENT')
 
@@ -99,28 +120,12 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
                     and current < MAX_CONNECTED_CURRENT)
     self.stopMe = False
 
-  def test_045_LedsConnectedCurrent(self):
-    self.i.DisplayMessage("Checking LEDs connected current...")
-
-    MIN_CONNECTED_CURRENT = 30
-    MAX_CONNECTED_CURRENT = 50
-
-    self.testRig.enableRelay('EN_LED_OUT')
-
-    current = self.testRig.measure('DUT_CURRENT')
-
-    self.i.DisplayMessage("LEDs connected current: %0.2f < %0.2f < %0.2f." % (MIN_CONNECTED_CURRENT, current, MAX_CONNECTED_CURRENT))
-    self.StoreTestResultData("%0.2f" % current)
-
-    self.assertTrue(current > MIN_CONNECTED_CURRENT
-                    and current < MAX_CONNECTED_CURRENT)
-    self.stopMe = False
 
   def test_050_redLedsOnCurrent(self):
     self.i.DisplayMessage("Checking red LEDs on...")
 
-    MIN_RED_CURRENT = 50
-    MAX_RED_CURRENT = 100
+    MIN_RED_CURRENT = 500
+    MAX_RED_CURRENT = 10000
     # TODO: Why send this twice?
     for j in range (0, 2):
       for x in range(0, 60):
@@ -136,51 +141,11 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
                     and current < MAX_RED_CURRENT)
     self.stopMe = False
 
-  def skip_test_060_greenLedsOnCurrent(self):
-    self.i.DisplayMessage("Checking green LEDs on...")
-
-    MIN_GREEN_CURRENT = 50
-    MAX_GREEN_CURRENT = 100
-    # TODO: Why send this twice?
-    for j in range (0, 2):
-      for x in range(0, 60):
-        self.dut.sendPixel(0,255,0)
-      self.dut.show();
-
-    current = self.testRig.measure('DUT_CURRENT')
-
-    self.i.DisplayMessage("Green LEDs current: %0.2f < %0.2f < %0.2f." % (MIN_GREEN_CURRENT, current, MAX_GREEN_CURRENT))
-    self.StoreTestResultData("%0.2f" % current)
-
-    self.assertTrue(current > MIN_GREEN_CURRENT
-                    and current < MAX_GREEN_CURRENT)
-    self.stopMe = False
-
-  def skip_test_070_blueLedsOnCurrent(self):
-    self.i.DisplayMessage("Checking blue LEDs on...")
-
-    MIN_BLUE_CURRENT = 50
-    MAX_BLUE_CURRENT = 100
-    # TODO: Why send this twice?
-    for j in range (0, 2):
-      for x in range(0, 60):
-        self.dut.sendPixel(0,0,255)
-      self.dut.show();
-
-    current = self.testRig.measure('DUT_CURRENT')
-
-    self.i.DisplayMessage("Blue LEDs current: %0.2f < %0.2f < %0.2f." % (MIN_BLUE_CURRENT, current, MAX_BLUE_CURRENT))
-    self.StoreTestResultData("%0.2f" % current)
-
-    self.assertTrue(current > MIN_BLUE_CURRENT
-                    and current < MAX_BLUE_CURRENT)
-    self.stopMe = False
-
   def test_080_whiteLedsOnCurrent(self):
     self.i.DisplayMessage("Checking white LEDs on...")
 
     MIN_WHITE_CURRENT = 100
-    MAX_WHITE_CURRENT = 300
+    MAX_WHITE_CURRENT = 30000
     # TODO: Why send this twice?
     for j in range (0, 2):
       for x in range(0, 60):
@@ -196,50 +161,6 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
                     and current < MAX_WHITE_CURRENT)
     self.stopMe = False
 
-  def test_090_D7_connected(self):
-    self.i.DisplayMessage("Checking D7 input works...")
-    self.testRig.setOutputLow('DUT_D7')
-
-    pinStates = 0
-    for j in range (0, 2):
-      for x in range(0, 60):
-        self.dut.sendPixel(0,0,0)
-      pinStates = self.dut.show();
-
-    self.testRig.setInput('DUT_D7')
-    
-    self.assertTrue(ord(pinStates[0]) == 11)
-    self.stopMe = False
-
-  def test_091_D11_connected(self):
-    self.i.DisplayMessage("Checking D11 input works...")
-    self.testRig.setOutputLow('DUT_D11')
-
-    pinStates = 0
-    for j in range (0, 2):
-      for x in range(0, 60):
-        self.dut.sendPixel(0,0,0)
-      pinStates = self.dut.show();
-
-    self.testRig.setInput('DUT_D11')
-    
-    self.assertTrue(ord(pinStates[0]) == 13)
-    self.stopMe = False
-
-  def test_092_A9_connected(self):
-    self.i.DisplayMessage("Checking A9 input works...")
-    self.testRig.setOutputLow('DUT_A9')
-
-    pinStates = 0
-    for j in range (0, 2):
-      for x in range(0, 60):
-        self.dut.sendPixel(0,0,0)
-      pinStates = self.dut.show();
-
-    self.testRig.setInput('DUT_A9')
-   
-    self.assertTrue(ord(pinStates[0]) == 14)
-    self.stopMe = False
 
   def test_100_button_connected(self):
     self.i.DisplayMessage("Checking button input works...")
