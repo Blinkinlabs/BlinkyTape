@@ -93,11 +93,26 @@ class TestRig:
     raise Exception("Pin" + pinName + "not found!")
 
   def setInput(self, pinName):
-    """ Disable an output relay """
+    """ Set up a pin as input"""
     for pin in self.shortTestPins:
       if pin.name == pinName:
         self.arduino.pinMode(pin.number, 'INPUT')
         return
+    raise Exception("Pin" + pinName + "not found!")
+
+  def setInputPullup(self, pinName):
+    """ Set up a pin as input in pullup mode"""
+    for pin in self.shortTestPins:
+      if pin.name == pinName:
+        self.arduino.pinMode(pin.number, 'INPUT_PULLUP')
+        return
+    raise Exception("Pin" + pinName + "not found!")
+
+  def readInput(self, pinName):
+    """ Set up a pin as input in pullup mode"""
+    for pin in self.shortTestPins:
+      if pin.name == pinName:
+        return self.arduino.digitalRead(pin.number)
     raise Exception("Pin" + pinName + "not found!")
 
   def measure(self, measurementName):

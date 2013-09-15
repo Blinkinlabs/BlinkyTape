@@ -9,6 +9,7 @@ import sys
 import Logger
 import Menu  
 import UserInterface
+import TestRig
 import BlinkyTapeUnitTest
 import Config
 import menus
@@ -64,16 +65,41 @@ class PcbaTestMenu(Menu.Menu):
 if __name__ == '__main__':
   try:
     Logger.logger.Init()
+    
+    # Add in some new defines for this test rig
+    newShortTestPins = [
+      TestRig.ArduinoPin('START_BUTTON',   16),
+    ]
+    TestRig.testRig.shortTestPins.extend(newShortTestPins)
+
+    newRelayPins = [
+      TestRig.ArduinoPin('LED_R',         11),
+      TestRig.ArduinoPin('LED_G',         10),
+      TestRig.ArduinoPin('LED_B',         17),  # Note: for Duemilanova, different for Leonardo
+    ]
+    TestRig.testRig.relayPins.extend(newRelayPins)
 
     interface = UserInterface.interface
-    interface.DisplayMessage("Loading test interface...")
 
-    module = __import__("test_strip")
+    TestRig.testRig.enableRelay('LED_G')
 
-    tests = unittest.defaultTestLoader.loadTestsFromModule(module)
+    while(True):
+      TestRig.testRig.setInputPullup('START_BUTTON')
 
-    runner = BlinkyTapeUnitTest.BlinkyTapeTestRunner()
-    result = runner.run(tests)
+      while(TestRig.testRig.readInput('START_BUTTON') == 1):
+        time.sleep(.05)
+
+      module = __import__("test_strip")
+
+      tests = unittest.defaultTestLoader.loadTestsFromModule(module)
+
+      runner = BlinkyTapeUnitTest.BlinkyTapeTestRunner()
+      result = runner.run(tests)
+      print result
+      if(len(result.errors) == 0 and len(result.failures) == 0):
+        TestRig.testRig.enableRelay('LED_G')
+      else:
+        TestRig.testRig.enableRelay('LED_R')
 
   except Exception as err:
     traceback.print_exc(file=sys.stderr)

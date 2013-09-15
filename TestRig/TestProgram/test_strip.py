@@ -23,6 +23,8 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     self.i = UserInterface.interface
     self.dut = BlinkyTape.BlinkyTape()
 
+    self.testRig.enableRelay("LED_B")
+
   @classmethod
   def tearDownClass(self):
     self.dut = None
@@ -38,8 +40,6 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
   def test_010_off_current(self):
     MIN_OFF_CURRENT = -1
     MAX_OFF_CURRENT = 2
-    self.testRig.enableRelay('EN_USB_GND')
-    time.sleep(.5)
 
     current = self.testRig.measure('DUT_CURRENT')
 
