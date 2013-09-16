@@ -105,23 +105,7 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     self.assertTrue(connected)
     self.stopMe = False
 
-  def test_060_dutConnectedCurrent(self):
-    self.i.DisplayMessage("Checking connected current...")
-
-    MIN_CONNECTED_CURRENT = 200
-    MAX_CONNECTED_CURRENT = 4000
-
-    current = self.testRig.measure('DUT_CURRENT')
-
-    self.i.DisplayMessage("DUT connected current: %0.2f < %0.2f < %0.2f." % (MIN_CONNECTED_CURRENT, current, MAX_CONNECTED_CURRENT))
-    self.StoreTestResultData("%0.2f" % current)
-
-    self.assertTrue(current > MIN_CONNECTED_CURRENT
-                    and current < MAX_CONNECTED_CURRENT)
-    self.stopMe = False
-
-
-  def test_050_redLedsOnCurrent(self):
+  def test_060_redLedsOnCurrent(self):
     self.i.DisplayMessage("Checking red LEDs on...")
 
     MIN_RED_CURRENT = 500
@@ -165,7 +149,7 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
   def test_100_button_connected(self):
     self.i.DisplayMessage("Checking button input works...")
 
-    MAX_TIME_SECONDS = 60;
+    MAX_TIME_SECONDS = 30;
 
     startTime = time.time()
     found = False
