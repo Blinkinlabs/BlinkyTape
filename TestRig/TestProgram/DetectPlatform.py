@@ -23,9 +23,10 @@ def ListSerialPorts():
   platform = detectPlatform()
 
   if platform == 'Darwin':
-    SERIAL_DEVICE_PATH = "/dev/cu.usb*"
+    ports =      glob.glob("/dev/cu.usb*")
   else:
     # TODO: linux?
-    SERIAL_DEVICE_PATH = "/dev/ttyACM*"
+    ports =      glob.glob("/dev/ttyACM*")
+    ports.extend(glob.glob("/dev/ttyUSB*"))
 
-  return glob.glob(SERIAL_DEVICE_PATH)
+  return ports
