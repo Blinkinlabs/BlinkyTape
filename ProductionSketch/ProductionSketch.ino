@@ -1,3 +1,5 @@
+// This is the example sketch that gets loaded on every BlinkyTape during production!
+
 #include <FastSPI_LED2.h>
 #include <Animation.h>
 
