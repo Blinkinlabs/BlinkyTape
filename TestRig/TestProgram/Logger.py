@@ -27,7 +27,7 @@ class FileSink():
         self.logFile.write(msg + '\n')
         self.logFile.flush()
     except:
-      print "Error logging to file %s." % self.FileName
+      print "Error logging to file %s." % self.fileName
       #raise #prevent logging errors from killing things.
 
 class Logger():

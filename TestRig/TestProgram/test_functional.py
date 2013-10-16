@@ -53,6 +53,7 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     # Scan for all connected devices; platform dependent
     originalPorts = set(DetectPlatform.ListSerialPorts())
  
+    self.testRig.enableRelay('EN_LED_OUT')
     self.testRig.enableRelay('EN_USB_GND')
     self.testRig.enableRelay('EN_USB_VCC')
     self.testRig.enableRelay('EN_USB_DATA')
@@ -88,7 +89,7 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     self.i.DisplayMessage("Checking connected current...")
 
     MIN_CONNECTED_CURRENT = 20
-    MAX_CONNECTED_CURRENT = 40
+    MAX_CONNECTED_CURRENT = 100
 
     current = self.testRig.measure('DUT_CURRENT')
 
@@ -103,7 +104,7 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     self.i.DisplayMessage("Checking LEDs connected current...")
 
     MIN_CONNECTED_CURRENT = 30
-    MAX_CONNECTED_CURRENT = 50
+    MAX_CONNECTED_CURRENT = 100
 
     self.testRig.enableRelay('EN_LED_OUT')
 
@@ -119,8 +120,8 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
   def test_050_redLedsOnCurrent(self):
     self.i.DisplayMessage("Checking red LEDs on...")
 
-    MIN_RED_CURRENT = 130
-    MAX_RED_CURRENT = 150
+    MIN_RED_CURRENT = 50
+    MAX_RED_CURRENT = 100
     # TODO: Why send this twice?
     for j in range (0, 2):
       for x in range(0, 60):
@@ -179,8 +180,8 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
   def test_080_whiteLedsOnCurrent(self):
     self.i.DisplayMessage("Checking white LEDs on...")
 
-    MIN_WHITE_CURRENT = 250
-    MAX_WHITE_CURRENT = 350
+    MIN_WHITE_CURRENT = 100
+    MAX_WHITE_CURRENT = 300
     # TODO: Why send this twice?
     for j in range (0, 2):
       for x in range(0, 60):
