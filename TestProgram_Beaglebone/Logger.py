@@ -52,7 +52,7 @@ class Logger():
 
   def Init(self):
     self.sinks.append(FileSink("./usb-log.log"))
-    self.sinks.append(FileSink("./sd-log.log"))
+#    self.sinks.append(FileSink("./sd-log.log"))
 
     if self.RequireDB:
       self.InitDB() # moved to menu_functional test area.
