@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.4">
+<eagle version="6.5.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -3528,12 +3528,13 @@ Metric Code Size 5664</description>
 <part name="U$14" library="blinkiverse" deviceset="TEST_PAD_SMT" device=""/>
 <part name="GND9" library="supply1" deviceset="GND" device=""/>
 <part name="U$9" library="blinkiverse" deviceset="WS2812B_CONNECTOR" device=""/>
+<part name="R3" library="blinkiverse" deviceset="R_US" device="" value="??"/>
 </parts>
 <sheets>
 <sheet>
 <plain>
-<text x="104.14" y="-30.48" size="2.54" layer="94">BlinkyTape LED controller RevD</text>
-<text x="104.14" y="-35.56" size="2.54" layer="94">http://blinkiverse.com</text>
+<text x="104.14" y="-30.48" size="2.54" layer="94">BlinkyTape LED controller RevH</text>
+<text x="104.14" y="-35.56" size="2.54" layer="94">http://blinkinlabs.com/blinkytape</text>
 <text x="177.8" y="-30.48" size="2.54" layer="94">CC 2.5 BY-SA</text>
 <text x="190.5" y="-53.34" size="2.54" layer="94">1</text>
 <text x="-48.26" y="137.16" size="1.778" layer="91">Bypass caps</text>
@@ -3586,6 +3587,7 @@ Metric Code Size 5664</description>
 <instance part="U$14" gate="G$1" x="187.96" y="93.98"/>
 <instance part="GND9" gate="1" x="20.32" y="63.5"/>
 <instance part="U$9" gate="G$1" x="172.72" y="33.02"/>
+<instance part="R3" gate="G$1" x="152.4" y="33.02"/>
 </instances>
 <busses>
 </busses>
@@ -3795,16 +3797,11 @@ Metric Code Size 5664</description>
 <wire x1="7.62" y1="30.48" x2="7.62" y2="43.18" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="D13" class="0">
-<segment>
-<pinref part="U$2" gate="G$1" pin="(ICP3/CLK0/OC4A)PC7"/>
-<wire x1="96.52" y1="60.96" x2="99.06" y2="60.96" width="0.1524" layer="91"/>
-<label x="99.06" y="60.96" size="1.778" layer="95" xref="yes"/>
-</segment>
+<net name="LED_DATA" class="0">
 <segment>
 <wire x1="167.64" y1="33.02" x2="157.48" y2="33.02" width="0.1524" layer="91"/>
-<label x="157.48" y="33.02" size="1.778" layer="95" rot="R180" xref="yes"/>
 <pinref part="U$9" gate="G$1" pin="DATA"/>
+<pinref part="R3" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="VCC" class="0">
@@ -3920,6 +3917,18 @@ Metric Code Size 5664</description>
 <label x="-20.32" y="20.32" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
+<net name="D13" class="0">
+<segment>
+<pinref part="U$2" gate="G$1" pin="(ICP3/CLK0/OC4A)PC7"/>
+<wire x1="96.52" y1="60.96" x2="99.06" y2="60.96" width="0.1524" layer="91"/>
+<label x="99.06" y="60.96" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="R3" gate="G$1" pin="1"/>
+<wire x1="147.32" y1="33.02" x2="144.78" y2="33.02" width="0.1524" layer="91"/>
+<label x="144.78" y="33.02" size="1.778" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
 </nets>
 </sheet>
 </sheets>
@@ -3935,7 +3944,6 @@ Metric Code Size 5664</description>
 <approved hash="104,1,35.56,40.64,U$2,UVCC,VCC,,,"/>
 <approved hash="104,1,35.56,86.36,U$2,VCC1,VCC,,,"/>
 <approved hash="106,1,-20.32,25.4,SHIELD,,,,,"/>
-<approved hash="115,1,68.476,46.886,FRAME1,,,,,"/>
 </errors>
 </schematic>
 </drawing>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.4">
+<eagle version="6.5.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -138,12 +138,11 @@
 <wire x1="25.25" y1="10" x2="25.25" y2="0" width="0.127" layer="20"/>
 <text x="9.15" y="6" size="1.016" layer="26" font="vector" ratio="20" rot="MR0" align="center">Blinky
 Tape</text>
-<text x="9.15" y="3.85" size="0.8128" layer="26" font="vector" ratio="20" rot="MR0" align="center">Rev G</text>
+<text x="9.15" y="3.85" size="0.8128" layer="26" font="vector" ratio="20" rot="MR0" align="center">Rev H</text>
 <text x="23.9" y="0.85" size="0.75" layer="25" font="vector" ratio="15" align="bottom-center">5V</text>
 <text x="23.9" y="5.89" size="0.75" layer="25" font="vector" ratio="15" align="bottom-center">D13</text>
 <text x="23.9" y="8.45" size="0.75" layer="25" font="vector" ratio="15" align="bottom-center">GND</text>
-<text x="8.09" y="1.97" size="0.75" layer="25" font="vector" ratio="15" align="center">Tape</text>
-<text x="11.24" y="2.6" size="0.9" layer="26" font="vector" ratio="20" rot="MR0" align="center">blinkytape.com</text>
+<text x="11.24" y="2.6" size="0.9" layer="26" font="vector" ratio="20" rot="MR0" align="center">blinkinlabs.com</text>
 <text x="23.9" y="0.85" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="bottom-center">5V</text>
 <text x="23.9" y="5.89" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="bottom-center">D13</text>
 <text x="23.9" y="8.45" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="bottom-center">GND</text>
@@ -153,8 +152,7 @@ Tape</text>
 <text x="4.35" y="6.25" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="center">D7</text>
 <text x="4.65" y="3.75" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="center">D11</text>
 <text x="0.5" y="10.75" size="0.8128" layer="46">Slot drill with copper</text>
-<text x="13.75" y="8.75" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="center">8/2013</text>
-<text x="6.93" y="2.96" size="0.75" layer="25" font="vector" ratio="15" align="center">Blinky</text>
+<text x="13.75" y="8.75" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="center">11/2013</text>
 </plain>
 <libraries>
 <library name="blinkiverse">
@@ -585,6 +583,7 @@ Modified from Laen's PCB Order Design Rules</description>
 <element name="U$14" library="blinkiverse" package="TEST_PAD_SMT" value="TEST_PAD_SMT" x="2" y="3.75" rot="MR270"/>
 <element name="U$15" library="blinkiverse" package="OSHW-LOGO-S" value="" x="20.89" y="6.7" rot="MR0"/>
 <element name="U$9" library="blinkiverse" package="WS2812B_CONNECTOR" value="WS2812B_CONNECTOR" x="23.9" y="5" rot="MR180"/>
+<element name="R3" library="blinkiverse" package="RES_0402_KEMET_MEDIAN" value="??" x="18.5" y="8.1" rot="R90"/>
 </elements>
 <signals>
 <signal name="GND">
@@ -809,17 +808,21 @@ Modified from Laen's PCB Order Design Rules</description>
 <signal name="D10">
 <contactref element="S1" pad="P$4"/>
 <contactref element="U$2" pad="30"/>
-<wire x1="17.275" y1="6.25" x2="17.74289375" y2="6.25" width="0.254" layer="1"/>
-<wire x1="17.74289375" y1="6.25" x2="18.096446875" y2="6.396446875" width="0.254" layer="1" curve="45"/>
-<wire x1="18.4033625" y1="6.8495375" x2="18.338059375" y2="6.691884375" width="0.254" layer="1"/>
-<wire x1="18.338059375" y1="6.691884375" x2="18.229675" y2="6.529675" width="0.254" layer="1" curve="-22.499569"/>
-<wire x1="18.229675" y1="6.529675" x2="18.096446875" y2="6.396446875" width="0.254" layer="1"/>
-<wire x1="19.653553125" y1="8.153553125" x2="18.511746875" y2="7.011746875" width="0.254" layer="1"/>
-<wire x1="18.511746875" y1="7.011746875" x2="18.4033625" y2="6.8495375" width="0.254" layer="1" curve="22.499685"/>
-<wire x1="19.653553125" y1="8.153553125" x2="20.00710625" y2="8.3" width="0.254" layer="1" curve="-45"/>
-<wire x1="20.00710625" y1="8.3" x2="20.79289375" y2="8.3" width="0.254" layer="1"/>
-<wire x1="20.79289375" y1="8.3" x2="21.146446875" y2="8.446446875" width="0.254" layer="1" curve="45"/>
-<wire x1="21.146446875" y1="8.446446875" x2="21.8" y2="9.1" width="0.254" layer="1"/>
+<wire x1="17.275" y1="6.25" x2="17.701471875" y2="6.25" width="0.254" layer="1"/>
+<wire x1="17.701471875" y1="6.25" x2="18.125734375" y2="6.425734375" width="0.254" layer="1" curve="44.999789"/>
+<wire x1="18.125734375" y1="6.425734375" x2="18.263603125" y2="6.663603125" width="0.254" layer="1"/>
+<wire x1="18.263603125" y1="6.663603125" x2="18.651471875" y2="6.9" width="0.254" layer="1" curve="-45"/>
+<wire x1="18.651471875" y1="6.9" x2="18.975734375" y2="6.975734375" width="0.254" layer="1" curve="44.999789"/>
+<wire x1="18.975734375" y1="6.975734375" x2="19.124265625" y2="7.124265625" width="0.254" layer="1"/>
+<wire x1="19.124265625" y1="7.124265625" x2="19.3" y2="7.548528125" width="0.254" layer="1" curve="44.999702"/>
+<wire x1="19.3" y1="7.548528125" x2="19.3" y2="7.651471875" width="0.254" layer="1"/>
+<wire x1="19.3" y1="7.651471875" x2="19.475734375" y2="8.075734375" width="0.254" layer="1" curve="-44.999789"/>
+<wire x1="19.475734375" y1="8.075734375" x2="19.524265625" y2="8.124265625" width="0.254" layer="1"/>
+<wire x1="19.524265625" y1="8.124265625" x2="19.948528125" y2="8.3" width="0.254" layer="1" curve="-44.999702"/>
+<wire x1="19.948528125" y1="8.3" x2="21.051471875" y2="8.3" width="0.254" layer="1"/>
+<wire x1="21.051471875" y1="8.3" x2="21.475734375" y2="8.475734375" width="0.254" layer="1" curve="44.999789"/>
+<wire x1="21.475734375" y1="8.475734375" x2="21.8" y2="8.8" width="0.254" layer="1"/>
+<wire x1="21.8" y1="8.8" x2="21.8" y2="9.1" width="0.254" layer="1"/>
 </signal>
 <signal name="AREF">
 <contactref element="U$2" pad="42"/>
@@ -833,27 +836,24 @@ Modified from Laen's PCB Order Design Rules</description>
 <wire x1="9.23804375" y1="5.140434375" x2="9.550390625" y2="5.25" width="0.254" layer="1" curve="-38.659752"/>
 <wire x1="9.550390625" y1="5.25" x2="10.225" y2="5.25" width="0.254" layer="1"/>
 </signal>
-<signal name="D13">
-<contactref element="U$2" pad="32"/>
-<contactref element="U$9" pad="DATA1"/>
-<contactref element="U$9" pad="DATA_1"/>
-<contactref element="U$9" pad="DATA_2"/>
-<contactref element="U$9" pad="DATA"/>
-<wire x1="25.25" y1="5" x2="23.9" y2="5" width="0.4064" layer="16"/>
-<wire x1="23.4" y1="5" x2="23.9" y2="5" width="0.4064" layer="16"/>
-<wire x1="17.275" y1="7.25" x2="17.84289375" y2="7.25" width="0.254" layer="1"/>
-<wire x1="17.84289375" y1="7.25" x2="18.196446875" y2="7.396446875" width="0.254" layer="1" curve="45"/>
-<wire x1="18.196446875" y1="7.396446875" x2="18.853553125" y2="8.053553125" width="0.254" layer="1"/>
-<wire x1="18.853553125" y1="8.053553125" x2="19" y2="8.40710625" width="0.254" layer="1" curve="45"/>
-<wire x1="19" y1="8.40710625" x2="19" y2="9.37" width="0.254" layer="1"/>
-<via x="19" y="9.37" extent="1-16" drill="0.35"/>
-<wire x1="19" y1="9.37" x2="22" y2="9.38" width="0.254" layer="16"/>
+<signal name="LED_DATA">
+<via x="19.1" y="9.37" extent="1-16" drill="0.35"/>
+<wire x1="19.1" y1="9.37" x2="22" y2="9.38" width="0.254" layer="16"/>
 <wire x1="22" y1="9.38" x2="22.2" y2="9.18" width="0.254" layer="16" curve="-90"/>
 <wire x1="22.2" y1="9.18" x2="22.2" y2="6.70710625" width="0.254" layer="16"/>
 <wire x1="22.2" y1="6.70710625" x2="22.346446875" y2="6.353553125" width="0.254" layer="16" curve="45"/>
 <wire x1="22.346446875" y1="6.353553125" x2="23.4" y2="5.3" width="0.254" layer="16"/>
-<wire x1="23.4" y1="5.3" x2="23.4" y2="5" width="0.254" layer="16"/>
+<contactref element="U$9" pad="DATA1"/>
+<contactref element="U$9" pad="DATA_1"/>
+<contactref element="U$9" pad="DATA_2"/>
+<contactref element="U$9" pad="DATA"/>
+<contactref element="R3" pad="P$2"/>
+<wire x1="25.25" y1="5" x2="23.9" y2="5" width="0.4064" layer="16"/>
+<wire x1="23.4" y1="5" x2="23.9" y2="5" width="0.4064" layer="16"/>
+<wire x1="19.1" y1="9.37" x2="18.5" y2="9.37" width="0.254" layer="1"/>
+<wire x1="18.5" y1="9.37" x2="18.5" y2="8.55" width="0.254" layer="1"/>
 <wire x1="23.9" y1="5" x2="23.9" y2="5" width="0" layer="19" extent="1-16"/>
+<wire x1="23.4" y1="5.3" x2="23.4" y2="5" width="0" layer="19" extent="16-16"/>
 </signal>
 <signal name="VCC">
 <contactref element="C1" pad="1"/>
@@ -905,7 +905,7 @@ Modified from Laen's PCB Order Design Rules</description>
 <wire x1="4.2" y1="6.3" x2="5.05" y2="6.3" width="0.4" layer="1"/>
 <wire x1="5.05" y1="6.3" x2="5.47" y2="6.4" width="0.4" layer="1"/>
 <contactref element="U$12" pad="P$1"/>
-<via x="19.40076875" y="6.866153125" extent="1-16" drill="0.35"/>
+<via x="19.6" y="6.5" extent="1-16" drill="0.35"/>
 <wire x1="8.2" y1="3.75" x2="7.984815625" y2="3.200965625" width="0.254" layer="1" curve="-45.83031"/>
 <wire x1="7.984815625" y1="3.200965625" x2="7.67931875" y2="2.944196875" width="0.254" layer="1"/>
 <wire x1="7.67931875" y1="2.944196875" x2="7.25" y2="2.87" width="0.254" layer="1" curve="-44.169613"/>
@@ -958,8 +958,7 @@ Modified from Laen's PCB Order Design Rules</description>
 <wire x1="19" y1="5.2" x2="19.38198125" y2="5.65063125" width="0.254" layer="1"/>
 <wire x1="19.38198125" y1="5.65063125" x2="19.50056875" y2="5.975284375" width="0.254" layer="1" curve="40.441105"/>
 <wire x1="19.50056875" y1="5.975284375" x2="19.5" y2="6.5" width="0.254" layer="1"/>
-<wire x1="19.5" y1="6.5" x2="19.40076875" y2="6.59923125" width="0.254" layer="1"/>
-<wire x1="19.40076875" y1="6.59923125" x2="19.40076875" y2="6.866153125" width="0.254" layer="1"/>
+<wire x1="19.6" y1="6.5" x2="19.5" y2="6.5" width="0.254" layer="1"/>
 <wire x1="23.9" y1="2.5" x2="23.9" y2="2.5" width="0" layer="19" extent="1-16"/>
 </signal>
 <signal name="N$3">
@@ -1043,6 +1042,12 @@ Modified from Laen's PCB Order Design Rules</description>
 </polygon>
 <wire x1="4.2" y1="2.5" x2="4.2" y2="2.5" width="0" layer="19" extent="1-16"/>
 <wire x1="4.2" y1="7.5" x2="4.2" y2="7.5" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="D13">
+<contactref element="U$2" pad="32"/>
+<contactref element="R3" pad="P$1"/>
+<wire x1="17.275" y1="7.25" x2="18.05" y2="7.25" width="0.254" layer="1"/>
+<wire x1="18.05" y1="7.25" x2="18.5" y2="7.65" width="0.254" layer="1"/>
 </signal>
 </signals>
 </board>
