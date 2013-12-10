@@ -115,6 +115,7 @@ void serialLoop() {
         }
 
         if (x == 2) {   // If we received three serial bytes
+          if(pixelIndex == LED_COUNT) break; // Prevent overflow by ignoring the pixel data beyond LED_COUNT
           leds[pixelIndex] = CRGB(buffer[0], buffer[1], buffer[2]);
           pixelIndex++;
         }
