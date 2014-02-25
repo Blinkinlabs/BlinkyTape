@@ -1,4 +1,6 @@
 import time
+import pygame
+import textrect
 import TestRig
 
 class UserInterface():
@@ -10,18 +12,22 @@ class UserInterface():
 
   def __init__(self):
     self.rig = TestRig.testRig
- 
-#    self.font = pygame.font.Font('fireflysung.ttf', 24)
-#    self.font = pygame.font.Font(None,24)
-#    self.displayRect = pygame.Rect((0,0,128,128))
+
+    pygame.init()
+    size=[320,240]
+    self.screen=pygame.display.set_mode(size)
+    pygame.mouse.set_visible(False)
+
+    self.font = pygame.font.Font("FreeMono.ttf", 20)
+    self.displayRect = pygame.Rect((0,0,320,240))
    
   def DisplayFill(self, color):
     """
     Fill screen in a color
     @param color Fill color (RGB tuple)
     """
-#    self.screen.fill(color)
-#    pygame.display.flip()
+    self.screen.fill(color)
+    pygame.display.flip()
     pass
 
   def DisplayMessage(self, message, color=(255,255,255), bgcolor=(0,0,0), boxed=False): 
@@ -31,19 +37,13 @@ class UserInterface():
     @apram color Text color (RGB tuple)
     @param bgcolor Background color (RGB tuple)
     """
-#    self.screen.fill(bgcolor, self.displayRect)
-#
-#    text = textrect.render_textrect(message,self.font,self.displayRect,color,bgcolor,0)
-#    
-#    # TODO: Handle screen rotation at the framebuffer level
-#    #text = pygame.transform.rotate(text, 180)
-#    self.screen.blit(text, self.displayRect.topleft)
-#
-#    #TODO: rotate screen at framebuffer level
-#    screen = pygame.transform.rotate(self.screen.subsurface(pygame.Rect(0,0,128,128)), 180)
-#    self.screen.blit(screen, self.displayRect.topleft)
-#
-#    pygame.display.flip()
+    self.screen.fill(bgcolor, self.displayRect)
+
+    text = textrect.render_textrect(message,self.font,self.displayRect,color,bgcolor,0)
+   
+    self.screen.blit(text, self.displayRect.topleft)
+
+    pygame.display.flip()
     if boxed:
       print "**********************************************************************"
       print ""
@@ -57,29 +57,23 @@ class UserInterface():
     Display a pass message to the user, for a given amout of time.
     @param timeout Time to display the message, in seconds
     """
-#    self.r.SetRgbLed(0, 1, 0)  # show green
     self.DisplayMessage(message, color=(0,0,0), bgcolor=(0,255,0), boxed=True)
     time.sleep(timeout)
-#    self.r.SetRgbLed(1,1,1)  # leds on
 
   def DisplayError(self, message = 'ERROR', timeout=.5):
     """
     Display a failure message to the user, for a given amout of time.
     @param timeout Time to display the message, in seconds
     """
-#    self.r.SetRgbLed(1, 0, 0)  # show red
     self.DisplayMessage(message, color=(0,0,0), bgcolor=(255,0,0), boxed=True)
-#    self.r.SetRgbLed(1,1,1)  # leds on
     
   def DisplayFail(self, message = 'FAIL', timeout=.5):
     """
     Display a failure message to the user, for a given amout of time.
     @param timeout Time to display the message, in seconds
     """
-#    self.r.SetRgbLed(1, 0, 0)  # show red
     self.DisplayMessage(message, color=(0,0,0), bgcolor=(255,0,0), boxed=True)
     time.sleep(timeout)
-#    self.r.SetRgbLed(1,1,1)  # leds on
 
   def Notify(self, message, color=(255,255,255), bgcolor=(0,0,0), strobe = False, strobeColor = (0,0,1)):
     """
@@ -91,16 +85,9 @@ class UserInterface():
     
 #    pygame.event.clear()  # clear previous events
 #    
-#    if strobe:
-#      self.StrobeInit()
-#
 #    while True:
-#      if strobe:
-#        self.UpdateStrobe(strobeColor)
 #      for event in pygame.event.get(pygame.KEYUP):
 #        if (event.key == pygame.K_RIGHT):
-#          if strobe:
-#            self.r.SetRgbLed(1,1,1)  # leds on
 #          return 
     raw_input('Press return to continue')
 
@@ -113,7 +100,6 @@ class UserInterface():
     red = strobeColor[0] * (self.sc/self.scMax)
     green = strobeColor[1] * (self.sc/self.scMax)
     blue = strobeColor[2] * (self.sc/self.scMax)
-#    self.r.SetRgbLed(red, green, blue)
 
     if self.scDir:
       self.sc += 1.0
@@ -137,20 +123,11 @@ class UserInterface():
 
 #    pygame.event.clear()  # clear previous events
 #
-#    if strobe:
-#      self.StrobeInit()
-#  
 #    while True:
-#      if strobe:
-#        self.UpdateStrobe(strobeColor)
 #      for event in pygame.event.get(pygame.KEYUP):
 #        if (event.key == pygame.K_RIGHT):
-#          if strobe:
-#            self.r.SetRgbLed(1,1,1)  # leds on
 #          return True
 #        if (event.key == pygame.K_UP):
-#          if strobe:
-#            self.r.SetRgbLed(1,1,1)  # leds on
 #          return False
     s = ''
     while(s != 'y' and s != 'n'):

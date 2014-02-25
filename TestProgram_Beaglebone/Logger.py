@@ -3,6 +3,7 @@ import json
 #import MySQLdb
 import traceback
 import sys
+import os
 
 import TestRig
 import UserInterface
@@ -17,7 +18,7 @@ class FileSink():
       self.logFile = open(self.fileName, 'a')
     except Exception:
       self.logFile = None
-      print "Cannot open USB logfile at %s" % self.fileName
+      print "Cannot open logfile at %s" % self.fileName
 
   def Log(self, data):
     """ Log a message to the file """
@@ -51,8 +52,11 @@ class Logger():
     self.sinks = []
 
   def Init(self):
-    self.sinks.append(FileSink("./usb-log.log"))
-#    self.sinks.append(FileSink("./sd-log.log"))
+    self.sinks.append(FileSink("./sd-log.log"))
+
+    # If a usb stick is connected, log to it as well.
+    if os.access('/media/usb0', os.R_OK):
+      self.sinks.append(FileSink("/media/usb0/usb-log.log"))
 
     if self.RequireDB:
       self.InitDB() # moved to menu_functional test area.

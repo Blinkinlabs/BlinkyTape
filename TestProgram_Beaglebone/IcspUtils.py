@@ -8,7 +8,7 @@ def writeFuses(portName, lockFuses, eFuses, hFuses, lFuses, programmer="avrisp")
 
   """
   command = [
-    "./avrdude",
+    "avrdude",
     "-c", programmer,
     "-P", portName,
     "-p", "m32u4",
@@ -30,7 +30,7 @@ def loadFlash(portName, flashFile, programmer="avrisp"):
   @param flashFile Array of file(s) to write to the device
   """
   command = [
-    "./avrdude",
+    "avrdude",
     "-c", programmer,
     "-P", portName,
     "-p", "m32u4",

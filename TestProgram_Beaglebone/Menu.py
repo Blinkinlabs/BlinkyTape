@@ -1,7 +1,7 @@
 import UserInterface
 import os
 import re
-#import pygame
+import pygame
 import unittest
 
 class Menu(object):
@@ -31,115 +31,111 @@ class Menu(object):
     @param items List of possible items to display
     """
     self.i = interface
-#
-#    self.visible_item_count = 4 # Maximum items to display at once
-# 
-#    self.selection_index = 0
-#    self.top_visible_index = 0
-# 
-#    self.selection_animate_state = 0 
-#    self.selection_animate_offset = 0
 
-#  def DrawItem(self, name, position, selected):
-#    """
-#    Draw an unselected menu item
-#    @param name Name item to dispaly
-#    @param position Place to draw the item (0-3)
-#    @param selected True if the current item is selected, false otherwise
-#    """
-#
-#    if (selected):
-#      color = (255,255,255)
-#      self.i.screen.fill((0,0,200),(0,32*position,128,32))
-#      text = self.i.font.render(name,1,color)
-#
-#      if (self.selection_animate_state < 15):
-#        self.selection_animate_state += 1
-#      elif (self.selection_animate_state == 15):
-#        self.selection_animate_offset += 1
-#        if (self.selection_animate_offset > text.get_width() + 10):
-#          self.selection_animate_state = 0
-#          self.selection_animate_offset = 0
-# 
-#      offset = -self.selection_animate_offset
-#      self.i.screen.blit(text, (offset,32*position))
-#      self.i.screen.blit(text, (offset+text.get_width() + 10,32*position))
-#
-#    else:
-#      color = (0,0,0)
-#      text = self.i.font.render(name,1,color)
-#      offset = 0
-#      self.i.screen.blit(text, (offset,32*position))
+    self.visible_item_count = 4 # Maximum items to display at once
+ 
+    self.selection_index = 0
+    self.top_visible_index = 0
+ 
+    self.selection_animate_state = 0 
+    self.selection_animate_offset = 0
+
+  def DrawItem(self, name, position, selected):
+    """
+    Draw an unselected menu item
+    @param name Name item to dispaly
+    @param position Place to draw the item (0-3)
+    @param selected True if the current item is selected, false otherwise
+    """
+
+    if (selected):
+      color = (255,255,255)
+      self.i.screen.fill((0,0,200),(0,32*position,320,32))
+      text = self.i.font.render(name,1,color)
+
+      if (self.selection_animate_state < 15):
+        self.selection_animate_state += 1
+      elif (self.selection_animate_state == 15):
+        self.selection_animate_offset += 1
+        if (self.selection_animate_offset > text.get_width() + 180):
+          self.selection_animate_state = 0
+          self.selection_animate_offset = 0
+ 
+      offset = -self.selection_animate_offset
+      self.i.screen.blit(text, (offset,32*position))
+      self.i.screen.blit(text, (offset+text.get_width() + 180,32*position))
+
+    else:
+      color = (0,0,0)
+      text = self.i.font.render(name,1,color)
+      offset = 0
+      self.i.screen.blit(text, (offset,32*position))
 
 
   def DrawMenu(self):
     """ Draw the current menu screen """
-#    self.i.screen.fill((255,255,255))
-#
-#    for i in range(0, self.visible_item_count):
-#      index = self.top_visible_index + i
-#      selected = (index == self.selection_index)
-#
-#      #if this is a valid item, draw it
-#      if (index < len(self.items)):
-#        name = str(index + 1) + ":" + self.items[index][0]
-#        self.DrawItem(name,i,selected)
-#    
-#    # TODO: rotate screen at framebuffer level
-#    screen = pygame.transform.rotate(self.i.screen.subsurface(pygame.Rect(0,0,128,128)), 180)
-#    self.i.screen.blit(screen, self.i.displayRect.topleft)
-#
-#    pygame.display.flip()
+    self.i.screen.fill((255,255,255))
 
-    print ""
-    i = 1
-    for entry in self.items:
-      print str(i) + ". " + entry[0]
-      i = i + 1
+    for i in range(0, self.visible_item_count):
+      index = self.top_visible_index + i
+      selected = (index == self.selection_index)
+
+      #if this is a valid item, draw it
+      if (index < len(self.items)):
+        name = str(index + 1) + ":" + self.items[index][0]
+        self.DrawItem(name,i,selected)
+    
+    pygame.display.flip()
+
+#    print ""
+#    i = 1
+#    for entry in self.items:
+#      print str(i) + ". " + entry[0]
+#      i = i + 1
 
   def Display(self):
     """ Run an interactive menu """
     while True:
       self.DrawMenu()
-      s = raw_input("Type a selection or press enter to run all tests")
-      try:
-        if len(s) == 0:
-	  n = 0
-        else:
-          n = int(s) - 1
-      except ValueError:
-        pass
-      else:
-        if n >= 0 and n < len(self.items):
-          self.HandleSelection(self.items[n])
+#      s = raw_input("Type a selection or press enter to run all tests")
+#      try:
+#        if len(s) == 0:
+#	  n = 0
+#        else:
+#          n = int(s) - 1
+#      except ValueError:
+#        pass
+#      else:
+#        if n >= 0 and n < len(self.items):
+#          self.HandleSelection(self.items[n])
 
-#      last_selection_index = self.selection_index
-#
-#      for event in pygame.event.get(pygame.KEYUP):
-#        if (event.key == pygame.K_UP):
-#          # Try to decrease the selection index
-#          self.selection_index = max(self.selection_index - 1, 0)
-#          # If the selection index crashes into the top top visible index, try to decrease the top visible index.
-#          if (self.selection_index == self.top_visible_index):
-#            self.top_visible_index = max(self.top_visible_index - 1, 0)
-#
-#        if (event.key == pygame.K_DOWN or event.key == pygame.K_LEFT):
-#          # Try to increase the selection index
-#          self.selection_index = min(self.selection_index + 1, len(self.items) - 1)
-#          # If the selection index crashes into the top top visible index, try to increase the top visible index.
-#          if (self.selection_index == self.top_visible_index + self.visible_item_count - 1):
-#            self.top_visible_index = min(self.top_visible_index + 1, len(self.items) - self.visible_item_count)
-# 
-#        if (event.key == pygame.K_RETURN or event.key == pygame.K_RIGHT):
-#          self.HandleSelection(self.items[self.selection_index])
-#
-#        if (event.key == pygame.K_ESCAPE):
-#          exit(1)
-#
-#      # If we have a new selection, reset the animation
-#      if (last_selection_index != self.selection_index):
-#        self.selection_animate_state = 0 
-#        self.selection_animate_offset = 0
+      last_selection_index = self.selection_index
+
+      for event in pygame.event.get(pygame.KEYUP):
+        if (event.key == pygame.K_UP):
+          # Try to decrease the selection index
+          self.selection_index = max(self.selection_index - 1, 0)
+          # If the selection index crashes into the top top visible index, try to decrease the top visible index.
+          if (self.selection_index == self.top_visible_index):
+            self.top_visible_index = max(self.top_visible_index - 1, 0)
+
+        if (event.key == pygame.K_DOWN or event.key == pygame.K_LEFT):
+          # Try to increase the selection index
+          self.selection_index = min(self.selection_index + 1, len(self.items) - 1)
+          # If the selection index crashes into the top top visible index, try to increase the top visible index.
+          if (self.selection_index == self.top_visible_index + self.visible_item_count - 1):
+            self.top_visible_index = min(self.top_visible_index + 1, len(self.items) - self.visible_item_count)
+ 
+        if (event.key == pygame.K_RETURN or event.key == pygame.K_RIGHT):
+          self.HandleSelection(self.items[self.selection_index])
+
+        if (event.key == pygame.K_ESCAPE):
+          exit(1)
+
+      # If we have a new selection, reset the animation
+      if (last_selection_index != self.selection_index):
+        self.selection_animate_state = 0 
+        self.selection_animate_offset = 0
 
   def HandleSelection(self, selection):
     print "Item selected: " + str(selection)
@@ -156,5 +152,6 @@ if __name__ == '__main__':
           ('Last Selection', '')
   ]
 
-  menu = Menu(interface, entries)
+  menu = Menu(interface)
+  menu.items = entries
   menu.Display()
