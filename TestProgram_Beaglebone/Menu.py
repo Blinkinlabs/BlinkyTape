@@ -3,6 +3,7 @@ import os
 import re
 import pygame
 import unittest
+import RPi.GPIO as GPIO
 
 class Menu(object):
   """
@@ -87,55 +88,65 @@ class Menu(object):
     
     pygame.display.flip()
 
-#    print ""
-#    i = 1
-#    for entry in self.items:
-#      print str(i) + ". " + entry[0]
-#      i = i + 1
 
   def Display(self):
     """ Run an interactive menu """
     while True:
-      self.DrawMenu()
-#      s = raw_input("Type a selection or press enter to run all tests")
-#      try:
-#        if len(s) == 0:
-#	  n = 0
-#        else:
-#          n = int(s) - 1
-#      except ValueError:
-#        pass
-#      else:
-#        if n >= 0 and n < len(self.items):
-#          self.HandleSelection(self.items[n])
+      if(self.i.useFramebuffer == False):
+        print ""
+        i = 1
+        for entry in self.items:
+          print str(i) + ". " + entry[0]
+          i = i + 1
 
-      last_selection_index = self.selection_index
 
-      for event in pygame.event.get(pygame.KEYUP):
-        if (event.key == pygame.K_UP):
-          # Try to decrease the selection index
-          self.selection_index = max(self.selection_index - 1, 0)
-          # If the selection index crashes into the top top visible index, try to decrease the top visible index.
-          if (self.selection_index == self.top_visible_index):
-            self.top_visible_index = max(self.top_visible_index - 1, 0)
+          s = raw_input("Type a selection or press enter to run all tests")
+          try:
+            if len(s) == 0:
+    	      n = 0
+            else:
+              n = int(s) - 1
+          except ValueError:
+            pass
+          else:
+            if n >= 0 and n < len(self.items):
+              self.HandleSelection(self.items[n])
 
-        if (event.key == pygame.K_DOWN or event.key == pygame.K_LEFT):
-          # Try to increase the selection index
-          self.selection_index = min(self.selection_index + 1, len(self.items) - 1)
-          # If the selection index crashes into the top top visible index, try to increase the top visible index.
-          if (self.selection_index == self.top_visible_index + self.visible_item_count - 1):
-            self.top_visible_index = min(self.top_visible_index + 1, len(self.items) - self.visible_item_count)
- 
-        if (event.key == pygame.K_RETURN or event.key == pygame.K_RIGHT):
-          self.HandleSelection(self.items[self.selection_index])
+      else:
+        self.DrawMenu()
+       
+        last_selection_index = self.selection_index
 
-        if (event.key == pygame.K_ESCAPE):
-          exit(1)
+        if(self.i.usePi):
+          if(GPIO.input(23) == 0):
+            self.HandleSelection(self.items[self.selection_index])
 
-      # If we have a new selection, reset the animation
-      if (last_selection_index != self.selection_index):
-        self.selection_animate_state = 0 
-        self.selection_animate_offset = 0
+        else:
+          for event in pygame.event.get(pygame.KEYUP):
+            if (event.key == pygame.K_UP):
+              # Try to decrease the selection index
+              self.selection_index = max(self.selection_index - 1, 0)
+              # If the selection index crashes into the top top visible index, try to decrease the top visible index.
+              if (self.selection_index == self.top_visible_index):
+                self.top_visible_index = max(self.top_visible_index - 1, 0)
+        
+            if (event.key == pygame.K_DOWN or event.key == pygame.K_LEFT):
+              # Try to increase the selection index
+              self.selection_index = min(self.selection_index + 1, len(self.items) - 1)
+              # If the selection index crashes into the top top visible index, try to increase the top visible index.
+              if (self.selection_index == self.top_visible_index + self.visible_item_count - 1):
+                self.top_visible_index = min(self.top_visible_index + 1, len(self.items) - self.visible_item_count)
+        
+            if (event.key == pygame.K_RETURN or event.key == pygame.K_RIGHT):
+              self.HandleSelection(self.items[self.selection_index])
+        
+            if (event.key == pygame.K_ESCAPE):
+              exit(1)
+        
+          # If we have a new selection, reset the animation
+          if (last_selection_index != self.selection_index):
+            self.selection_animate_state = 0 
+            self.selection_animate_offset = 0
 
   def HandleSelection(self, selection):
     print "Item selected: " + str(selection)

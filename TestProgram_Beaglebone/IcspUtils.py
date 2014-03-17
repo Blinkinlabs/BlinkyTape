@@ -1,6 +1,8 @@
 import subprocess
 import time
 import optparse
+import sys
+import cStringIO
 
 def writeFuses(portName, lockFuses, eFuses, hFuses, lFuses, programmer="avrisp"):
   """
@@ -19,9 +21,21 @@ def writeFuses(portName, lockFuses, eFuses, hFuses, lFuses, programmer="avrisp")
     "-U", "hfuse:w:%#02X:m" % hFuses,
     "-U", "lfuse:w:%#02X:m" % lFuses,
   ]
-  print command
 
-  return subprocess.call(command)
+  s = open('result.log','w')
+  e = open('errorresult.log','w')
+  result = subprocess.call(command, stdout=s, stderr=e)
+  s.close()
+  e.close()
+
+  s = open('result.log','r')
+  e = open('errorresult.log','r')
+  stdout = s.readlines()
+  stderr = e.readlines()
+  s.close()
+  e.close()
+
+  return result, stdout, stderr
   
 def loadFlash(portName, flashFile, programmer="avrisp"):
   """
@@ -38,8 +52,20 @@ def loadFlash(portName, flashFile, programmer="avrisp"):
     "-U" "flash:w:%s:i" % flashFile,
   ]
 
-  return subprocess.call(command)
+  s = open('result.log','w')
+  e = open('errorresult.log','w')
+  result = subprocess.call(command, stdout=s, stderr=e)
+  s.close()
+  e.close()
 
+  s = open('result.log','r')
+  e = open('errorresult.log','r')
+  stdout = s.readlines()
+  stderr = e.readlines()
+  s.close()
+  e.close()
+
+  return result, stdout, stderr
 
 
 if __name__ == '__main__':
@@ -56,19 +82,19 @@ if __name__ == '__main__':
   hFuses    = 0xD8
   lFuses    = 0xFF
   
-  returnCode = writeFuses(port, lockFuses, eFuses, hFuses, lFuses, programmer="usbtiny")
+  returnCode = writeFuses(port, lockFuses, eFuses, hFuses, lFuses)
 
  
-  if (returnCode != 0):
+  if (returnCode[0] != 0):
     print "FAIL. Error writing the fuses!"
     exit(1)
   print "PASS. Fuses written correctly"
 
   productionFile = "firmware/BlinkyTape-Production.hex"
 
-  returnCode = loadFlash(port, productionFile, programmer="usbtiny")
+  returnCode = loadFlash(port, productionFile)
 
-  if (returnCode!= 0):
+  if (returnCode[0]!= 0):
     print "FAIL. Error programming bootloader!"
     exit(1)
   print "PASS. Bootlaoder programmed successfully"

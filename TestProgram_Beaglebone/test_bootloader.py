@@ -5,7 +5,7 @@ import BlinkyTapeUnitTest
 import TestRig
 import UserInterface
 import IcspUtils
-
+import Logger
 
 class TestProgramBootloader(BlinkyTapeUnitTest.BlinkyTapeTestCase):
   def __init__(self, methodName):
@@ -39,9 +39,12 @@ class TestProgramBootloader(BlinkyTapeUnitTest.BlinkyTapeTestCase):
     lFuses    = 0xFF
 #    lFuses    = 0x5E #default
     
-    returnCode = IcspUtils.writeFuses(self.port, lockFuses, eFuses, hFuses, lFuses)
+    result = IcspUtils.writeFuses(self.port, lockFuses, eFuses, hFuses, lFuses)
     
-    self.assertEqual(returnCode, 0)
+    self.LogDataPoint('fuses stdout', result[1])
+    self.LogDataPoint('fuses stderr', result[2])
+
+    self.assertEqual(result[0], 0)
     self.stopMe = False
 
   def test_020_program_production(self):
@@ -56,7 +59,10 @@ class TestProgramBootloader(BlinkyTapeUnitTest.BlinkyTapeTestCase):
 
     productionFile = "firmware/BlinkyTape-Production.hex"
 
-    returnCode = IcspUtils.loadFlash(self.port, productionFile)
+    result = IcspUtils.loadFlash(self.port, productionFile)
 
-    self.assertEqual(returnCode, 0)
+    self.LogDataPoint('firmware stdout', result[1])
+    self.LogDataPoint('firmware stderr', result[2])
+
+    self.assertEqual(result[0], 0)
     self.stopMe = False

@@ -2,24 +2,32 @@ import time
 import pygame
 import textrect
 import TestRig
+import RPi.GPIO as GPIO
 
 class UserInterface():
   """
   The user interface is a simple class for displaying messages on the LCD screen,
   and reading input from the front keypad.
   """
-  screen = {}
+  screen = None
+  useFramebuffer = True
+  usePi = True
 
   def __init__(self):
     self.rig = TestRig.testRig
 
-    pygame.init()
-    size=[320,240]
-    self.screen=pygame.display.set_mode(size)
-    pygame.mouse.set_visible(False)
+    if(self.useFramebuffer):
+      pygame.init()
+      size=[320,240]
+      self.screen=pygame.display.set_mode(size)
+      pygame.mouse.set_visible(False)
 
-    self.font = pygame.font.Font("FreeMono.ttf", 20)
-    self.displayRect = pygame.Rect((0,0,320,240))
+      self.font = pygame.font.Font("FreeMono.ttf", 20)
+      self.displayRect = pygame.Rect((0,0,320,240))
+
+    if(self.usePi):
+      GPIO.setmode(GPIO.BCM)
+      GPIO.setup(23, GPIO.IN, pull_up_down = GPIO.PUD_UP)
    
   def DisplayFill(self, color):
     """
@@ -37,13 +45,15 @@ class UserInterface():
     @apram color Text color (RGB tuple)
     @param bgcolor Background color (RGB tuple)
     """
-    self.screen.fill(bgcolor, self.displayRect)
+    if self.screen != None:
+      self.screen.fill(bgcolor, self.displayRect)
 
-    text = textrect.render_textrect(message,self.font,self.displayRect,color,bgcolor,0)
+      text = textrect.render_textrect(message,self.font,self.displayRect,color,bgcolor,0)
    
-    self.screen.blit(text, self.displayRect.topleft)
+      self.screen.blit(text, self.displayRect.topleft)
 
-    pygame.display.flip()
+      pygame.display.flip()
+
     if boxed:
       print "**********************************************************************"
       print ""
