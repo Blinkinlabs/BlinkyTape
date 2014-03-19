@@ -2,8 +2,18 @@
 #define COLOR_LOOP_H
 
 #include <FastLED.h>
+#include "BlinkyTape.h"
 
-extern void setColorLoopColors(float newRBal, float newGBal, float newBBal);
-extern void colorLoop(CRGB * leds);
+class ColorLoop : public Pattern {
+  private:
+    float rBal;
+    float gBal;
+    float bBal;
+    
+  public:
+    ColorLoop(float newRBal, float newGBal, float newBBal);
+    void reset() {};
+    void draw(CRGB * leds);
+};
 
 #endif

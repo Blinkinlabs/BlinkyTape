@@ -3,14 +3,17 @@
 
 #include <Arduino.h>
 
-#define SCAN_WIDTH 4
+Scanner::Scanner(uint8_t newScanWidth) :
+  scanWidth(newScanWidth) {
+    
+  }
 
-void Scanner(CRGB* leds) {  
+void Scanner::draw(CRGB* leds) {  
   static uint8_t position = 2;
   static uint8_t direction = 0; // 0 is positive, 1 is negative
 
   for (uint8_t i = 0; i < LED_COUNT; i++) {
-    if((i >= position) && (i < position + SCAN_WIDTH)) {
+    if((i >= position) && (i < position + scanWidth)) {
       leds[i].r = 0;
       leds[i].g = 0;
       leds[i].b = 255;
@@ -30,7 +33,7 @@ void Scanner(CRGB* leds) {
     position -= 1;
   }
   
-  if(position > LED_COUNT - SCAN_WIDTH) {
+  if(position > LED_COUNT - scanWidth) {
     direction = 1;
   }
   else if(position == 0) {

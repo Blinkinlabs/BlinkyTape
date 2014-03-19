@@ -1,20 +1,7 @@
-#include "ColorLoop.h"
+#include "Shimmer.h"
 #include "BlinkyTape.h"
 
 #include <Arduino.h>
-
-//Shimmer variables
-int max_value[LED_COUNT];
-uint8_t direction[LED_COUNT];
-float value[LED_COUNT];
-float death[LED_COUNT];
-int step_size = 5;
-int ledMax = 255;
-
-int color_temp = 0;
-float color_temp_factor_r = 1.0;
-float color_temp_factor_g = 1.0;
-float color_temp_factor_b = 1.0;
 
 //light champagne
 float light_champagne_r = 1.0000;
@@ -26,7 +13,7 @@ float medium_champagne_r = 1.0000;
 float medium_champagne_g = 0.9412;
 float medium_champagne_b = 0.7020;
 
-void SetColorTemperature(uint8_t newColorTemperature) {
+void Shimmer::SetColorTemperature(uint8_t newColorTemperature) {
   //set color temp
   if (newColorTemperature == 0)
   {
@@ -48,7 +35,7 @@ void SetColorTemperature(uint8_t newColorTemperature) {
   }
 }
 
-void InitializeShimmer() {
+void Shimmer::reset() {
     //Shimmer initiation
   for (uint8_t i = 0; i < LED_COUNT; i++)
   {
@@ -57,9 +44,18 @@ void InitializeShimmer() {
     death[i] = max_value[i] + (step_size / 2) + (0.5 * random(ledMax));
     direction[i] = 1;
   }
+  
+  SetColorTemperature(0);
 }
 
-void Shimmer(CRGB* leds) { 
+Shimmer::Shimmer() :
+  step_size(5),
+  color_temp(0),
+  ledMax(255) {
+    reset();
+}
+
+void Shimmer::draw(CRGB* leds) { 
   //  static uint8_t i = 0;
   //  int done = 0;
   int accelerated_step = 0;

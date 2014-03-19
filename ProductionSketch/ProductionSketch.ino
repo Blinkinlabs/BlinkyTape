@@ -1,143 +1,125 @@
 // This is the example sketch that gets loaded on every BlinkyTape during production!
 
-#include <FastSPI_LED2.h>
+#include <FastLED.h>
 #include <Animation.h>
 
-#define LED_COUNT 60
+#include "BlinkyTape.h"
+#include "ColorLoop.h"
+#include "SerialLoop.h"
+#include "Shimmer.h"
+#include "Scanner.h"
+
 struct CRGB leds[LED_COUNT];
-
-#ifdef REVB // RevB boards have a slightly different pinout.
-
-#define LED_OUT      5
-#define BUTTON_IN    13
-#define ANALOG_INPUT A11
-#define IO_A         15
-
-#else
-
-#define LED_OUT      13
-#define BUTTON_IN    10
-#define ANALOG_INPUT A9
-#define IO_A         7
-#define IO_B         11
-
-#endif
 
 #define BRIGHT_STEP_COUNT 5
 uint8_t brightnesSteps[BRIGHT_STEP_COUNT] = {5,15,40,70,93};
 uint8_t brightness = 4;
-uint8_t lastButtonState = 1;
 
 long last_time;
+
+// Button interrupt variables and Interrupt Service Routine
+uint8_t buttonState = 0;
+volatile long buttonDownTime = 0;
+volatile long buttonPressTime = 0;
+
+#define BUTTON_BRIGHTNESS_SWITCH_TIME  1     // Time to hold the button down to switch brightness
+#define BUTTON_PATTERN_SWITCH_TIME    500  // Time to hold the button down to switch patterns
+
+uint8_t currentAnimation = 3;
+#define ANIMATION_COUNT 4
+
+ColorLoop rainbow(1,1,1);
+Scanner   scanner(4);
+Shimmer   shimmer();
+
+// Change the current animation
+void initializeAnimation(uint8_t newAnimation) {
+  currentAnimation = newAnimation;
+  
+//  switch (currentAnimation) {
+//    case 0:
+//      setColorLoopColors(1,1,1);
+//      break;
+//    case 1:
+//      setColorLoopColors(.2,1,1);
+//      break;
+//    case 2:
+//      InitializeShimmer();
+//      SetColorTemperature(0);
+//      break;
+//    case 3:
+//      break;
+//  }
+}
+
+// Run one step of the current animation
+void runAnimation() {
+  switch (currentAnimation) {
+    case 0:
+    case 1:
+      rainbow.draw(leds);
+      break;
+    case 2:
+      shimmer.draw(leds);
+      break;
+    case 3:
+      scanner.draw(leds);
+      break;
+  }
+}
+
+
+ISR(PCINT0_vect){                        // Will be called on both pressing and releasing
+  buttonState = !(PINB & (1 << PINB6)); // Reading state of the PB6 (remember that HIGH == released)
+  
+  if(buttonState) {
+    // On button down, just record the time
+    buttonDownTime = millis();
+    // TODO: Start gesture timer...
+  }
+  else {
+    // On button up, if we've waited a little time, then update the brightness.
+    buttonPressTime = millis() - buttonDownTime;
+    if(buttonPressTime > BUTTON_PATTERN_SWITCH_TIME) {
+      initializeAnimation((currentAnimation+1)%ANIMATION_COUNT);
+    }
+    else if(buttonPressTime > BUTTON_BRIGHTNESS_SWITCH_TIME) {
+      brightness = (brightness + 1) % BRIGHT_STEP_COUNT;
+      LEDS.setBrightness(brightnesSteps[brightness]);
+    }
+  }
+}
 
 void setup()
 {  
   Serial.begin(57600);
   
   LEDS.addLeds<WS2811, LED_OUT, GRB>(leds, LED_COUNT);
-  LEDS.showColor(CRGB(0, 0, 0));
   LEDS.setBrightness(93); // Limit max current draw to 1A
   LEDS.show();
 
   pinMode(BUTTON_IN, INPUT_PULLUP);
   pinMode(ANALOG_INPUT, INPUT_PULLUP);
-  pinMode(IO_A, INPUT_PULLUP);
-  pinMode(IO_B, INPUT_PULLUP);
+  pinMode(EXTRA_PIN_A, INPUT_PULLUP);
+  pinMode(EXTRA_PIN_B, INPUT_PULLUP);
+  
+  // Interrupt set-up; see Atmega32u4 datasheet section 11
+  PCIFR  |= (1 << PCIF0);  // Just in case, clear interrupt flag
+  PCMSK0 |= (1 << PCINT6); // Set interrupt mask to the button pin (PCINT6)
+  PCICR  |= (1 << PCIE0);  // Enable interrupt
   
   last_time = millis();
-}
-
-
-void color_loop() {  
-  static uint8_t i = 0;
-  static int j = 0;
-  static int f = 0;
-  static int k = 0;
-  static int count;
-
-  static int pixelIndex;
-  
-  for (uint8_t i = 0; i < LED_COUNT; i++) {
-    leds[i].r = 64*(1+sin(i/2.0 + j/4.0       ));
-    leds[i].g = 64*(1+sin(i/1.0 + f/9.0  + 2.1));
-    leds[i].b = 64*(1+sin(i/3.0 + k/14.0 + 4.2));
-    
-    if ((millis() - last_time > 15) && pixelIndex <= LED_COUNT + 1) {
-      last_time = millis();
-      count = LED_COUNT - pixelIndex;
-      pixelIndex++; 
-    }
-    
-    // why is this per LED?
-    for (int x = count; x >= 0; x--) {
-      leds[x] = CRGB(0, 0, 0);
-    }
-    
-  }
-  LEDS.show();
-  
-  j = j + 1;
-  f = f + 1;
-  k = k + 2;
-}
-
-void serialLoop() {
-  static int pixelIndex;
-
-  while(true) {
-
-    if(Serial.available() > 2) {
-
-      uint8_t buffer[3]; // Buffer to store three incoming bytes used to compile a single LED color
-
-      for (uint8_t x=0; x<3; x++) { // Read three incoming bytes
-        uint8_t c = Serial.read();
-        
-        if (c < 255) {
-          buffer[x] = c; // Using 255 as a latch semaphore
-        }
-        else {
-          LEDS.show();
-          pixelIndex = 0;
-          
-          // BUTTON_IN (D10):   07 - 0111
-          // IO_A(D7):          11 - 1011
-          // IO_B (D11):        13 - 1101
-          // ANALOG_INPUT (A9): 14 - 1110
-
-          char c = (digitalRead(BUTTON_IN)    << 3)
-                 | (digitalRead(IO_A)         << 2)
-                 | (digitalRead(IO_B)         << 1)
-                 | (digitalRead(ANALOG_INPUT)     );
-          Serial.write(c);
-          
-          break;
-        }
-
-        if (x == 2) {   // If we received three serial bytes
-          if(pixelIndex == LED_COUNT) break; // Prevent overflow by ignoring the pixel data beyond LED_COUNT
-          leds[pixelIndex] = CRGB(buffer[0], buffer[1], buffer[2]);
-          pixelIndex++;
-        }
-      }
-    }
-  }
 }
 
 void loop()
 {
   // If'n we get some data, switch to passthrough mode
   if(Serial.available() > 0) {
-    serialLoop();
+    serialLoop(leds);
   }
   
-  uint8_t buttonState = digitalRead(BUTTON_IN);
-  if((buttonState != lastButtonState) && (buttonState == 0)) {
-    brightness = (brightness + 1) % BRIGHT_STEP_COUNT;
-    LEDS.setBrightness(brightnesSteps[brightness]);
-  }
-  lastButtonState = buttonState;
-  
-  color_loop();
+  runAnimation();
+
+  LEDS.show();
 }
 

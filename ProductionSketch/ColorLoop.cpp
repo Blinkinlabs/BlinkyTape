@@ -3,24 +3,20 @@
 
 #include <Arduino.h>
 
-float rBal = 1.0;
-float gBal = 1.0;
-float bBal = 1.0;
 
-void setColorLoopColors(float newRBal, float newGBal, float newBBal) {
-  rBal = newRBal;
-  gBal = newGBal;
-  bBal = newBBal;
+ColorLoop::ColorLoop(float newRBal, float newGBal, float newBBal) :
+  rBal(newRBal),
+  gBal(newGBal),
+  bBal(newBBal) {
 }
 
-void colorLoop(CRGB* leds) {  
-  static uint8_t i = 0;
+void ColorLoop::draw(CRGB* leds) {  
   static int j = 0;
   static int f = 0;
   static int k = 0;
   static int count;
 
-  static int pixelIndex;
+//  static int pixelIndex;
   
   for (uint8_t i = 0; i < LED_COUNT; i++) {
     leds[i].r = 64*(1+sin(i/2.0 + j/4.0  )) * rBal;
