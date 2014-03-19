@@ -35,7 +35,7 @@ Pattern* patterns[MAX_PATTERNS];
 
 ColorLoop rainbow(1,1,1);
 ColorLoop blues(.2,1,1);
-Scanner   scanner(4);
+Scanner   scanner(4, CRGB(0,255,0));
 Shimmer   shimmer;
 
 // Register a pattern

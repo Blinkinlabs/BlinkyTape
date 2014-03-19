@@ -10,12 +10,13 @@ ColorLoop::ColorLoop(float newRBal, float newGBal, float newBBal) :
   bBal(newBBal) {
 }
 
-void ColorLoop::draw(CRGB* leds) {  
-  static int j = 0;
-  static int f = 0;
-  static int k = 0;
-  static int count;
+void ColorLoop::reset() {
+  j = 0;
+  f = 0;
+  k = 0;
+}
 
+void ColorLoop::draw(CRGB* leds) {
 //  static int pixelIndex;
   
   for (uint8_t i = 0; i < LED_COUNT; i++) {

@@ -52,7 +52,6 @@ Shimmer::Shimmer() :
   step_size(5),
   ledMax(255),
   color_temp(0) {
-    reset();
 }
 
 void Shimmer::draw(CRGB* leds) { 
@@ -111,6 +110,6 @@ void Shimmer::draw(CRGB* leds) {
     }
   } // end for
     
-  delay(30);
+  delay(30);  // TODO: Don't place me here
 } // end shimmer_update_loop
 

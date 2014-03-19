@@ -3,25 +3,23 @@
 
 #include <Arduino.h>
 
-Scanner::Scanner(uint8_t newScanWidth) :
-  scanWidth(newScanWidth) {
-    
+Scanner::Scanner(uint8_t newScanWidth, CRGB newColor) :
+  scanWidth(newScanWidth),
+  color(newColor) {
   }
 
-void Scanner::draw(CRGB* leds) {  
-  static uint8_t position = 2;
-  static uint8_t direction = 0; // 0 is positive, 1 is negative
+void Scanner::reset() {
+  position = 2;
+  direction = 1;
+}
 
+void Scanner::draw(CRGB* leds) {  
   for (uint8_t i = 0; i < LED_COUNT; i++) {
     if((i >= position) && (i < position + scanWidth)) {
-      leds[i].r = 0;
-      leds[i].g = 0;
-      leds[i].b = 255;
+      leds[i] = color;
     }
     else {
-      leds[i].r = 0;
-      leds[i].g = 0;
-      leds[i].b = 0;
+      leds[i] = CRGB(0);
     }    
   }
   
@@ -40,5 +38,5 @@ void Scanner::draw(CRGB* leds) {
     direction = 0;
   }
   
-  delay(30);
+  delay(30);  // TODO: Don't place me here
 }

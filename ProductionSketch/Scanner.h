@@ -7,10 +7,14 @@
 class Scanner : public Pattern {
   private:
     uint8_t scanWidth;
+    CRGB color;
+    
+    uint8_t position;
+    uint8_t direction; // 0 is positive, 1 is negative
     
   public:
-    Scanner(uint8_t newScanWidth);
-    void reset() {};
+    Scanner(uint8_t newScanWidth, CRGB newColor);
+    void reset();
     void draw(CRGB * leds);
 };
 
