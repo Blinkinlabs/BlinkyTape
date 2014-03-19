@@ -50,8 +50,8 @@ void Shimmer::reset() {
 
 Shimmer::Shimmer() :
   step_size(5),
-  color_temp(0),
-  ledMax(255) {
+  ledMax(255),
+  color_temp(0) {
     reset();
 }
 

@@ -12,6 +12,7 @@
 class Pattern {
   public:
     virtual void draw(CRGB * leds);
+    virtual void reset();
 };
 
 #endif
