@@ -29,14 +29,9 @@ volatile long buttonPressTime = 0;
 
 uint8_t currentPattern = 0;
 uint8_t patternCount = 0;
-#define MAX_PATTERNS 4
+#define MAX_PATTERNS 10
 Pattern* patterns[MAX_PATTERNS];
 //uint8_t patternSelectionIndicator = 255;
-
-ColorLoop rainbow(1,1,1);
-ColorLoop blues(.2,1,1);
-Scanner   scanner(4, CRGB(0,255,0));
-Shimmer   shimmer;
 
 // Register a pattern
 void registerPattern(Pattern* newPattern) {
@@ -134,13 +129,12 @@ void setup()
   PCMSK0 |= (1 << PCINT6); // Set interrupt mask to the button pin (PCINT6)
   PCICR  |= (1 << PCIE0);  // Enable interrupt
   
-  registerPattern(&rainbow);
-  registerPattern(&blues);
-  registerPattern(&scanner);
-  registerPattern(&shimmer);
+  registerPattern(new ColorLoop(1,1,1));
+  registerPattern(new ColorLoop(.2,1,1));
+  registerPattern(new Scanner(4, CRGB(0,0,255)));
+  registerPattern(new Shimmer(0));
   
   last_time = millis();
-  
 }
 
 void loop()

@@ -36,22 +36,23 @@ void Shimmer::SetColorTemperature(uint8_t newColorTemperature) {
 }
 
 void Shimmer::reset() {
+  
     //Shimmer initiation
   for (uint8_t i = 0; i < LED_COUNT; i++)
   {
     value[i] = 0.0;
-    max_value[i] = random(ledMax);
-    death[i] = max_value[i] + (step_size / 2) + (0.5 * random(ledMax));
+    maxValue[i] = random(ledMax);
+    death[i] = maxValue[i] + (stepSize / 2) + (0.5 * random(ledMax));
     direction[i] = 1;
   }
   
-  SetColorTemperature(0);
+  SetColorTemperature(colorTemperature);
 }
 
-Shimmer::Shimmer() :
-  step_size(5),
+Shimmer::Shimmer(uint8_t newColorTemperature) :
+  stepSize(5),
   ledMax(255),
-  color_temp(0) {
+  colorTemperature(newColorTemperature) {
 }
 
 void Shimmer::draw(CRGB* leds) { 
@@ -63,12 +64,12 @@ void Shimmer::draw(CRGB* leds) {
   //static int pixelIndex;
 
   for (int i = 0; i < LED_COUNT; i++) {
-    unit = max_value[i] / (float)ledMax;
-    accelerated_step = (float)step_size + ((float)ledMax * (0.015 * (float)step_size * unit * unit * unit * unit));
+    unit = maxValue[i] / (float)ledMax;
+    accelerated_step = (float)stepSize + ((float)ledMax * (0.015 * (float)stepSize * unit * unit * unit * unit));
 
     if (direction[i] == 1) {
-      if (value[i] < max_value[i]) {
-        //value[i] += step_size;
+      if (value[i] < maxValue[i]) {
+        //value[i] += stepSize;
         value[i] = value[i] + accelerated_step;
 
         //error checking
@@ -86,8 +87,8 @@ void Shimmer::draw(CRGB* leds) {
     }
     else {
       if (value[i] > 0) {
-        death[i] = death[i] - step_size;
-        value[i] = value[i] - step_size;
+        death[i] = death[i] - stepSize;
+        value[i] = value[i] - stepSize;
 
         //error checking
         if (value[i] < 0) {
@@ -99,12 +100,12 @@ void Shimmer::draw(CRGB* leds) {
         leds[i].b = (int)(value[i] * color_temp_factor_b);  
       }
       else {
-        death[i] = death[i] - step_size;        
+        death[i] = death[i] - stepSize;        
         if (death[i] < 0)
         {
           direction[i] = 1;
-          max_value[i] = random(ledMax);
-          death[i] = max_value[i] + (step_size / 2) + (0.5 * random(ledMax));
+          maxValue[i] = random(ledMax);
+          death[i] = maxValue[i] + (stepSize / 2) + (0.5 * random(ledMax));
         }
       }
     }

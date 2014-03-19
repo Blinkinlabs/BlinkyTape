@@ -7,20 +7,20 @@
 class Shimmer : public Pattern {
   private:
     //Shimmer variables
-    int max_value[LED_COUNT];
+    uint8_t maxValue[LED_COUNT];
     uint8_t direction[LED_COUNT];
     float value[LED_COUNT];
     float death[LED_COUNT];
-    int step_size;
-    int ledMax;
+    uint8_t stepSize;
+    uint8_t ledMax;
 
-    int color_temp;
+    uint8_t colorTemperature;
     float color_temp_factor_r;
     float color_temp_factor_g;
     float color_temp_factor_b;
     
   public:
-    Shimmer();
+    Shimmer(uint8_t newColorTemperature);
     void reset();
     void draw(CRGB * leds);
     
