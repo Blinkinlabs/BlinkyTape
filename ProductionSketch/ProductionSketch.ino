@@ -21,11 +21,14 @@ struct CRGB leds[LED_COUNT];
   volatile uint8_t brightnesSteps[BRIGHT_STEP_COUNT] = {5,15,40,70,93};
 #endif
 
+uint8_t brightness = 4;
+uint8_t lastBrightness = 4;
 
-volatile uint8_t brightness = 4;
-volatile uint8_t lastBrightness = 4;
 
-long last_time;
+// For fading in a new sketch
+long lastTime;
+int pixelIndex;
+
 
 // Button interrupt variables and Interrupt Service Routine
 uint8_t buttonState = 0;
@@ -36,11 +39,12 @@ long buttonPressTime = 0;
 #define BUTTON_BRIGHTNESS_SWITCH_TIME  1     // Time to hold the button down to switch brightness
 #define BUTTON_PATTERN_SWITCH_TIME    1000   // Time to hold the button down to switch patterns
 
+
 uint8_t currentPattern = 0;
 uint8_t patternCount = 0;
 #define MAX_PATTERNS 10
 Pattern* patterns[MAX_PATTERNS];
-//uint8_t patternSelectionIndicator = 255;
+
 
 // Register a pattern
 void registerPattern(Pattern* newPattern) {
@@ -63,7 +67,8 @@ void initializePattern(uint8_t newPattern) {
   currentPattern = newPattern;
   patterns[currentPattern]->reset();
   
-//  patternSelectionIndicator = 0;
+  lastTime = millis();
+  pixelIndex = 0;
 }
 
 // Run one step of the current pattern
@@ -140,10 +145,10 @@ void setup()
   
   registerPattern(new ColorLoop(1,1,1));
   registerPattern(new ColorLoop(.2,1,1));
-  registerPattern(new Scanner(4, CRGB(0,0,255)));
+  registerPattern(new Scanner(4, CRGB(255,0,0)));
   registerPattern(new Shimmer(0));
   
-  last_time = millis();
+  initializePattern(0);
 }
 
 void loop()
@@ -153,21 +158,21 @@ void loop()
     serialLoop(leds);
   }
   
-//  if(patternSelectionIndicator < 85) {
-//    patternSelectionIndicator += 1;
-//    LEDS.showColor(CRGB(50,0,100));
+  // Draw the current pattern
+  runPattern();
+    
+// Disable- will do a fade down/up instead.
+//  //Then, if we transitioning in a new pattern, fade it in.
+//  if ((millis() - lastTime > 15) && pixelIndex <= LED_COUNT + 1) {
+//    lastTime = millis();
+//    pixelIndex++;
 //  }
-//  else if(patternSelectionIndicator < 170) {
-//    patternSelectionIndicator += 1;
-//    LEDS.showColor(CRGB(0,0,0));
+//  
+//  // why is this per LED?
+//  for (int x = (LED_COUNT - pixelIndex); x >= 0; x--) {
+//    leds[x] = CRGB(0, 0, 0);
 //  }
-//  else if(patternSelectionIndicator < 254) {
-//    patternSelectionIndicator += 1;
-//    LEDS.showColor(CRGB(100,0,150));
-//  }
-//  else {
-    runPattern();
+
     LEDS.show();
-//  }
 }
 
