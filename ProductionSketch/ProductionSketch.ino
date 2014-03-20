@@ -1,5 +1,4 @@
 // This is the example sketch that gets loaded on every BlinkyTape during production!
-
 #include <FastLED.h>
 #include <Animation.h>
 
@@ -9,10 +8,20 @@
 #include "Shimmer.h"
 #include "Scanner.h"
 
+#define STEP_UP_DOWN_BRIGHTNESS
+
+
 struct CRGB leds[LED_COUNT];
 
-#define BRIGHT_STEP_COUNT 5
-volatile uint8_t brightnesSteps[BRIGHT_STEP_COUNT] = {5,15,40,70,93};
+#ifdef STEP_UP_DOWN_BRIGHTNESS
+  #define BRIGHT_STEP_COUNT 8
+  volatile uint8_t brightnesSteps[BRIGHT_STEP_COUNT] = {5,15,40,70,93, 70, 40, 15};
+#else
+  #define BRIGHT_STEP_COUNT 5
+  volatile uint8_t brightnesSteps[BRIGHT_STEP_COUNT] = {5,15,40,70,93};
+#endif
+
+
 volatile uint8_t brightness = 4;
 volatile uint8_t lastBrightness = 4;
 
@@ -21,8 +30,8 @@ long last_time;
 // Button interrupt variables and Interrupt Service Routine
 uint8_t buttonState = 0;
 bool buttonDebounced;
-volatile long buttonDownTime = 0;
-volatile long buttonPressTime = 0;
+long buttonDownTime = 0;
+long buttonPressTime = 0;
 
 #define BUTTON_BRIGHTNESS_SWITCH_TIME  1     // Time to hold the button down to switch brightness
 #define BUTTON_PATTERN_SWITCH_TIME    1000   // Time to hold the button down to switch patterns

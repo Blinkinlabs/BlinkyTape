@@ -29,11 +29,11 @@ void ColorLoop::draw(CRGB* leds) {
 //      count = LED_COUNT - pixelIndex;
 //      pixelIndex++;
 //    }
-    
-    // why is this per LED?
-    for (int x = count; x >= 0; x--) {
-      leds[x] = CRGB(0, 0, 0);
-    }
+//    
+//    // why is this per LED?
+//    for (int x = count; x >= 0; x--) {
+//      leds[x] = CRGB(0, 0, 0);
+//    }
     
   }
   
