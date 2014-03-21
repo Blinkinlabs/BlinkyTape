@@ -1,3 +1,5 @@
+#include <EEPROM.h>
+
 // This is the example sketch that gets loaded on every BlinkyTape during production!
 #include <FastLED.h>
 #include <Animation.h>
@@ -40,6 +42,7 @@ long buttonPressTime = 0;
 #define BUTTON_PATTERN_SWITCH_TIME    1000   // Time to hold the button down to switch patterns
 
 
+#define PATTERN_EEPROM_ADDRESS 0
 uint8_t currentPattern = 0;
 uint8_t patternCount = 0;
 #define MAX_PATTERNS 10
@@ -63,6 +66,8 @@ void initializePattern(uint8_t newPattern) {
   if(newPattern >= MAX_PATTERNS) {
     return;
   }
+  
+  EEPROM.write(PATTERN_EEPROM_ADDRESS, newPattern);
   
   currentPattern = newPattern;
   patterns[currentPattern]->reset();
@@ -148,7 +153,15 @@ void setup()
   registerPattern(new Scanner(4, CRGB(255,0,0)));
   registerPattern(new Shimmer(0));
   
-  initializePattern(0);
+
+  // Attempt to read in the last used pattern; if it's an invalid
+  // number, initialize it to 0 instead.
+  currentPattern = EEPROM.read(PATTERN_EEPROM_ADDRESS);
+  if(currentPattern >= patternCount) {
+    currentPattern = 0;
+  }
+  
+  initializePattern(currentPattern);
 }
 
 void loop()
