@@ -9,19 +9,13 @@
 #include "SerialLoop.h"
 #include "Shimmer.h"
 #include "Scanner.h"
-
-#define STEP_UP_DOWN_BRIGHTNESS
-
+#include "Flashlight.h"
 
 struct CRGB leds[LED_COUNT];
 
-#ifdef STEP_UP_DOWN_BRIGHTNESS
-  #define BRIGHT_STEP_COUNT 8
-  volatile uint8_t brightnesSteps[BRIGHT_STEP_COUNT] = {5,15,40,70,93, 70, 40, 15};
-#else
-  #define BRIGHT_STEP_COUNT 5
-  volatile uint8_t brightnesSteps[BRIGHT_STEP_COUNT] = {5,15,40,70,93};
-#endif
+#define BRIGHT_STEP_COUNT 8
+#define STARTING_BRIGHTNESS 4
+volatile uint8_t brightnesSteps[BRIGHT_STEP_COUNT] = {5,15,40,70,93, 70, 40, 15};
 
 uint8_t brightness = 4;
 uint8_t lastBrightness = 4;
@@ -29,8 +23,9 @@ uint8_t lastBrightness = 4;
 
 // For fading in a new sketch
 long lastTime;
-int pixelIndex;
 
+float fadeIndex;
+#define FADE_STEPS 50
 
 // Button interrupt variables and Interrupt Service Routine
 uint8_t buttonState = 0;
@@ -42,7 +37,11 @@ long buttonPressTime = 0;
 #define BUTTON_PATTERN_SWITCH_TIME    1000   // Time to hold the button down to switch patterns
 
 
-#define PATTERN_EEPROM_ADDRESS 0
+#define EEPROM_START_ADDRESS  0
+#define EEPROM_MAGIG_BYTE_0   0x12
+#define EEPROM_MAGIC_BYTE_1   0x34
+#define PATTERN_EEPROM_ADDRESS EEPROM_START_ADDRESS + 2
+
 uint8_t currentPattern = 0;
 uint8_t patternCount = 0;
 #define MAX_PATTERNS 10
@@ -73,7 +72,7 @@ void initializePattern(uint8_t newPattern) {
   patterns[currentPattern]->reset();
   
   lastTime = millis();
-  pixelIndex = 0;
+  fadeIndex = 0;
 }
 
 // Run one step of the current pattern
@@ -135,7 +134,8 @@ void setup()
   Serial.begin(57600);
   
   LEDS.addLeds<WS2811, LED_OUT, GRB>(leds, LED_COUNT);
-  LEDS.setBrightness(93); // Limit max current draw to 1A
+  brightness = STARTING_BRIGHTNESS;
+  LEDS.setBrightness(brightnesSteps[brightness]);
   LEDS.show();
 
   pinMode(BUTTON_IN, INPUT_PULLUP);
@@ -152,14 +152,24 @@ void setup()
   registerPattern(new ColorLoop(.2,1,1));
   registerPattern(new Scanner(4, CRGB(255,0,0)));
   registerPattern(new Shimmer(0));
+  registerPattern(new Flashlight(CRGB(255,255,255)));
   
 
   // Attempt to read in the last used pattern; if it's an invalid
   // number, initialize it to 0 instead.
-  currentPattern = EEPROM.read(PATTERN_EEPROM_ADDRESS);
-  if(currentPattern >= patternCount) {
+  if((EEPROM.read(EEPROM_START_ADDRESS) == EEPROM_MAGIG_BYTE_0)
+     && (EEPROM.read(EEPROM_START_ADDRESS + 1) == EEPROM_MAGIC_BYTE_1)) {
+    currentPattern = EEPROM.read(PATTERN_EEPROM_ADDRESS);
+    if(currentPattern >= patternCount) {
+      currentPattern = 0;
+    }
+  }
+  else {
+    EEPROM.write(EEPROM_START_ADDRESS, EEPROM_MAGIG_BYTE_0);
+    EEPROM.write(EEPROM_START_ADDRESS, EEPROM_MAGIC_BYTE_1);
     currentPattern = 0;
   }
+     
   
   initializePattern(currentPattern);
 }
@@ -173,19 +183,15 @@ void loop()
   
   // Draw the current pattern
   runPattern();
-    
-// Disable- will do a fade down/up instead.
-//  //Then, if we transitioning in a new pattern, fade it in.
-//  if ((millis() - lastTime > 15) && pixelIndex <= LED_COUNT + 1) {
-//    lastTime = millis();
-//    pixelIndex++;
-//  }
-//  
-//  // why is this per LED?
-//  for (int x = (LED_COUNT - pixelIndex); x >= 0; x--) {
-//    leds[x] = CRGB(0, 0, 0);
-//  }
 
-    LEDS.show();
+  if((millis() - lastTime > 15) && fadeIndex < FADE_STEPS) {
+    lastTime = millis();
+    fadeIndex++;
+    
+    LEDS.setBrightness(brightnesSteps[brightness]*(fadeIndex/FADE_STEPS));
+  }
+    
+
+  LEDS.show();
 }
 
