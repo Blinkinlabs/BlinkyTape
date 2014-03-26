@@ -18,7 +18,7 @@ case "$1" in
   start)
     echo "Starting test rig"
     # run application you want to start
-    bash -c 'cd /home/pi/BlinkyTape/TestProgram_Beaglebone/; ./run_stripreflasher.sh'
+    bash -c 'cd /home/pi/BlinkyTape/TestProgram_Beaglebone/; ./run_strip_reflasher.sh'
     ;;
   stop)
     echo "Stopping test rig"
