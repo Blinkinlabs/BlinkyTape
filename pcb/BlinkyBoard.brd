@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="7.2.0">
+<eagle version="7.5.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -7522,7 +7522,7 @@ Modified from Laen's PCB Order Design Rules</description>
 <element name="U$14" library="blinkiverse" package="TEST_PAD_SMT" value="TEST_PAD_SMT" x="2" y="3.75" rot="MR270"/>
 <element name="U$15" library="blinkiverse" package="OSHW-LOGO-S" value="" x="13.29" y="8.1" rot="MR0"/>
 <element name="U$9" library="blinkiverse" package="WS2812B_CONNECTOR" value="WS2812B_CONNECTOR" x="23.9" y="5" rot="MR180"/>
-<element name="R3" library="blinkiverse" package="RES_0402_KEMET_MEDIAN" value="??" x="18" y="8.1" rot="R90"/>
+<element name="R3" library="blinkiverse" package="RES_0402_KEMET_MEDIAN" value="200" x="18" y="8.1" rot="R90"/>
 <element name="U$7" library="blinkinlabs" package="BUTTON_2P_SMD" value="" x="20.2" y="6.9" smashed="yes" rot="R270">
 <attribute name="VALUE" x="17.2" y="9.9" size="1.27" layer="27" rot="R270"/>
 </element>

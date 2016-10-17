@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="7.2.0">
+<eagle version="7.5.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -3456,7 +3456,7 @@ Sparkfun and Adafruit libraries.</description>
 <part name="U$14" library="blinkiverse" deviceset="TEST_PAD_SMT" device=""/>
 <part name="GND9" library="supply1" deviceset="GND" device=""/>
 <part name="U$9" library="blinkiverse" deviceset="WS2812B_CONNECTOR" device=""/>
-<part name="R3" library="blinkiverse" deviceset="R_US" device="" value="??"/>
+<part name="R3" library="blinkiverse" deviceset="R_US" device="" value="200"/>
 <part name="U$7" library="blinkinlabs" deviceset="BUTTON_MOMENTARY" device=""/>
 </parts>
 <sheets>
