@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="7.5.0">
+<eagle version="7.7.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="1" unitdist="mm" unit="mm" style="lines" multiple="1" display="yes" altdistance="0.25" altunitdist="mm" altunit="mm"/>
+<grid distance="0.5" unitdist="mm" unit="mm" style="lines" multiple="1" display="yes" altdistance="0.1" altunitdist="mm" altunit="mm"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -36,10 +36,10 @@
 <layer number="26" name="bNames" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="27" name="tValues" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="28" name="bValues" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="29" name="tStop" color="7" fill="3" visible="yes" active="yes"/>
-<layer number="30" name="bStop" color="7" fill="6" visible="yes" active="yes"/>
-<layer number="31" name="tCream" color="7" fill="4" visible="yes" active="yes"/>
-<layer number="32" name="bCream" color="7" fill="5" visible="yes" active="yes"/>
+<layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
+<layer number="30" name="bStop" color="7" fill="6" visible="no" active="yes"/>
+<layer number="31" name="tCream" color="7" fill="4" visible="no" active="yes"/>
+<layer number="32" name="bCream" color="7" fill="5" visible="no" active="yes"/>
 <layer number="33" name="tFinish" color="6" fill="3" visible="no" active="yes"/>
 <layer number="34" name="bFinish" color="6" fill="6" visible="no" active="yes"/>
 <layer number="35" name="tGlue" color="7" fill="4" visible="no" active="yes"/>
@@ -53,17 +53,19 @@
 <layer number="43" name="vRestrict" color="2" fill="10" visible="no" active="yes"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
 <layer number="45" name="Holes" color="7" fill="1" visible="no" active="yes"/>
-<layer number="46" name="Milling" color="3" fill="1" visible="no" active="yes"/>
+<layer number="46" name="Milling" color="3" fill="1" visible="yes" active="yes"/>
 <layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes"/>
 <layer number="48" name="Document" color="7" fill="1" visible="no" active="yes"/>
 <layer number="49" name="Reference" color="7" fill="1" visible="no" active="yes"/>
 <layer number="50" name="dxf" color="7" fill="1" visible="no" active="yes"/>
-<layer number="51" name="tDocu" color="14" fill="1" visible="no" active="yes"/>
+<layer number="51" name="tDocu" color="14" fill="1" visible="yes" active="yes"/>
 <layer number="52" name="bDocu" color="14" fill="1" visible="no" active="yes"/>
 <layer number="53" name="tGND_GNDA" color="7" fill="9" visible="no" active="no"/>
 <layer number="54" name="bGND_GNDA" color="1" fill="9" visible="no" active="no"/>
 <layer number="56" name="wert" color="7" fill="1" visible="no" active="yes"/>
 <layer number="57" name="tCAD" color="7" fill="1" visible="no" active="no"/>
+<layer number="59" name="tCarbon" color="7" fill="1" visible="no" active="no"/>
+<layer number="60" name="bCarbon" color="7" fill="1" visible="no" active="no"/>
 <layer number="90" name="Modules" color="5" fill="1" visible="no" active="no"/>
 <layer number="91" name="Nets" color="2" fill="1" visible="no" active="no"/>
 <layer number="92" name="Busses" color="1" fill="1" visible="no" active="no"/>
@@ -98,6 +100,7 @@
 <layer number="126" name="_bNames" color="7" fill="1" visible="no" active="yes"/>
 <layer number="127" name="_tValues" color="7" fill="1" visible="no" active="yes"/>
 <layer number="128" name="_bValues" color="7" fill="1" visible="no" active="yes"/>
+<layer number="129" name="Mask" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="131" name="tAdjust" color="7" fill="1" visible="no" active="yes"/>
 <layer number="132" name="bAdjust" color="7" fill="1" visible="no" active="yes"/>
 <layer number="144" name="Drill_legend" color="7" fill="1" visible="no" active="yes"/>
@@ -108,7 +111,7 @@
 <layer number="154" name="FabDoc2" color="7" fill="1" visible="no" active="yes"/>
 <layer number="155" name="FabDoc3" color="7" fill="1" visible="no" active="yes"/>
 <layer number="199" name="Contour" color="7" fill="1" visible="no" active="yes"/>
-<layer number="200" name="bsilk" color="1" fill="10" visible="yes" active="yes"/>
+<layer number="200" name="bsilk" color="1" fill="10" visible="no" active="yes"/>
 <layer number="201" name="201bmp" color="2" fill="10" visible="no" active="yes"/>
 <layer number="202" name="202bmp" color="7" fill="1" visible="no" active="yes"/>
 <layer number="203" name="203bmp" color="7" fill="1" visible="no" active="yes"/>
@@ -133,6 +136,12 @@
 <layer number="222" name="222bmp" color="7" fill="1" visible="no" active="yes"/>
 <layer number="223" name="223bmp" color="7" fill="1" visible="no" active="yes"/>
 <layer number="224" name="224bmp" color="7" fill="1" visible="no" active="yes"/>
+<layer number="225" name="225bmp" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="226" name="226bmp" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="227" name="227bmp" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="228" name="228bmp" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="229" name="229bmp" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="230" name="230bmp" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="231" name="Eagle3D_PG1" color="7" fill="1" visible="no" active="no"/>
 <layer number="232" name="Eagle3D_PG2" color="7" fill="1" visible="no" active="no"/>
 <layer number="233" name="Eagle3D_PG3" color="7" fill="1" visible="no" active="no"/>
@@ -7335,6 +7344,28 @@ Sparkfun and Adafruit libraries.</description>
 </package>
 </packages>
 </library>
+<library name="PaxInstrument-T400">
+<description>Generated from &lt;b&gt;lumberdaq.sch&lt;/b&gt;&lt;p&gt;
+by exp-lbrs.ulp</description>
+<packages>
+<package name="SPARKFUN-RESISTORS_0603-RES">
+<wire x1="-1.016" y1="0.635" x2="1.016" y2="0.635" width="0.0508" layer="39"/>
+<wire x1="1.016" y1="0.635" x2="1.016" y2="-0.635" width="0.0508" layer="39"/>
+<wire x1="1.016" y1="-0.635" x2="-1.016" y2="-0.635" width="0.0508" layer="39"/>
+<wire x1="-1.016" y1="-0.635" x2="-1.016" y2="0.635" width="0.0508" layer="39"/>
+<wire x1="-0.356" y1="0.432" x2="0.356" y2="0.432" width="0.1016" layer="51"/>
+<wire x1="-0.356" y1="-0.419" x2="0.356" y2="-0.419" width="0.1016" layer="51"/>
+<rectangle x1="-0.8382" y1="-0.4699" x2="-0.3381" y2="0.4801" layer="51"/>
+<rectangle x1="0.3302" y1="-0.4699" x2="0.8303" y2="0.4801" layer="51"/>
+<rectangle x1="-0.1999" y1="-0.3" x2="0.1999" y2="0.3" layer="35"/>
+<rectangle x1="-0.2286" y1="-0.381" x2="0.2286" y2="0.381" layer="21"/>
+<smd name="1" x="-0.85" y="0" dx="0.9398" dy="1.016" layer="1"/>
+<smd name="2" x="0.85" y="0" dx="0.9398" dy="1.016" layer="1"/>
+<text x="-0.889" y="0.762" size="0.4064" layer="25" font="vector">&gt;NAME</text>
+<text x="-1.016" y="-1.143" size="0.4064" layer="27" font="vector">&gt;VALUE</text>
+</package>
+</packages>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -7500,13 +7531,13 @@ Modified from Laen's PCB Order Design Rules</description>
 </autorouter>
 <elements>
 <element name="R2" library="blinkiverse" package="RES_0402_KEMET_MEDIAN" value="22" x="7.75" y="6.75" smashed="yes"/>
-<element name="R1" library="blinkiverse" package="RES_0402_KEMET_MEDIAN" value="22" x="7.75" y="5.75" smashed="yes"/>
-<element name="C5" library="blinkiverse" package="CAP_0402_KEMET_MEDIAN" value="1uF" x="7.4" y="4.76" smashed="yes" rot="R180"/>
-<element name="C3" library="blinkiverse" package="CAP_0402_KEMET_MEDIAN" value="0.1uF" x="7.4" y="3.75" smashed="yes" rot="R180"/>
+<element name="R1" library="blinkiverse" package="RES_0402_KEMET_MEDIAN" value="22" x="7.75" y="5.85" smashed="yes"/>
+<element name="C5" library="blinkiverse" package="CAP_0402_KEMET_MEDIAN" value="1uF" x="7.75" y="4.96" smashed="yes" rot="R180"/>
+<element name="C3" library="blinkiverse" package="CAP_0402_KEMET_MEDIAN" value="0.1uF" x="7.75" y="4.05" smashed="yes" rot="R180"/>
 <element name="C6" library="blinkiverse" package="CAP_0402_KEMET_MEDIAN" value="18pF" x="21.5" y="2.5" smashed="yes" rot="R90"/>
 <element name="C7" library="blinkiverse" package="CAP_0402_KEMET_MEDIAN" value="18pF" x="18" y="2" smashed="yes" rot="R270"/>
-<element name="C2" library="blinkiverse" package="CAP_0402_KEMET_MEDIAN" value="0.1uF" x="7.55" y="7.75" smashed="yes" rot="R180"/>
-<element name="C1" library="adafruit" package="C0603K" value="10uF" x="7.7" y="9" smashed="yes" rot="R180"/>
+<element name="C2" library="blinkiverse" package="CAP_0402_KEMET_MEDIAN" value="0.1uF" x="7.75" y="7.65" smashed="yes" rot="R180"/>
+<element name="C1" library="adafruit" package="C0603K" value="10uF" x="7.75" y="9" smashed="yes" rot="R180"/>
 <element name="U$2" library="blinkinlabs" package="QFN44ML_7X7_LONGLEADS_MOD" value="ATMEGA32U4MU_MODDED" x="13.25" y="5.25" smashed="yes"/>
 <element name="Q1" library="blinkinlabs" package="CRSYTAL_2520" value="16 MHz" x="19.75" y="2.25" smashed="yes" rot="R270"/>
 <element name="C4" library="blinkiverse" package="CAP_0402_KEMET_MEDIAN" value="0.1uF" x="18" y="4.6" smashed="yes" rot="R90"/>
@@ -7526,6 +7557,18 @@ Modified from Laen's PCB Order Design Rules</description>
 <element name="U$7" library="blinkinlabs" package="BUTTON_2P_SMD" value="" x="20.2" y="6.9" smashed="yes" rot="R270">
 <attribute name="VALUE" x="17.2" y="9.9" size="1.27" layer="27" rot="R270"/>
 </element>
+<element name="Z2" library="PaxInstrument-T400" package="SPARKFUN-RESISTORS_0603-RES" value="PGB1010603" x="-4" y="6">
+<attribute name="MPN" value="PGB1010603NRHF" x="-8" y="10" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="Littelfuse" x="-8" y="10" size="1.778" layer="27" display="off"/>
+</element>
+<element name="Z1" library="PaxInstrument-T400" package="SPARKFUN-RESISTORS_0603-RES" value="PGB1010603" x="-8" y="6">
+<attribute name="MPN" value="PGB1010603NRHF" x="-8" y="6" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="Littelfuse" x="-8" y="6" size="1.778" layer="27" display="off"/>
+</element>
+<element name="Z3" library="PaxInstrument-T400" package="SPARKFUN-RESISTORS_0603-RES" value="PGB1010603" x="-8" y="2">
+<attribute name="MPN" value="PGB1010603NRHF" x="-11" y="6" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="Littelfuse" x="-11" y="6" size="1.778" layer="27" display="off"/>
+</element>
 </elements>
 <signals>
 <signal name="GND" class="1">
@@ -7543,7 +7586,9 @@ Modified from Laen's PCB Order Design Rules</description>
 <contactref element="C2" pad="P$2"/>
 <contactref element="C4" pad="P$2"/>
 <polygon width="0.24" layer="16" isolate="0.254">
-<vertex x="5.05" y="7.2"/>
+<vertex x="0.05" y="10"/>
+<vertex x="4.4" y="10"/>
+<vertex x="4.4" y="7.2"/>
 <vertex x="9.6" y="7.2"/>
 <vertex x="10" y="6.8"/>
 <vertex x="14.9" y="6.8"/>
@@ -7553,7 +7598,7 @@ Modified from Laen's PCB Order Design Rules</description>
 <vertex x="19.8" y="5"/>
 <vertex x="20.4" y="4.4"/>
 <vertex x="20.5" y="0"/>
-<vertex x="5.05" y="0"/>
+<vertex x="0.05" y="0"/>
 </polygon>
 <contactref element="U$2" pad="PAD@4"/>
 <contactref element="U$2" pad="PAD@13"/>
@@ -7562,13 +7607,13 @@ Modified from Laen's PCB Order Design Rules</description>
 <wire x1="12.25" y1="1.725" x2="12.25" y2="3.14289375" width="0.254" layer="1"/>
 <wire x1="11.25" y1="8.775" x2="11.25" y2="7.15710625" width="0.254" layer="1"/>
 <wire x1="15.25" y1="8.775" x2="15.25" y2="7.25710625" width="0.254" layer="1"/>
-<via x="6.46" y="6.89" extent="1-16" drill="0.3"/>
+<via x="6.46" y="6.89" extent="1-16" drill="0.2"/>
 <contactref element="U$4" pad="PIN$5"/>
 <wire x1="4.35" y1="3.7" x2="5.75" y2="3.7" width="0.4" layer="1"/>
 <wire x1="18" y1="1.55" x2="17.05" y2="1.55" width="0.254" layer="1"/>
 <wire x1="17.05" y1="1.55" x2="17" y2="1.5" width="0.254" layer="1"/>
-<via x="17" y="1.5" extent="1-16" drill="0.3"/>
-<via x="19.35" y="4.25" extent="1-16" drill="0.3"/>
+<via x="17" y="1.5" extent="1-16" drill="0.2"/>
+<via x="19.35" y="4.25" extent="1-16" drill="0.2"/>
 <wire x1="21.5" y1="2.95" x2="21.5" y2="3" width="0.254" layer="1"/>
 <contactref element="U$13" pad="P$1"/>
 <contactref element="Q1" pad="P$4"/>
@@ -7579,9 +7624,9 @@ Modified from Laen's PCB Order Design Rules</description>
 <contactref element="U$9" pad="GND_1"/>
 <contactref element="U$9" pad="GND_2"/>
 <contactref element="U$9" pad="GND"/>
-<via x="20.15" y="4.25" extent="1-16" drill="0.3"/>
-<via x="6.09" y="4.76" extent="1-16" drill="0.3"/>
-<via x="6.1" y="3.81" extent="1-16" drill="0.3"/>
+<via x="20.15" y="4.25" extent="1-16" drill="0.2"/>
+<via x="6.09" y="4.76" extent="1-16" drill="0.2"/>
+<via x="6.1" y="3.81" extent="1-16" drill="0.2"/>
 <polygon width="0.24" layer="1">
 <vertex x="6.8" y="3.5"/>
 <vertex x="5.5" y="3.5"/>
@@ -7591,14 +7636,14 @@ Modified from Laen's PCB Order Design Rules</description>
 <wire x1="16.775" y1="2.75" x2="15.853553125" y2="2.75" width="0.24" layer="1"/>
 <wire x1="15.853553125" y1="2.75" x2="15.676778125" y2="2.823221875" width="0.24" layer="1" curve="-44.999494"/>
 <wire x1="15.676778125" y1="2.823221875" x2="15.2" y2="3.3" width="0.24" layer="1"/>
-<wire x1="6.825" y1="9" x2="6.56" y2="8.735" width="0.5" layer="1"/>
+<wire x1="6.875" y1="9" x2="6.56" y2="8.735" width="0.5" layer="1"/>
 <wire x1="6.56" y1="8.735" x2="6.56" y2="7.7" width="0.5" layer="1"/>
 <wire x1="6.56" y1="7.7" x2="6.56" y2="7.564853125" width="0.5" layer="1"/>
 <wire x1="6.56" y1="7.564853125" x2="6.5" y2="7.42" width="0.5" layer="1" curve="-45"/>
 <wire x1="6.5" y1="7.42" x2="6.5" y2="7.4" width="0.5" layer="1"/>
 <wire x1="6.5" y1="7.4" x2="6.46" y2="7.30343125" width="0.5" layer="1" curve="45"/>
 <wire x1="6.46" y1="7.30343125" x2="6.46" y2="6.89" width="0.5" layer="1"/>
-<wire x1="7.1" y1="7.75" x2="7.05" y2="7.7" width="0.5" layer="1"/>
+<wire x1="7.3" y1="7.65" x2="7.05" y2="7.7" width="0.5" layer="1"/>
 <wire x1="7.05" y1="7.7" x2="6.56" y2="7.7" width="0.5" layer="1"/>
 <wire x1="21.5" y1="2.95" x2="20.55" y2="2.95" width="0.24" layer="1"/>
 <wire x1="20.55" y1="2.95" x2="20.4" y2="3.1" width="0.24" layer="1"/>
@@ -7622,8 +7667,8 @@ Modified from Laen's PCB Order Design Rules</description>
 <wire x1="18.12238125" y1="5.471140625" x2="19.1" y2="6.09" width="0.24" layer="1"/>
 <wire x1="20.4" y1="3.1" x2="20.4" y2="4.23" width="0.24" layer="1"/>
 <wire x1="20.4" y1="4.23" x2="20.15" y2="4.25" width="0.24" layer="1"/>
-<via x="19.75" y="4.8" extent="1-16" drill="0.3"/>
-<via x="5.74" y="4.28" extent="1-16" drill="0.3"/>
+<via x="19.75" y="4.8" extent="1-16" drill="0.2"/>
+<via x="5.74" y="4.28" extent="1-16" drill="0.2"/>
 <polygon width="0.24" layer="16">
 <vertex x="25" y="10"/>
 <vertex x="25.2" y="10"/>
@@ -7633,6 +7678,38 @@ Modified from Laen's PCB Order Design Rules</description>
 </polygon>
 <via x="24.5" y="9" extent="1-16" drill="0.3"/>
 <via x="23.5" y="9" extent="1-16" drill="0.3"/>
+<contactref element="U$4" pad="PAD$8"/>
+<contactref element="U$4" pad="PAD$10"/>
+<contactref element="U$4" pad="PAD$2"/>
+<contactref element="U$4" pad="PAD$4"/>
+<contactref element="U$4" pad="PAD$5"/>
+<contactref element="U$4" pad="PAD$7"/>
+<contactref element="U$4" pad="PAD$6"/>
+<contactref element="U$4" pad="PAD$1"/>
+<contactref element="U$4" pad="PAD$3"/>
+<contactref element="U$4" pad="PAD$9"/>
+<contactref element="Z2" pad="1"/>
+<contactref element="Z1" pad="1"/>
+<contactref element="Z3" pad="1"/>
+<polygon width="0.254" layer="1">
+<vertex x="0.05" y="10"/>
+<vertex x="4.55" y="10"/>
+<vertex x="4.55" y="7"/>
+<vertex x="2.75" y="7"/>
+<vertex x="2.75" y="3"/>
+<vertex x="4.55" y="3"/>
+<vertex x="4.55" y="0"/>
+<vertex x="0.05" y="0"/>
+</polygon>
+<wire x1="7.3" y1="4.05" x2="7.3" y2="4.96" width="0" layer="19" extent="1-1"/>
+<wire x1="6.09" y1="4.76" x2="7.3" y2="4.96" width="0" layer="19" extent="1-1"/>
+<wire x1="4.2" y1="2.5" x2="4.35" y2="3.7" width="0" layer="19" extent="1-1"/>
+<wire x1="4.2" y1="2.5" x2="4.2" y2="2.5" width="0" layer="19" extent="1-16"/>
+<wire x1="4.2" y1="7.5" x2="4.2" y2="7.5" width="0" layer="19" extent="1-16"/>
+<wire x1="1.5" y1="1.45" x2="1.5" y2="1.8275" width="0" layer="19" extent="1-16"/>
+<wire x1="-4.85" y1="6" x2="1.5" y2="6" width="0" layer="19" extent="1-1"/>
+<wire x1="-8.85" y1="6" x2="-4.85" y2="6" width="0" layer="19" extent="1-1"/>
+<wire x1="-8.85" y1="2" x2="-8.85" y2="6" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="MOSI">
 <contactref element="U$2" pad="10"/>
@@ -7642,7 +7719,7 @@ Modified from Laen's PCB Order Design Rules</description>
 <wire x1="8.956778125" y1="3.176778125" x2="9.133553125" y2="3.25" width="0.2" layer="1" curve="-44.999284"/>
 <wire x1="9.133553125" y1="3.25" x2="9.725" y2="3.25" width="0.2" layer="1"/>
 <wire x1="7.5" y1="1.616446875" x2="7.5" y2="1" width="0.2" layer="1"/>
-<via x="7.5" y="1" extent="1-16" drill="0.3"/>
+<via x="7.5" y="1" extent="1-16" drill="0.2"/>
 </signal>
 <signal name="MISO">
 <contactref element="U$2" pad="11"/>
@@ -7651,7 +7728,7 @@ Modified from Laen's PCB Order Design Rules</description>
 <wire x1="9" y1="2.287840625" x2="9.0487375" y2="2.43614375" width="0.2" layer="1" curve="-36.385171"/>
 <wire x1="9.0487375" y1="2.43614375" x2="9.28" y2="2.75" width="0.2" layer="1"/>
 <wire x1="9" y1="2.287840625" x2="9" y2="1" width="0.2" layer="1"/>
-<via x="9" y="1" extent="1-16" drill="0.3"/>
+<via x="9" y="1" extent="1-16" drill="0.2"/>
 </signal>
 <signal name="SCK">
 <contactref element="U$2" pad="9"/>
@@ -7659,7 +7736,7 @@ Modified from Laen's PCB Order Design Rules</description>
 <wire x1="9.725" y1="3.75" x2="9.003553125" y2="3.75" width="0.2" layer="1"/>
 <wire x1="9.003553125" y1="3.75" x2="8.826778125" y2="3.676778125" width="0.2" layer="1" curve="44.999494"/>
 <wire x1="8.826778125" y1="3.676778125" x2="6.15" y2="1" width="0.2" layer="1"/>
-<via x="6" y="1" extent="1-16" drill="0.3"/>
+<via x="6" y="1" extent="1-16" drill="0.2"/>
 <wire x1="6" y1="1" x2="6.15" y2="1" width="0.2" layer="1"/>
 </signal>
 <signal name="RST">
@@ -7670,10 +7747,10 @@ Modified from Laen's PCB Order Design Rules</description>
 <wire x1="11.176778125" y1="1.076778125" x2="10.973221875" y2="0.873221875" width="0.2" layer="1"/>
 <wire x1="10.973221875" y1="0.873221875" x2="10.796446875" y2="0.8" width="0.2" layer="1" curve="-44.999284"/>
 <wire x1="10.796446875" y1="0.8" x2="10.5" y2="0.8" width="0.2" layer="1"/>
-<via x="10.5" y="0.8" extent="1-16" drill="0.3"/>
+<via x="10.5" y="0.8" extent="1-16" drill="0.2"/>
 <wire x1="10.5" y1="0.8" x2="10.5" y2="1" width="0.2" layer="16"/>
 </signal>
-<signal name="N$9">
+<signal name="XTAL1">
 <contactref element="C7" pad="P$1"/>
 <contactref element="U$2" pad="17"/>
 <contactref element="Q1" pad="P$1"/>
@@ -7700,12 +7777,12 @@ Modified from Laen's PCB Order Design Rules</description>
 <wire x1="13.323221875" y1="1.116778125" x2="13.25" y2="1.293553125" width="0.2" layer="1" curve="-44.999284"/>
 <wire x1="13.25" y1="1.293553125" x2="13.25" y2="1.725" width="0.2" layer="1"/>
 </signal>
-<signal name="N$8">
+<signal name="XTAL2">
 <contactref element="C6" pad="P$1"/>
 <contactref element="U$2" pad="16"/>
 <contactref element="Q1" pad="P$3"/>
-<via x="12.75" y="0.7" extent="1-16" drill="0.3"/>
-<via x="21.5" y="1" extent="1-16" drill="0.3"/>
+<via x="12.75" y="0.7" extent="1-16" drill="0.2"/>
+<via x="21.5" y="1" extent="1-16" drill="0.2"/>
 <wire x1="12.75" y1="1.725" x2="12.75" y2="0.7" width="0.2" layer="1"/>
 <wire x1="21.5" y1="2.05" x2="21.5" y2="1" width="0.2" layer="1"/>
 <wire x1="21.5" y1="1" x2="21.273221875" y2="0.773221875" width="0.2" layer="16"/>
@@ -7725,7 +7802,9 @@ Modified from Laen's PCB Order Design Rules</description>
 <wire x1="6.366446875" y1="5.39" x2="6.543221875" y2="5.463221875" width="0.2" layer="1" curve="44.999494"/>
 <wire x1="6.543221875" y1="5.463221875" x2="6.756778125" y2="5.676778125" width="0.2" layer="1"/>
 <wire x1="6.756778125" y1="5.676778125" x2="6.933553125" y2="5.75" width="0.2" layer="1" curve="-44.999284"/>
-<wire x1="6.933553125" y1="5.75" x2="7.3" y2="5.75" width="0.2" layer="1"/>
+<wire x1="6.933553125" y1="5.75" x2="7.3" y2="5.85" width="0.2" layer="1"/>
+<contactref element="Z1" pad="2"/>
+<wire x1="-7.15" y1="6" x2="4.35" y2="5" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="D-_IN">
 <contactref element="R2" pad="P$1"/>
@@ -7741,6 +7820,8 @@ Modified from Laen's PCB Order Design Rules</description>
 <wire x1="6.75" y1="6.3" x2="7.2" y2="6.7" width="0.2" layer="1"/>
 <wire x1="7.2" y1="6.7" x2="7.25" y2="6.75" width="0.2" layer="1"/>
 <wire x1="7.25" y1="6.75" x2="7.3" y2="6.75" width="0.2" layer="1"/>
+<contactref element="Z2" pad="2"/>
+<wire x1="-3.15" y1="6" x2="4.35" y2="5.65" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="D-">
 <contactref element="R2" pad="P$2"/>
@@ -7754,7 +7835,7 @@ Modified from Laen's PCB Order Design Rules</description>
 <wire x1="9.123553125" y1="6.25" x2="8.946778125" y2="6.176778125" width="0.2" layer="1" curve="44.999494"/>
 <wire x1="8.946778125" y1="6.176778125" x2="8.593221875" y2="5.823221875" width="0.2" layer="1"/>
 <wire x1="8.593221875" y1="5.823221875" x2="8.416446875" y2="5.75" width="0.2" layer="1" curve="-44.999284"/>
-<wire x1="8.416446875" y1="5.75" x2="8.2" y2="5.75" width="0.2" layer="1"/>
+<wire x1="8.416446875" y1="5.75" x2="8.2" y2="5.85" width="0.2" layer="1"/>
 </signal>
 <signal name="D10">
 <contactref element="U$2" pad="30"/>
@@ -7780,17 +7861,17 @@ Modified from Laen's PCB Order Design Rules</description>
 <signal name="AREF">
 <contactref element="U$2" pad="42"/>
 </signal>
-<signal name="N$2">
+<signal name="UCAP">
 <contactref element="U$2" pad="6"/>
 <contactref element="C5" pad="P$1"/>
-<wire x1="7.85" y1="4.76" x2="8.193203125" y2="4.752371875" width="0.24" layer="1"/>
+<wire x1="8.2" y1="4.96" x2="8.193203125" y2="4.752371875" width="0.24" layer="1"/>
 <wire x1="8.193203125" y1="4.752371875" x2="8.375534375" y2="4.825534375" width="0.24" layer="1" curve="46.281134"/>
 <wire x1="8.375534375" y1="4.825534375" x2="8.726778125" y2="5.176778125" width="0.24" layer="1"/>
 <wire x1="8.726778125" y1="5.176778125" x2="8.903553125" y2="5.25" width="0.24" layer="1" curve="-44.999284"/>
 <wire x1="8.903553125" y1="5.25" x2="9.725" y2="5.25" width="0.24" layer="1"/>
 </signal>
 <signal name="LED_DATA">
-<via x="18" y="9.37" extent="1-16" drill="0.3"/>
+<via x="18" y="9.37" extent="1-16" drill="0.2"/>
 <contactref element="U$9" pad="DATA1"/>
 <contactref element="U$9" pad="DATA_1"/>
 <contactref element="U$9" pad="DATA_2"/>
@@ -7825,16 +7906,16 @@ Modified from Laen's PCB Order Design Rules</description>
 <wire x1="16.75" y1="8.75" x2="16.5" y2="8.775" width="0.254" layer="1"/>
 <wire x1="16.5" y1="8.775" x2="15.75" y2="8.775" width="0.254" layer="1"/>
 <wire x1="11.75" y1="1.725" x2="11.75" y2="0.7" width="0.254" layer="1"/>
-<via x="11.75" y="0.7" extent="1-16" drill="0.3"/>
-<via x="6.05" y="2.77" extent="1-16" drill="0.3"/>
-<via x="9.95" y="8.55" extent="1-16" drill="0.3"/>
-<via x="16.75" y="8.75" extent="1-16" drill="0.3"/>
+<via x="11.75" y="0.7" extent="1-16" drill="0.2"/>
+<via x="6.85" y="2.57" extent="1-16" drill="0.2"/>
+<via x="9.95" y="8.55" extent="1-16" drill="0.2"/>
+<via x="16.75" y="8.75" extent="1-16" drill="0.2"/>
 <contactref element="U$4" pad="PIN$1"/>
-<via x="5.67" y="6.43" extent="1-16" drill="0.3"/>
+<via x="5.67" y="6.43" extent="1-16" drill="0.2"/>
 <wire x1="4.35" y1="6.3" x2="5.23" y2="6.3" width="0.4" layer="1"/>
 <wire x1="5.23" y1="6.3" x2="5.23" y2="7" width="0.4" layer="1"/>
 <contactref element="U$12" pad="P$1"/>
-<via x="18.92" y="5.2" extent="1-16" drill="0.3"/>
+<via x="18.92" y="5.2" extent="1-16" drill="0.2"/>
 <wire x1="9.725" y1="7.25" x2="9.7" y2="7.25" width="0.254" layer="1"/>
 <polygon width="0.24" layer="16">
 <vertex x="5.1" y="10"/>
@@ -7857,13 +7938,13 @@ Modified from Laen's PCB Order Design Rules</description>
 <contactref element="U$9" pad="5V1"/>
 <contactref element="U$9" pad="5V"/>
 <contactref element="U$9" pad="5V_2"/>
-<via x="5.35" y="9.35" extent="1-16" drill="0.3"/>
-<via x="5.75" y="8.75" extent="1-16" drill="0.3"/>
+<via x="5.25" y="6.95" extent="1-16" drill="0.2"/>
+<via x="5.25" y="7.45" extent="1-16" drill="0.2"/>
 <polygon width="0.24" layer="1">
-<vertex x="5" y="10"/>
+<vertex x="5" y="8.3"/>
 <vertex x="5" y="6.2"/>
-<vertex x="6" y="6.2"/>
-<vertex x="6" y="10"/>
+<vertex x="5.8" y="6.2"/>
+<vertex x="5.8" y="8.3"/>
 </polygon>
 <wire x1="9.725" y1="4.75" x2="9.083553125" y2="4.75" width="0.24" layer="1"/>
 <wire x1="9.083553125" y1="4.75" x2="8.906778125" y2="4.676778125" width="0.24" layer="1" curve="44.999494"/>
@@ -7872,14 +7953,14 @@ Modified from Laen's PCB Order Design Rules</description>
 <wire x1="8.72" y1="4.303553125" x2="8.72" y2="4.386446875" width="0.24" layer="1"/>
 <wire x1="8.72" y1="4.386446875" x2="8.793221875" y2="4.563221875" width="0.24" layer="1" curve="-44.999494"/>
 <wire x1="8.793221875" y1="4.563221875" x2="8.906778125" y2="4.676778125" width="0.24" layer="1"/>
-<wire x1="7.85" y1="3.75" x2="8.27" y2="3.75" width="0.24" layer="1"/>
+<wire x1="8.2" y1="4.05" x2="8.27" y2="3.75" width="0.24" layer="1"/>
 <wire x1="8.27" y1="3.75" x2="7.363221875" y2="2.843221875" width="0.24" layer="1"/>
 <wire x1="7.363221875" y1="2.843221875" x2="7.186446875" y2="2.77" width="0.24" layer="1" curve="-44.999284"/>
-<wire x1="7.186446875" y1="2.77" x2="6.05" y2="2.77" width="0.24" layer="1"/>
-<via x="9.95" y="9.25" extent="1-16" drill="0.3"/>
+<wire x1="7.186446875" y1="2.77" x2="6.85" y2="2.57" width="0.24" layer="1"/>
+<via x="9.95" y="9.25" extent="1-16" drill="0.2"/>
 <wire x1="10.75" y1="8.775" x2="10.175" y2="8.775" width="0.24" layer="1"/>
 <wire x1="10.175" y1="8.775" x2="9.95" y2="8.55" width="0.24" layer="1"/>
-<wire x1="8" y1="7.75" x2="8.228709375" y2="7.64936875" width="0.24" layer="1"/>
+<wire x1="8.2" y1="7.65" x2="8.228709375" y2="7.64936875" width="0.24" layer="1"/>
 <wire x1="8.228709375" y1="7.64936875" x2="8.269196875" y2="7.626865625" width="0.24" layer="1" curve="-10.631255"/>
 <wire x1="8.269196875" y1="7.626865625" x2="8.75616875" y2="7.293675" width="0.24" layer="1"/>
 <wire x1="8.75616875" y1="7.293675" x2="8.897340625" y2="7.25" width="0.24" layer="1" curve="34.380345"/>
@@ -7887,15 +7968,15 @@ Modified from Laen's PCB Order Design Rules</description>
 <wire x1="9.95" y1="8.55" x2="9.9" y2="8.6" width="0.5" layer="1"/>
 <wire x1="9.9" y1="8.6" x2="9.9" y2="9.2" width="0.5" layer="1"/>
 <wire x1="9.9" y1="9.2" x2="9.7" y2="9" width="0.5" layer="1"/>
-<wire x1="9.7" y1="9" x2="8.575" y2="9" width="0.5" layer="1"/>
-<wire x1="8.575" y1="9" x2="8.3" y2="8.725" width="0.5" layer="1"/>
-<wire x1="6.05" y1="2.77" x2="6.03" y2="2.77" width="0.5" layer="16"/>
-<wire x1="6.03" y1="2.77" x2="4.9" y2="3.9" width="0.5" layer="16"/>
-<wire x1="4.9" y1="3.9" x2="4.9" y2="5.556446875" width="0.5" layer="16"/>
+<wire x1="9.7" y1="9" x2="8.625" y2="9" width="0.5" layer="1"/>
+<wire x1="8.625" y1="9" x2="8.3" y2="8.725" width="0.5" layer="1"/>
+<wire x1="6.85" y1="2.57" x2="5.73" y2="2.57" width="0.5" layer="16"/>
+<wire x1="5.73" y1="2.57" x2="4.9" y2="3.4" width="0.5" layer="16"/>
+<wire x1="4.9" y1="3.4" x2="4.9" y2="5.556446875" width="0.5" layer="16"/>
 <wire x1="4.9" y1="5.556446875" x2="4.973221875" y2="5.733221875" width="0.5" layer="16" curve="-44.999494"/>
 <wire x1="4.973221875" y1="5.733221875" x2="5.67" y2="6.43" width="0.5" layer="16"/>
-<wire x1="6.05" y1="2.77" x2="10.705" y2="2.77" width="0.5" layer="16"/>
-<wire x1="10.705" y1="2.77" x2="11.75" y2="1.725" width="0.5" layer="16"/>
+<wire x1="6.85" y1="2.57" x2="10.905" y2="2.57" width="0.5" layer="16"/>
+<wire x1="10.905" y1="2.57" x2="11.75" y2="1.725" width="0.5" layer="16"/>
 <wire x1="11.75" y1="1.725" x2="11.75" y2="0.7" width="0.5" layer="16"/>
 <wire x1="16.775" y1="3.25" x2="17.446446875" y2="3.25" width="0.24" layer="1"/>
 <wire x1="17.446446875" y1="3.25" x2="17.623221875" y2="3.323221875" width="0.24" layer="1" curve="44.999494"/>
@@ -7907,10 +7988,10 @@ Modified from Laen's PCB Order Design Rules</description>
 <wire x1="18.51" y1="4.21" x2="18.7" y2="4.4" width="0.24" layer="1"/>
 <wire x1="18.7" y1="4.4" x2="18.7" y2="4.9" width="0.24" layer="1"/>
 <wire x1="18.7" y1="4.9" x2="18.92" y2="5.2" width="0.24" layer="1"/>
-<wire x1="8" y1="7.75" x2="8" y2="8.321446875" width="0.5" layer="1"/>
+<wire x1="8.2" y1="7.65" x2="8" y2="8.321446875" width="0.5" layer="1"/>
 <wire x1="8" y1="8.321446875" x2="8.073221875" y2="8.498221875" width="0.5" layer="1" curve="-44.999494"/>
-<wire x1="8.073221875" y1="8.498221875" x2="8.575" y2="9" width="0.5" layer="1"/>
-<via x="5.35" y="8.15" extent="1-16" drill="0.3"/>
+<wire x1="8.073221875" y1="8.498221875" x2="8.625" y2="9" width="0.5" layer="1"/>
+<via x="5.25" y="7.95" extent="1-16" drill="0.2"/>
 <polygon width="0.24" layer="1">
 <vertex x="25.2" y="0"/>
 <vertex x="25.3" y="0"/>
@@ -7920,6 +8001,8 @@ Modified from Laen's PCB Order Design Rules</description>
 </polygon>
 <via x="23.5" y="1" extent="1-16" drill="0.3"/>
 <via x="24.5" y="1" extent="1-16" drill="0.3"/>
+<contactref element="Z3" pad="2"/>
+<wire x1="4.9" y1="3.4" x2="-7.15" y2="2" width="0" layer="19" extent="1-16"/>
 </signal>
 <signal name="N$3">
 </signal>
@@ -7934,30 +8017,25 @@ Modified from Laen's PCB Order Design Rules</description>
 <signal name="D11">
 <contactref element="U$2" pad="12"/>
 <contactref element="U$14" pad="P$1"/>
-<via x="9.85" y="1.97" extent="1-16" drill="0.3"/>
-<wire x1="10.75" y1="1.85" x2="10.06709375" y2="1.85" width="0.2" layer="1"/>
-<wire x1="10.06709375" y1="1.85" x2="9.8750375" y2="1.93995625" width="0.2" layer="1" curve="-50.194979"/>
-<wire x1="9.8750375" y1="1.93995625" x2="9.85" y2="1.97" width="0.2" layer="1"/>
-<wire x1="4.343221875" y1="3.676778125" x2="4.166446875" y2="3.75" width="0.2" layer="16" curve="44.999284"/>
-<wire x1="4.166446875" y1="3.75" x2="2" y2="3.75" width="0.2" layer="16"/>
-<wire x1="4.343221875" y1="3.676778125" x2="5.326778125" y2="2.693221875" width="0.2" layer="16"/>
-<wire x1="5.326778125" y1="2.693221875" x2="5.4" y2="2.516446875" width="0.2" layer="16" curve="-44.999284"/>
-<wire x1="5.4" y1="2.516446875" x2="5.41163125" y2="2.48836875" width="0.2" layer="16" curve="45.003189"/>
-<wire x1="5.41163125" y1="2.48836875" x2="5.726778125" y2="2.173221875" width="0.2" layer="16"/>
-<wire x1="5.726778125" y1="2.173221875" x2="5.903553125" y2="2.1" width="0.2" layer="16" curve="44.999284"/>
-<wire x1="9.85" y1="1.97" x2="9.773221875" y2="2.026778125" width="0.2" layer="16"/>
-<wire x1="9.773221875" y1="2.026778125" x2="9.596446875" y2="2.1" width="0.2" layer="16" curve="44.999284"/>
-<wire x1="9.596446875" y1="2.1" x2="5.903553125" y2="2.1" width="0.2" layer="16"/>
+<via x="9.75" y="1.77" extent="1-16" drill="0.2"/>
+<wire x1="9.68" y1="1.8" x2="5" y2="1.8" width="0.2" layer="16"/>
+<wire x1="5" y1="1.8" x2="4.7" y2="1.5" width="0.2" layer="16"/>
+<wire x1="4.7" y1="1.5" x2="3.5" y2="1.5" width="0.2" layer="16"/>
+<wire x1="3.5" y1="1.5" x2="2" y2="3" width="0.2" layer="16"/>
+<wire x1="2" y1="3" x2="2" y2="3.75" width="0.2" layer="16"/>
+<wire x1="9.68" y1="1.8" x2="9.75" y2="1.77" width="0.2" layer="16"/>
+<wire x1="10.75" y1="1.85" x2="9.83" y2="1.85" width="0.2" layer="1"/>
+<wire x1="9.83" y1="1.85" x2="9.75" y2="1.77" width="0.2" layer="1"/>
 </signal>
 <signal name="D7">
 <contactref element="U$2" pad="1"/>
 <contactref element="U$10" pad="P$1"/>
-<via x="9.02" y="7.92" extent="1-16" drill="0.3"/>
+<via x="9.02" y="7.92" extent="1-16" drill="0.2"/>
 <wire x1="9.02" y1="7.92" x2="8.844778125" y2="7.674690625" width="0.2" layer="16"/>
 <wire x1="8.844778125" y1="7.674690625" x2="8.641346875" y2="7.57" width="0.2" layer="16" curve="-54.461773"/>
-<wire x1="8.641346875" y1="7.57" x2="5.863553125" y2="7.57" width="0.2" layer="16"/>
-<wire x1="5.863553125" y1="7.57" x2="5.686778125" y2="7.496778125" width="0.2" layer="16" curve="44.999494"/>
-<wire x1="5.686778125" y1="7.496778125" x2="4.513221875" y2="6.323221875" width="0.2" layer="16"/>
+<wire x1="8.641346875" y1="7.57" x2="6.263553125" y2="7.57" width="0.2" layer="16"/>
+<wire x1="6.263553125" y1="7.57" x2="6.086778125" y2="7.496778125" width="0.2" layer="16" curve="44.999494"/>
+<wire x1="6.086778125" y1="7.496778125" x2="4.513221875" y2="6.323221875" width="0.2" layer="16"/>
 <wire x1="4.513221875" y1="6.323221875" x2="4.336446875" y2="6.25" width="0.2" layer="16" curve="-44.999284"/>
 <wire x1="4.336446875" y1="6.25" x2="2" y2="6.25" width="0.2" layer="16"/>
 <wire x1="9.725" y1="7.75" x2="9.29" y2="7.75" width="0.2" layer="1"/>
@@ -7965,47 +8043,13 @@ Modified from Laen's PCB Order Design Rules</description>
 </signal>
 <signal name="A9">
 <contactref element="U$2" pad="29"/>
-<via x="18.33" y="6.37" extent="1-16" drill="0.3"/>
+<via x="18.33" y="6.37" extent="1-16" drill="0.2"/>
 <contactref element="U$11" pad="P$1"/>
 <wire x1="16.775" y1="5.75" x2="17.615253125" y2="5.75" width="0.2" layer="1"/>
 <wire x1="17.615253125" y1="5.75" x2="17.7934625" y2="5.824665625" width="0.2" layer="1" curve="45.465916"/>
 <wire x1="17.7934625" y1="5.824665625" x2="18.33" y2="6.37" width="0.2" layer="1"/>
 <wire x1="16.9" y1="5" x2="16.97" y2="5" width="0.2" layer="16"/>
 <wire x1="16.97" y1="5" x2="18.33" y2="6.37" width="0.2" layer="16"/>
-</signal>
-<signal name="SHIELD">
-<contactref element="U$4" pad="PAD$8"/>
-<contactref element="U$4" pad="PAD$10"/>
-<contactref element="U$4" pad="PAD$2"/>
-<contactref element="U$4" pad="PAD$4"/>
-<contactref element="U$4" pad="PAD$5"/>
-<contactref element="U$4" pad="PAD$7"/>
-<contactref element="U$4" pad="PAD$6"/>
-<contactref element="U$4" pad="PAD$1"/>
-<contactref element="U$4" pad="PAD$3"/>
-<contactref element="U$4" pad="PAD$9"/>
-<polygon width="0.254" layer="1">
-<vertex x="0.05" y="10"/>
-<vertex x="4.55" y="10"/>
-<vertex x="4.55" y="7"/>
-<vertex x="2.75" y="7"/>
-<vertex x="2.75" y="3"/>
-<vertex x="4.55" y="3"/>
-<vertex x="4.55" y="0"/>
-<vertex x="0.05" y="0"/>
-</polygon>
-<polygon width="0.24" layer="16" isolate="0.254">
-<vertex x="0.05" y="10"/>
-<vertex x="4.55" y="10"/>
-<vertex x="4.55" y="7.5"/>
-<vertex x="2.75" y="7.5"/>
-<vertex x="2.75" y="2.5"/>
-<vertex x="4.55" y="2.5"/>
-<vertex x="4.55" y="0"/>
-<vertex x="0.05" y="0"/>
-</polygon>
-<wire x1="4.2" y1="7.5" x2="4.2" y2="7.5" width="0" layer="19" extent="1-16"/>
-<wire x1="4.2" y1="2.5" x2="4.2" y2="2.5" width="0" layer="19" extent="1-16"/>
 </signal>
 <signal name="D13">
 <contactref element="U$2" pad="32"/>
@@ -8020,10 +8064,11 @@ Modified from Laen's PCB Order Design Rules</description>
 <approved hash="19,1,42abeee0888cfa7a"/>
 <approved hash="19,1,8aa342f736de7076"/>
 <approved hash="5,1,604122d63935ff2e"/>
-<approved hash="18,30,84b3e9f5b1cb661a"/>
-<approved hash="18,30,427e8ecdb23e462c"/>
-<approved hash="18,30,e01a3c648ef88daa"/>
-<approved hash="3,1,8ff8ebc0ebc68ffe"/>
+<approved hash="19,16,531cabbb9cfce1a1"/>
+<approved hash="19,16,0ef5534f55d7e090"/>
+<approved hash="19,16,3ea7f12057d9ad48"/>
+<approved hash="19,16,39910a3525c5da87"/>
+<approved hash="19,16,81f2d20eea18ff8a"/>
 <approved hash="5,1,2a47b0893934ff74"/>
 <approved hash="19,1,993c8d8c15a08fc1"/>
 <approved hash="5,1,3bd08bcc7a4ffaa9"/>
@@ -8032,31 +8077,30 @@ Modified from Laen's PCB Order Design Rules</description>
 <approved hash="19,1,db1a479714b9ae8f"/>
 <approved hash="19,1,8ceb02a3f8da72d2"/>
 <approved hash="19,1,f519fd7d752e75b6"/>
-<approved hash="4,1,808d798f6e7cbcb2"/>
-<approved hash="4,1,979f681d6e70abaa"/>
-<approved hash="4,1,60d14460c1751b7d"/>
-<approved hash="4,1,f58a97079b00f98d"/>
-<approved hash="4,1,c145a3baafbdcd42"/>
-<approved hash="4,1,dde0af5da35ad1e7"/>
 <approved hash="19,16,9c0c6676607a9a00"/>
 <approved hash="19,16,040b8a718c7a0200"/>
 <approved hash="19,16,240c1676107e2204"/>
 <approved hash="19,16,bdc00d3e92b5f649"/>
-<approved hash="19,16,243ba2c225a5d358"/>
 <approved hash="19,16,02011389ba2351ae"/>
+<approved hash="19,16,243ba2c225a5d358"/>
 <approved hash="5,16,5f5ab975bf53a1bb"/>
-<approved hash="19,16,531cabbb9cfce1a1"/>
-<approved hash="19,16,0ef5534f55d7e090"/>
-<approved hash="19,16,3ea7f12057d9ad48"/>
-<approved hash="4,16,60d14460c1751b7d"/>
-<approved hash="19,16,39910a3525c5da87"/>
-<approved hash="4,16,808d798f6e7cbcb2"/>
+<approved hash="18,30,84b3e9f5b1cb661a"/>
+<approved hash="18,30,427e8ecdb23e462c"/>
+<approved hash="18,30,e01a3c648ef88daa"/>
+<approved hash="3,1,8ff8ebc0ebc68ffe"/>
+<approved hash="4,1,979f681d6e70abaa"/>
+<approved hash="4,1,808d798f6e7cbcb2"/>
+<approved hash="4,1,60d14460c1751b7d"/>
+<approved hash="4,1,f58a97079b00f98d"/>
+<approved hash="4,1,c145a3baafbdcd42"/>
+<approved hash="4,1,dde0af5da35ad1e7"/>
 <approved hash="4,16,979f681d6e70abaa"/>
+<approved hash="4,16,808d798f6e7cbcb2"/>
+<approved hash="4,16,60d14460c1751b7d"/>
 <approved hash="4,16,a6199cae98b45be2"/>
-<approved hash="4,16,f58a97079b00f98d"/>
-<approved hash="19,16,81f2d20eea18ff8a"/>
-<approved hash="4,16,dde0af5da35ad1e7"/>
 <approved hash="4,16,c145a3baafbdcd42"/>
+<approved hash="4,16,dde0af5da35ad1e7"/>
+<approved hash="4,16,f58a97079b00f98d"/>
 </errors>
 </board>
 </drawing>
