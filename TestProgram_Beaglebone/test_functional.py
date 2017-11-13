@@ -184,7 +184,7 @@ class TestFunctionalTests(BlinkyTapeUnitTest.BlinkyTapeTestCase):
   def test_080_whiteLedsOnCurrent(self):
     self.i.DisplayMessage("Checking white LEDs on...")
 
-    MIN_WHITE_CURRENT = 100
+    MIN_WHITE_CURRENT = 70
     MAX_WHITE_CURRENT = 300
     # TODO: Why send this twice?
     for j in range (0, 2):
