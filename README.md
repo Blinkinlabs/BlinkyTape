@@ -13,4 +13,4 @@ More information about the BlinkyTape is available here: [http://blinkinlabs.com
 
 # I want one!
 
-Cool! BlinkyTape is available in [our store](http://blinkinlabs.myshopify.com/products/blinkytape-basic), as well as through many fine distributors. A [full list is available here](http://blinkinlabs.com/blinkytape).
+Cool! BlinkyTape is available in [our store](http://blinkinlabs.myshopify.com/products/blinkytape-basic), as well as through many fine distributors.
