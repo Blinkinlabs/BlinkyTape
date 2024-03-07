@@ -54,10 +54,6 @@ class Logger():
   def Init(self):
     self.sinks.append(FileSink("./sd-log.log"))
 
-    # If a usb stick is connected, log to it as well.
-    if os.access('/media/usb0', os.R_OK):
-      self.sinks.append(FileSink("/media/usb0/usb-log.log"))
-
     if self.RequireDB:
       self.InitDB() # moved to menu_functional test area.
 
