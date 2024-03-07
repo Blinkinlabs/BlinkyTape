@@ -22,14 +22,14 @@ def writeFuses(portName, lockFuses, eFuses, hFuses, lFuses, programmer="avrisp")
     "-U", "lfuse:w:%#02X:m" % lFuses,
   ]
 
-  s = open('result.log','w')
-  e = open('errorresult.log','w')
+  s = open('/tmp/result.log','w')
+  e = open('/tmp/errorresult.log','w')
   result = subprocess.call(command, stdout=s, stderr=e)
   s.close()
   e.close()
 
-  s = open('result.log','r')
-  e = open('errorresult.log','r')
+  s = open('/tmp/result.log','r')
+  e = open('/tmp/errorresult.log','r')
   stdout = s.readlines()
   stderr = e.readlines()
   s.close()
@@ -52,14 +52,14 @@ def loadFlash(portName, flashFile, programmer="avrisp"):
     "-U" "flash:w:%s:i" % flashFile,
   ]
 
-  s = open('result.log','w')
-  e = open('errorresult.log','w')
+  s = open('/tmp/result.log','w')
+  e = open('/tmp/errorresult.log','w')
   result = subprocess.call(command, stdout=s, stderr=e)
   s.close()
   e.close()
 
-  s = open('result.log','r')
-  e = open('errorresult.log','r')
+  s = open('/tmp/result.log','r')
+  e = open('/tmp/errorresult.log','r')
   stdout = s.readlines()
   stderr = e.readlines()
   s.close()
