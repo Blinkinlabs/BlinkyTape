@@ -13,6 +13,8 @@ class UserInterface():
   useFramebuffer = True
   usePi = True
 
+  lastMessage = ''
+
   def __init__(self):
     self.rig = TestRig.testRig
 
@@ -46,6 +48,8 @@ class UserInterface():
     @param bgcolor Background color (RGB tuple)
     """
     if self.screen != None:
+      self.lastMessage = message
+
       self.screen.fill(bgcolor, self.displayRect)
 
       text = textrect.render_textrect(message,self.font,self.displayRect,color,bgcolor,0)
@@ -67,22 +71,23 @@ class UserInterface():
     Display a pass message to the user, for a given amout of time.
     @param timeout Time to display the message, in seconds
     """
-    self.DisplayMessage(message, color=(0,0,0), bgcolor=(0,255,0), boxed=True)
+    self.DisplayMessage(message, color=(255,255,255), bgcolor=(0,255,0), boxed=True)
     time.sleep(timeout)
 
-  def DisplayError(self, message = 'ERROR', timeout=1):
+  def DisplayError(self, message = 'ERROR', timeout=5):
     """
     Display a failure message to the user, for a given amout of time.
     @param timeout Time to display the message, in seconds
     """
-    self.DisplayMessage(message, color=(0,0,0), bgcolor=(255,0,0), boxed=True)
+    self.DisplayMessage(message, color=(255,255,255), bgcolor=(255,0,0), boxed=True)
+    time.sleep(timeout)
     
-  def DisplayFail(self, message = 'FAIL', timeout=1):
+  def DisplayFail(self, message = 'FAIL', timeout=5):
     """
     Display a failure message to the user, for a given amout of time.
     @param timeout Time to display the message, in seconds
     """
-    self.DisplayMessage(message, color=(0,0,0), bgcolor=(255,0,0), boxed=True)
+    self.DisplayMessage(message + '\n\n' + self.lastMessage, color=(255,255,255), bgcolor=(255,0,0), boxed=True)
     time.sleep(timeout)
 
   def Notify(self, message, color=(255,255,255), bgcolor=(0,0,0), strobe = False, strobeColor = (0,0,1)):
